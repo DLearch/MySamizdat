@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\http-interceptors\jwt.interceptor.ts" />
     <None Remove="ClientApp\src\app\modules\app-material.module.ts" />
     <None Remove="ClientApp\src\app\modules\app-routing.module.ts" />
     <None Remove="ClientApp\src\app\modules\app-translate.module.ts" />
@@ -13,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\components\layout\" />
+    <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -23,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\http-interceptors\jwt.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-material.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-routing.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-translate.module.ts" />
