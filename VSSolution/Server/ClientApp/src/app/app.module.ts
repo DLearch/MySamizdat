@@ -7,12 +7,14 @@ import { AppMaterialModule } from './modules/app-material.module';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { AppTranslateModule } from './modules/app-translate.module';
 import { MainComponent } from './components/main/main.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
