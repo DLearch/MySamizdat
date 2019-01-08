@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './components/layout/app/app.component';
 import { AppMaterialModule } from './modules/app-material.module';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { AppTranslateModule } from './modules/app-translate.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './modules/app-routing.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppTranslateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
