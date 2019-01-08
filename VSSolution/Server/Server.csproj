@@ -2,9 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\modules\app-material.module.ts" />
+    <None Remove="ClientApp\src\app\modules\app-routing.module.ts" />
+    <None Remove="ClientApp\src\app\modules\app-translate.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\layout\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -12,6 +20,12 @@
     <PackageReference Include="MailKit" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\app-material.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\app-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\app-translate.module.ts" />
   </ItemGroup>
 
 </Project>
