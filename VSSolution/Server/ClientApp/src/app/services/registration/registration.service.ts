@@ -41,6 +41,4 @@ export class RegistrationService {
 
     return throwError(data);
   }
-  }
-
 }
