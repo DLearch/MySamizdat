@@ -9,6 +9,7 @@ import { AppTranslateModule } from './modules/app-translate.module';
 import { MainComponent } from './components/main/main.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppConfigService } from './services/app-config/app-config.service';
+import { UserStorageService } from './services/user-storage/user-storage.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AppConfigService } from './services/app-config/app-config.service';
     AppRoutingModule,
     AppTranslateModule
   ],
-  providers: [AppConfigService],
+  providers: [AppConfigService, UserStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
