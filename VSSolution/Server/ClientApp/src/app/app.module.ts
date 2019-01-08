@@ -8,6 +8,7 @@ import { AppRoutingModule } from './modules/app-routing.module';
 import { AppTranslateModule } from './modules/app-translate.module';
 import { MainComponent } from './components/main/main.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AppConfigService } from './services/app-config/app-config.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppRoutingModule,
     AppTranslateModule
   ],
-  providers: [],
+  providers: [AppConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
