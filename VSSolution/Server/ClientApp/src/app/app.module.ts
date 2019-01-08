@@ -11,13 +11,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppConfigService } from './services/app-config/app-config.service';
 import { UserStorageService } from './services/user-storage/user-storage.service';
 import { JWTInterceptor } from './http-interceptors/jwt.interceptor';
+import { SignUpComponent } from './components/account/sign-up/sign-up.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

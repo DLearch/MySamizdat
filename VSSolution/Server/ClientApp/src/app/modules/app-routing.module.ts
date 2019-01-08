@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from '../components/main/main.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { SignUpComponent } from '../components/account/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
