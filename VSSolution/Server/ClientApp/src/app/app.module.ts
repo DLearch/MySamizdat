@@ -6,11 +6,13 @@ import { AppComponent } from './components/layout/app/app.component';
 import { AppMaterialModule } from './modules/app-material.module';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { AppTranslateModule } from './modules/app-translate.module';
+import { MainComponent } from './components/main/main.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
