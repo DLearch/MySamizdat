@@ -1,0 +1,45 @@
+<mat-card>
+  <h2>{{ 'sign-in-page-header' | translate }}</h2>
+  <form [formGroup]="signInForm">
+
+    <!--Email form field-->
+    <mat-form-field>
+      <input matInput placeholder="{{ 'email-input-placeholder' | translate }}" type="email" formControlName="email" />
+      <!--If Email is empty-->
+      <mat-error *ngIf="
+            signInForm.controls['email'].invalid
+            && signInForm.controls['email'].touched
+            && !signInForm.controls['email'].value">
+        {{ 'email-input-error-empty' | translate }}
+      </mat-error>
+      <!--If Email is wrong-->
+      <mat-error *ngIf="
+            signInForm.controls['email'].invalid
+            && signInForm.controls['email'].touched
+            && signInForm.controls['email'].value">
+        {{ 'email-input-error-wrong' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <!--Password form field-->
+    <mat-form-field>
+      <input matInput placeholder="{{ 'password-input-placeholder' | translate }}" type="password" formControlName="password" />
+      <!--If Password is empty-->
+      <mat-error *ngIf="
+            signInForm.controls['password'].invalid
+            && signInForm.controls['password'].touched
+            && !signInForm.controls['password'].value">
+        {{ 'password-input-error-empty' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <!--Submit button-->
+    <button mat-raised-button color="primary" (click)="authenticate()">
+      {{ 'sign-in-button-text' | translate }}
+    </button>
+  </form>
+</mat-card>

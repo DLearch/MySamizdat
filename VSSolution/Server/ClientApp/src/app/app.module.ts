@@ -13,6 +13,7 @@ import { UserStorageService } from './services/user-storage/user-storage.service
 import { JWTInterceptor } from './http-interceptors/jwt.interceptor';
 import { SignUpComponent } from './components/account/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignInComponent } from './components/account/sign-in/sign-in.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     MainComponent,
     NotFoundComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
