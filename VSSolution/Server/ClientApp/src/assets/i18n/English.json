@@ -1,3 +1,11 @@
 {
-
+  "sign-up-page-header": "Sign up",
+  "email-input-placeholder": "Email",
+  "username-input-placeholder": "Name",
+  "password-input-placeholder": "Password",
+  "sign-up-button-text": "Sign up",
+  "password-input-error-empty": "Enter password",
+  "name-input-error-empty": "Enter name",
+  "email-input-error-empty": "Enter email",
+  "email-input-error-wrong": "Email is wrong"
 }
