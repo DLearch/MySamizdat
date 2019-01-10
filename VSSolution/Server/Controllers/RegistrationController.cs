@@ -49,7 +49,28 @@ namespace Server.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
-                    return RedirectToAction("SendConfirmationMessage", "EmailConfirmation", new SendConfirmationMessageVM() { Email = user.Email });
+                {
+                    ConfirmVM valuesModel = new ConfirmVM()
+                    {
+                        Email = user.Email,
+                        Token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
+                    };
+
+                    string callbackUrl = Url.Action(
+                        "",
+                        "sign-up",
+                        valuesModel,
+                        protocol: HttpContext.Request.Scheme
+                    );
+
+                    await _emailService.SendEmailAsync(
+                        user.Email
+                        , "Confirm your account"
+                        , $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>"
+                    );
+
+                    return Ok();
+                }
                 else
                     foreach (var error in result.Errors)
                         ModelState.AddModelError(string.Empty, error.Description);
