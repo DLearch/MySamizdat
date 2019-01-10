@@ -7,5 +7,7 @@
   "password-input-error-empty": "Enter password",
   "name-input-error-empty": "Enter name",
   "email-input-error-empty": "Enter email",
-  "email-input-error-wrong": "Email is wrong"
+  "email-input-error-wrong": "Email is wrong",
+  "sign-in-page-header": "Sign in",
+  "sign-in-button-text": "Sign in"
 }
