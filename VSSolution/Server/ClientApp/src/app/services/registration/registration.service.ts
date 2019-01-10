@@ -12,7 +12,7 @@ export class RegistrationService {
 
   constructor(
     private config: AppConfigService
-    , private userStorage: UserStorageService
+    , userStorage: UserStorageService
     , private http: HttpClient
   ) {
     userStorage.unsetUser();
@@ -33,9 +33,7 @@ export class RegistrationService {
     return this.config.get('PathAPI') + 'registration';
   }
 
-  private handleRegisterResponse(): void {
-
-  }
+  private handleRegisterResponse(): void { }
 
   private handleRegisterErrorResponse(data: any): any {
 
