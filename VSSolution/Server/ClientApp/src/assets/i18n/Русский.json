@@ -1,3 +1,15 @@
 {
-
+  "sign-up-page-header": "Создать аккаунт",
+  "email-input-placeholder": "Email",
+  "username-input-placeholder": "Имя",
+  "password-input-placeholder": "Пароль",
+  "sign-up-button-text": "Создать аккаунт",
+  "password-input-error-empty": "Введите пароль",
+  "password-input-error-wrong": "Некорректный пароль",
+  "name-input-error-empty": "Введите имя",
+  "name-input-error-wrong": "Некорректный имя",
+  "email-input-error-empty": "Введите email",
+  "email-input-error-wrong": "Некорректный email",
+  "sign-in-page-header": "Вход",
+  "sign-in-button-text": "Войти"
 }
