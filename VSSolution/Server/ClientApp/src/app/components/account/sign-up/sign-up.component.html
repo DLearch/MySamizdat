@@ -1,3 +1,61 @@
-<p>
-  sign-up works!
-</p>
+<mat-card>
+  <h2>{{ 'sign-up-page-header' | translate }}</h2>
+  <form [formGroup]="signUpForm" *ngIf='!isComplete'>
+
+    <!--Email form field-->
+    <mat-form-field>
+      <input matInput placeholder="{{ 'email-input-placeholder' | translate }}" type="email" formControlName="email" />
+      <!--If Email is empty-->
+      <mat-error *ngIf="
+            signUpForm.controls['email'].invalid
+            && signUpForm.controls['email'].touched
+            && !signUpForm.controls['email'].value">
+        {{ 'email-input-error-empty' | translate }}
+      </mat-error>
+      <!--If Email is wrong-->
+      <mat-error *ngIf="
+            signUpForm.controls['email'].invalid
+            && signUpForm.controls['email'].touched
+            && signUpForm.controls['email'].value">
+        {{ 'email-input-error-wrong' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <!--Name form field-->
+    <mat-form-field>
+      <input matInput placeholder="{{ 'username-input-placeholder' | translate }}" type="text" formControlName="name" />
+      <!--If name is empty-->
+      <mat-error *ngIf="
+            signUpForm.controls['name'].invalid
+            && signUpForm.controls['name'].touched
+            && !signUpForm.controls['name'].value">
+        {{ 'name-input-error-empty' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <!--Password form field-->
+    <mat-form-field>
+      <input matInput placeholder="{{ 'password-input-placeholder' | translate }}" type="password" formControlName="password" />
+      <!--If Password is empty-->
+      <mat-error *ngIf="
+            signUpForm.controls['password'].invalid
+            && signUpForm.controls['password'].touched
+            && !signUpForm.controls['password'].value">
+        {{ 'password-input-error-empty' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <!--Submit button-->
+    <button mat-raised-button color="primary" (click)="register()">
+      {{ 'sign-up-button-text' | translate }}
+    </button>
+  </form>
+
+  <p *ngIf='isComplete'>Отправлено</p>
+</mat-card>
