@@ -25,6 +25,7 @@ import { AccountComponent } from './components/account/account/account.component
     NotFoundComponent,
     SignUpComponent,
     SignInComponent,
+    LangPickerComponent,
     AccountComponent
   ],
   imports: [
