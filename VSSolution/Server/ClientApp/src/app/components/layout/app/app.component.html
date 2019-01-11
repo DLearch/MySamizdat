@@ -1,2 +1,77 @@
+<div class="main">
 
-<router-outlet></router-outlet>
+  <header>
+    <mat-toolbar>
+
+      <!-- Menu button -->
+      <button type='button'
+              aria-label='Toggle sidenav'
+              mat-icon-button
+              (click)='sidenav.toggle()'>
+        <mat-icon aria-label='Side nav toggle icon'>menu</mat-icon>
+      </button>
+
+      <!-- Site name -->
+      <a routerLink="" mat-button>{{ 'site-name' | translate }}</a>
+
+      <!-- Spacer -->
+      <span class="flex-spacer"></span>
+
+      <!-- If the user is not logged in-->
+      <span *ngIf='!isAuthenticated'>
+
+        <!-- Sign in button -->
+        <a routerLink="/sign-in" mat-button>{{ 'sign-in-button-text' | translate }}</a>
+
+      </span> 
+
+      <!-- If the user is logged in-->
+      <span *ngIf='isAuthenticated'>
+
+        <!-- Profile button -->
+        <a routerLink="/account" mat-button>{{ userStorage.name }}</a>
+
+        <!-- Sign out button -->
+        <a routerLink="/sign-out" mat-button>{{ 'sign-out-button-text' | translate }}</a>
+
+      </span>
+
+    </mat-toolbar>
+  </header>
+
+  <mat-sidenav-container class='sidenav-container'>
+
+    <!-- Left menu -->
+    <mat-sidenav #sidenav
+                 [mode]='(isHandset$ | async) ? "over" : "side"'
+                 [opened]='!(isHandset$ | async)'>
+
+      <!-- Navbar -->
+      <mat-nav-list>
+        <a mat-list-item routerLink="">Main</a>
+        <a mat-list-item routerLink="/sign-in">Sign in</a>
+        <a mat-list-item routerLink="/sign-up">Sign up</a>
+        <a mat-list-item routerLink="/notfound">Not found</a>
+      </mat-nav-list>
+
+    </mat-sidenav>
+
+    <!-- Content -->
+    <mat-sidenav-content>
+
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <footer>
+    <mat-toolbar>
+
+      <app-lang-picker></app-lang-picker>
+
+    </mat-toolbar>
+  </footer>
+</div>
