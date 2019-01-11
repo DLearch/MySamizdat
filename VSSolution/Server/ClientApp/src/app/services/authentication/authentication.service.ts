@@ -12,7 +12,7 @@ export class AuthenticationService {
 
   constructor(
     private config: AppConfigService
-    , userStorage: UserStorageService
+    , private userStorage: UserStorageService
     , private http: HttpClient
   ) {
     userStorage.unsetUser();
@@ -23,7 +23,7 @@ export class AuthenticationService {
     return this.http
       .post(this.getAuthenticateUrl(), user)
       .pipe(
-        map(() => this.handleAuthenticateResponse()),
+      map(response => this.handleAuthenticateResponse(response)),
         catchError(response => this.handleAuthenticateErrorResponse(response))
       );
   }
@@ -33,7 +33,10 @@ export class AuthenticationService {
     return this.config.get('PathAPI') + 'authentication';
   }
 
-  private handleAuthenticateResponse(): void { }
+  private handleAuthenticateResponse(data: any): void {
+
+    this.userStorage.setUser(data.name, data.token);
+  }
 
   private handleAuthenticateErrorResponse(data: any): any {
 
