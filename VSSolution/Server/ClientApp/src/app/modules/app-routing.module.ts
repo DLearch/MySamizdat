@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-out', redirectTo: 'sign-in' },
   { path: 'account', component: AccountComponent },
   { path: '**', component: NotFoundComponent }
 ];
