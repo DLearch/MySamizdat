@@ -1,4 +1,5 @@
 {
+  "site-name": "Runoo",
   "sign-up-page-header": "Создать аккаунт",
   "email-input-placeholder": "Email",
   "username-input-placeholder": "Имя",
@@ -11,5 +12,6 @@
   "email-input-error-empty": "Введите email",
   "email-input-error-wrong": "Некорректный email",
   "sign-in-page-header": "Вход",
-  "sign-in-button-text": "Войти"
+  "sign-in-button-text": "Войти",
+  "sign-out-button-text": "Выйти"
 }

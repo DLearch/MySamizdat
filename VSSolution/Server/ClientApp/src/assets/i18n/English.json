@@ -1,4 +1,5 @@
 {
+  "site-name": "Runoo",
   "sign-up-page-header": "Sign up",
   "email-input-placeholder": "Email",
   "username-input-placeholder": "Name",
@@ -11,5 +12,6 @@
   "email-input-error-empty": "Enter email",
   "email-input-error-wrong": "Email is wrong",
   "sign-in-page-header": "Sign in",
-  "sign-in-button-text": "Sign in"
+  "sign-in-button-text": "Sign in",
+  "sign-out-button-text": "Sign out"
 }
