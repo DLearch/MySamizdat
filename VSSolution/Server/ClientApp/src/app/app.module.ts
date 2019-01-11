@@ -14,6 +14,8 @@ import { JWTInterceptor } from './http-interceptors/jwt.interceptor';
 import { SignUpComponent } from './components/account/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './components/account/sign-in/sign-in.component';
+import { LangPickerComponent } from './components/layout/lang-picker/lang-picker.component';
+import { AccountComponent } from './components/account/account/account.component';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { SignInComponent } from './components/account/sign-in/sign-in.component'
     MainComponent,
     NotFoundComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
