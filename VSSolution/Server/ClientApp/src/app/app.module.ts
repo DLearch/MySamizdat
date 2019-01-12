@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './components/account/sign-in/sign-in.component';
 import { LangPickerComponent } from './components/layout/lang-picker/lang-picker.component';
 import { AccountComponent } from './components/account/account/account.component';
+import { AuthorizationGuard } from './guards/authorization.guard';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { AccountComponent } from './components/account/account/account.component
   providers: [
     AppConfigService,
     UserStorageService,
+    AuthorizationGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
