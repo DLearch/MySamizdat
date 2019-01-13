@@ -20,7 +20,7 @@
       <!-- If the user is not logged in-->
       <span *ngIf='!isAuthenticated'>
 
-        <!-- Sign in button -->
+        <!-- Sign in link -->
         <a routerLink="/sign-in" mat-button>{{ 'sign-in-button-text' | translate }}</a>
 
       </span> 
@@ -28,10 +28,10 @@
       <!-- If the user is logged in-->
       <span *ngIf='isAuthenticated'>
 
-        <!-- Profile button -->
+        <!-- Profile link -->
         <a routerLink="/account" mat-button>{{ userStorage.name }}</a>
 
-        <!-- Sign out button -->
+        <!-- Sign out link -->
         <a routerLink="/sign-out" mat-button>{{ 'sign-out-button-text' | translate }}</a>
 
       </span>
@@ -51,6 +51,7 @@
         <a mat-list-item routerLink="">Main</a>
         <a mat-list-item routerLink="/sign-in">Sign in</a>
         <a mat-list-item routerLink="/sign-up">Sign up</a>
+        <a mat-list-item routerLink="/account">Account</a>
         <a mat-list-item routerLink="/notfound">Not found</a>
       </mat-nav-list>
 
