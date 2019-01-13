@@ -1,46 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserStorageService } from '../user-storage/user-storage.service';
-import { AppConfigService } from '../app-config/app-config.service';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  private readonly authenticateController: string = 'authentication';
+
   constructor(
-    private config: AppConfigService
+    private api: ApiService
     , private userStorage: UserStorageService
-    , private http: HttpClient
   ) {
     userStorage.unsetUser();
   }
 
-  public authenticate(user: any): Observable<any> {
+  public authenticate(data: any): Observable<any> {
 
-    return this.http
-      .post(this.getAuthenticateUrl(), user)
-      .pipe(
-      map(response => this.handleAuthenticateResponse(response)),
-        catchError(response => this.handleAuthenticateErrorResponse(response))
-      );
-  }
-
-  private getAuthenticateUrl(): string {
-
-    return this.config.get('PathAPI') + 'authentication';
+    return this.api
+      .post(data, this.authenticateController)
+      .pipe(map(response => this.handleAuthenticateResponse(response)));
   }
 
   private handleAuthenticateResponse(data: any): void {
 
     this.userStorage.setUser(data.name, data.token);
-  }
-
-  private handleAuthenticateErrorResponse(data: any): any {
-
-    console.log(data);
-    return throwError(data);
   }
 }
