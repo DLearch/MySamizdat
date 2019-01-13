@@ -9,6 +9,9 @@ namespace Server.ViewModels.PasswordChange
     public class PasswordChangeVM
     {
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public string OldPassword { get; set; }
 
         [Required]
