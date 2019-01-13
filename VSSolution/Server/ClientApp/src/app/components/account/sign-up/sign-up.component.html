@@ -55,6 +55,9 @@
     <button mat-raised-button color="primary" (click)="register()">
       {{ 'sign-up-button-text' | translate }}
     </button>
+
+    <!--Sign in link-->
+    <a routerLink="/sign-in" mat-button>{{ 'sign-in-button-text' | translate }}</a>
   </form>
 
   <p *ngIf='isComplete'>Отправлено</p>
