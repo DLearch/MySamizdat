@@ -1,36 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from '../app-config/app-config.service';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { UserStorageService } from '../user-storage/user-storage.service';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PasswordChangeService {
 
+  private readonly changeController: string = 'passwordchange';
+
   constructor(
-    private config: AppConfigService
-    , private http: HttpClient
+    private api: ApiService
+    , private userStorage: UserStorageService
   ) { }
 
   public change(data: any): Observable<any> {
 
-    return this.http
-      .post(this.getChangeUrl(), data)
-      .pipe(
-        catchError(response => this.handleChangeErrorResponse(response))
-      );
-  }
+    data.name = this.userStorage.name;
 
-  private getChangeUrl(): string {
-
-    return this.config.get('PathAPI') + 'change-password';
-  }
-
-  private handleChangeErrorResponse(data: any): any {
-
-    console.log(data);
-    return throwError(data);
+    return this.api
+      .post(data, this.changeController);
   }
 }
