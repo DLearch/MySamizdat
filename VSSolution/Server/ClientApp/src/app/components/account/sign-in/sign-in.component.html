@@ -16,7 +16,7 @@
       <mat-error *ngIf="
             signInForm.controls['email'].invalid
             && signInForm.controls['email'].touched
-            && signInForm.controls['email'].value">
+            && signInForm.controls['email'].valid">
         {{ 'email-input-error-wrong' | translate }}
       </mat-error>
     </mat-form-field>
@@ -41,5 +41,8 @@
     <button mat-raised-button color="primary" (click)="authenticate()">
       {{ 'sign-in-button-text' | translate }}
     </button>
+
+    <!--Sign up link-->
+    <a routerLink="/sign-up" mat-button>{{ 'sign-up-button-text' | translate }}</a>
   </form>
 </mat-card>
