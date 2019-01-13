@@ -16,6 +16,7 @@ import { SignInComponent } from './components/account/sign-in/sign-in.component'
 import { LangPickerComponent } from './components/layout/lang-picker/lang-picker.component';
 import { AccountComponent } from './components/account/account/account.component';
 import { AuthorizationGuard } from './guards/authorization.guard';
+import { PasswordChangeComponent } from './components/account/password-change/password-change.component';
 import { ApiService } from './services/api/api.service';
 
 
@@ -27,7 +28,8 @@ import { ApiService } from './services/api/api.service';
     SignUpComponent,
     SignInComponent,
     LangPickerComponent,
-    AccountComponent
+    AccountComponent,
+    PasswordChangeComponent
   ],
   imports: [
     BrowserModule,

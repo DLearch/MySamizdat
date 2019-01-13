@@ -6,6 +6,7 @@ import { SignUpComponent } from '../components/account/sign-up/sign-up.component
 import { SignInComponent } from '../components/account/sign-in/sign-in.component';
 import { AccountComponent } from '../components/account/account/account.component';
 import { AuthorizationGuard } from '../guards/authorization.guard';
+import { PasswordChangeComponent } from '../components/account/password-change/password-change.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -13,11 +14,12 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-out', redirectTo: 'sign-in' },
   { path: 'account', component: AccountComponent, canActivate: [AuthorizationGuard] },
+  { path: 'change-password', component: PasswordChangeComponent, canActivate: [AuthorizationGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)]
+  , exports: [RouterModule]
 })
 export class AppRoutingModule { }
