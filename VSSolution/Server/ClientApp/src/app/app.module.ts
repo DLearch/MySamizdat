@@ -16,6 +16,7 @@ import { SignInComponent } from './components/account/sign-in/sign-in.component'
 import { LangPickerComponent } from './components/layout/lang-picker/lang-picker.component';
 import { AccountComponent } from './components/account/account/account.component';
 import { AuthorizationGuard } from './guards/authorization.guard';
+import { ApiService } from './services/api/api.service';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AuthorizationGuard } from './guards/authorization.guard';
     AppConfigService,
     UserStorageService,
     AuthorizationGuard,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })
