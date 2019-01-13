@@ -13,5 +13,11 @@
   "email-input-error-wrong": "Email is wrong",
   "sign-in-page-header": "Sign in",
   "sign-in-button-text": "Sign in",
-  "sign-out-button-text": "Sign out"
+  "sign-out-button-text": "Sign out",
+  "password-change-page-header": "Change password",
+  "password-change-button-text": "Change",
+  "current-password-input-placeholder": "Current password",
+  "new-password-input-placeholder": "New password",
+  "current-password-input-error-empty": "Enter current password",
+  "new-password-input-error-empty": "Enter new password"
 }
