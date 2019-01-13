@@ -10,7 +10,7 @@ export class AppConfigService {
   public constructor() {
 
     this._config = {
-      PathAPI: 'https://localhost:44314/',
+      PathAPI: 'https://localhost:44314/api/',
       DefaultLang: 'English',
       Langs: [ 'English', 'Русский' ]
     };
