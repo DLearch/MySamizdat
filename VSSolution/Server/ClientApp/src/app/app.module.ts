@@ -18,6 +18,8 @@ import { AccountComponent } from './components/account/account/account.component
 import { AuthorizationGuard } from './guards/authorization.guard';
 import { PasswordChangeComponent } from './components/account/password-change/password-change.component';
 import { ApiService } from './services/api/api.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { ApiService } from './services/api/api.service';
     HttpClientModule,
     AppMaterialModule,
     AppRoutingModule,
-    AppTranslateModule
+    AppTranslateModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AppConfigService,
