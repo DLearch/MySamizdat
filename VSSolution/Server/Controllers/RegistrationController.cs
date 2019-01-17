@@ -73,7 +73,7 @@ namespace Server.Controllers
                 }
                 else
                     foreach (var error in result.Errors)
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        ModelState.AddModelError(error.Code, error.Description);
             }
 
             return BadRequest(ModelState);
