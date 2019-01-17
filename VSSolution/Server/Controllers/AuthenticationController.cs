@@ -47,10 +47,10 @@ namespace Server.Controllers
                         });
                     }
                     else
-                        ModelState.AddModelError("Password", "wrong-password");
+                        ModelState.AddModelError("Password", "password-input-error-wrong");
                 }
                 else
-                    ModelState.AddModelError("Email", "email-not-found");
+                    ModelState.AddModelError("Email", "email-input-error-not-found");
             }
 
             return BadRequest(ModelState);
