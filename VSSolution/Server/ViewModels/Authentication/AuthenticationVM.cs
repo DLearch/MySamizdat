@@ -12,7 +12,8 @@ namespace Server.ViewModels.Authentication
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "password-input-error-empty")]
+        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "password-input-error-wrong")]
         public string Password { get; set; }
     }
 }

@@ -11,10 +11,12 @@ namespace Server.ViewModels.PasswordChange
         [Required]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "current-password-input-error-empty")]
+        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "current-password-input-error-wrong")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "new-password-input-error-empty")]
+        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "new-password-input-error-wrong")]
         public string NewPassword { get; set; }
     }
 }
