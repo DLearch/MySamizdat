@@ -8,10 +8,10 @@ namespace Server.ViewModels.EmailConfirmation
 {
     public class ConfirmRVM
     {
-        [Required]
+        [Required(ErrorMessage = "empty")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "empty")]
         public string Token { get; set; }
     }
 }

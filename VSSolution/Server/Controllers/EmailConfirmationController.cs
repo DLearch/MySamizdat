@@ -42,7 +42,7 @@ namespace Server.Controllers
                 User user = await _userManager.FindByEmailAsync(model.Email);
 
                 if (user == null)
-                    ModelState.AddModelError("Email", "email-not-found");
+                    ModelState.AddModelError("Email", "not-found");
                 else
                 {
                     ConfirmVM valuesModel = new ConfirmVM()
@@ -79,7 +79,7 @@ namespace Server.Controllers
                 User user = await _userManager.FindByEmailAsync(model.Email);
 
                 if (user == null)
-                    ModelState.AddModelError("Email", "email-not-found");
+                    ModelState.AddModelError("Email", "not-found");
                 else
                 {
                     IdentityResult result = await _userManager.ConfirmEmailAsync(user, model.Token);
