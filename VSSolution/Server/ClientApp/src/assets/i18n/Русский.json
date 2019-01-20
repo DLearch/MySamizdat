@@ -1,17 +1,73 @@
 {
-  "site-name": "Runoo",
-  "sign-up-page-header": "Создать аккаунт",
-  "email-input-placeholder": "Email",
-  "username-input-placeholder": "Имя",
-  "password-input-placeholder": "Пароль",
-  "sign-up-button-text": "Создать аккаунт",
-  "password-input-error-empty": "Введите пароль",
-  "password-input-error-wrong": "Некорректный пароль",
-  "name-input-error-empty": "Введите имя",
-  "name-input-error-wrong": "Некорректный имя",
-  "email-input-error-empty": "Введите email",
-  "email-input-error-wrong": "Некорректный email",
-  "sign-in-page-header": "Вход",
-  "sign-in-button-text": "Войти",
-  "sign-out-button-text": "Выйти"
+  "site": {
+    "name": "Runoo"
+  },
+  "pages": {
+    "sign-up": {
+      "name": "Регистрация"
+    },
+    "sign-in": {
+      "name": "Вход"
+    },
+    "new-book": {
+      "name": "Создание книги"
+    },
+    "password-change": {
+      "name": "Изменение пароля"
+    }
+  },
+  "button-texts": {
+    "sign-up": "Создать аккаунт",
+    "sign-in": "Войти",
+    "sign-out": "Выйти",
+    "create-book": "Создать книгу",
+    "change-password": "Изменить пароль"
+  },
+  "inputs": {
+    "email": {
+      "placeholder": "Email",
+      "errors": {
+        "empty": "Введите email",
+        "wrong": "Некорректный email",
+        "short": "Короткий email",
+        "not-found": "Email не найден",
+        "already-taken": "Email уже занят"
+      }
+    },
+    "username": {
+      "placeholder": "Имя",
+      "errors": {
+        "empty": "Введите имя",
+        "wrong": "Некорректное имя",
+        "short": "Слишком короткое имя",
+        "not-found": "Пользователь не найден",
+        "already-taken": "Имя уже используется"
+      }
+    },
+    "password": {
+      "placeholder": "Пароль",
+      "errors": {
+        "empty": "Введите пароль",
+        "wrong": "Некорректный пароль",
+        "short": "Слишком короткий пароль"
+      }
+    },
+    "current-password": {
+      "placeholder": "Текущий пароль",
+      "errors": {
+        "empty": "Введите текущий пароль",
+        "wrong": "Неправильный пароль",
+        "short": "Слишком короткий пароль"
+      }
+    },
+    "new-password": {
+      "placeholder": "Новый пароль",
+      "errors": {
+        "empty": "Введите новый пароль",
+        "wrong": "Некорректный пароль",
+        "short": "Слишком короткий пароль"
+      }
+    }
+  },
+  "sent": "Отправлено"
 }
