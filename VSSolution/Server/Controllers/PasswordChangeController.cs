@@ -40,7 +40,7 @@ namespace Server.Controllers
                             ModelState.AddModelError(string.Empty, error.Description);
                 }
                 else
-                    ModelState.AddModelError("", "not-found");
+                    ModelState.AddModelError("UserName", "not-found");
             }
 
             return BadRequest(ModelState);
