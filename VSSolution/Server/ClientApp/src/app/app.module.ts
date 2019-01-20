@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './components/layout/app/app.component';
 import { AppMaterialModule } from './modules/app-material.module';
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -20,7 +20,18 @@ import { PasswordChangeComponent } from './components/account/password-change/pa
 import { ApiService } from './services/api/api.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { InputComponent } from './components/forms/input/input.component';
+import { Observable } from 'rxjs';
 
+@Injectable()
+export class JWTInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    console.log(req);
+
+    return next.handle(req);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +42,8 @@ import { environment } from '../environments/environment';
     SignInComponent,
     LangPickerComponent,
     AccountComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +60,12 @@ import { environment } from '../environments/environment';
     AppConfigService,
     UserStorageService,
     AuthorizationGuard,
-    ApiService
+    ApiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
