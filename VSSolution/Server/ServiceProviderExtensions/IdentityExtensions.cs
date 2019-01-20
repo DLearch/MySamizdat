@@ -15,7 +15,7 @@ namespace Server.ServiceProviderExtensions
         public static void AddConfiguredIdentity(this IServiceCollection services)
         {
             //services.AddTransient<IPasswordValidator<User>, PasswordValidator>();
-            services.AddTransient<IUserValidator<User>, UserValidator>();
+            //services.AddTransient<IUserValidator<User>, UserValidator>(); // throws 400 error with email & username already taken
 
             services.AddIdentity<User, IdentityRole>(options => {
                     options.Password.RequiredLength = 6;
@@ -24,8 +24,8 @@ namespace Server.ServiceProviderExtensions
                     options.Password.RequireUppercase = true;
                     options.Password.RequireDigit = true;
 
-                    //options.User.RequireUniqueEmail = true;
-                    //options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMM_";
+                    options.User.RequireUniqueEmail = true;
+                    options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMM0123456789_";
                 })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
