@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { AppConfigService } from '../app-config/app-config.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { UserStorageService } from '../user-storage/user-storage.service';
 import { catchError, map } from 'rxjs/operators';
 
@@ -48,9 +48,9 @@ export class ApiService {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
+    
     if (!this.userStorage.isEmpty())
-      httpHeaders.append('Authorization', 'Bearer ' + this.userStorage.token);
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorage.token);
 
     return httpHeaders;
   }
@@ -65,6 +65,9 @@ export class ApiService {
   private handlePostErrorResponse(data: any): any {
 
     console.log(data);
+
+    if (data instanceof HttpErrorResponse)
+      return throwError(data.error);
 
     return throwError(data);
   }
