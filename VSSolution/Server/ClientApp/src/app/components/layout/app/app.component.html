@@ -12,7 +12,7 @@
       </button>
 
       <!-- Site name -->
-      <a routerLink="" mat-button>{{ 'site-name' | translate }}</a>
+      <a routerLink="" mat-button>{{ 'site.name' | translate }}</a>
 
       <!-- Spacer -->
       <span class="flex-spacer"></span>
@@ -21,7 +21,7 @@
       <span *ngIf='!isAuthenticated'>
 
         <!-- Sign in link -->
-        <a routerLink="/sign-in" mat-button>{{ 'sign-in-button-text' | translate }}</a>
+        <a routerLink="/sign-in" mat-button>{{ 'button-texts.sign-in' | translate }}</a>
 
       </span> 
 
@@ -32,7 +32,7 @@
         <a routerLink="/account" mat-button>{{ userStorage.name }}</a>
 
         <!-- Sign out link -->
-        <a routerLink="/sign-out" mat-button>{{ 'sign-out-button-text' | translate }}</a>
+        <a routerLink="/sign-out" mat-button>{{ 'button-texts.sign-out' | translate }}</a>
 
       </span>
 
@@ -53,6 +53,7 @@
         <a mat-list-item routerLink="/sign-up">Sign up</a>
         <a mat-list-item routerLink="/account">Account</a>
         <a mat-list-item routerLink="/change-password">Change password</a>
+        <a mat-list-item routerLink="/new-book">Create book</a>
         <a mat-list-item routerLink="/notfound">Not found</a>
       </mat-nav-list>
 
