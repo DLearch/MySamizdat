@@ -40,6 +40,8 @@ namespace Server.Controllers
 
                     if (result.Succeeded)
                     {
+                        //await _userManager.ResetAccessFailedCountAsync(user);
+
                         return Ok(new AuthenticationRVM()
                         {
                             Name = user.UserName,
@@ -47,10 +49,14 @@ namespace Server.Controllers
                         });
                     }
                     else
-                        ModelState.AddModelError("Password", "password-input-error-wrong");
+                    {
+                        //await _userManager.AccessFailedAsync(user);
+
+                        ModelState.AddModelError("Password", "wrong");
+                    }
                 }
                 else
-                    ModelState.AddModelError("Email", "email-input-error-not-found");
+                    ModelState.AddModelError("Email", "not-found");
             }
 
             return BadRequest(ModelState);

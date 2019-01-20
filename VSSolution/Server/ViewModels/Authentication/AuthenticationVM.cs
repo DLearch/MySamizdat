@@ -8,12 +8,12 @@ namespace Server.ViewModels.Authentication
 {
     public class AuthenticationVM
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "empty")]
+        [EmailAddress(ErrorMessage = "wrong")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "password-input-error-empty")]
-        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "password-input-error-wrong")]
+        [Required(ErrorMessage = "empty")]
+        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "wrong")]
         public string Password { get; set; }
     }
 }
