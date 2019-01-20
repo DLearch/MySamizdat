@@ -1,47 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { AppConfigService } from 'src/app/services/app-config/app-config.service';
+import { setErrorsFromResponse } from '../../forms/set-errors-from-response.func';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css'],
-  providers: [AuthenticationService]
+  selector: 'app-sign-in'
+  , templateUrl: './sign-in.component.html'
+  , styleUrls: ['./sign-in.component.css']
+  , providers: [AuthenticationService]
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
-  public signInForm: FormGroup;
+  public mainForm: FormGroup;
 
   public constructor(
     formBuilder: FormBuilder
     , private authenticationService: AuthenticationService
     , private router: Router
+    , config: AppConfigService
   ) {
 
-    this.signInForm = formBuilder.group({
+    this.mainForm = formBuilder.group({
 
       'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [Validators.required]]
+      'password': ['', [Validators.required, Validators.pattern(config.get('PasswordPattern') as string)]]
     });
   }
 
-  ngOnInit() { }
+  public mainSubmit(): void {
 
-  public authenticate(): void {
-
-    this.authenticationService
-      .authenticate(this.signInForm.value)
-      .subscribe(
-        () => this.handleSignInResponse(),
-        (data) => this.handleSignInErrorResponse(data)
-      );
+    if (this.mainForm.valid)
+      this.authenticationService
+        .authenticate(this.mainForm.value)
+        .subscribe(
+          () => this.router.navigate([''])
+          , response => setErrorsFromResponse(response, this.mainForm)
+        );
   }
-
-  private handleSignInResponse(): void {
-
-    this.router.navigate(['']);
-  }
-
-  private handleSignInErrorResponse(data: any): void { }
 }

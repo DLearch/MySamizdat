@@ -1,48 +1,27 @@
 <mat-card>
-  <h2>{{ 'sign-in-page-header' | translate }}</h2>
-  <form [formGroup]="signInForm">
 
-    <!--Email form field-->
-    <mat-form-field>
-      <input matInput placeholder="{{ 'email-input-placeholder' | translate }}" type="email" formControlName="email" />
-      <!--If Email is empty-->
-      <mat-error *ngIf="
-            signInForm.controls['email'].invalid
-            && signInForm.controls['email'].touched
-            && !signInForm.controls['email'].value">
-        {{ 'email-input-error-empty' | translate }}
-      </mat-error>
-      <!--If Email is wrong-->
-      <mat-error *ngIf="
-            signInForm.controls['email'].invalid
-            && signInForm.controls['email'].touched
-            && signInForm.controls['email'].valid">
-        {{ 'email-input-error-wrong' | translate }}
-      </mat-error>
-    </mat-form-field>
+  <!--Page name-->
+  <h2>{{ 'pages.sign-in.name' | translate }}</h2>
 
+  <!--Main form-->
+  <form [formGroup]="mainForm" (submit)="mainSubmit()">
+
+    <!--Email input-->
+    <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
+    <br />
     <br />
 
-    <!--Password form field-->
-    <mat-form-field>
-      <input matInput placeholder="{{ 'password-input-placeholder' | translate }}" type="password" formControlName="password" />
-      <!--If Password is empty-->
-      <mat-error *ngIf="
-            signInForm.controls['password'].invalid
-            && signInForm.controls['password'].touched
-            && !signInForm.controls['password'].value">
-        {{ 'password-input-error-empty' | translate }}
-      </mat-error>
-    </mat-form-field>
-
+    <!--Password input-->
+    <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
+    <br />
     <br />
 
     <!--Submit button-->
-    <button mat-raised-button color="primary" (click)="authenticate()">
-      {{ 'sign-in-button-text' | translate }}
+    <button mat-raised-button color="primary" type="submit">
+      {{ 'button-texts.sign-in' | translate }}
     </button>
 
     <!--Sign up link-->
-    <a routerLink="/sign-up" mat-button>{{ 'sign-up-button-text' | translate }}</a>
+    <a routerLink="/sign-up" mat-button>{{ 'button-texts.sign-up' | translate }}</a>
   </form>
 </mat-card>
