@@ -11,6 +11,7 @@ export class AppConfigService {
 
     this._config = {
       PathAPI: 'https://localhost:44314/api/',
+      PasswordPattern: '(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',
       DefaultLang: 'English',
       Langs: [ 'English', 'Русский' ]
     };
