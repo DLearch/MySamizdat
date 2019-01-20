@@ -1,0 +1,9 @@
+
+<mat-form-field>
+  <input matInput placeholder="{{ 'inputs.' + fieldTK + '.placeholder' | translate }}" [type]="type" [formControl]="field" />
+  <mat-error *ngIf="field.invalid">
+    <span *ngFor="let errorTK of errorTKs">
+      {{ 'inputs.' + fieldTK + '.errors.' + errorTK | translate }}
+    </span>
+  </mat-error>
+</mat-form-field>
