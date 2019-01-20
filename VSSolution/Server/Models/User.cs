@@ -8,5 +8,6 @@ namespace Server.Models
 {
     public class User : IdentityUser
     {
+        public bool EmailIsVisible { get; set; }
     }
 }
