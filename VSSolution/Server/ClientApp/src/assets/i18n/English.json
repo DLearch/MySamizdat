@@ -1,28 +1,73 @@
 {
-  "site-name": "Runoo",
-  "sign-up-page-header": "Sign up",
-  "email-input-placeholder": "Email",
-  "username-input-placeholder": "Name",
-  "password-input-placeholder": "Password",
-  "sign-up-button-text": "Sign up",
-  "password-input-error-empty": "Enter password",
-  "password-input-error-wrong": "Password is wrong",
-  "password-input-error-short": "Password is too short",
-  "name-input-error-empty": "Enter name",
-  "name-input-error-wrong": "Name is wrong",
-  "name-input-error-not-found": "Name not found",
-  "email-input-error-empty": "Enter email",
-  "email-input-error-wrong": "Email is wrong",
-  "email-input-error-not-found": "Email not found",
-  "sign-in-page-header": "Sign in",
-  "sign-in-button-text": "Sign in",
-  "sign-out-button-text": "Sign out",
-  "password-change-page-header": "Change password",
-  "password-change-button-text": "Change",
-  "current-password-input-placeholder": "Current password",
-  "current-password-input-error-empty": "Enter current password",
-  "current-password-input-error-wrong": "Current password is wrong",
-  "new-password-input-placeholder": "New password",
-  "new-password-input-error-empty": "Enter new password",
-  "new-password-input-error-wrong": "New password is wrong"
+  "site": {
+    "name": "Runoo"
+  },
+  "pages": {
+    "sign-up": {
+      "name": "Sign up"
+    },
+    "sign-in": {
+      "name": "Sign in"
+    },
+    "new-book": {
+      "name": "Create book"
+    },
+    "password-change": {
+      "name": "Change password"
+    }
+  },
+  "button-texts": {
+    "sign-up": "Sign up",
+    "sign-in": "Sign in",
+    "sign-out": "Sign out",
+    "create-book": "Create",
+    "change-password": "Change"
+  },
+  "inputs": {
+    "email": {
+      "placeholder": "Email",
+      "errors": {
+        "empty": "Enter email",
+        "wrong": "Email is wrong",
+        "short": "Email is too short",
+        "not-found": "Email not found",
+        "already-taken": "Email is already taken"
+      }
+    },
+    "username": {
+      "placeholder": "Name",
+      "errors": {
+        "empty": "Enter name",
+        "wrong": "Name is wrong",
+        "short": "Name is too short",
+        "not-found": "User not found",
+        "already-taken": "Name is already taken"
+      }
+    },
+    "password": {
+      "placeholder": "Password",
+      "errors": {
+        "empty": "Enter password",
+        "wrong": "Password is wrong",
+        "short": "Password is too short"
+      }
+    },
+    "current-password": {
+      "placeholder": "Current password",
+      "errors": {
+        "empty": "Enter current password",
+        "wrong": "Current password is wrong",
+        "short": "Current password is too short"
+      }
+    },
+    "new-password": {
+      "placeholder": "New password",
+      "errors": {
+        "empty": "Enter new password",
+        "wrong": "New password is wrong",
+        "short": "New password is too short"
+      }
+    }
+  },
+  "sent": "Is sent"
 }
