@@ -26,22 +26,22 @@ export class InputComponent implements ControlValueAccessor {
     const errors = [];
     const find: Function = key => this.field.errors.hasOwnProperty(key);
     
-    if (find('required') || find('empty'))
+    if (find('required'))
       errors.push('empty');
 
-    else if (find('maxlength') || find('long'))
+    else if (find('maxlength'))
       errors.push('long');
 
-    else if (find('minlength') || find('short'))
+    else if (find('minlength'))
       errors.push('short');
 
-    else if (find('email') || find('pattern') || find('wrong'))
+    else if (find('email') || find('pattern'))
       errors.push('wrong');
 
-    else
-      for (let error in this.field.errors)
+    else if (find('api'))
+      for (let error of this.field.errors['api'])
         errors.push(error);
-    
+
     return errors;
   }
   
