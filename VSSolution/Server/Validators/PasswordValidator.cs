@@ -18,9 +18,9 @@ namespace Server.Validators
             List<IdentityError> errors = new List<IdentityError>();
 
             if (string.IsNullOrEmpty(password))
-                AddError("password-input-error-empty", errors);
+                AddError("inputs.password.errors.empty", errors);
             else if (!Regex.IsMatch(password, regexPattern))
-                AddError("password-input-error-wrong", errors);
+                AddError("inputs.password.errors.wrong", errors);
 
             return Task.FromResult(errors.Count == 0 ?
                 IdentityResult.Success : IdentityResult.Failed(errors.ToArray()));

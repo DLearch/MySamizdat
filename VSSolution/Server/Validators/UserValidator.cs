@@ -21,18 +21,18 @@ namespace Server.Validators
             List<IdentityError> errors = new List<IdentityError>();
 
             if (string.IsNullOrWhiteSpace(user.UserName))
-                AddError(userNameCode, "username-input-error-empty", errors);
+                AddError(userNameCode, "inputs.username.errors.empty", errors);
             else if (!Regex.IsMatch(user.UserName, regexUserNamePattern))
-                AddError(userNameCode, "username-input-error-wrong", errors);
+                AddError(userNameCode, "inputs.username.errors.wrong", errors);
             else if ((await manager.FindByNameAsync(user.UserName)) != null)
-                AddError(userNameCode, "username-input-error-already-taken", errors);
+                AddError(userNameCode, "inputs.username.errors.already-taken", errors);  // throws 400 error with username already taken
 
             if (string.IsNullOrWhiteSpace(user.Email))
-                AddError(emailCode, "email-input-error-empty", errors);
+                AddError(emailCode, "inputs.email.errors.empty", errors);
             else if (!(new EmailAddressAttribute().IsValid(user.Email)))
-                AddError(emailCode, "email-input-error-wrong", errors);
+                AddError(emailCode, "inputs.email.errors.wrong", errors);
             else if ((await manager.FindByEmailAsync(user.Email)) != null)
-                AddError(emailCode, "email-input-error-already-taken", errors);
+                AddError(emailCode, "inputs.email.errors.already-taken", errors);  // throws 400 error with email already taken
 
             return errors.Count == 0 ?
                 IdentityResult.Success : IdentityResult.Failed(errors.ToArray());
