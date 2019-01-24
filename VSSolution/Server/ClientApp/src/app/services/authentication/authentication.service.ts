@@ -15,7 +15,7 @@ export class AuthenticationService {
     private api: ApiService
     , private userStorage: UserStorageService
   ) {
-    userStorage.unsetUser();
+    userStorage.token = null;
   }
 
   public authenticate(data: any): Observable<any> {
@@ -29,6 +29,7 @@ export class AuthenticationService {
 
   private handleAuthenticateResponse(data: any): void {
 
-    this.userStorage.setUser(data.name, data.token);
+    this.userStorage.token = data.token;
+    this.userStorage.user = data.user;
   }
 }

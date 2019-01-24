@@ -6,14 +6,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.ViewModels.Authentication
+namespace Server.ViewModels.Account
 {
-    public class AuthenticationRVM
+    public class GetUserRVM
     {
         [MyRequired]
         public User User { get; set; }
-
-        [MyRequired]
-        public string Token { get; set; }
     }
 }

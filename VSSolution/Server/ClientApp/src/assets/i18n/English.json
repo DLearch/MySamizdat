@@ -69,5 +69,6 @@
       }
     }
   },
-  "sent": "Is sent"
+  "sent": "Is sent",
+  "email-is-visible":  "Email is visible for other users"
 }

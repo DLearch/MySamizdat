@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,13 @@ export class UserStorageService {
 
   public set token(value: any) {
 
-    this.storage[this.tokenKey] = value;
+    if (value)
+      this.storage.setItem(this.tokenKey, value);
+    else {
+
+      this.storage.removeItem(this.tokenKey);
+      this.user = null;
+    }
 
     this.tokenChanged.next(!this.isEmpty());
   }
@@ -38,30 +45,26 @@ export class UserStorageService {
     return this.tokenChanged.asObservable();
   }
 
-  // Name ///////////////////////////////////////
-
-  private readonly nameKey: string = 'username';
-
-  public get name(): any {
-
-    return this.storage[this.nameKey];
-  }
-
-  public set name(value: any) {
-
-    this.storage[this.nameKey] = value;
-  }
-
   // User ///////////////////////////////////////
 
-  public unsetUser() {
-    this.setUser(null, null);
+  private readonly userKey: string = 'user';
+
+  public get user(): User {
+
+    const item = this.storage.getItem(this.userKey);
+
+    if (item)
+      return JSON.parse(item) as User;
+    else
+      return null;
   }
 
-  public setUser(name: string, token: string): void {
+  public set user(user: User) {
 
-    this.name = name;
-    this.token = token;
+    if (user)
+      this.storage.setItem(this.userKey, JSON.stringify(user));
+    else
+      this.storage.removeItem(this.userKey);
   }
 
   public isEmpty(): boolean {

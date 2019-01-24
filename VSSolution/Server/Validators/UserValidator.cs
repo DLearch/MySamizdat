@@ -14,25 +14,23 @@ namespace Server.Validators
         public const string userNameCode = "UserName";
         public const string emailCode = "Email";
 
-        public const string regexUserNamePattern = @"^[a-zA-Z0-9_]+$";
-
         public async Task<IdentityResult> ValidateAsync(UserManager<User> manager, User user)
         {
             List<IdentityError> errors = new List<IdentityError>();
 
-            if (string.IsNullOrWhiteSpace(user.UserName))
-                AddError(userNameCode, "inputs.username.errors.empty", errors);
-            else if (!Regex.IsMatch(user.UserName, regexUserNamePattern))
-                AddError(userNameCode, "inputs.username.errors.wrong", errors);
+            if (string.IsNullOrEmpty(user.UserName))
+                AddError(userNameCode, "empty", errors);
+            else if (!(new UserNameAttribute().IsValid(user.UserName)))
+                AddError(userNameCode, "wrong", errors);
             else if ((await manager.FindByNameAsync(user.UserName)) != null)
-                AddError(userNameCode, "inputs.username.errors.already-taken", errors);  // throws 400 error with username already taken
+                AddError(userNameCode, "already-taken", errors);
 
-            if (string.IsNullOrWhiteSpace(user.Email))
-                AddError(emailCode, "inputs.email.errors.empty", errors);
+            if (string.IsNullOrEmpty(user.Email))
+                AddError(emailCode, "empty", errors);
             else if (!(new EmailAddressAttribute().IsValid(user.Email)))
-                AddError(emailCode, "inputs.email.errors.wrong", errors);
+                AddError(emailCode, "wrong", errors);
             else if ((await manager.FindByEmailAsync(user.Email)) != null)
-                AddError(emailCode, "inputs.email.errors.already-taken", errors);  // throws 400 error with email already taken
+                AddError(emailCode, "already-taken", errors);
 
             return errors.Count == 0 ?
                 IdentityResult.Success : IdentityResult.Failed(errors.ToArray());

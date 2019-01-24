@@ -31,7 +31,7 @@ export class SignInComponent {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
+    //if (this.mainForm.valid)
       this.authenticationService
         .authenticate(this.mainForm.value)
         .subscribe(

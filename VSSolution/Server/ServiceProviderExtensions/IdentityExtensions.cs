@@ -14,8 +14,8 @@ namespace Server.ServiceProviderExtensions
     {
         public static void AddConfiguredIdentity(this IServiceCollection services)
         {
-            //services.AddTransient<IPasswordValidator<User>, PasswordValidator>();
-            //services.AddTransient<IUserValidator<User>, UserValidator>(); // throws 400 error with email & username already taken
+            services.AddTransient<IPasswordValidator<User>, PasswordValidator>();
+            services.AddTransient<IUserValidator<User>, UserValidator>(); // throws 400 error with email & username already taken
 
             services.AddIdentity<User, IdentityRole>(options => {
                     options.Password.RequiredLength = 6;

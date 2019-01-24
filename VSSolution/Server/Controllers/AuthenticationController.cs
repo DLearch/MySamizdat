@@ -44,7 +44,7 @@ namespace Server.Controllers
 
                         return Ok(new AuthenticationRVM()
                         {
-                            Name = user.UserName,
+                            User = user,
                             Token = _jwtGenerator.Generate(user)
                         });
                     }

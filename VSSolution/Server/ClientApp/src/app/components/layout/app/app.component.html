@@ -29,7 +29,7 @@
       <span *ngIf='isAuthenticated'>
 
         <!-- Profile link -->
-        <a routerLink="/account" mat-button>{{ userStorage.name }}</a>
+        <a routerLink="/account" mat-button>{{ userStorage.user?.userName }}</a>
 
         <!-- Sign out link -->
         <a routerLink="/sign-out" mat-button>{{ 'button-texts.sign-out' | translate }}</a>

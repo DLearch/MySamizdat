@@ -5,15 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.ViewModels.EmailConfirmation
+namespace Server.ViewModels.Account
 {
-    public class ConfirmRVM
+    public class SwitchEmailVisibilityRVM
     {
         [MyRequired]
-        [UserName]
-        public string Name { get; set; }
-
-        [MyRequired]
-        public string Token { get; set; }
+        public bool EmailIsVisible { get; set; }
     }
 }

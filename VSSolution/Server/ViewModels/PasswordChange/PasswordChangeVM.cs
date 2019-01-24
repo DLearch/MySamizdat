@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Validators;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,15 +9,12 @@ namespace Server.ViewModels.PasswordChange
 {
     public class PasswordChangeVM
     {
-        [Required(ErrorMessage = "empty")]
-        public string Name { get; set; }
-
-        [Required(ErrorMessage = "empty")]
-        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "wrong")]
+        [MyRequired]
+        [Password]
         public string OldPassword { get; set; }
 
-        [Required(ErrorMessage = "empty")]
-        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "wrong")]
+        [MyRequired]
+        [Password]
         public string NewPassword { get; set; }
     }
 }

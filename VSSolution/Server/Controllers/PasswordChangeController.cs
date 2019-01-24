@@ -27,7 +27,7 @@ namespace Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await _userManager.FindByNameAsync(model.Name);
+                User user = await _userManager.GetUserAsync(User);
 
                 if (user != null)
                 {

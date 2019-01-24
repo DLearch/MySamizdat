@@ -67,7 +67,10 @@ export class ApiService {
     console.log(data);
 
     if (data instanceof HttpErrorResponse)
-      return throwError(data.error);
+      switch (data.status) {
+        case 400:
+          return throwError(data.error);
+      }
 
     return throwError(data);
   }

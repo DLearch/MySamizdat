@@ -1,3 +1,9 @@
-<p>
-  account works!
-</p>
+<!--Password change link-->
+<a routerLink="/change-password" mat-button>{{ 'button-texts.change-password' | translate }}</a>
+<br />
+
+<!--Email label-->
+<p>{{ userStorage.user.email }}</p>
+
+<!--Email visibility-->
+<mat-slide-toggle (toggleChange)="switchEmailVisibility(emailIsVisible)" [(ngModel)]="emailIsVisible">{{ 'email-is-visible' | translate }}</mat-slide-toggle>

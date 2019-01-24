@@ -12,6 +12,7 @@ import {
   , MatGridListModule
   , MatSelectModule
   , MatMenuModule
+  , MatSlideToggleModule
 } from '@angular/material';
 
 @NgModule({
@@ -28,6 +29,7 @@ import {
     , MatGridListModule
     , MatSelectModule
     , MatMenuModule
+    , MatSlideToggleModule
   ],
   exports: [
     LayoutModule
@@ -42,6 +44,7 @@ import {
     , MatGridListModule
     , MatSelectModule
     , MatMenuModule
+    , MatSlideToggleModule
   ]
 })
 export class AppMaterialModule { }

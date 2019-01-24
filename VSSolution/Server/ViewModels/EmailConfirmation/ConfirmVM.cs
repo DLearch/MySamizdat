@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Validators;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace Server.ViewModels.EmailConfirmation
 {
     public class ConfirmVM
     {
-        [Required(ErrorMessage = "empty")]
-        [EmailAddress(ErrorMessage = "wrong")]
+        [MyRequired]
+        [MyEmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "empty")]
+        [MyRequired]
         public string Token { get; set; }
     }
 }

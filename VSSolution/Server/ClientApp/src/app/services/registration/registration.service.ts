@@ -14,7 +14,7 @@ export class RegistrationService {
     private api: ApiService
     , userStorage: UserStorageService
   ) {
-    userStorage.unsetUser();
+    userStorage.token = null;
   }
 
   public register(data: any): Observable<any> {

@@ -31,7 +31,7 @@ export class SignUpComponent {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
+    //if (this.mainForm.valid)
       this.registrationService
         .register(this.mainForm.value)
         .subscribe(

@@ -31,7 +31,7 @@ export class PasswordChangeComponent {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
+    //if (this.mainForm.valid)
       this.passwordChangeService
         .change(this.mainForm.value)
         .subscribe(

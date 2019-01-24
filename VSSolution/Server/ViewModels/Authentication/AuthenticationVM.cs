@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Validators;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,12 +9,12 @@ namespace Server.ViewModels.Authentication
 {
     public class AuthenticationVM
     {
-        [Required(ErrorMessage = "empty")]
-        [EmailAddress(ErrorMessage = "wrong")]
+        [MyRequired]
+        [MyEmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "empty")]
-        [RegularExpression(@"(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "wrong")]
+        [MyRequired]
+        [Password]
         public string Password { get; set; }
     }
 }
