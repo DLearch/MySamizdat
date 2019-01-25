@@ -32,11 +32,17 @@ namespace Server.Controllers
                 if (user != null)
                 {
                     user.EmailIsVisible = model.EmailIsVisible;
-                    
-                    return Ok(new SwitchEmailVisibilityRVM()
-                    {
-                        EmailIsVisible = user.EmailIsVisible
-                    });
+
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+
+                    if(result.Succeeded)
+                        return Ok(new SwitchEmailVisibilityRVM()
+                        {
+                            EmailIsVisible = user.EmailIsVisible
+                        });
+                    else
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError(error.Code, error.Description);
                 }
                 else
                     ModelState.AddModelError("User", "not-found");

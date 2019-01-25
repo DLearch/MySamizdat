@@ -50,24 +50,7 @@ namespace Server.Controllers
 
                 if (result.Succeeded)
                 {
-                    ConfirmVM valuesModel = new ConfirmVM()
-                    {
-                        Email = user.Email,
-                        Token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
-                    };
-
-                    string callbackUrl = Url.Action(
-                        "",
-                        "sign-up",
-                        valuesModel,
-                        protocol: HttpContext.Request.Scheme
-                    );
-
-                    await _emailService.SendEmailAsync(
-                        user.Email
-                        , "Confirm your account"
-                        , $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>"
-                    );
+                    await _emailService.SendEmailConfirmationMessageAsync(user);
 
                     return Ok();
                 }

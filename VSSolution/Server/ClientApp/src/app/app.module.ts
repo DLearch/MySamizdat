@@ -22,6 +22,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { InputComponent } from './components/forms/input/input.component';
 import { Observable } from 'rxjs';
+import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
+import { EmailConfirmedComponent } from './components/account/email-confirmed/email-confirmed.component';
+import { EmailUnconfirmedComponent } from './components/account/email-unconfirmed/email-unconfirmed.component';
 
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
@@ -43,7 +46,10 @@ export class JWTInterceptor implements HttpInterceptor {
     LangPickerComponent,
     AccountComponent,
     PasswordChangeComponent,
-    InputComponent
+    InputComponent,
+    ConfirmEmailComponent,
+    EmailConfirmedComponent,
+    EmailUnconfirmedComponent,
   ],
   imports: [
     BrowserModule,

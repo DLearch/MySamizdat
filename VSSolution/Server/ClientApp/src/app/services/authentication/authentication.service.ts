@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { UserStorageService } from '../user-storage/user-storage.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AuthenticationService {
     return this.api
       .post(data, this.authenticateController)
       .pipe(
-        map(response => this.handleAuthenticateResponse(response))
+        tap(response => this.handleAuthenticateResponse(response))
       );
   }
 

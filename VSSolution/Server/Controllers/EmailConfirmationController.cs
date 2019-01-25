@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Server.Models;
@@ -35,37 +36,24 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendConfirmationMessage([FromBody]SendConfirmationMessageVM model)
+        [Authorize]
+        public async Task<IActionResult> SendConfirmationMessage()
         {
             if (ModelState.IsValid)
             {
-                User user = await _userManager.FindByEmailAsync(model.Email);
+                User user = await _userManager.GetUserAsync(User);
 
-                if (user == null)
-                    ModelState.AddModelError("Email", "not-found");
-                else
-                {
-                    ConfirmVM valuesModel = new ConfirmVM()
+                if (user != null)
+                    if (!user.EmailConfirmed)
                     {
-                        Email = user.Email,
-                        Token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
-                    };
+                        await _emailService.SendEmailConfirmationMessageAsync(user);
 
-                    string callbackUrl = Url.Action(
-                        "ConfirmEmail",
-                        "Registration",
-                        valuesModel,
-                        protocol: HttpContext.Request.Scheme
-                    );
-
-                    await _emailService.SendEmailAsync(
-                        user.Email
-                        , "Confirm your account"
-                        , $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>"
-                    );
-
-                    return Ok();
-                }
+                        return Ok();
+                    }
+                    else
+                        ModelState.AddModelError("Email", "already-confirmed");
+                else
+                    ModelState.AddModelError("Email", "not-found");
             }
 
             return BadRequest(ModelState);
@@ -90,13 +78,13 @@ namespace Server.Controllers
 
                         return Ok(new ConfirmRVM()
                         {
-                            Name = user.UserName,
+                            User = user,
                             Token = _jwtGenerator.Generate(user)
                         });
                     }
                     else
                         foreach (var error in result.Errors)
-                            ModelState.AddModelError(string.Empty, error.Description);
+                            ModelState.AddModelError(error.Code, error.Description);
                 }
             }
 

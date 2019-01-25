@@ -21,7 +21,9 @@
     "sign-in": "Sign in",
     "sign-out": "Sign out",
     "create-book": "Create",
-    "change-password": "Change"
+    "send-email-confirmation-message": "Send email confirmation message",
+    "send-email-confirmation-message-again": "Send email confirmation message again",
+    "change-password": "Change password"
   },
   "inputs": {
     "email": {
@@ -70,5 +72,6 @@
     }
   },
   "sent": "Is sent",
-  "email-is-visible":  "Email is visible for other users"
+  "email-is-not-confirmed": "Email is not confirmed",
+  "email-is-visible": "Email is visible for other users"
 }

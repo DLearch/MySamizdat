@@ -23,7 +23,7 @@ namespace Server.ServiceProviderExtensions
                     options.Password.RequireLowercase = true;
                     options.Password.RequireUppercase = true;
                     options.Password.RequireDigit = true;
-
+                
                     options.User.RequireUniqueEmail = true;
                     options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMM0123456789_";
                 })
