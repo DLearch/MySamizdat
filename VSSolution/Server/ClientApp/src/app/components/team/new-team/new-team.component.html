@@ -1,0 +1,18 @@
+<!--Page name-->
+<h2>{{ 'pages.new-team.name' | translate }}</h2>
+
+<!--Main form-->
+<form [formGroup]="mainForm" (submit)="mainSubmit()">
+
+  <!--TeamName input-->
+  <app-input formControlName="name" type="text" fieldTK="teamname" [field]="mainForm.get('name')"></app-input>
+
+  <br />
+  <br />
+
+  <!--Submit button-->
+  <button mat-raised-button color="primary" type="submit">
+    {{ 'button-texts.create-book' | translate }}
+  </button>
+
+</form>

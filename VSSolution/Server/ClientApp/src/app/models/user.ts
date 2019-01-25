@@ -1,3 +1,5 @@
+import { Team } from './team';
+
 export class User {
 
   userName: string;
@@ -8,4 +10,6 @@ export class User {
 
   phone: string;
   phoneConfirmed: boolean;
+
+  teams: Team[];
 }

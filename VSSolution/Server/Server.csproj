@@ -6,14 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\team.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\modules\app-material.module.ts" />
     <None Remove="ClientApp\src\app\modules\app-routing.module.ts" />
     <None Remove="ClientApp\src\app\modules\app-translate.module.ts" />
+    <None Remove="ClientApp\src\app\services\team\create.vm.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\components\layout\" />
+    <Folder Include="ClientApp\src\app\components\notifications\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -24,10 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\team.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-material.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-routing.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\app-translate.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\team\create.vm.ts" />
   </ItemGroup>
 
 </Project>

@@ -78,7 +78,7 @@ namespace Server.Controllers
 
                         return Ok(new ConfirmRVM()
                         {
-                            User = user,
+                            User = user.GetPrivateCopy(),
                             Token = _jwtGenerator.Generate(user)
                         });
                     }

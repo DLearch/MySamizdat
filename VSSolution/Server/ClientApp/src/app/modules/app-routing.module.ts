@@ -10,9 +10,12 @@ import { PasswordChangeComponent } from '../components/account/password-change/p
 import { ConfirmEmailComponent } from '../components/account/confirm-email/confirm-email.component';
 import { EmailConfirmedComponent } from '../components/account/email-confirmed/email-confirmed.component';
 import { EmailUnconfirmedComponent } from '../components/account/email-unconfirmed/email-unconfirmed.component';
+import { TeamComponent } from '../components/team/team/team.component';
+import { NewTeamComponent } from '../components/team/new-team/new-team.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
+
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-out', redirectTo: 'sign-in' },
@@ -21,6 +24,10 @@ const routes: Routes = [
   { path: 'email-confirmed', component: EmailConfirmedComponent, canActivate: [AuthorizationGuard] },
   { path: 'email-unconfirmed', component: EmailUnconfirmedComponent },
   { path: 'change-password', component: PasswordChangeComponent, canActivate: [AuthorizationGuard] },
+
+  { path: 'team/:id', component: TeamComponent },
+  { path: 'create-team', component: NewTeamComponent },
+
   { path: '**', component: NotFoundComponent }
 ];
 

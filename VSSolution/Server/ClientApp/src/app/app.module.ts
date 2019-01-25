@@ -25,6 +25,8 @@ import { Observable } from 'rxjs';
 import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
 import { EmailConfirmedComponent } from './components/account/email-confirmed/email-confirmed.component';
 import { EmailUnconfirmedComponent } from './components/account/email-unconfirmed/email-unconfirmed.component';
+import { NewTeamComponent } from './components/team/new-team/new-team.component';
+import { TeamComponent } from './components/team/team/team.component';
 
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
@@ -50,6 +52,8 @@ export class JWTInterceptor implements HttpInterceptor {
     ConfirmEmailComponent,
     EmailConfirmedComponent,
     EmailUnconfirmedComponent,
+    NewTeamComponent,
+    TeamComponent,
   ],
   imports: [
     BrowserModule,

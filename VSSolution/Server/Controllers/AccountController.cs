@@ -61,7 +61,7 @@ namespace Server.Controllers
                 if (user != null)
                     return Ok(new GetUserRVM()
                     {
-                        User = user
+                        User = user.GetPrivateCopy()
                     });
                 else
                     ModelState.AddModelError("User", "not-found");
