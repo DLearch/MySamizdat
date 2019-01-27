@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostListener } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 
@@ -6,11 +6,14 @@ import { User } from 'src/app/models/user';
   providedIn: 'root'
 })
 export class UserStorageService {
-
+  
   private storage: Storage;
 
   constructor() {
+
     this.storage = window.localStorage;
+
+    window.addEventListener("storage", () => this.tokenChanged.next(!this.isEmpty()));
   }
 
   // Token //////////////////////////////////////

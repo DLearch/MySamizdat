@@ -15,14 +15,14 @@ namespace Server.ServiceProviderExtensions
     {
         public static void AddConfiguredAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            const string authenticationScheme = JwtBearerDefaults.AuthenticationScheme;
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             services
                 .AddAuthentication(options =>
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
+                    options.DefaultAuthenticateScheme = options.DefaultScheme = options.DefaultChallengeScheme = authenticationScheme;
                 })
                 .AddJwtBearer(cfg =>
                 {

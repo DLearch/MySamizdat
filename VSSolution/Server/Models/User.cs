@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Server.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,15 @@ namespace Server.Models
 {
     public class User : IdentityUser
     {
+        [MyRequired]
         public bool EmailIsVisible { get; set; }
 
-        public List<TeamMember> Teams { get; set; }
+        //public List<TeamMember> Teams { get; set; }
+        
+        [MyRequired]
+        public DateTime BirthDate { get; set; }
 
-        public List<Notification> Notifications { get; set; }
+        //public List<string> Languages { get; set; }
 
         public User GetPublicCopy() => new User()
         {
@@ -29,6 +34,7 @@ namespace Server.Models
             , UserName = UserName
             , EmailIsVisible = EmailIsVisible
             , EmailConfirmed = EmailConfirmed
+            , BirthDate = BirthDate
         };
     }
 }

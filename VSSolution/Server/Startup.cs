@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,6 @@ namespace Server
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfiguredDbContext(Configuration);
@@ -45,6 +45,8 @@ namespace Server
             services.AddSingleton<JWTGenerator>();
 
             services.AddScoped<EmailService>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +63,11 @@ namespace Server
 
             app.UseAuthentication();
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NotificationHub>("/notification");
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -73,10 +80,9 @@ namespace Server
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
-                {
-                    //spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-                }
+                else
+                    spa.UseAngularCliServer(npmScript: "start");
             });
         }
     }
