@@ -1,0 +1,31 @@
+<!--Page name-->
+<h2>{{ 'pages.sign-up.name' | translate }}</h2>
+
+<!--Main form-->
+<form [formGroup]="mainForm" *ngIf='!isComplete' (submit)="mainSubmit()">
+
+  <!--Email input-->
+  <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
+  <br />
+  <br />
+
+  <!--UserName input-->
+  <app-input formControlName="userName" type="text" fieldTK="username" [field]="mainForm.get('userName')"></app-input>
+  <br />
+  <br />
+
+  <!--Password input-->
+  <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
+  <br />
+  <br />
+
+  <!--Submit button-->
+  <button mat-raised-button color="primary" type="submit">
+    {{ 'button-texts.sign-up' | translate }}
+  </button>
+
+  <!--Sign in link-->
+  <a routerLink="/sign-in" mat-button>{{ 'button-texts.sign-in' | translate }}</a>
+</form>
+
+<p *ngIf='isComplete'>{{ 'sent' | translate }}</p>

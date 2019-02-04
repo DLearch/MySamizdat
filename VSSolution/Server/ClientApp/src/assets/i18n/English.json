@@ -16,6 +16,9 @@
       "name": "Change password"
     }
   },
+  "navbar-links" : {
+    "main" : "Main"
+  },
   "button-texts": {
     "sign-up": "Sign up",
     "sign-in": "Sign in",

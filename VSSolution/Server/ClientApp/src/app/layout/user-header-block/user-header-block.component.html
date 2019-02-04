@@ -1,0 +1,19 @@
+
+<!-- If the user is logged in-->
+<span *ngIf='accountService.isAuthenticated'>
+
+  <!-- Profile link -->
+  <a routerLink="/account" mat-button>{{ accountService.user.userName }}</a>
+
+  <!-- Sign out link -->
+  <a routerLink="/sign-out" mat-button>{{ 'button-texts.sign-out' | translate }}</a>
+
+</span>
+
+<!-- If the user is not logged in-->
+<span *ngIf='!accountService.isAuthenticated'>
+
+  <!-- Sign in link -->
+  <a routerLink="/sign-in" mat-button>{{ 'button-texts.sign-in' | translate }}</a>
+
+</span>

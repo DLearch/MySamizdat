@@ -1,81 +1,92 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injectable } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppComponent } from './components/layout/app/app.component';
-import { AppMaterialModule } from './modules/app-material.module';
-import { AppRoutingModule } from './modules/app-routing.module';
-import { AppTranslateModule } from './modules/app-translate.module';
-import { MainComponent } from './components/main/main.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AppConfigService } from './services/app-config/app-config.service';
-import { UserStorageService } from './services/user-storage/user-storage.service';
-import { SignUpComponent } from './components/account/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignInComponent } from './components/account/sign-in/sign-in.component';
-import { LangPickerComponent } from './components/layout/lang-picker/lang-picker.component';
-import { AccountComponent } from './components/account/account/account.component';
-import { AuthorizationGuard } from './guards/authorization.guard';
-import { PasswordChangeComponent } from './components/account/password-change/password-change.component';
-import { ApiService } from './services/api/api.service';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { InputComponent } from './components/forms/input/input.component';
-import { Observable } from 'rxjs';
-import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
-import { EmailConfirmedComponent } from './components/account/email-confirmed/email-confirmed.component';
-import { EmailUnconfirmedComponent } from './components/account/email-unconfirmed/email-unconfirmed.component';
-import { NewTeamComponent } from './components/team/new-team/new-team.component';
-import { TeamComponent } from './components/team/team/team.component';
 
-@Injectable()
-export class JWTInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+// App modules
+import { AppRoutingModule } from './app-routing.module';
+import { AppMaterialModule } from './app-material.module';
+import { AppTranslateModule } from './app-translate.module';
 
-    console.log(req);
+// Pages
+import { ErrorComponent } from './pages/error/error.component';
+import { ChallengeComponent } from './pages/challenge/challenge.component';
+import { EmailConfirmationComponent } from './pages/email-confirmation/email-confirmation.component';
+import { PasswordSettingComponent } from './pages/password-setting/password-setting.component';
+import { MainComponent } from './pages/main/main.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { AccountComponent } from './pages/account/account.component';
+import { BookComponent } from './pages/book/book.component';
+import { SeriesComponent } from './pages/series/series.component';
+import { UserComponent } from './pages/user/user.component';
+import { TeamComponent } from './pages/team/team.component';
+import { TeamCreatingComponent } from './pages/team-creating/team-creating.component';
+import { SeriesCreatingComponent } from './pages/series-creating/series-creating.component';
+import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
-    return next.handle(req);
-  }
-}
+// Layout components
+import { AppComponent } from './layout/app/app.component';
+import { LayoutComponent } from './layout/layout/layout.component';
+import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
+import { UserHeaderBlockComponent } from './layout/user-header-block/user-header-block.component';
+
+// Other components
+import { InputComponent } from './components/input/input.component';
+
+// Services
+import { LogInterceptorService } from './services/log-interceptor.service';
+import { AccountService } from './services/account/account.service';
+import { ApiService } from './services/api/api.service';
+import { SignOutComponent } from './pages/sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MainComponent,
-    NotFoundComponent,
-    SignUpComponent,
-    SignInComponent,
-    LangPickerComponent,
-    AccountComponent,
-    PasswordChangeComponent,
-    InputComponent,
-    ConfirmEmailComponent,
-    EmailConfirmedComponent,
-    EmailUnconfirmedComponent,
-    NewTeamComponent,
-    TeamComponent,
+    AppComponent
+    , LayoutComponent
+    , LanguagePickerComponent
+    , UserHeaderBlockComponent
+    , MainComponent
+    , ErrorComponent
+    , SignInComponent
+    , SignUpComponent
+    , ChallengeComponent
+    , EmailConfirmationComponent
+    , PasswordSettingComponent
+    , SettingsComponent
+    , AccountComponent
+    , BookComponent
+    , SeriesComponent
+    , UserComponent
+    , TeamComponent
+    , TeamCreatingComponent
+    , SeriesCreatingComponent
+    , BookCreatingComponent
+    , InputComponent, SignOutComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppMaterialModule,
-    AppRoutingModule,
-    AppTranslateModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    BrowserModule
+    , FormsModule
+    , ReactiveFormsModule
+    , BrowserAnimationsModule
+    , HttpClientModule
+    , ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    , AppMaterialModule
+    , AppRoutingModule
+    , AppTranslateModule
   ],
   providers: [
-    AppConfigService,
-    UserStorageService,
-    AuthorizationGuard,
-    ApiService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JWTInterceptor,
+      useClass: LogInterceptorService,
       multi: true
     }
+    , ApiService
+    , AccountService
   ],
   bootstrap: [AppComponent]
 })

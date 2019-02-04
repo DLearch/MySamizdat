@@ -12,7 +12,7 @@ namespace Server.Models
         [MyRequired]
         public bool EmailIsVisible { get; set; }
 
-        //public List<TeamMember> Teams { get; set; }
+        public List<TeamMember> Teams { get; set; }
         
         [MyRequired]
         public DateTime BirthDate { get; set; }

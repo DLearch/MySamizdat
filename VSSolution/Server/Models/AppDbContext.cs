@@ -9,8 +9,8 @@ namespace Server.Models
 {
     public class AppDbContext : IdentityDbContext<User>
     {
-        //public DbSet<Team> Teams { get; set; }
-        //public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

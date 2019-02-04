@@ -1,15 +1,9 @@
-import { Team } from './team';
-
 export class User {
 
   userName: string;
 
   email: string;
-  emailConfirmed: boolean;
   emailIsVisible: boolean;
+  emailConfirmed: boolean;
 
-  phone: string;
-  phoneConfirmed: boolean;
-
-  teams: Team[];
 }

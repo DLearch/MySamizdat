@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { AppConfigService } from '../app-config/app-config.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { UserStorageService } from '../user-storage/user-storage.service';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { AccountService } from '../account/account.service';
 
 @Injectable()
 export class ApiService {
 
+  readonly apiPath: string = 'https://localhost:44314/api';
+
   constructor(
     private http: HttpClient
-    , private config: AppConfigService
-    , private userStorage: UserStorageService
+    //, private accountService: AccountService
   ) { }
 
-  public post(data: any, controller: string, action?: string): Observable<any> {
+  public post(data: any, controller?: string, action?: string): Observable<any> {
 
     return this.http
       .post(
@@ -23,14 +23,17 @@ export class ApiService {
         , { headers: this.getHttpHeaders() }
       )
       .pipe(
-        map(response => this.handlePostResponse(response)),
-        catchError(response => this.handlePostErrorResponse(response))
+        tap(response => this.handleResponse(response)),
+        catchError(response => this.handleError(response))
       );
   }
 
-  public getUri(controller: string, action?: string): string {
+  public getUri(controller?: string, action?: string): string {
 
-    let uri: string = this.config.get('PathAPI') + controller;
+    let uri: string = this.apiPath;
+
+    if (controller)
+      uri += '/' + controller;
 
     if (action)
       uri += '/' + action;
@@ -48,22 +51,24 @@ export class ApiService {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    
-    if (!this.userStorage.isEmpty())
-      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorage.token);
+
+    //if (this.accountService.isAuthenticated)
+    //  httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.accountService.token);
 
     return httpHeaders;
   }
 
-  private handlePostResponse(data: any): any {
+  private handleResponse(data: any): any {
 
+    console.log("API response:");
     console.log(data);
 
     return data;
   }
 
-  private handlePostErrorResponse(data: any): any {
+  private handleError(data: any): any {
 
+    console.log("API error:");
     console.log(data);
 
     if (data instanceof HttpErrorResponse)

@@ -6,17 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\models\team.ts" />
-    <None Remove="ClientApp\src\app\models\user.ts" />
-    <None Remove="ClientApp\src\app\modules\app-material.module.ts" />
-    <None Remove="ClientApp\src\app\modules\app-routing.module.ts" />
-    <None Remove="ClientApp\src\app\modules\app-translate.module.ts" />
-    <None Remove="ClientApp\src\app\services\team\create.vm.ts" />
+    <Compile Remove="ClientApp\src\app\modules\**" />
+    <Content Remove="ClientApp\src\app\modules\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\modules\**" />
+    <None Remove="ClientApp\src\app\modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\components\layout\" />
-    <Folder Include="ClientApp\src\app\components\notifications\" />
+    <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
+    <None Remove="ClientApp\src\app\models\book.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
+    <None Remove="ClientApp\src\app\MyValidators.ts" />
+    <None Remove="ClientApp\src\app\services\account\authenticate-vm.ts" />
+    <None Remove="ClientApp\src\app\services\account\change-password-vm.ts" />
+    <None Remove="ClientApp\src\app\services\account\confirm-email-vm.ts" />
+    <None Remove="ClientApp\src\app\services\account\register-vm.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -27,12 +34,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\models\team.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\modules\app-material.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\modules\app-routing.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\modules\app-translate.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\team\create.vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\MyValidators.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\account\authenticate-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\account\change-password-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\account\confirm-email-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\account\register-vm.ts" />
   </ItemGroup>
 
 </Project>
