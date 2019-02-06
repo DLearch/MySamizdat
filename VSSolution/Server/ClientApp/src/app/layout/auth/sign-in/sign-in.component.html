@@ -1,0 +1,45 @@
+<div class="bottom-sheet-main">
+  <div class="flex-box">
+
+    <!--Page name-->
+    <h2>{{ 'pages.sign-in.name' | translate }}</h2>
+
+    <div class="flex-box-right-element flex-box-center-element">
+      <!--Closing button-->
+      <button type='button'
+              mat-icon-button
+              (click)='close()'>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-box-right-element">
+
+  </div>
+  <!--Main form-->
+  <form [formGroup]="mainForm" (submit)="mainSubmit()">
+
+    <!--Email input-->
+    <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
+    <br />
+
+    <!--Password input-->
+    <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
+    <br />
+
+    <div class="flex-box">
+      <!-- Sign up button -->
+      <button type="button" mat-button (click)="openSignUp()">{{ 'button-texts.sign-up' | translate }}</button>
+
+      <div class="flex-box-right-element">
+
+        <!--Submit button-->
+        <button mat-raised-button color="primary" type="submit">
+          {{ 'button-texts.sign-in' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

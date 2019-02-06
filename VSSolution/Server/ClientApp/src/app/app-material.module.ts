@@ -13,6 +13,8 @@ import {
   , MatSelectModule
   , MatMenuModule
   , MatSlideToggleModule
+  , MatBottomSheetModule
+  , MatDividerModule
 } from '@angular/material';
 
 const modules = [
@@ -29,6 +31,8 @@ const modules = [
   , MatSelectModule
   , MatMenuModule
   , MatSlideToggleModule
+  , MatBottomSheetModule
+  , MatDividerModule
 ];
 
 @NgModule({

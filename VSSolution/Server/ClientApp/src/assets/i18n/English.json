@@ -16,11 +16,11 @@
       "name": "Change password"
     }
   },
-  "navbar-links" : {
-    "main" : "Main"
+  "navbar-links": {
+    "main": "Main"
   },
   "button-texts": {
-    "sign-up": "Sign up",
+    "sign-up": "Create account",
     "sign-in": "Sign in",
     "sign-out": "Sign out",
     "create-book": "Create",
@@ -74,7 +74,8 @@
       }
     }
   },
-  "sent": "Is sent",
+  "or": "or",
+  "email-confirmation-message-sent": "Confirmation message sent",
   "email-is-not-confirmed": "Email is not confirmed",
   "email-is-visible": "Email is visible for other users"
 }

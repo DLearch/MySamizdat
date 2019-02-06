@@ -1,0 +1,74 @@
+<div class="main">
+
+  <header>
+    <mat-toolbar>
+
+      <!-- Menu button -->
+      <button type='button'
+              mat-icon-button
+              (click)='sidenav.toggle()'>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- Site name -->
+      <a routerLink="" mat-button>{{ 'site.name' | translate }}</a>
+
+      <!-- Spacer -->
+      <span class="flex-spacer"></span>
+
+      <!-- If the user is logged in-->
+      <span *ngIf='authGuard.isAuthenticated'>
+
+        <!-- Profile link -->
+        <a routerLink="/account" mat-button>{{ userStorage.userName }}</a>
+
+        <!-- Sign out button -->
+        <button mat-button (click)="auth.unauthenticate()">{{ 'button-texts.sign-out' | translate }}</button>
+
+      </span>
+
+      <!-- If the user is not logged in-->
+      <span *ngIf='!authGuard.isAuthenticated'>
+
+        <!-- Sign in button -->
+        <button mat-button (click)="openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
+
+      </span>
+
+
+    </mat-toolbar>
+  </header>
+
+  <mat-sidenav-container class='sidenav-container'>
+
+    <!-- Left menu -->
+    <mat-sidenav #sidenav
+                 [mode]='(isHandset$ | async) ? "over" : "side"'
+                 [opened]='!(isHandset$ | async)'>
+
+      <!-- Navbar -->
+      <mat-nav-list>
+        <a mat-list-item routerLink="">{{ 'navbar-links.main' | translate }}</a>
+      </mat-nav-list>
+
+    </mat-sidenav>
+
+    <!-- Content -->
+    <mat-sidenav-content>
+
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <footer>
+    <mat-toolbar>
+
+      <app-language-picker></app-language-picker>
+
+    </mat-toolbar>
+  </footer>
+</div>

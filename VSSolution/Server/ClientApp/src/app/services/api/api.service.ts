@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { AccountService } from '../account/account.service';
+import { UserStorageService } from '../user-storage/user-storage.service';
 
 @Injectable()
 export class ApiService {
 
   readonly apiPath: string = 'https://localhost:44314/api';
-
   constructor(
     private http: HttpClient
-    //, private accountService: AccountService
+    , private userStorageService: UserStorageService
   ) { }
 
   public post(data: any, controller?: string, action?: string): Observable<any> {
@@ -52,8 +51,8 @@ export class ApiService {
       'Content-Type': 'application/json'
     });
 
-    //if (this.accountService.isAuthenticated)
-    //  httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.accountService.token);
+    if (this.userStorageService.token)
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
 
     return httpHeaders;
   }

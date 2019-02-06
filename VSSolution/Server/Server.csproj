@@ -14,13 +14,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
-    <None Remove="ClientApp\src\app\models\book.ts" />
-    <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\MyValidators.ts" />
-    <None Remove="ClientApp\src\app\services\account\authenticate-vm.ts" />
-    <None Remove="ClientApp\src\app\services\account\change-password-vm.ts" />
-    <None Remove="ClientApp\src\app\services\account\confirm-email-vm.ts" />
-    <None Remove="ClientApp\src\app\services\account\register-vm.ts" />
+    <None Remove="ClientApp\src\app\services\auth\authenticate-vm.ts" />
+    <None Remove="ClientApp\src\app\services\auth\confirm-email-vm.ts" />
+    <None Remove="ClientApp\src\app\services\auth\register-vm.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,13 +32,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\MyValidators.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\account\authenticate-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\account\change-password-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\account\confirm-email-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\account\register-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth\authenticate-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth\confirm-email-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\auth\register-vm.ts" />
   </ItemGroup>
 
 </Project>

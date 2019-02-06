@@ -56,12 +56,6 @@ namespace Server.Controllers
 
                 if (result.Succeeded)
                 {
-                    _db.Teams.Add(new Team()
-                    {
-                        isPersonal = true
-                        , TeamName = user.UserName
-
-                    });
                     await SendEmailConfirmationMessageAsync(user);
 
                     return Ok();
