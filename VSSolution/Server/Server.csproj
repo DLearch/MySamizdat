@@ -14,28 +14,43 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
+    <None Remove="ClientApp\src\app\models\book.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\MyValidators.ts" />
     <None Remove="ClientApp\src\app\services\auth\authenticate-vm.ts" />
     <None Remove="ClientApp\src\app\services\auth\confirm-email-vm.ts" />
     <None Remove="ClientApp\src\app\services\auth\register-vm.ts" />
+    <None Remove="ClientApp\src\app\services\book\book-catalog-info.ts" />
+    <None Remove="ClientApp\src\app\services\book\create-vm.ts" />
+    <None Remove="ClientApp\src\app\services\dialog-window\dialog-window-config.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Images\Books\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\MyValidators.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth\authenticate-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth\confirm-email-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth\register-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\book\book-catalog-info.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\book\create-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\dialog-window\dialog-window-config.ts" />
   </ItemGroup>
 
 </Project>

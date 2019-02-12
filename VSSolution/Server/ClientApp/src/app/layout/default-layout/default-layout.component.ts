@@ -7,6 +7,7 @@ import { AuthGuard } from 'src/app/services/auth-guard/auth.guard';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MatBottomSheet } from '@angular/material';
 import { SignInComponent } from '../auth/sign-in/sign-in.component';
+import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -15,12 +16,16 @@ import { SignInComponent } from '../auth/sign-in/sign-in.component';
 })
 export class DefaultLayoutComponent {
 
+  dialogOpened: boolean = false;
+
   constructor(
     private breakpointObserver: BreakpointObserver
     , private authGuard: AuthGuard
     , private userStorage: UserStorageService
     , private auth: AuthService
     , private bottomSheet: MatBottomSheet
+    , private dialogWindowService: DialogWindowService
+
   ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -32,5 +37,10 @@ export class DefaultLayoutComponent {
   openSignIn(): void {
 
     this.bottomSheet.open(SignInComponent);
+  }
+
+  openTestSignIn(): void {
+
+    this.dialogWindowService.open(SignInComponent);
   }
 }

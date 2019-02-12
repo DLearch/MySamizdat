@@ -18,8 +18,8 @@ export class SignInComponent {
   public constructor(
     formBuilder: FormBuilder
     , private auth: AuthService
-    , private bottomSheetRef: MatBottomSheetRef<SignInComponent>
-    , private bottomSheet: MatBottomSheet
+    //, private bottomSheet: MatBottomSheet
+    //, private bottomSheetRef?: MatBottomSheetRef<SignInComponent>
   ) {
     
     this.mainForm = formBuilder.group({
@@ -42,11 +42,11 @@ export class SignInComponent {
 
   openSignUp(): void {
 
-    this.bottomSheet.open(SignUpComponent);
+    //this.bottomSheet.open(SignUpComponent);
   }
   
   close(): void {
 
-    this.bottomSheetRef.dismiss();
+    //this.bottomSheetRef.dismiss();
   }
 }

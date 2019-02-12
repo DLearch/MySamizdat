@@ -12,19 +12,18 @@ namespace Server.Models
         [MyRequired]
         public bool EmailIsVisible { get; set; }
 
-        public List<TeamMember> Teams { get; set; }
-        
+        public List<Book> Books { get; set; }
+
         [MyRequired]
         public DateTime BirthDate { get; set; }
-
-        //public List<string> Languages { get; set; }
-
+        
         public User GetPublicCopy() => new User()
         {
             Id = Id
             , Email = EmailIsVisible && EmailConfirmed ? Email : null
             , UserName = UserName
             , EmailIsVisible = EmailIsVisible
+            , Books = Books
         };
 
         public User GetPrivateCopy() => new User()
@@ -35,6 +34,7 @@ namespace Server.Models
             , EmailIsVisible = EmailIsVisible
             , EmailConfirmed = EmailConfirmed
             , BirthDate = BirthDate
+            , Books = Books
         };
     }
 }

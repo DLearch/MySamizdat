@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';
+import { PortalModule } from '@angular/cdk/portal';
 import {
   MatInputModule
   , MatFormFieldModule
@@ -15,6 +16,7 @@ import {
   , MatSlideToggleModule
   , MatBottomSheetModule
   , MatDividerModule
+  , MatPaginatorModule
 } from '@angular/material';
 
 const modules = [
@@ -33,6 +35,8 @@ const modules = [
   , MatSlideToggleModule
   , MatBottomSheetModule
   , MatDividerModule
+  , MatPaginatorModule
+  , PortalModule
 ];
 
 @NgModule({

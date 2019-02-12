@@ -15,12 +15,15 @@ import { AppTranslateModule } from './app-translate.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { MainComponent } from './pages/main/main.component';
 import { AppComponent } from './app.component';
+import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
 
 // Layout components
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
 import { SignInComponent } from './layout/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './layout/auth/sign-up/sign-up.component';
+import { EmailConfirmedComponent } from './layout/auth/email-confirmed/email-confirmed.component';
+import { EmailUnconfirmedComponent } from './layout/auth/email-unconfirmed/email-unconfirmed.component';
 
 // Other components
 import { InputComponent } from './components/input/input.component';
@@ -32,8 +35,11 @@ import { AuthService } from './services/auth/auth.service';
 import { UserStorageService } from './services/user-storage/user-storage.service';
 import { AuthGuard } from './services/auth-guard/auth.guard';
 import { EmailConfirmationGuard } from './services/email-confirmation-guard/email-confirmation.guard';
-import { EmailConfirmedComponent } from './layout/auth/email-confirmed/email-confirmed.component';
-import { EmailUnconfirmedComponent } from './layout/auth/email-unconfirmed/email-unconfirmed.component';
+import { BookService } from './services/book/book.service';
+import { BookComponent } from './pages/book/book.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
+import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
+import { DialogWindowService } from './services/dialog-window/dialog-window.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +53,7 @@ import { EmailUnconfirmedComponent } from './layout/auth/email-unconfirmed/email
     , InputComponent
     , EmailConfirmedComponent
     , EmailUnconfirmedComponent
+    , BookCreatingComponent, BookComponent, CatalogComponent, DialogWindowComponent
   ]
   , imports: [
     BrowserModule
@@ -70,6 +77,8 @@ import { EmailUnconfirmedComponent } from './layout/auth/email-unconfirmed/email
     , UserStorageService
     , AuthGuard
     , EmailConfirmationGuard
+    , BookService
+    , DialogWindowService
   ]
   , entryComponents: [
     SignInComponent

@@ -92,7 +92,7 @@ namespace Server.Controllers
                         ModelState.AddModelError("Password", "wrong");
                 }
                 else
-                    ModelState.AddModelError("Login", "not-found");
+                    ModelState.AddModelError("Email", "not-found");
             }
 
             return BadRequest(ModelState);

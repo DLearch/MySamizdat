@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { Observable } from 'rxjs';
+import { Observable, empty } from 'rxjs';
 import { RegisterVM } from './register-vm';
 import { AuthenticateVM } from './authenticate-vm';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { UserStorageService } from '../user-storage/user-storage.service';
 import { MatBottomSheet } from '@angular/material';
 import { SignInComponent } from 'src/app/layout/auth/sign-in/sign-in.component';
@@ -21,13 +21,13 @@ export class AuthService {
     , private authGuard: AuthGuard
   ) { }
   
-  register(model: RegisterVM): Observable<any> {
+  register(model: RegisterVM): Observable<void> {
 
     return this.api
       .post(model, this.controller, 'register');
   }
 
-  authenticate(model: AuthenticateVM): Observable<any> {
+  authenticate(model: AuthenticateVM): Observable<void> {
 
     return this.api
       .post(model, this.controller, 'gettoken')
@@ -44,7 +44,7 @@ export class AuthService {
     this.authGuard.updateAuthentication();
   }
 
-  confirmEmail(model: ConfirmEmailVM): Observable<any> {
+  confirmEmail(model: ConfirmEmailVM): Observable<void> {
 
     return this.api
       .post(model, this.controller, 'confirmemail')

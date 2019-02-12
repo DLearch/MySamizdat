@@ -1,0 +1,25 @@
+<!--Page name-->
+<h2>{{ 'pages.catalog.name' | translate }}</h2>
+
+<div *ngIf="books">
+
+  <!--Books-->
+  <div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/book/{{ book.id }}" *ngFor="let book of books"> {{ book.title }} </a>
+    </mat-nav-list>
+  </div>
+
+  <!--Paginator-->
+  <mat-paginator (page)="updatePage($event)"
+                 [length]="length"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+</div>
+
+<div *ngIf="!books">
+  !
+</div>

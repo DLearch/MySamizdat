@@ -11,14 +11,20 @@
       </button>
 
       <!-- Site name -->
-      <a routerLink="" mat-button>{{ 'site.name' | translate }}</a>
+      <a routerLink="" mat-button>{{ 'navbar-links.main' | translate }}</a>
 
+      <!-- Catalog link -->
+      <a routerLink="/catalog" mat-button>{{ 'navbar-links.catalog' | translate }}</a>
       <!-- Spacer -->
       <span class="flex-spacer"></span>
 
       <!-- If the user is logged in-->
       <span *ngIf='authGuard.isAuthenticated'>
 
+        <!-- Create book button -->
+        <a routerLink="/create-book" mat-icon-button>
+          <mat-icon>library_add</mat-icon>
+        </a>
         <!-- Profile link -->
         <a routerLink="/account" mat-button>{{ userStorage.userName }}</a>
 
@@ -33,8 +39,9 @@
         <!-- Sign in button -->
         <button mat-button (click)="openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
 
+        <!-- Sign in button -->
+        <button mat-button (click)="openTestSignIn()">test</button>
       </span>
-
 
     </mat-toolbar>
   </header>
@@ -43,12 +50,12 @@
 
     <!-- Left menu -->
     <mat-sidenav #sidenav
-                 [mode]='(isHandset$ | async) ? "over" : "side"'
-                 [opened]='!(isHandset$ | async)'>
+                 [mode]='(isHandset$ | async) ? "over" : "side"'>
 
       <!-- Navbar -->
       <mat-nav-list>
         <a mat-list-item routerLink="">{{ 'navbar-links.main' | translate }}</a>
+        <a mat-list-item routerLink="catalog">{{ 'navbar-links.catalog' | translate }}</a>
       </mat-nav-list>
 
     </mat-sidenav>
@@ -72,3 +79,5 @@
     </mat-toolbar>
   </footer>
 </div>
+
+<app-dialog-window></app-dialog-window>

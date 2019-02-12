@@ -9,26 +9,40 @@
     "sign-in": {
       "name": "Sign in"
     },
-    "new-book": {
+    "add-book": {
       "name": "Create book"
     },
     "password-change": {
       "name": "Change password"
+    },
+    "catalog": {
+      "name": "Catalog"
     }
   },
   "navbar-links": {
-    "main": "Main"
+    "main": "Main",
+    "catalog":  "Catalog"
   },
   "button-texts": {
     "sign-up": "Create account",
     "sign-in": "Sign in",
     "sign-out": "Sign out",
     "create-book": "Create",
+    "create": "Create",
     "send-email-confirmation-message": "Send email confirmation message",
     "send-email-confirmation-message-again": "Send email confirmation message again",
     "change-password": "Change password"
   },
   "inputs": {
+    "book-title": {
+      "placeholder": "Title",
+      "errors": {
+        "empty": "Enter title",
+        "wrong": "Title is wrong",
+        "short": "Title is too short",
+        "already-taken": "Title is already taken"
+      }
+    },
     "email": {
       "placeholder": "Email",
       "errors": {

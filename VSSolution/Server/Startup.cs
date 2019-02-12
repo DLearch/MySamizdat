@@ -45,6 +45,7 @@ namespace Server
             services.AddSingleton<JWTGenerator>();
 
             services.AddScoped<EmailService>();
+            services.AddScoped<BookManager>();
 
             services.AddSignalR();
         }

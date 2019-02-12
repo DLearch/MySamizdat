@@ -11,6 +11,9 @@ import { ErrorComponent } from './pages/error/error.component';
 // Guards
 import { AuthGuard } from './services/auth-guard/auth.guard';
 import { EmailConfirmationGuard } from './services/email-confirmation-guard/email-confirmation.guard';
+import { BookComponent } from './pages/book/book.component';
+import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 
 const routes: Routes = [
   {
@@ -20,6 +23,11 @@ const routes: Routes = [
       { path: '', component: MainComponent }
 
       , { path: 'confirm-email', component: MainComponent, canActivate: [EmailConfirmationGuard] }
+
+      , { path: 'create-book', component: BookCreatingComponent, canActivate: [AuthGuard] }
+      , { path: 'book/:id', component: BookComponent }
+      , { path: 'catalog/:page', component: CatalogComponent }
+      , { path: 'catalog', component: CatalogComponent }
 
       , { path: '**', component: ErrorComponent, data: { error: 404 } }
     ]

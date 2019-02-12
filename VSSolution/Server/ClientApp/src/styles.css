@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -34,5 +33,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bottom-sheet-main {
   width: 90%;
   max-width: 300px;
+  min-width: 200px;
   margin: 0 auto;
 }
