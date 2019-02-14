@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
-import { AuthGuard } from 'src/app/services/auth-guard/auth.guard';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { MatBottomSheet } from '@angular/material';
-import { SignInComponent } from '../auth/sign-in/sign-in.component';
-import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -15,17 +9,9 @@ import { DialogWindowService } from 'src/app/services/dialog-window/dialog-windo
   styleUrls: ['./default-layout.component.css']
 })
 export class DefaultLayoutComponent {
-
-  dialogOpened: boolean = false;
-
+  
   constructor(
     private breakpointObserver: BreakpointObserver
-    , private authGuard: AuthGuard
-    , private userStorage: UserStorageService
-    , private auth: AuthService
-    , private bottomSheet: MatBottomSheet
-    , private dialogWindowService: DialogWindowService
-
   ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -33,14 +19,4 @@ export class DefaultLayoutComponent {
     .pipe(
       map(result => result.matches)
     );
-
-  openSignIn(): void {
-
-    this.bottomSheet.open(SignInComponent);
-  }
-
-  openTestSignIn(): void {
-
-    this.dialogWindowService.open(SignInComponent);
-  }
 }

@@ -1,18 +1,5 @@
 <div class="bottom-sheet-main">
-  <div class="flex-box">
-
-    <!--Page name-->
-    <h2>{{ 'pages.sign-up.name' | translate }}</h2>
-
-    <div class="flex-box-right-element flex-box-center-element">
-      <!--Closing button-->
-      <button type='button'
-              mat-icon-button
-              (click)='close()'>
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-  </div>
+  
   <!--Main form-->
   <form [formGroup]="mainForm" *ngIf='!isComplete' (submit)="mainSubmit()">
 
@@ -30,7 +17,7 @@
 
     <div class="flex-box">
       <!-- Sign in button -->
-      <button type="button" mat-button (click)="openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
+      <button type="button" mat-button (click)="authDialog.openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
 
       <div class="flex-box-right-element">
 

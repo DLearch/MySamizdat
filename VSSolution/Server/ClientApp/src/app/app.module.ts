@@ -36,10 +36,14 @@ import { UserStorageService } from './services/user-storage/user-storage.service
 import { AuthGuard } from './services/auth-guard/auth.guard';
 import { EmailConfirmationGuard } from './services/email-confirmation-guard/email-confirmation.guard';
 import { BookService } from './services/book/book.service';
+
+//////
 import { BookComponent } from './pages/book/book.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
 import { DialogWindowService } from './services/dialog-window/dialog-window.service';
+import { AuthDialogService } from './services/auth-dialog/auth-dialog.service';
+import { UserPanelComponent } from './layout/user-panel/user-panel.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { DialogWindowService } from './services/dialog-window/dialog-window.serv
     , InputComponent
     , EmailConfirmedComponent
     , EmailUnconfirmedComponent
-    , BookCreatingComponent, BookComponent, CatalogComponent, DialogWindowComponent
+    , BookCreatingComponent
+    , BookComponent
+    , CatalogComponent
+    , DialogWindowComponent
+    , UserPanelComponent
   ]
   , imports: [
     BrowserModule
@@ -79,6 +87,7 @@ import { DialogWindowService } from './services/dialog-window/dialog-window.serv
     , EmailConfirmationGuard
     , BookService
     , DialogWindowService
+    , AuthDialogService
   ]
   , entryComponents: [
     SignInComponent

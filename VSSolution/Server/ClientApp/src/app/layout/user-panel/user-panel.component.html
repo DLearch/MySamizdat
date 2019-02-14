@@ -1,0 +1,21 @@
+<!-- If the user is logged in-->
+<span *ngIf='authGuard.isAuthenticated'>
+
+  <!-- Create book button -->
+  <a routerLink="/create-book" mat-icon-button>
+    <mat-icon>library_add</mat-icon>
+  </a>
+  <!-- Profile link -->
+  <a routerLink="/account" mat-button>{{ userStorage.userName }}</a>
+
+  <!-- Sign out button -->
+  <button mat-button (click)="auth.unauthenticate()">{{ 'button-texts.sign-out' | translate }}</button>
+
+</span>
+
+<!-- If the user is not logged in-->
+<span *ngIf='!authGuard.isAuthenticated'>
+
+  <!-- Sign in button -->
+  <button mat-button (click)="authDialog.openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
+</span>

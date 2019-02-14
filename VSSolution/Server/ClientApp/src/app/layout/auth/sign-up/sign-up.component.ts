@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { MyValidators } from 'src/app/MyValidators';
 import { setErrors } from 'src/app/components/input/set-errors';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { MatBottomSheetRef, MatBottomSheet } from '@angular/material';
-import { SignInComponent } from '../sign-in/sign-in.component';
+import { AuthDialogService } from 'src/app/services/auth-dialog/auth-dialog.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,8 +18,7 @@ export class SignUpComponent {
   public constructor(
     formBuilder: FormBuilder
     , private auth: AuthService
-    , private bottomSheetRef: MatBottomSheetRef<SignUpComponent>
-    , private bottomSheet: MatBottomSheet
+    , private authDialog: AuthDialogService
   ) {
 
     this.mainForm = formBuilder.group({
@@ -40,15 +38,5 @@ export class SignUpComponent {
           () => this.isComplete = true
           , response => setErrors(response, this.mainForm)
         );
-  }
-
-  openSignIn(): void {
-
-    this.bottomSheet.open(SignInComponent);
-  }
-
-  close(): void {
-
-    this.bottomSheetRef.dismiss();
   }
 }
