@@ -50,12 +50,3 @@
   overflow: auto;
   transform: translateY(0%);
 }
-
-.header {
-  display: flex;
-}
-
-.headerCloseButton {
-  margin-left: auto;
-  align-self: center;
-}

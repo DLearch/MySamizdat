@@ -46,9 +46,19 @@ namespace Server.Services
             Book book = await _db.Books
                 .Include(b => b.Owner)
                 .Include(b => b.Comments)
-                .AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+                    .ThenInclude(c => c.Author)
+                .FirstOrDefaultAsync(b => b.Id == id);
 
-            book.Owner = book.Owner.GetPublicCopy();
+            if(book != null)
+            {
+                if (book.Owner != null)
+                    book.Owner = book.Owner.GetPublicCopy();
+
+                if(book.Comments != null)
+                    foreach (Comment comment in book.Comments)
+                        if (comment.Author != null)
+                            comment.Author = comment.Author.GetPublicCopy();
+            }
 
             return book;
         }
@@ -72,7 +82,7 @@ namespace Server.Services
                 Content = content
                 , AuthorId = authorId
                 , BookId = bookId
-                , ParentId = parentId
+                //, ParentId = parentId
             });
         }
 

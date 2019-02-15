@@ -46,6 +46,8 @@ import { UserPanelComponent } from './layout/user-panel/user-panel.component';
 import { SignInService } from './services/sign-in/sign-in.service';
 import { SignUpService } from './services/sign-up/sign-up.service';
 import { CommentComponent } from './components/comment/comment.component';
+import { DialogHeaderComponent } from './components/dialog-header/dialog-header.component';
+import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,7 @@ import { CommentComponent } from './components/comment/comment.component';
     , BookComponent
     , CatalogComponent
     , DialogWindowComponent
-    , UserPanelComponent, CommentComponent
+    , UserPanelComponent, CommentComponent, DialogHeaderComponent, LoadOverlayComponent
   ]
   , imports: [
     BrowserModule

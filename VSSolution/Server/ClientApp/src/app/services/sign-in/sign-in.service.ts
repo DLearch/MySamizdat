@@ -10,6 +10,6 @@ export class SignInService {
   ) { }
 
   open(): void {
-    this.dialogWindow.open(SignInComponent, { closeButtonVisible: true, titleTK: 'pages.sign-in.name' });
+    this.dialogWindow.open(SignInComponent);
   }
 }

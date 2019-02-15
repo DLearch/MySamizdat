@@ -18,7 +18,7 @@ export class SignInComponent {
   public constructor(
     formBuilder: FormBuilder
     , private auth: AuthService
-    , private signUp: SignUpService
+    , public signUp: SignUpService
     , private dialog: DialogWindowService
   ) {
     

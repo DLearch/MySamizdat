@@ -12,9 +12,9 @@ import { SignInService } from 'src/app/services/sign-in/sign-in.service';
 export class UserPanelComponent {
 
   constructor(
-    private authGuard: AuthGuard
+    public authGuard: AuthGuard
     , private userStorage: UserStorageService
-    , private auth: AuthService
+    , public auth: AuthService
     , private signIn: SignInService
   ) { }
   

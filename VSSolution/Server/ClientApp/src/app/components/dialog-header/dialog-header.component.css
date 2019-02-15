@@ -1,0 +1,9 @@
+
+.header {
+  display: flex;
+}
+
+.headerCloseButton {
+  margin-left: auto;
+  align-self: center;
+}

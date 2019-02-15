@@ -10,6 +10,6 @@ export class SignUpService {
   ) { }
 
   open(): void {
-    this.dialogWindow.open(SignUpComponent, { closeButtonVisible: true, titleTK: 'pages.sign-up.name' });
+    this.dialogWindow.open(SignUpComponent);
   }
 }

@@ -34,6 +34,14 @@
     "change-password": "Change password"
   },
   "inputs": {
+    "comment": {
+      "placeholder": "Leave comment",
+      "errors": {
+        "empty": "Enter comment",
+        "wrong": "Comment is wrong",
+        "short": "Comment is too short"
+      }
+    },
     "book-title": {
       "placeholder": "Title",
       "errors": {

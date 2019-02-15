@@ -23,8 +23,8 @@ namespace Server.Models
         public int BookId { get; set; }
         public Book Book { get; set; }
 
-        public int ParentId { get; set; }
-        public Comment Parent { get; set; }
-        public List<Comment> Children { get; set; }
+        //public int ParentId { get; set; }
+        //public Comment Parent { get; set; }
+        //public List<Comment> Children { get; set; }
     }
 }

@@ -5,25 +5,9 @@
       (click)="service.isOpen = false">
 </div>
 
-<div *ngIf="service.isOpen" class="dialog">
+<div *ngIf="service.isOpen" class="dialog" [@openClose]="openCloseAnim" (@openClose.done)="openCloseDone()">
   <div class="dialog2">
     <div class="portal" aria-modal="true" role="dialog" tabindex="1">
-
-      <!--Header-->
-      <div class="header" *ngIf="service.config.titleTK || service.config.closeButtonVisible">
-
-        <!--Title-->
-        <h2 *ngIf="service.config.titleTK">{{ service.config.titleTK | translate }}</h2>
-
-        <!--Close button-->
-        <div class="headerCloseButton" *ngIf="service.config.closeButtonVisible">
-          <button type='button'
-                  mat-icon-button
-                  (click)='close()'>
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-      </div>
 
       <!--Portal-->
       <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>

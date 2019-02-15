@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { Component, OnDestroy, ViewContainerRef, Renderer2, ElementRef } from '@angular/core';
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
 import { Subscription } from 'rxjs';
-import { trigger, style, transition, animate } from '@angular/animations';
+import { trigger, style, transition, animate, group, state } from '@angular/animations';
 
 @Component({
   selector: 'app-dialog-window',
@@ -12,6 +12,18 @@ import { trigger, style, transition, animate } from '@angular/animations';
     'class': 'cdk-overlay-container'
   }
   , animations: [
+    trigger('openClose', [
+      state('opened', style({ opacity: 1 })),
+      state('closed', style({ opacity: 0 })),
+      transition('opened => closed', animate('0.2s')),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        group([
+          animate('0.2s', style({
+            opacity: 1
+          }))
+        ])])
+    ]),
     trigger('backdrop', [
       transition(':enter', [
         style({ opacity: 0 }),
@@ -21,25 +33,16 @@ import { trigger, style, transition, animate } from '@angular/animations';
         animate('0.2s', style({ opacity: 0 }))
       ])
     ])
-    , trigger('slide', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('1s', style({ opacity: 0 }))
-      ])
-    ])
   ]
 })
 export class DialogWindowComponent implements OnDestroy {
 
   subscription: Subscription = null;
   componentPortal: ComponentPortal<any> = null;
+  openCloseAnim: string = 'closed';
   
   constructor(
-    private service: DialogWindowService
+    public service: DialogWindowService
   ) {
     this.subscription = service.subject.asObservable().subscribe(isOpen => isOpen ? this.open() : this.close());
   }
@@ -47,15 +50,22 @@ export class DialogWindowComponent implements OnDestroy {
   open(): void {
     this.componentPortal = new ComponentPortal(this.service.component);
     this.service.isOpen = true;
-    console.log(this.componentPortal);
+    this.openCloseAnim = 'opened';
   }
 
   close(): void {
-    this.componentPortal = null;
-    this.service.isOpen = false;
+    
+    this.openCloseAnim = 'closed';
   }
   
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  openCloseDone() {
+    if (this.openCloseAnim == 'closed') {
+
+      this.service.isOpen = false;
+      this.componentPortal = null;
+    }
   }
 }

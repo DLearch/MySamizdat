@@ -19,8 +19,7 @@ export class DialogWindowService {
   }
 
   close(): void {
-
-    this.component = null;
+    
     this.setConfig();
 
     this.subject.next(false);

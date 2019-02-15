@@ -1,0 +1,15 @@
+<!--Header-->
+<div class="header" *ngIf="titleTK || closeButtonVisible">
+
+  <!--Title-->
+  <h2 *ngIf="titleTK">{{ titleTK | translate }}</h2>
+
+  <!--Close button-->
+  <div class="headerCloseButton" *ngIf="closeButtonVisible">
+    <button type='button'
+            mat-icon-button
+            (click)='dialog.close()'>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

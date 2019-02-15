@@ -1,5 +1,7 @@
 <div class="bottom-sheet-main">
-  
+
+  <app-dialog-header titleTK="pages.sign-up.name" closeButtonVisible="true"></app-dialog-header>
+
   <!--Main form-->
   <form [formGroup]="mainForm" *ngIf='!isComplete' (submit)="mainSubmit()">
 
