@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.Models
+namespace Server.ViewModels.Chapter
 {
-    public class Publisher
+    public class AddVM
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public List<Book> Books { get; set; }
+        public string Content { get; set; }
+
+        public int BookId { get; set; }
     }
 }

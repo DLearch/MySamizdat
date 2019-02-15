@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { Observable, empty } from 'rxjs';
+import { Observable, empty, throwError } from 'rxjs';
 import { RegisterVM } from './register-vm';
 import { AuthenticateVM } from './authenticate-vm';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { UserStorageService } from '../user-storage/user-storage.service';
 import { MatBottomSheet } from '@angular/material';
 import { SignInComponent } from 'src/app/layout/auth/sign-in/sign-in.component';
@@ -35,6 +35,11 @@ export class AuthService {
         this.userStorage.userName = response.userName;
         this.userStorage.token = response.token;
         this.authGuard.updateAuthentication();
+
+      }), catchError(response => {
+        console.log('Auth error:');
+        console.log(response);
+        return throwError(response);
       })); 
   }
 

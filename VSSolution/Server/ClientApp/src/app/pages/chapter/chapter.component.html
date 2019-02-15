@@ -1,0 +1,12 @@
+
+<div *ngIf="chapter">
+
+  <h2>{{ chapter.name }}</h2>
+  <p>{{ chapter.content }}</p>
+
+  <app-comments [comments]="chapter.comments" [id]="chapter.id" type="chapter"></app-comments>
+</div>
+
+<div *ngIf="!chapter">
+  !
+</div>

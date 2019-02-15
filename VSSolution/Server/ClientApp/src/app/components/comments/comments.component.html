@@ -1,0 +1,10 @@
+<!--Comments-->
+<p>{{'comments'|translate}}</p>
+<mat-list>
+  <mat-list-item *ngFor="let comment of comments">
+    <app-comment [comment]="comment"></app-comment>
+  </mat-list-item>
+</mat-list>
+<div *ngIf="!comments || comments.length < 1">{{'empty'|translate}}</div>
+
+<app-comment-creating [type]="type" [id]="id" [callback]="pushCommentFunc"></app-comment-creating>

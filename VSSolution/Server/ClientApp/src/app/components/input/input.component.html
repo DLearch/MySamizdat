@@ -1,14 +1,26 @@
 
-<mat-form-field appearance="outline"
+
+<mat-form-field *ngIf="type == 'textarea'"
+                appearance="outline"
                 class="field">
   <mat-label>{{ 'inputs.' + fieldTK + '.placeholder' | translate }}</mat-label>
 
-  <textarea *ngIf="type == 'textarea'"
-         matInput
-         [formControl]="field" ></textarea>
+  <textarea matInput
+            [formControl]="field"></textarea>
 
-  <input *ngIf="type != 'textarea'"
-         matInput
+  <mat-error *ngIf="field.invalid">
+    <span *ngFor="let errorTK of errorTKs">
+      {{ 'inputs.' + fieldTK + '.errors.' + errorTK | translate }}
+    </span>
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field *ngIf="type != 'textarea'"
+                appearance="outline"
+                class="field">
+  <mat-label>{{ 'inputs.' + fieldTK + '.placeholder' | translate }}</mat-label>
+
+  <input matInput
          [type]="type"
          [formControl]="field" />
   <mat-error *ngIf="field.invalid">

@@ -1,0 +1,12 @@
+
+<!--Comment form-->
+<form [formGroup]="mainForm" (submit)="mainSubmit()">
+
+  <!--Content input-->
+  <app-input formControlName="content" type="textarea" fieldTK="comment" [field]="mainForm.get('content')"></app-input>
+
+  <!--Submit button-->
+  <button mat-raised-button color="primary" type="submit">
+    {{ 'button-texts.create' | translate }}
+  </button>
+</form>

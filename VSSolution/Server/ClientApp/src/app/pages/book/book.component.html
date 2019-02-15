@@ -4,23 +4,19 @@
   <h2>{{ book.title }}</h2>
   <p>{{ book.owner.userName }}</p>
 
-  <!--Comments-->
-  <div *ngFor="let comment of book.comments">
+  <p>{{ 'chapters'| translate}}</p>
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let chapter of book.chapters" [routerLink]="['/book', book.id, chapter.id]">
+      {{chapter.name}}
+    </a>
+  </mat-nav-list>
+  <div *ngIf="!book.chapters || book.chapters.length < 1">{{'empty'|translate}}</div>
 
-    <app-comment [comment]="comment"></app-comment>
-  </div>
+  <a mat-raised-button color="primary" [routerLink]="['/book', book.id, 'create-chapter']">
+    {{ 'button-texts.create' | translate }}
+  </a>
 
-  <!--Comment form-->
-  <form [formGroup]="commentForm" (submit)="commentSubmit()">
-
-    <!--Content input-->
-    <app-input formControlName="content" type="textarea" fieldTK="comment" [field]="commentForm.get('content')"></app-input>
-
-    <!--Submit button-->
-    <button mat-raised-button color="primary" type="submit">
-      {{ 'button-texts.create' | translate }}
-    </button>
-  </form>
+  <app-comments [comments]="book.comments" [id]="book.id" type="book"></app-comments>
 </div>
 
 <div *ngIf="!book">

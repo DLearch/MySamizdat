@@ -12,6 +12,9 @@
     "add-book": {
       "name": "Create book"
     },
+    "add-chapter": {
+      "name": "Create chapter"
+    },
     "password-change": {
       "name": "Change password"
     },
@@ -21,9 +24,10 @@
   },
   "navbar-links": {
     "main": "Main",
-    "catalog":  "Catalog"
+    "catalog": "Catalog"
   },
   "button-texts": {
+    "read": "Read",
     "sign-up": "Create account",
     "sign-in": "Sign in",
     "sign-out": "Sign out",
@@ -40,6 +44,23 @@
         "empty": "Enter comment",
         "wrong": "Comment is wrong",
         "short": "Comment is too short"
+      }
+    },
+    "chapter-name": {
+      "placeholder": "Name",
+      "errors": {
+        "empty": "Enter name",
+        "wrong": "Name is wrong",
+        "short": "Name is too short",
+        "already-taken": "Name is already exists"
+      }
+    },
+    "chapter-content": {
+      "placeholder": "Content",
+      "errors": {
+        "empty": "Enter content",
+        "wrong": "Content is wrong",
+        "short": "Content is too short"
       }
     },
     "book-title": {
@@ -97,7 +118,10 @@
     }
   },
   "or": "or",
+  "empty": "Empty",
   "email-confirmation-message-sent": "Confirmation message sent",
   "email-is-not-confirmed": "Email is not confirmed",
-  "email-is-visible": "Email is visible for other users"
+  "email-is-visible": "Email is visible for other users",
+  "comments": "Comments: ",
+  "chapters": "Chapters: "
 }

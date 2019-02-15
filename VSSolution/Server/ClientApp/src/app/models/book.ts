@@ -1,5 +1,5 @@
 import { User } from './user';
-import { Comment } from './comment';
+import { BookComment } from './book-comment';
 
 export class Book {
   id: number;
@@ -9,5 +9,5 @@ export class Book {
   ownerId: string;
   owner: User;
 
-  comments: Comment[];
+  comments: BookComment[];
 }

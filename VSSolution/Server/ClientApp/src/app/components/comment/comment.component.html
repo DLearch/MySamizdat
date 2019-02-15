@@ -1,5 +1,4 @@
 <div>
-  <h3>{{ comment.authorId }}</h3>
-  <p>{{ comment.content }}</p>
-  <div>{{ comment.date }}</div>
+  {{ comment.content }}<br/>
+  {{ comment.author.userName }}, {{ comment.creationTime | date }}
 </div>

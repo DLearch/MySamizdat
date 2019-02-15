@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-// Layouts
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
-
-// Pages
 import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
-
-// Guards
 import { AuthGuard } from './services/auth-guard/auth.guard';
 import { EmailConfirmationGuard } from './services/email-confirmation-guard/email-confirmation.guard';
 import { BookComponent } from './pages/book/book.component';
 import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
+import { ChapterComponent } from './pages/chapter/chapter.component';
+import { ChapterCreatingComponent } from './pages/chapter-creating/chapter-creating.component';
 
 const routes: Routes = [
   {
@@ -25,9 +21,12 @@ const routes: Routes = [
       , { path: 'confirm-email', component: MainComponent, canActivate: [EmailConfirmationGuard] }
 
       , { path: 'create-book', component: BookCreatingComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:id', component: BookComponent }
+      , { path: 'book/:book/create-chapter', component: ChapterCreatingComponent, canActivate: [AuthGuard] }
+      , { path: 'book/:book/:chapter', component: ChapterComponent }
+      , { path: 'book/:book', component: BookComponent }
       , { path: 'catalog/:page', component: CatalogComponent }
       , { path: 'catalog', component: CatalogComponent }
+      , { path: 'book', redirectTo: 'catalog' }
 
       , { path: '**', component: ErrorComponent, data: { error: 404 } }
     ]

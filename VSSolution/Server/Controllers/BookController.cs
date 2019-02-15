@@ -17,20 +17,14 @@ namespace Server.Controllers
     public class BookController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly IConfiguration _configuration;
-        private readonly BookManager _bookManager;
         private readonly AppDbContext _db;
 
         public BookController(
             UserManager<User> userManager
-            , IConfiguration configuration
-            , BookManager bookManager
             , AppDbContext db
         )
         {
             _userManager = userManager;
-            _configuration = configuration;
-            _bookManager = bookManager;
             _db = db;
         }
 
@@ -43,9 +37,19 @@ namespace Server.Controllers
 
                 if(user != null)
                 {
+                    Book book = new Book()
+                    {
+                        Title = model.Title
+                        , OwnerId = user.Id
+                    };
+
+                    await _db.Books.AddAsync(book);
+
+                    await _db.SaveChangesAsync();
+
                     return Ok(new AddRVM()
                     {
-                        Id = await _bookManager.CreateBookAsync(model.Title, user.Id)
+                        Id = book.Id
                     });
                 }
                 else
@@ -61,23 +65,65 @@ namespace Server.Controllers
         {
             if (ModelState.IsValid)
             {
+                Book book = await _db.Books
+                    .Include(b => b.Owner)
+                    .Include(b => b.Chapters)
+                    .Include(b => b.Comments)
+                        .ThenInclude(c => c.Author)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(b => b.Id == model.Id);
+                
+                if(book != null)
+                {
+                    if (book.Owner != null)
+                        book.Owner = new User()
+                        {
+                            Id = book.Owner.Id
+                            , UserName = book.Owner.UserName
+                        };
+
+                    if(book.Comments != null)
+                    {
+                        book.Comments = book.Comments.Select(c => {
+
+                            BookComment comment = new BookComment()
+                            {
+                                Id = c.Id
+                                , AuthorId = c.AuthorId
+                                , CreationTime = c.CreationTime
+                                , Content = c.Content
+                            };
+
+                            if (c.Author != null)
+                                comment.Author = new User()
+                                {
+                                    Id = c.AuthorId
+                                    , UserName = c.Author.UserName
+                                };
+
+                            return comment;
+                        }).ToList();
+                    }
+
+                    if (book.Chapters != null)
+                    {
+                        book.Chapters = book.Chapters.Select(c => {
+
+                            return new Chapter()
+                            {
+                                BookId = c.BookId,
+                                CreationTime = c.CreationTime,
+                                Id = c.Id,
+                                Name = c.Name
+                            };
+                        }).ToList();
+                    }
+                }
+
                 return Ok(new GetRVM()
                 {
-                    Book = await _bookManager.GetBookByIdAsync(model.Id)
+                    Book = book
                 });
-            }
-
-            return BadRequest(ModelState);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete([FromBody]DeleteVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                await _bookManager.DeleteBookByIdAsync(model.Id);
-
-                return Ok();
             }
 
             return BadRequest(ModelState);
@@ -90,31 +136,12 @@ namespace Server.Controllers
             if (ModelState.IsValid)
                 return Ok(new GetCatalogRVM()
                 {
-                    Length = _bookManager.GetBooksCount()
+                    Length = _db.Books.Count()
                     , Books = _db.Books.Skip(model.page * model.pageSize).Take(model.pageSize).ToList()
                 });
 
             return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Comment([FromBody]CommentVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = await _userManager.GetUserAsync(User);
-
-                if (user != null)
-                {
-                    await _bookManager.CreateCommentAsync(model.Content, user.Id, model.BookId, model.ParentId);
-
-                    return Ok();
-                }
-                else
-                    ModelState.AddModelError("User", "not-found");
-            }
-
-            return BadRequest(ModelState);
-        }
     }
 }

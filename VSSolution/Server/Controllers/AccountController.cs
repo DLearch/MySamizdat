@@ -203,7 +203,15 @@ namespace Server.Controllers
                 if (user != null)
                     return Ok(new GetUserRVM()
                     {
-                        User = user.GetPrivateCopy()
+                        User = new User()
+                        {
+                            Id = user.Id
+                            , UserName = user.UserName
+                            , Email = user.Email
+                            , BirthDate = user.BirthDate
+                            , EmailConfirmed = user.EmailConfirmed
+                            , EmailIsVisible = user.EmailIsVisible
+                        }
                     });
                 else
                     ModelState.AddModelError("User", "not-found");

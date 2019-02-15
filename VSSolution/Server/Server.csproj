@@ -14,7 +14,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
+    <None Remove="ClientApp\src\app\models\book-comment.ts" />
     <None Remove="ClientApp\src\app\models\book.ts" />
+    <None Remove="ClientApp\src\app\models\chapter-comment.ts" />
+    <None Remove="ClientApp\src\app\models\chapter.ts" />
     <None Remove="ClientApp\src\app\models\comment.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\MyValidators.ts" />
@@ -23,6 +26,7 @@
     <None Remove="ClientApp\src\app\services\auth\register-vm.ts" />
     <None Remove="ClientApp\src\app\services\book\book-catalog-info.ts" />
     <None Remove="ClientApp\src\app\services\book\create-vm.ts" />
+    <None Remove="ClientApp\src\app\services\chapter\create-vm.ts" />
     <None Remove="ClientApp\src\app\services\dialog-window\dialog-window-config.ts" />
   </ItemGroup>
 
@@ -43,7 +47,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\book-comment.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\chapter-comment.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\chapter.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\comment.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\MyValidators.ts" />
@@ -52,6 +59,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\services\auth\register-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\book\book-catalog-info.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\book\create-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\chapter\create-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\dialog-window\dialog-window-config.ts" />
   </ItemGroup>
 

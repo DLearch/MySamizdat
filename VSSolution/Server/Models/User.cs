@@ -12,32 +12,13 @@ namespace Server.Models
     {
         [Required]
         public bool EmailIsVisible { get; set; }
-
-        public List<Book> Books { get; set; }
-
+        
         [Required]
         public DateTime BirthDate { get; set; }
 
+        public List<Book> Books { get; set; }
         public List<Comment> Comments { get; set; }
-
-        public User GetPublicCopy() => new User()
-        {
-            Id = Id
-            , Email = EmailIsVisible && EmailConfirmed ? Email : null
-            , UserName = UserName
-            , EmailIsVisible = EmailIsVisible
-            , Books = Books
-        };
-
-        public User GetPrivateCopy() => new User()
-        {
-            Id = Id
-            , Email = Email
-            , UserName = UserName
-            , EmailIsVisible = EmailIsVisible
-            , EmailConfirmed = EmailConfirmed
-            , BirthDate = BirthDate
-            , Books = Books
-        };
+        public List<BookComment> BookComments { get; set; }
+        public List<ChapterComment> ChapterComments { get; set; }
     }
 }
