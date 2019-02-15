@@ -38,7 +38,9 @@ namespace Server
             
             services.AddConfiguredAuthentication(Configuration);
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.AddConfiguredSpaStaticFiles();
 

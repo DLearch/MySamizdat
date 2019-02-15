@@ -17,5 +17,5 @@
 <span *ngIf='!authGuard.isAuthenticated'>
 
   <!-- Sign in button -->
-  <button mat-button (click)="authDialog.openSignIn()">{{ 'button-texts.sign-in' | translate }}</button>
+  <button mat-button (click)="signIn.open()">{{ 'button-texts.sign-in' | translate }}</button>
 </span>

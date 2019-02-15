@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MyValidators } from 'src/app/MyValidators';
 import { setErrors } from 'src/app/components/input/set-errors';
-import { AuthDialogService } from 'src/app/services/auth-dialog/auth-dialog.service';
+import { SignInService } from 'src/app/services/sign-in/sign-in.service';
+import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,9 +17,9 @@ export class SignUpComponent {
   public isComplete = false;
 
   public constructor(
-    formBuilder: FormBuilder
-    , private auth: AuthService
-    , private authDialog: AuthDialogService
+    formBuilder: FormBuilder,
+    private auth: AuthService
+    , private signIn: SignInService
   ) {
 
     this.mainForm = formBuilder.group({

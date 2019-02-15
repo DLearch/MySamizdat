@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthDialogService } from './auth-dialog.service';
+import { SignInService } from './sign-in.service';
 
-describe('AuthDialogService', () => {
+describe('SignInService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AuthDialogService = TestBed.get(AuthDialogService);
+    const service: SignInService = TestBed.get(SignInService);
     expect(service).toBeTruthy();
   });
 });

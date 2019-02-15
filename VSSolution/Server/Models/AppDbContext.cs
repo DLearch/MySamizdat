@@ -10,6 +10,7 @@ namespace Server.Models
     public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

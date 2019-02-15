@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Server.Models;
 using Server.Services;
@@ -92,6 +93,26 @@ namespace Server.Controllers
                     Length = _bookManager.GetBooksCount()
                     , Books = _db.Books.Skip(model.page * model.pageSize).Take(model.pageSize).ToList()
                 });
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment([FromBody]CommentVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.GetUserAsync(User);
+
+                if (user != null)
+                {
+                    await _bookManager.CreateCommentAsync(model.Content, user.Id, model.BookId, model.ParentId);
+
+                    return Ok();
+                }
+                else
+                    ModelState.AddModelError("User", "not-found");
+            }
 
             return BadRequest(ModelState);
         }

@@ -38,4 +38,10 @@ export class BookService {
     return this.api
       .post({ pageSize: pageSize, page: page }, this.controller, 'getcatalog');
   }
+
+  comment(content: string, bookId: number, parentId: number = 0): Observable<void> {
+
+    return this.api
+      .post({ content: content, bookId: bookId, parentId: parentId }, this.controller, 'comment');
+  }
 }

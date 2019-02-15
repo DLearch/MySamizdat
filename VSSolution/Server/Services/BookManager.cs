@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Server.Services
 {
@@ -42,7 +43,14 @@ namespace Server.Services
 
         public async Task<Book> GetBookByIdAsync(int id)
         {
-            return await _db.Books.FindAsync(id);
+            Book book = await _db.Books
+                .Include(b => b.Owner)
+                .Include(b => b.Comments)
+                .AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+
+            book.Owner = book.Owner.GetPublicCopy();
+
+            return book;
         }
 
         public async Task DeleteBookByIdAsync(int id)
@@ -55,6 +63,28 @@ namespace Server.Services
         public int GetBooksCount()
         {
             return _db.Books.Count();
+        }
+
+        public async Task<int> CreateCommentAsync(string content, string authorId, int bookId, int parentId = 0)
+        {
+            return await CreateCommentAsync(new Comment()
+            {
+                Content = content
+                , AuthorId = authorId
+                , BookId = bookId
+                , ParentId = parentId
+            });
+        }
+
+        public async Task<int> CreateCommentAsync(Comment comment)
+        {
+            comment.Date = DateTime.Now;
+
+            await _db.Comments.AddAsync(comment);
+
+            await _db.SaveChangesAsync();
+
+            return comment.Id;
         }
     }
 }

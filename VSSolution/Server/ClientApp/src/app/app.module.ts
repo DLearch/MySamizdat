@@ -42,8 +42,10 @@ import { BookComponent } from './pages/book/book.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
 import { DialogWindowService } from './services/dialog-window/dialog-window.service';
-import { AuthDialogService } from './services/auth-dialog/auth-dialog.service';
 import { UserPanelComponent } from './layout/user-panel/user-panel.component';
+import { SignInService } from './services/sign-in/sign-in.service';
+import { SignUpService } from './services/sign-up/sign-up.service';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,7 @@ import { UserPanelComponent } from './layout/user-panel/user-panel.component';
     , BookComponent
     , CatalogComponent
     , DialogWindowComponent
-    , UserPanelComponent
+    , UserPanelComponent, CommentComponent
   ]
   , imports: [
     BrowserModule
@@ -87,7 +89,8 @@ import { UserPanelComponent } from './layout/user-panel/user-panel.component';
     , EmailConfirmationGuard
     , BookService
     , DialogWindowService
-    , AuthDialogService
+    , SignInService
+    , SignUpService
   ]
   , entryComponents: [
     SignInComponent

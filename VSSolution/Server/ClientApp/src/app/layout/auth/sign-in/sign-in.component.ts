@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MyValidators } from 'src/app/MyValidators';
 import { setErrors } from 'src/app/components/input/set-errors';
-import { AuthDialogService } from 'src/app/services/auth-dialog/auth-dialog.service';
+import { SignUpService } from 'src/app/services/sign-up/sign-up.service';
+import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,7 +18,8 @@ export class SignInComponent {
   public constructor(
     formBuilder: FormBuilder
     , private auth: AuthService
-    , private authDialog: AuthDialogService
+    , private signUp: SignUpService
+    , private dialog: DialogWindowService
   ) {
     
     this.mainForm = formBuilder.group({
@@ -33,7 +35,7 @@ export class SignInComponent {
       this.auth
         .authenticate(this.mainForm.value)
         .subscribe(
-        () => this.authDialog.close()
+        () => this.dialog.close()
           , response => setErrors(response, this.mainForm)
         );
   }

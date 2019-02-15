@@ -47,6 +47,7 @@ export class DialogWindowComponent implements OnDestroy {
   open(): void {
     this.componentPortal = new ComponentPortal(this.service.component);
     this.service.isOpen = true;
+    console.log(this.componentPortal);
   }
 
   close(): void {

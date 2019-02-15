@@ -2,6 +2,7 @@
 using Server.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,14 +10,16 @@ namespace Server.Models
 {
     public class User : IdentityUser
     {
-        [MyRequired]
+        [Required]
         public bool EmailIsVisible { get; set; }
 
         public List<Book> Books { get; set; }
 
-        [MyRequired]
+        [Required]
         public DateTime BirthDate { get; set; }
-        
+
+        public List<Comment> Comments { get; set; }
+
         public User GetPublicCopy() => new User()
         {
             Id = Id
