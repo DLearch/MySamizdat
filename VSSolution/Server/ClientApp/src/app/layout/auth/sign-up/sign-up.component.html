@@ -1,5 +1,7 @@
 <div class="bottom-sheet-main">
 
+  <app-load-overlay *ngIf="isWaiting"></app-load-overlay>
+
   <app-dialog-header titleTK="pages.sign-up.name" closeButtonVisible="true"></app-dialog-header>
 
   <!--Main form-->

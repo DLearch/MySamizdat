@@ -15,6 +15,7 @@ export class SignUpComponent {
 
   public mainForm: FormGroup;
   public isComplete = false;
+  isWaiting: boolean = false;
 
   public constructor(
     formBuilder: FormBuilder,
@@ -32,12 +33,18 @@ export class SignUpComponent {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
+    if (this.mainForm.valid) {
+      this.isWaiting = true;
+
       this.auth
         .register(this.mainForm.value)
         .subscribe(
           () => this.isComplete = true
-          , response => setErrors(response, this.mainForm)
+        , response => {
+          this.isWaiting = false;
+          setErrors(response, this.mainForm);
+        }
         );
+    }
   }
 }

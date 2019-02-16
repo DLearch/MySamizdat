@@ -42,6 +42,8 @@ import { ChapterComponent } from './pages/chapter/chapter.component';
 import { ChapterCreatingComponent } from './pages/chapter-creating/chapter-creating.component';
 import { ChapterService } from './services/chapter/chapter.service';
 import { CommentService } from './services/comment/comment.service';
+import { ImageLoadComponent } from './components/image-load/image-load.component';
+import { BackdropComponent } from './components/backdrop/backdrop.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,7 @@ import { CommentService } from './services/comment/comment.service';
     , BookComponent
     , CatalogComponent
     , DialogWindowComponent
-    , UserPanelComponent, CommentComponent, DialogHeaderComponent, LoadOverlayComponent, CommentsComponent, CommentCreatingComponent, ChapterComponent, ChapterCreatingComponent
+    , UserPanelComponent, CommentComponent, DialogHeaderComponent, LoadOverlayComponent, CommentsComponent, CommentCreatingComponent, ChapterComponent, ChapterCreatingComponent, ImageLoadComponent, BackdropComponent
   ]
   , imports: [
     BrowserModule

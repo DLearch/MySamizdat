@@ -14,6 +14,7 @@ import { DialogWindowService } from 'src/app/services/dialog-window/dialog-windo
 export class SignInComponent {
 
   public mainForm: FormGroup;
+  isWaiting: boolean = false;
 
   public constructor(
     formBuilder: FormBuilder
@@ -31,12 +32,18 @@ export class SignInComponent {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
+    if (this.mainForm.valid) {
+      this.isWaiting = true;
+
       this.auth
         .authenticate(this.mainForm.value)
         .subscribe(
-        () => this.dialog.close()
-          , response => setErrors(response, this.mainForm)
+          () => this.dialog.close(),
+          response => {
+            this.isWaiting = false;
+            setErrors(response, this.mainForm);
+          }
         );
+    }
   }
 }
