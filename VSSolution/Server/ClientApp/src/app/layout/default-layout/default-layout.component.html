@@ -1,17 +1,10 @@
-<div class="main">
+<div class="main-wrapper">
 
   <!--Header-->
   <header>
     <mat-toolbar>
 
-      <!-- Menu button -->
-      <button type='button'
-              mat-icon-button
-              (click)='sidenav.toggle()'>
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      <!-- Site name -->
+      <!-- Main link -->
       <a routerLink="" mat-button>{{ 'navbar-links.main' | translate }}</a>
 
       <!-- Catalog link -->
@@ -25,30 +18,10 @@
     </mat-toolbar>
   </header>
 
-  <mat-sidenav-container class='sidenav-container'>
-
-    <!-- Left menu -->
-    <mat-sidenav #sidenav
-                 [mode]='(isHandset$ | async) ? "over" : "side"'>
-
-      <!-- Navbar -->
-      <mat-nav-list>
-        <a mat-list-item routerLink="">{{ 'navbar-links.main' | translate }}</a>
-        <a mat-list-item routerLink="catalog">{{ 'navbar-links.catalog' | translate }}</a>
-      </mat-nav-list>
-
-    </mat-sidenav>
-
-    <!-- Content -->
-    <mat-sidenav-content>
-
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
+  <!-- Content -->
+  <main class="component content">
+    <router-outlet></router-outlet>
+  </main>
 
   <!--Footer-->
   <footer>

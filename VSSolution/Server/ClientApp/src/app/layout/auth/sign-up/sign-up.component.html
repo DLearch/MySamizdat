@@ -9,17 +9,14 @@
 
     <!--Email input-->
     <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
-    <br />
 
     <!--UserName input-->
     <app-input formControlName="userName" type="text" fieldTK="username" [field]="mainForm.get('userName')"></app-input>
-    <br />
 
     <!--Password input-->
     <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
-    <br />
 
-    <div class="flex-box">
+    <div class="flex-box" style="margin: 0.83em 0">
       <!-- Sign in button -->
       <button type="button" mat-button (click)="signIn.open()">{{ 'button-texts.sign-in' | translate }}</button>
 

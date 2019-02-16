@@ -7,13 +7,11 @@
 
     <!--Email input-->
     <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
-    <br />
 
     <!--Password input-->
     <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
-    <br />
 
-    <div class="flex-box">
+    <div class="flex-box" style="margin: 0.83em 0">
       <!-- Sign up button -->
       <button type="button" mat-button (click)="signUp.open()">{{ 'button-texts.sign-up' | translate }}</button>
 
@@ -25,6 +23,7 @@
         </button>
       </div>
     </div>
+
   </form>
 
 </div>
