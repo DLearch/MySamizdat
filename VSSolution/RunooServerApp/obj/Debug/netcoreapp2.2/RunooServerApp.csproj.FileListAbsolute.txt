@@ -1,0 +1,11 @@
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\bin\Debug\netcoreapp2.2\RunooServerApp.deps.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\bin\Debug\netcoreapp2.2\RunooServerApp.runtimeconfig.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\bin\Debug\netcoreapp2.2\RunooServerApp.runtimeconfig.dev.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\bin\Debug\netcoreapp2.2\RunooServerApp.dll
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.RazorAssemblyInfo.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.RazorAssemblyInfo.cs
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Runoo\VSSolution\RunooServerApp\obj\Debug\netcoreapp2.2\RunooServerApp.RazorTargetAssemblyInfo.cache
