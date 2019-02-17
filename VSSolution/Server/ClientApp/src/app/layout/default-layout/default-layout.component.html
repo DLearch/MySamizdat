@@ -1,30 +1,39 @@
-<div class="main-wrapper">
+<div class="main-wrapper mat-app-background"
+     [ngClass]="themePickerService.class">
 
   <!--Header-->
-  <mat-toolbar class="line">
+  <mat-toolbar>
+    <mat-toolbar-row class="toolbar-row">
 
       <!-- Main link -->
       <a routerLink="" mat-button>{{ 'navbar-links.main' | translate }}</a>
 
       <!-- Catalog link -->
       <a routerLink="/catalog" mat-button>{{ 'navbar-links.catalog' | translate }}</a>
+
       <!-- Spacer -->
       <span class="flex-spacer"></span>
 
       <!--User panel-->
       <app-user-panel></app-user-panel>
 
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <!-- Content -->
-  <router-outlet></router-outlet>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
 
   <!--Footer-->
-  <mat-toolbar class="line">
+  <mat-toolbar>
+    <mat-toolbar-row class="toolbar-row">
 
       <!--Language picker-->
       <app-language-picker></app-language-picker>
+      <app-theme-picker></app-theme-picker>
 
+    </mat-toolbar-row>
   </mat-toolbar>
 </div>
 

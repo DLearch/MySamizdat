@@ -3,14 +3,9 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #616161;
 }
 
-.flex-spacer {
-  flex: 1 1 auto;
-}
-
-.horizontal-margin-md {
+/*.horizontal-margin-md {
   margin: 0px 10px;
 }
 
@@ -50,4 +45,4 @@ body {
   max-width: 300px;
   min-width: 200px;
   margin: 0 auto;
-}
+}*/

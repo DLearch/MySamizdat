@@ -7,7 +7,7 @@
 
 <div *ngIf="service.isOpen" class="dialog" [@openClose]="openCloseAnim" (@openClose.done)="openCloseDone()">
   <div class="dialog2">
-    <div class="portal" aria-modal="true" role="dialog" tabindex="1">
+    <div class="material-dark-theme mat-app-background portal" aria-modal="true" role="dialog" tabindex="1">
 
       <!--Portal-->
       <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
