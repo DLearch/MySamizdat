@@ -10,4 +10,6 @@ export class Book {
   owner: User;
 
   comments: BookComment[];
+
+  mainImagePath: string;
 }

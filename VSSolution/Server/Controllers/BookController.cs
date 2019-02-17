@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using Server.Services;
 using Server.ViewModels.Book;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,18 +21,24 @@ namespace Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly AppDbContext _db;
+        private readonly ImageStorage _imageStorage;
+        private readonly IHostingEnvironment _appEnvironment;
 
         public BookController(
             UserManager<User> userManager
             , AppDbContext db
+            , ImageStorage imageStorage
+            , IHostingEnvironment appEnvironment
         )
         {
             _userManager = userManager;
             _db = db;
+            _imageStorage = imageStorage;
+            _appEnvironment = appEnvironment;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody]AddVM model)
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> Add(AddVM model)//, [FromForm]IFormFile mainImage)
         {
             if (ModelState.IsValid)
             {
@@ -39,13 +48,21 @@ namespace Server.Controllers
                 {
                     Book book = new Book()
                     {
-                        Title = model.Title
-                        , OwnerId = user.Id
+                        Title = model.Title,
+                        OwnerId = user.Id
                     };
 
                     await _db.Books.AddAsync(book);
-
+                    
                     await _db.SaveChangesAsync();
+
+                    if (model.MainImage != null)
+                    {
+                        book.MainImagePath = await _imageStorage.SaveImageAsync(Path.Combine("books", book.Id.ToString()), model.MainImage);
+
+                        await _db.SaveChangesAsync();
+                    }
+
 
                     return Ok(new AddRVM()
                     {

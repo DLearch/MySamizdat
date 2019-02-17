@@ -14,7 +14,7 @@ export class ApiService {
   ) { }
 
   public post(data: any, controller?: string, action?: string): Observable<any> {
-
+    
     return this.http
       .post(
         this.getUri(controller, action)
@@ -27,6 +27,28 @@ export class ApiService {
       );
   }
 
+  public postForm(data: any, controller?: string, action?: string): Observable<any> {
+
+    let httpHeaders = new HttpHeaders();
+
+    if (this.userStorageService.token)
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
+
+    var formData = new FormData();
+    for (let key in data)
+      formData.append(key, data[key]);
+
+    return this.http
+      .post(
+        this.getUri(controller, action)
+      , formData
+      , { headers: httpHeaders }
+      )
+      .pipe(
+        tap(response => this.handleResponse(response)),
+        catchError(response => this.handleError(response))
+      );
+  }
   public getUri(controller?: string, action?: string): string {
 
     let uri: string = this.apiPath;

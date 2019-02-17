@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   host: {
-    'class': 'component'
+    'class': 'component content'
   }
 })
 export class CatalogComponent implements OnInit {

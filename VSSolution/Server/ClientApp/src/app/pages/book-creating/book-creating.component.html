@@ -3,11 +3,14 @@
 <h2>{{ 'pages.add-book.name' | translate }}</h2>
 
 <!--Main form-->
-<form [formGroup]="mainForm" (submit)="mainSubmit()">
+<form [formGroup]="mainForm" (submit)="mainSubmit($event)">
 
   <!--Title input-->
   <app-input formControlName="title" type="text" fieldTK="book-title" [field]="mainForm.get('title')"></app-input>
-  <br />
+
+  <input type="file" (change)="onFileChange($event.target.files)" />
+
+  <img [src]="mainForm.value.mainImage"/>
 
   <div class="flex-box">
     

@@ -31,6 +31,12 @@ body {
   display: flex;
 }
 
+.content {
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
 .flex-box-right-element {
   margin-left: auto;
 }

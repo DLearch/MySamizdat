@@ -3,7 +3,7 @@
 
   <h2>{{ book.title }}</h2>
   <p>{{ book.owner.userName }}</p>
-
+  <img [src]="'https://localhost:44314/images/' + book.mainImagePath"/>
   <p>{{ 'chapters'| translate}}</p>
   <mat-nav-list>
     <a mat-list-item *ngFor="let chapter of book.chapters" [routerLink]="['/book', book.id, chapter.id]">

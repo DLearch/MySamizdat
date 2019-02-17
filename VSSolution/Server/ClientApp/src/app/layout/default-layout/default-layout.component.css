@@ -4,8 +4,8 @@
   flex-direction: column;
 }
 
-.content {
+.line {
   max-width: 1000px;
   width: 100%;
-  align-self: center;
+  margin: auto;
 }

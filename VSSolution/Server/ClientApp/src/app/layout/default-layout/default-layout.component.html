@@ -1,8 +1,7 @@
 <div class="main-wrapper">
 
   <!--Header-->
-  <header>
-    <mat-toolbar>
+  <mat-toolbar class="line">
 
       <!-- Main link -->
       <a routerLink="" mat-button>{{ 'navbar-links.main' | translate }}</a>
@@ -15,23 +14,18 @@
       <!--User panel-->
       <app-user-panel></app-user-panel>
 
-    </mat-toolbar>
-  </header>
+  </mat-toolbar>
 
   <!-- Content -->
-  <main class="component content">
-    <router-outlet></router-outlet>
-  </main>
+  <router-outlet></router-outlet>
 
   <!--Footer-->
-  <footer>
-    <mat-toolbar>
+  <mat-toolbar class="line">
 
       <!--Language picker-->
       <app-language-picker></app-language-picker>
 
-    </mat-toolbar>
-  </footer>
+  </mat-toolbar>
 </div>
 
 <!--Dialog window-->

@@ -47,6 +47,7 @@ namespace Server
             services.AddSingleton<JWTGenerator>();
 
             services.AddScoped<EmailService>();
+            services.AddScoped<ImageStorage>();
 
             services.AddSignalR();
         }

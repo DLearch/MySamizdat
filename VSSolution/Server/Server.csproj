@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Images\Books\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\images\books\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,9 +16,9 @@ export class BookService {
   ) { }
 
   create(model: CreateVM): Observable<number> {
-
+    
     return this.api
-      .post(model, this.controller, 'add')
+      .postForm(model, this.controller, 'add')
       .pipe(
         map(response => response.id)
       );
