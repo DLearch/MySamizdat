@@ -1,4 +1,4 @@
-﻿using Server.Validators;
+﻿using Server.Validators.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ namespace Server.ViewModels.Comment
 {
     public class CommentBookVM
     {
-        [MyRequired]
+        [RequiredVM]
         public string Content { get; set; }
 
-        [MyRequired]
+        [RequiredVM]
         public int BookId { get; set; }
 
         public int ParentId { get; set; }

@@ -49,3 +49,10 @@
   overflow: auto;
   transform: translateY(0%);
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+

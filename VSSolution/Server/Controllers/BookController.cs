@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Server.Models;
+using Server.Models.Comments;
 using Server.Services;
 using Server.ViewModels.Book;
 using System;
@@ -38,7 +39,7 @@ namespace Server.Controllers
         }
 
         [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> Add(AddVM model)//, [FromForm]IFormFile mainImage)
+        public async Task<IActionResult> Add(AddVM model)
         {
             if (ModelState.IsValid)
             {
@@ -95,8 +96,8 @@ namespace Server.Controllers
                     if (book.Owner != null)
                         book.Owner = new User()
                         {
-                            Id = book.Owner.Id
-                            , UserName = book.Owner.UserName
+                            Id = book.Owner.Id,
+                            UserName = book.Owner.UserName
                         };
 
                     if(book.Comments != null)
@@ -154,7 +155,7 @@ namespace Server.Controllers
                 return Ok(new GetCatalogRVM()
                 {
                     Length = _db.Books.Count()
-                    , Books = _db.Books.Skip(model.page * model.pageSize).Take(model.pageSize).ToList()
+                    , Books = _db.Books.Skip(model.Page * model.PageSize).Take(model.PageSize).ToList()
                 });
 
             return BadRequest(ModelState);

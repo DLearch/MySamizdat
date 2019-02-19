@@ -1,0 +1,48 @@
+<div class="page-wrapper">
+
+  <!--Basic info-->
+  <mat-card class="basic-info-card">
+    <mat-card-header>
+      <button mat-mini-fab *ngIf="!isWaiting" class="avatar" mat-card-avatar (click)="changeAvatar()"></button>
+      <mat-card-title>{{userStorage.userName}}</mat-card-title>
+      <mat-card-subtitle *ngIf="!isWaiting">{{ userStorage.user.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="!isWaiting" class="basic-info-card-content">
+
+      <!--Birthday-->
+      <!--<mat-form-field >
+        <input matInput [matDatepicker]="picker" placeholder="Birthday">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>-->
+
+      <!--Sex-->
+      <!--<mat-button-toggle-group name="sex" aria-label="Sex"  class="content-element">
+        <mat-button-toggle value="undefined" checked>Undefined</mat-button-toggle>
+        <mat-button-toggle value="male">Male</mat-button-toggle>
+        <mat-button-toggle value="female">Female</mat-button-toggle>
+      </mat-button-toggle-group>-->
+
+      <!--Email visibility-->
+      <div class="content-element">
+        <app-load-overlay *ngIf="isEmailVisibilityChanging"></app-load-overlay>
+
+        <mat-slide-toggle [(ngModel)]="userStorage.user.emailIsVisible" (change)="onEmailVisibilityChanged()">
+          Email is visible for other users?
+        </mat-slide-toggle>
+      </div>
+
+      <!--Langs-->
+      <!--<mat-form-field>
+        <mat-select placeholder="Favorite food">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>-->
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<app-load-overlay *ngIf="isWaiting"></app-load-overlay>

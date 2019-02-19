@@ -5,4 +5,7 @@ export class User {
 
   email: string;
 
+  emailIsVisible: boolean;
+
+  avatarImageType: string;
 }

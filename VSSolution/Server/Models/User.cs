@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Server.Models.Comments;
 using Server.Validators;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace Server.Models
         
         public DateTime BirthDate { get; set; }
         
-        public bool? Sex { get; set; }
-
         public List<Book> Books { get; set; }
+
         public List<Comment> Comments { get; set; }
         public List<BookComment> BookComments { get; set; }
         public List<ChapterComment> ChapterComments { get; set; }
 
+        public Language MainLanguage { get; set; }
     }
 }

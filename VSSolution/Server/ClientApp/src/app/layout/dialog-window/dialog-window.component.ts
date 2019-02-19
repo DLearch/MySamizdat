@@ -1,8 +1,8 @@
-import { Component, OnDestroy, ViewContainerRef, Renderer2, ElementRef } from '@angular/core';
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
+import { Component, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { trigger, style, transition, animate, group, state } from '@angular/animations';
+import { DialogWindowService } from './dialog-window.service';
 
 @Component({
   selector: 'app-dialog-window',
@@ -35,25 +35,25 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
     ])
   ]
 })
-export class DialogWindowComponent implements OnDestroy {
-
+export class DialogWindowComponent implements OnDestroy, AfterViewInit {
+  
   subscription: Subscription = null;
   componentPortal: ComponentPortal<any> = null;
   openCloseAnim: string = 'closed';
   
   constructor(
-    public service: DialogWindowService
+    public service: DialogWindowService,
+    private cdRef: ChangeDetectorRef
   ) {
-    this.subscription = service.subject.asObservable().subscribe(isOpen => isOpen ? this.open() : this.close());
+    this.subscription = service.subject.asObservable().subscribe(isOpen => isOpen ? this.open() : this.startClosing());
   }
 
   open(): void {
     this.componentPortal = new ComponentPortal(this.service.component);
-    this.service.isOpen = true;
     this.openCloseAnim = 'opened';
   }
 
-  close(): void {
+  startClosing(): void {
     
     this.openCloseAnim = 'closed';
   }
@@ -61,11 +61,19 @@ export class DialogWindowComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  openCloseDone() {
-    if (this.openCloseAnim == 'closed') {
 
-      this.service.isOpen = false;
+  ngAfterViewInit(): void {
+    if (this.service.component) {
+      this.service.subject.next(true);
+      this.cdRef.detectChanges();
+    }
+  }
+
+  finishClosing() {
+    if (this.openCloseAnim == 'closed') {
+      
       this.componentPortal = null;
+      this.service.setConfig();
     }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Server.Models;
+using Server.Validators.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Server.Validators
 
             if (string.IsNullOrEmpty(password))
                 AddError("empty", errors);
-            else if (!(new PasswordAttribute().IsValid(password)))
+            else if (!(new PasswordVMAttribute().IsValid(password)))
                 AddError("wrong", errors);
 
             return Task.FromResult(errors.Count == 0 ?

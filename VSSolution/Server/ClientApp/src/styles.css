@@ -5,44 +5,25 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/*.horizontal-margin-md {
-  margin: 0px 10px;
+.dialog-content-wrapper {
+  width: 90%;
+  max-width: 300px;
+  min-width: 200px;
+  margin: 0 auto;
 }
 
-.vertical-margin-md {
-  margin: 10px 0px;
-}
-
-.margin-md {
-  margin: 10px;
-}
-
-.flex-box {
+.dialog-buttons-wrapper {
   display: flex;
+  justify-content: space-between;
+  margin: 0.83em 0;
 }
 
-.component {
-  flex: 1;
-  display: flex;
-}
-
-.content {
+.page-wrapper {
   max-width: 1000px;
   width: 100%;
   margin: auto;
 }
 
-.flex-box-right-element {
-  margin-left: auto;
+.flex-spacer {
+  flex: 1 1 auto;
 }
-
-.flex-box-center-element {
-  align-self:center;
-}
-
-.bottom-sheet-main {
-  width: 90%;
-  max-width: 300px;
-  min-width: 200px;
-  margin: 0 auto;
-}*/

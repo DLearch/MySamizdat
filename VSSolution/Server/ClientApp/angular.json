@@ -27,8 +27,8 @@
               "src/material-theme.scss",
               "src/styles.css"
             ],
-            "scripts": [],
-            "showCircularDependencies": false
+            "scripts": []
+            //"showCircularDependencies": false
           },
           "configurations": {
             "production": {

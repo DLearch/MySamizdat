@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DialogWindowService } from 'src/app/services/dialog-window/dialog-window.service';
+import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
 
 @Component({
   selector: 'app-dialog-header',

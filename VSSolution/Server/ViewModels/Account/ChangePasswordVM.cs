@@ -1,4 +1,4 @@
-﻿using Server.Validators;
+﻿using Server.Validators.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ namespace Server.ViewModels.Account
 {
     public class ChangePasswordVM
     {
-        [MyRequired]
-        [Password]
-        public string OldPassword { get; set; }
+        [RequiredVM]
+        [PasswordVM]
+        public string CurrentPassword { get; set; }
 
-        [MyRequired]
-        [Password]
+        [RequiredVM]
+        [PasswordVM]
         public string NewPassword { get; set; }
     }
 }

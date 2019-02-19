@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthGuard } from 'src/app/services/auth-guard/auth.guard';
-import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { SignInService } from 'src/app/services/sign-in/sign-in.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { UserStorageService } from 'src/app/auth/user-storage.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -12,10 +10,8 @@ import { SignInService } from 'src/app/services/sign-in/sign-in.service';
 export class UserPanelComponent {
 
   constructor(
-    public authGuard: AuthGuard
-    , private userStorage: UserStorageService
-    , public auth: AuthService
-    , private signIn: SignInService
+    private userStorage: UserStorageService,
+    public auth: AuthService
   ) { }
   
 }

@@ -43,9 +43,7 @@ namespace Server
             );
 
             services.AddConfiguredSpaStaticFiles();
-
-            services.AddSingleton<JWTGenerator>();
-
+            
             services.AddScoped<EmailService>();
             services.AddScoped<ImageStorage>();
 

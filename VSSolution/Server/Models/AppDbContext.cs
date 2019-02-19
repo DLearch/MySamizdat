@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Server.Models.Comments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace Server.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
 
-
+        public DbSet<Language> Languages { get; set; }
+        
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BookComment> BookComments { get; set; }
         public DbSet<ChapterComment> ChapterComments { get; set; }

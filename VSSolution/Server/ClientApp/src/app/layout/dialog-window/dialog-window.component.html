@@ -2,12 +2,31 @@
 <div class="overlay-backdrop"
       @backdrop
       *ngIf="service.isOpen"
-      (click)="service.isOpen = false">
+      (click)="service.close()">
 </div>
 
-<div *ngIf="service.isOpen" class="dialog" [@openClose]="openCloseAnim" (@openClose.done)="openCloseDone()">
+<div *ngIf="service.isOpen" class="dialog" [@openClose]="openCloseAnim" (@openClose.done)="finishClosing()">
   <div class="dialog2">
-    <div class="material-dark-theme mat-app-background portal" aria-modal="true" role="dialog" tabindex="1">
+    <div class="mat-app-background portal" aria-modal="true" role="dialog" tabindex="1">
+
+      <!--Header-->
+      <div class="header" *ngIf="service.config.titleTK || service.config.closeButtonVisible" [style.max-width]="service.config.headerMaxWidth">
+
+        <!--Title-->
+        <h2 *ngIf="service.config.titleTK">{{ service.config.titleTK | translate }}</h2>
+
+        <!-- Spacer -->
+        <span class="flex-spacer"></span>
+
+        <!--Close button-->
+        <div *ngIf="service.config.closeButtonVisible">
+          <button type='button'
+                  mat-icon-button
+                  (click)='service.close()'>
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
 
       <!--Portal-->
       <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-image-load',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ImageLoadComponent {
 
-  image: any;
+  @Input() fieldTK: string;
+  @Input() field: FormControl;
+
   constructor() { }
   
 }

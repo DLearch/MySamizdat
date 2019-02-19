@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
+using Server.Models.Comments;
 using Server.ViewModels.Comment;
 using System;
 using System.Collections.Generic;

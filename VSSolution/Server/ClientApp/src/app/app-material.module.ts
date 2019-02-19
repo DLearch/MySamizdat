@@ -14,10 +14,13 @@ import {
   , MatSelectModule
   , MatMenuModule
   , MatSlideToggleModule
-  , MatBottomSheetModule
   , MatDividerModule
   , MatPaginatorModule
   , MatProgressSpinnerModule
+  , MatButtonToggleModule
+  , MatDatepickerModule
+  , MatNativeDateModule
+  , MatSnackBarModule
 } from '@angular/material';
 
 const modules = [
@@ -34,11 +37,14 @@ const modules = [
   , MatSelectModule
   , MatMenuModule
   , MatSlideToggleModule
-  , MatBottomSheetModule
   , MatDividerModule
   , MatPaginatorModule
   , PortalModule
   , MatProgressSpinnerModule
+  , MatButtonToggleModule
+  , MatDatepickerModule
+  , MatNativeDateModule
+  , MatSnackBarModule
 ];
 
 @NgModule({

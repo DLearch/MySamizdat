@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Server.Models;
+using Server.Validators.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -30,7 +31,7 @@ namespace Server.Validators
         {
             if (string.IsNullOrEmpty(user.UserName))
                 AddError(userNameCode, "empty", errors);
-            else if (!(new UserNameAttribute().IsValid(user.UserName)))
+            else if (!(new UserNameVMAttribute().IsValid(user.UserName)))
                 AddError(userNameCode, "wrong", errors);
             else
             {

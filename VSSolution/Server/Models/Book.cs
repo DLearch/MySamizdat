@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Models.Comments;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace Server.Models
 
         public List<Chapter> Chapters { get; set; }
         public List<BookComment> Comments { get; set; }
+
+        public Language Language { get; set; }
     }
 }

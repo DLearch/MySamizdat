@@ -14,25 +14,14 @@ import { AppComponent } from './app.component';
 import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
-import { SignInComponent } from './layout/auth/sign-in/sign-in.component';
-import { SignUpComponent } from './layout/auth/sign-up/sign-up.component';
-import { EmailConfirmedComponent } from './layout/auth/email-confirmed/email-confirmed.component';
-import { EmailUnconfirmedComponent } from './layout/auth/email-unconfirmed/email-unconfirmed.component';
 import { InputComponent } from './components/input/input.component';
 import { LogInterceptorService } from './services/log-interceptor/log-interceptor.service';
 import { ApiService } from './services/api/api.service';
-import { AuthService } from './services/auth/auth.service';
-import { UserStorageService } from './services/user-storage/user-storage.service';
-import { AuthGuard } from './services/auth-guard/auth.guard';
-import { EmailConfirmationGuard } from './services/email-confirmation-guard/email-confirmation.guard';
 import { BookService } from './services/book/book.service';
 import { BookComponent } from './pages/book/book.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
-import { DialogWindowService } from './services/dialog-window/dialog-window.service';
 import { UserPanelComponent } from './layout/user-panel/user-panel.component';
-import { SignInService } from './services/sign-in/sign-in.service';
-import { SignUpService } from './services/sign-up/sign-up.service';
 import { CommentComponent } from './components/comment/comment.component';
 import { DialogHeaderComponent } from './components/dialog-header/dialog-header.component';
 import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
@@ -46,6 +35,17 @@ import { ImageLoadComponent } from './components/image-load/image-load.component
 import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { ThemePickerComponent } from './layout/theme-picker/theme-picker.component';
 import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
+import { AccountComponent } from './pages/account/account.component';
+import { AccountService } from './pages/account/account.service';
+import { ConfigurationService } from './services/configuration/configuration.service';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { AuthService } from './auth/auth.service';
+import { UserStorageService } from './auth/user-storage.service';
+import { AuthGuard } from './auth/auth.guard';
+import { DialogWindowService } from './layout/dialog-window/dialog-window.service';
+import { ApiAuthService } from './auth/api-auth/api-auth.service';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -57,13 +57,23 @@ import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
     , SignInComponent
     , SignUpComponent
     , InputComponent
-    , EmailConfirmedComponent
-    , EmailUnconfirmedComponent
     , BookCreatingComponent
     , BookComponent
     , CatalogComponent
     , DialogWindowComponent
-    , UserPanelComponent, CommentComponent, DialogHeaderComponent, LoadOverlayComponent, CommentsComponent, CommentCreatingComponent, ChapterComponent, ChapterCreatingComponent, ImageLoadComponent, BackdropComponent, ThemePickerComponent
+    , UserPanelComponent
+    , CommentComponent
+    , DialogHeaderComponent
+    , LoadOverlayComponent
+    , CommentsComponent
+    , CommentCreatingComponent
+    , ChapterComponent
+    , ChapterCreatingComponent
+    , ImageLoadComponent
+    , BackdropComponent
+    , ThemePickerComponent
+    , AccountComponent
+    , AvatarComponent
   ]
   , imports: [
     BrowserModule
@@ -86,20 +96,18 @@ import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
     , AuthService
     , UserStorageService
     , AuthGuard
-    , EmailConfirmationGuard
     , BookService
     , DialogWindowService
-    , SignInService
-    , SignUpService
+    , ApiAuthService
     , ChapterService
     , CommentService
     , ThemePickerService
+    , AccountService
+    , ConfigurationService
   ]
   , entryComponents: [
     SignInComponent
     , SignUpComponent
-    , EmailConfirmedComponent
-    , EmailUnconfirmedComponent
   ]
   , bootstrap: [AppComponent]
 })
