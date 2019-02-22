@@ -13,7 +13,7 @@ namespace Server.Models
         
         public string Title { get; set; }
 
-        public string MainImagePath  { get; set; }
+        public string CoverPath  { get; set; }
 
         public string OwnerId { get; set; }
         public User Owner { get; set; }

@@ -46,6 +46,7 @@ namespace Server
             
             services.AddScoped<EmailService>();
             services.AddScoped<ImageStorage>();
+            services.AddScoped<FilesStorage>();
 
             services.AddSignalR();
         }

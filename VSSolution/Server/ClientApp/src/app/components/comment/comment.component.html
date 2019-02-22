@@ -1,4 +1,18 @@
-<div>
-  {{ comment.content }}<br/>
-  {{ comment.author.userName }}, {{ comment.creationTime | date }}
+
+<div class="comment-wrapper">
+
+  <app-avatar class="author-avatar" [imageType]="comment.author.avatarImageType" [userName]="comment.author.userName"></app-avatar>
+
+  <div class="main">
+
+    <div class="header">
+      <span class="mat-body-strong">{{ comment.author.userName }} </span> <span class="mat-small"> {{ comment.creationTime | date: 'short' }}</span>
+    </div>
+    <div class="content mat-body">
+      {{ comment.content }}
+    </div>
+    <div class="actions">
+      <button mat-button>Answer</button>
+    </div>
+  </div>
 </div>

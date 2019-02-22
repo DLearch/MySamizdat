@@ -7,5 +7,5 @@ export class User {
 
   emailIsVisible: boolean;
 
-  avatarImageType: string;
+  avatarPath: string;
 }

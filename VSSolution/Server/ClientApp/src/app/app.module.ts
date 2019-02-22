@@ -46,6 +46,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { DialogWindowService } from './layout/dialog-window/dialog-window.service';
 import { ApiAuthService } from './auth/api-auth/api-auth.service';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { ImageComponent } from './components/image/image.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     , ThemePickerComponent
     , AccountComponent
     , AvatarComponent
+    , ImageComponent
   ]
   , imports: [
     BrowserModule
@@ -108,6 +110,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
   , entryComponents: [
     SignInComponent
     , SignUpComponent
+    , ImageLoadComponent
   ]
   , bootstrap: [AppComponent]
 })

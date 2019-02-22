@@ -13,7 +13,7 @@
       <div class="header" *ngIf="service.config.titleTK || service.config.closeButtonVisible" [style.max-width]="service.config.headerMaxWidth">
 
         <!--Title-->
-        <h2 *ngIf="service.config.titleTK">{{ service.config.titleTK | translate }}</h2>
+        <div *ngIf="service.config.titleTK" class="mat-h1 title">{{ service.config.titleTK | translate }}</div>
 
         <!-- Spacer -->
         <span class="flex-spacer"></span>

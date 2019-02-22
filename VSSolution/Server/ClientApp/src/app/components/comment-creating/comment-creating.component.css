@@ -1,0 +1,15 @@
+.main-wrapper {
+  display: flex;
+  
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.main {
+  flex: 1;
+  margin-left: 10px;
+}

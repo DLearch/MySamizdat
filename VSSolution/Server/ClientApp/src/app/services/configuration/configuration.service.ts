@@ -5,9 +5,8 @@ export class ConfigurationService {
 
   readonly _config: { [key: string]: any } = {
     apiUrl: 'https://localhost:44314/api',
-    imagesUrl: 'https://localhost:44314/images/',
     url: 'https://localhost:44314/',
-    defaultAvatarUri: ''
+    defaultAvatarUrn: 'files/default-avatar.png'
   };
 
   getString(key: string): string {

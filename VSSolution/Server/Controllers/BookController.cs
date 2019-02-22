@@ -56,15 +56,7 @@ namespace Server.Controllers
                     await _db.Books.AddAsync(book);
                     
                     await _db.SaveChangesAsync();
-
-                    if (model.MainImage != null)
-                    {
-                        book.MainImagePath = await _imageStorage.SaveImageAsync(Path.Combine("books", book.Id.ToString()), model.MainImage);
-
-                        await _db.SaveChangesAsync();
-                    }
-
-
+                    
                     return Ok(new AddRVM()
                     {
                         Id = book.Id

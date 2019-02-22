@@ -12,6 +12,8 @@ import { setErrors } from '../input/set-errors';
 export class CommentCreatingComponent {
 
   public mainForm: FormGroup;
+
+  @Input() parentId: number;
   @Input() type: string;
   @Input() id: number;
   @Input() callback: Function;

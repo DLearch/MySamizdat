@@ -1,24 +1,53 @@
 
-<div *ngIf="book">
+<div *ngIf="book" class="page-wrapper">
 
-  <h2>{{ book.title }}</h2>
-  <p>{{ book.owner.userName }}</p>
-  <img [src]="'https://localhost:44314/images/' + book.mainImagePath"/>
-  <p>{{ 'chapters'| translate}}</p>
-  <mat-nav-list>
-    <a mat-list-item *ngFor="let chapter of book.chapters" [routerLink]="['/book', book.id, chapter.id]">
-      {{chapter.name}}
-    </a>
-  </mat-nav-list>
-  <div *ngIf="!book.chapters || book.chapters.length < 1">{{'empty'|translate}}</div>
+  <div class="main-wrapper">
+    <!--Title-->
+    <div class="mat-h2">{{ book.title }}</div>
 
-  <a mat-raised-button color="primary" [routerLink]="['/book', book.id, 'create-chapter']">
-    {{ 'button-texts.create' | translate }}
-  </a>
+    <!--Main info-->
+    <div class="main-info">
+      <div class="main-info-column-1">
+        <app-image [path]="book.mainImagePath"></app-image>
+        <a *ngIf="book.chapters && book.chapters.length" mat-raised-button color="primary" [routerLink]="['/book', book.id, book.chapters[0].id]">Читать</a>
+        
+        <button mat-button>В закладки</button>
+        <a mat-button>Скачать</a>
+      </div>
 
+      <div class="main-info-column-2">
+
+        <div class="mat-body">Author: {{ book.owner.userName }}</div>
+      </div>
+    </div>
+
+    <!--Divider-->
+    <mat-divider></mat-divider>
+
+    <!--Chapters-->
+    <div>
+      <p>{{ 'chapters'| translate}}</p>
+
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let chapter of book.chapters" [routerLink]="['/book', book.id, chapter.id]">
+          {{chapter.name}}
+        </a>
+      </mat-nav-list>
+      <div *ngIf="!book.chapters || !book.chapters.length">{{'empty'|translate}}</div>
+
+      <!--Create chapter link-->
+      <a mat-raised-button color="primary" [routerLink]="['/book', book.id, 'create-chapter']">
+        {{ 'button-texts.create' | translate }}
+      </a>
+    </div>
+
+    <!--Divider-->
+    <mat-divider></mat-divider>
+
+  </div>
+
+  <!--Comments-->
   <app-comments [comments]="book.comments" [id]="book.id" type="book"></app-comments>
 </div>
 
-<div *ngIf="!book">
-  !
-</div>
+<app-load-overlay *ngIf="!book"></app-load-overlay>

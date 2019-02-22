@@ -1,0 +1,13 @@
+.comment-wrapper {
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: row;
+}
+
+.author-avatar {
+}
+
+.main {
+  flex: 1;
+  margin-left: 10px;
+}

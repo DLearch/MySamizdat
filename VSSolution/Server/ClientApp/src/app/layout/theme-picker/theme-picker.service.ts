@@ -4,7 +4,7 @@ import { themes } from './themes';
 @Injectable()
 export class ThemePickerService {
 
-  readonly defaultTheme: string = 'dark';
+  readonly defaultTheme: string = 'light';
 
   theme: string = this.defaultTheme;
   class: string = themes[this.defaultTheme];

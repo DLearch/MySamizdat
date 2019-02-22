@@ -38,4 +38,11 @@ export class AccountService {
     return this.api
       .post(model, this.controller, 'changepassword');
   }
+
+  changeAvatar(image: File): Observable<void> {
+
+    return this.api
+      .postForm({ avatar: image }, this.controller, 'changeavatar')
+      .pipe(tap(response => this.userStorage.user.avatarPath = response.avatarPath));
+  }
 }

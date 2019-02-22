@@ -18,14 +18,17 @@ namespace Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly AppDbContext _db;
+        private readonly FilesStorage _filesStorage;
 
         public AccountController(
-            UserManager<User> userManager
-            , AppDbContext db
+            UserManager<User> userManager,
+            AppDbContext db,
+            FilesStorage filesStorage
         )
         {
             _userManager = userManager;
             _db = db;
+            _filesStorage = filesStorage;
         }
 
         [HttpPost]
@@ -97,6 +100,42 @@ namespace Server.Controllers
                     else
                         foreach (var error in result.Errors)
                             ModelState.AddModelError(error.Code, error.Description);
+                }
+                else
+                    ModelState.AddModelError("User", "not-found");
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> ChangeAvatar(ChangeAvatarVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.GetUserAsync(User);
+
+                if (user != null)
+                {
+                    if (user.AvatarPath != null)
+                        _filesStorage.Delete(user.AvatarPath);
+
+                    if (model.Avatar != null)
+                        user.AvatarPath = await _filesStorage.SaveAsync(model.Avatar);
+                    else
+                        user.AvatarPath = null;
+
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                        return Ok(new ChangeAvatarRVM()
+                        {
+                            AvatarPath = user.AvatarPath
+                        });
+                    else
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError(error.Code, error.Description);
+                    
                 }
                 else
                     ModelState.AddModelError("User", "not-found");

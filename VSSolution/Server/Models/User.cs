@@ -18,6 +18,8 @@ namespace Server.Models
         
         public List<Book> Books { get; set; }
 
+        public string AvatarPath { get; set; }
+
         public List<Comment> Comments { get; set; }
         public List<BookComment> BookComments { get; set; }
         public List<ChapterComment> ChapterComments { get; set; }

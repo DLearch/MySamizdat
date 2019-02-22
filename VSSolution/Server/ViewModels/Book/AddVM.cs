@@ -11,6 +11,5 @@ namespace Server.ViewModels.Book
     {
         [RequiredVM]
         public string Title { get; set; }
-        public IFormFile MainImage { get; set; }
     }
 }

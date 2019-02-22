@@ -12,7 +12,7 @@ export class AvatarComponent {
   readonly defaultAvatarUri: string = 'images/avatars/default.png';
 
   @Input() imageType: string = null;
-  @Input() userName: string = null;
+  @Input() userName: string | 'default' = null;
 
   get avatarUri(): string {
 
@@ -23,10 +23,11 @@ export class AvatarComponent {
   }
 
   getLink(): string[] | string {
+
     if (!this.userName)
       return '/users';
 
-    if (this.userStorage.userName === this.userName)
+    if ('default' === this.userName || this.userStorage.userName === this.userName)
       return '/account';
 
     return ['/users', this.userName];

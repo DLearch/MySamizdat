@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book/book.service';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/models/book';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -12,8 +15,8 @@ export class BookComponent implements OnInit {
   book: Book;
 
   constructor(
-    private bookService: BookService
-    , private route: ActivatedRoute
+    private bookService: BookService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -24,5 +27,4 @@ export class BookComponent implements OnInit {
       , error => console.log(error)
     );
   }
-
 }

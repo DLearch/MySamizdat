@@ -1,5 +1,6 @@
 import { User } from './user';
 import { BookComment } from './book-comment';
+import { Chapter } from './chapter';
 
 export class Book {
   id: number;
@@ -12,4 +13,6 @@ export class Book {
   comments: BookComment[];
 
   mainImagePath: string;
+
+  chapters: Chapter[];
 }

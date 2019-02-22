@@ -1,31 +1,4 @@
 {
-  "site": {
-    "name": "Runoo"
-  },
-  "pages": {
-    "sign-up": {
-      "name": "Sign up"
-    },
-    "sign-in": {
-      "name": "Sign in"
-    },
-    "add-book": {
-      "name": "Create book"
-    },
-    "add-chapter": {
-      "name": "Create chapter"
-    },
-    "password-change": {
-      "name": "Change password"
-    },
-    "catalog": {
-      "name": "Catalog"
-    }
-  },
-  "navbar-links": {
-    "main": "Main",
-    "catalog": "Catalog"
-  },
   "button-texts": {
     "read": "Read",
     "sign-up": "Create account",
@@ -37,6 +10,12 @@
     "send-email-confirmation-message-again": "Send email confirmation message again",
     "change-password": "Change password"
   },
+  "chapters": "Chapters: ",
+  "comments": "Comments: ",
+  "email-confirmation-message-sent": "Confirmation message sent",
+  "email-is-not-confirmed": "Email is not confirmed",
+  "email-is-visible": "Email is visible for other users",
+  "empty": "Empty",
   "inputs": {
     "comment": {
       "placeholder": "Leave comment",
@@ -118,11 +97,32 @@
       }
     }
   },
+  "navbar-links": {
+    "main": "Main",
+    "catalog": "Catalog"
+  },
   "or": "or",
-  "empty": "Empty",
-  "email-confirmation-message-sent": "Confirmation message sent",
-  "email-is-not-confirmed": "Email is not confirmed",
-  "email-is-visible": "Email is visible for other users",
-  "comments": "Comments: ",
-  "chapters": "Chapters: "
+  "pages": {
+    "sign-up": {
+      "name": "Sign up"
+    },
+    "sign-in": {
+      "name": "Sign in"
+    },
+    "add-book": {
+      "name": "Create book"
+    },
+    "add-chapter": {
+      "name": "Create chapter"
+    },
+    "password-change": {
+      "name": "Change password"
+    },
+    "catalog": {
+      "name": "Catalog"
+    }
+  },
+  "site": {
+    "name": "Runoo"
+  }
 }
