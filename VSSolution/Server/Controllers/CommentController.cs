@@ -25,7 +25,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]CreateVM model)
+        public async Task<IActionResult> Add([FromBody]CreateVM model)
         {
             if (ModelState.IsValid)
             {
@@ -65,16 +65,10 @@ namespace Server.Controllers
 
                         await _db.SaveChangesAsync();
 
-                        comment.Author = new User()
+                        return Ok(new
                         {
-                            UserName = user.UserName,
-                            Id = user.Id,
-                            AvatarPath = user.AvatarPath
-                        };
-
-                        return Ok(new CreateRVM()
-                        {
-                            Comment = comment
+                            comment.Id,
+                            comment.CreationTime
                         });
                     }
                 }

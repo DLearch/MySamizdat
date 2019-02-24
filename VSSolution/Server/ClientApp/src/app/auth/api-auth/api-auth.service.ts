@@ -5,36 +5,35 @@ import { AuthenticateVM } from 'src/app/auth/api-auth/authenticate-vm';
 import { ConfirmEmailVM } from 'src/app/auth/api-auth/confirm-email-vm';
 import { RegisterVM } from 'src/app/auth/api-auth/register-vm';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
 
 @Injectable()
 export class ApiAuthService {
-
-  private readonly controller: string = 'auth';
-
+  
   constructor(
-    private api: ApiService,
+    private authController: AuthControllerService,
     private userStorage: UserStorageService
   ) { }
 
   authenticate(model: AuthenticateVM): Observable<void> {
 
-    return this.api
-      .post(model, this.controller, 'gettoken')
-      .pipe(tap(response => this.fillUserStorage(response)));
+    return this.authController
+      .getToken(model.email, model.password)
+      .pipe(map(response => this.fillUserStorage(response)));
   }
   
   register(model: RegisterVM): Observable<void> {
 
-    return this.api
-      .post(model, this.controller, 'register');
+    return this.authController
+      .register(model.userName, model.email, model.password);
   }
 
   confirmEmail(model: ConfirmEmailVM): Observable<void> {
 
-    return this.api
-      .post(model, this.controller, 'confirmemail')
-      .pipe(tap(response => this.fillUserStorage(response)));
+    return this.authController
+      .confirmEmail(model.email, model.token)
+      .pipe(map(response => this.fillUserStorage(response)));
   }
 
   private fillUserStorage(data: any) {

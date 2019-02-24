@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
-import { Book } from 'src/app/models/book';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogService } from './catalog.service';
 
@@ -14,7 +13,7 @@ export class CatalogComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 10;
   length: number = 0;
-  books: Book[];
+  books: { id: number, title: string }[];
 
   constructor(
     private service: CatalogService
@@ -27,6 +26,7 @@ export class CatalogComponent implements OnInit {
 
     if (page && page > 0)
       this.pageIndex = page - 1;
+
 
     this.updatePage({ pageSize: this.pageSize, pageIndex: this.pageIndex, length: this.length, previousPageIndex: 0 });
   }

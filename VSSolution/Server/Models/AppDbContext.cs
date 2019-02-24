@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Server.Models.Bookmarks;
 using Server.Models.Books;
 using Server.Models.Comments;
 using Server.Models.States;
@@ -22,7 +21,7 @@ namespace Server.Models
         //public DbSet<BookState> BookStates { get; set; }
         //public DbSet<TranslateBookState> TranslateBookStates { get; set; }
 
-        //public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<Bookmark> Bookmarks { get; set; }
 
         //public DbSet<Genre> Genres { get; set; }
         //public DbSet<Author> Authors { get; set; }

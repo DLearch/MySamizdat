@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ChapterControllerService } from 'src/app/api-services/chapter-controller/chapter-controller.service';
 
 @Injectable()
 export class NewChapterService {
 
   constructor(
-    private api: ApiService
+    private chapterController: ChapterControllerService
   ) { }
 
   create(model: { name: string, content: string, bookId: number }): Observable<number> {
 
-    return this.api
-      .post(model, 'chapter', 'add')
-      .pipe(
-        map(response => response.chapterId)
-      );
+    return this.chapterController.addChapter(model.name, model.content, model.bookId);
   }
 }

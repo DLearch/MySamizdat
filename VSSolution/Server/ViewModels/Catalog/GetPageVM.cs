@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.ViewModels.Book
+namespace Server.ViewModels.Catalog
 {
-    public class GetCatalogRVM
+    public class GetPageVM
     {
         [RequiredVM]
-        public int Length { get; set; }
+        public int PageSize { get; set; }
 
-        public List<Models.Books.Book> Books { get; set; }
+        [RequiredVM]
+        public int Page { get; set; }
     }
 }

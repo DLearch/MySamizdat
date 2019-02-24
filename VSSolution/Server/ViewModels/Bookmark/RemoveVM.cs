@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.ViewModels.Auth
+namespace Server.ViewModels.Bookmark
 {
-    public class ConfirmEmailRVM : GetTokenRVM
+    public class RemoveVM
     {
+        public int BookId { get; set; }
     }
 }

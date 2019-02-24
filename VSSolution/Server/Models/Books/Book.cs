@@ -1,5 +1,4 @@
-﻿using Server.Models.Bookmarks;
-using Server.Models.Comments;
+﻿using Server.Models.Comments;
 using Server.Models.States;
 using System;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace Server.Models.Books
         //[InverseProperty("OriginalBook")]
         //public List<TranslateBook> Translates { get; set; }
 
-        //public List<Bookmark> Bookmarks { get; set; }
+        public List<Bookmark> Bookmarks { get; set; }
 
         //[Required]
         //public int StateId { get; set; }

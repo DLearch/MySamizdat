@@ -90,9 +90,9 @@ namespace Server.Controllers
                         if (!result.Succeeded)
                             ModelState.AddModelError("Password", "wrong");
                         else
-                            return Ok(new GetTokenRVM()
+                            return Ok(new
                             {
-                                UserName = user.UserName,
+                                user.UserName,
                                 Token = GenerateJWTToken(user)
                             });
                     }
@@ -143,9 +143,9 @@ namespace Server.Controllers
                     {
                         await _signInManager.SignInAsync(user, false);
 
-                        return Ok(new ConfirmEmailRVM()
+                        return Ok(new
                         {
-                            UserName = user.UserName,
+                            user.UserName,
                             Token = GenerateJWTToken(user)
                         });
                     }

@@ -32,27 +32,21 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetInfo()
         {
             if (ModelState.IsValid)
             {
                 User user = await _userManager.GetUserAsync(User);
 
                 if (user != null)
-                    return Ok(new GetUserRVM()
+                    return Ok(new
                     {
-                        User = new User()
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            BirthDate = user.BirthDate,
-                            EmailConfirmed = user.EmailConfirmed,
-                            EmailIsVisible = user.EmailIsVisible,
-                            AvatarPath = user.AvatarPath,
-                            //MainLanguageId = user.MainLanguageId,
-                            //MainLanguage = user.MainLanguage
-                        }
+                        user.Id,
+                        user.UserName,
+                        user.Email,
+                        user.BirthDate,
+                        user.EmailIsVisible,
+                        user.AvatarPath
                     });
                 else
                     ModelState.AddModelError("User", "not-found");

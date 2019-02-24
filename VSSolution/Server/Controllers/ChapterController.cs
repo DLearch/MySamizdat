@@ -56,10 +56,7 @@ namespace Server.Controllers
 
                         await _db.SaveChangesAsync();
 
-                        return Ok(new AddRVM()
-                        {
-                            ChapterId = chapter.Id
-                        });
+                        return Ok(chapter.Id);
                     }
                     else
                         ModelState.AddModelError("User", "access");
@@ -87,33 +84,27 @@ namespace Server.Controllers
                     ModelState.AddModelError("Chapter", "not-found");
                 else
                 {
-                    chapter.Book = new Book()
+                    return Ok(new
                     {
-                        Id = chapter.BookId,
-                        Title = chapter.Book.Title
-                    };
-
-                    chapter.Comments = chapter.Comments.Select(
-                        c => new ChapterComment()
+                        chapter.Content,
+                        chapter.CreationTime,
+                        chapter.Name,
+                        Book = new {
+                            chapter.Book.Id,
+                            chapter.Book.Title
+                        },
+                        Comments = chapter.Comments.Select(comment => new
                         {
-                            Content = c.Content,
-                            CreationTime = c.CreationTime,
-                            Id = c.Id,
-                            ChapterId = c.ChapterId,
-                            AuthorId = c.AuthorId,
-                            Author = new User()
+                            comment.Id,
+                            comment.Content,
+                            comment.CreationTime,
+                            comment.ParentId,
+                            Author = new
                             {
-                                Id = c.AuthorId,
-                                UserName = c.Author.UserName,
-                                AvatarPath = c.Author.AvatarPath
-                            },
-                            ParentId = c.ParentId
-                        }
-                        ).ToList();
-
-                    return Ok(new GetRVM()
-                    {
-                        Chapter = chapter
+                                comment.Author.UserName,
+                                comment.Author.AvatarPath
+                            }
+                        }).ToList(),
                     });
                 }
             }

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.ViewModels.Chapter
+namespace Server.ViewModels.Bookmark
 {
-    public class AddRVM
+    public class AddVM
     {
         [RequiredVM]
-        public int ChapterId { get; set; }
+        public int BookId { get; set; }
     }
 }

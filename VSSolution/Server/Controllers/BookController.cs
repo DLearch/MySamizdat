@@ -24,20 +24,17 @@ namespace Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly AppDbContext _db;
-        private readonly IHostingEnvironment _appEnvironment;
 
         public BookController(
             UserManager<User> userManager
             , AppDbContext db
-            , IHostingEnvironment appEnvironment
         )
         {
             _userManager = userManager;
             _db = db;
-            _appEnvironment = appEnvironment;
         }
 
-        [HttpPost, DisableRequestSizeLimit]
+        [HttpPost]
         public async Task<IActionResult> Add(AddVM model)
         {
             if (ModelState.IsValid)
@@ -46,31 +43,23 @@ namespace Server.Controllers
 
                 if(user != null)
                 {
-                    Book book = null;
-
-                    if (!string.IsNullOrEmpty(model.OriginalTitle))
-                    {
-                        book = new TranslateBook()
-                        {
-                            OriginalTitle = model.OriginalTitle,
-                           // OriginalLanguageId = model.OriginalLanguageId
-                        };
-                    }
+                    if (await _db.Books.AnyAsync(b => b.Title == model.Title))
+                        ModelState.AddModelError("Title", "already-taken");
                     else
-                        book = new Book();
-
-                    book.UserId = user.Id;
-                    book.Title = model.Title;
-                    //book.LanguageId = model.LanguageId;
-
-                    await _db.Books.AddAsync(book);
-                    
-                    await _db.SaveChangesAsync();
-                    
-                    return Ok(new AddRVM()
                     {
-                        BookId = book.Id
-                    });
+                        Book book = new Book()
+                        {
+                            Title = model.Title,
+                            UserId = user.Id
+                        };
+
+                        await _db.Books.AddAsync(book);
+
+                        await _db.SaveChangesAsync();
+
+                        return Ok(book.Id);
+                    }
+
                 }
                 else
                     ModelState.AddModelError("User", "not-found");
@@ -96,96 +85,42 @@ namespace Server.Controllers
                     ModelState.AddModelError("Book", "not-found");
                 else
                 {
-                    //book.Genres = book.Genres.Select(g => new Genre()
-                    //{
-                    //    Id = g.Id,
-                    //    TK = g.TK
-                    //}).ToList();
-
-                    book.User = new User()
-                    {
-                        Id = book.UserId,
-                        UserName = book.User.UserName,
-                        AvatarPath = book.User.AvatarPath
-                    };
-
-                    //if (book.Team != null)
-                    //    book.Team = new Team()
-                    //    {
-                    //        Id = book.TeamId,
-                    //        Name = book.Team.Name
-                    //    };
-
-                    //book.State = new BookState()
-                    //{
-                    //    Id = book.StateId,
-                    //    TK = book.State.TK
-                    //};
-
-                    //book.Language = new Language()
-                    //{
-                    //    Id = book.LanguageId,
-                    //    TK = book.Language.TK
-                    //};
-
-                    //book.Author = new Author()
-                    //{
-                    //    Id = book.AuthorId,
-                    //    Name = book.Author.Name
-                    //};
-
-                    book.Comments = book.Comments.Select(
-                        c => new BookComment()
-                        {
-                            Content = c.Content,
-                            CreationTime = c.CreationTime,
-                            Id = c.Id,
-                            BookId = c.BookId,
-                            AuthorId = c.AuthorId,
-                            Author = new User()
-                            {
-                                Id = c.AuthorId,
-                                UserName = c.Author.UserName,
-                                AvatarPath = c.Author.AvatarPath
-                            },
-                            ParentId = c.ParentId
-                        }
-                        ).ToList();
-
-                    book.Chapters = book.Chapters.Select(c => new Chapter()
-                    {
-                        Id = c.Id,
-                        CreationTime = c.CreationTime,
-                        Name = c.Name
-                    }).ToList();
+                    User user = await _userManager.GetUserAsync(User);
                     
-                    return Ok(new GetRVM()
+                    return Ok(new
                     {
-                        Book = book
+                        book.Title,
+                        book.Description,
+                        book.CoverPath,
+                        Bookmark = user != null && book.Bookmarks.Any(b => b.UserId == user.Id),
+                        User = new
+                        {
+                            book.User.UserName,
+                            book.User.AvatarPath
+                        },
+                        Comments = book.Comments.Select(comment => new
+                        {
+                            comment.Id,
+                            comment.Content,
+                            comment.CreationTime,
+                            comment.ParentId,
+                            Author = new
+                            {
+                                comment.Author.UserName,
+                                comment.Author.AvatarPath
+                            }
+                        }).ToList(),
+                        Chapters = book.Chapters.Select(chapter => new
+                        {
+                            chapter.Id,
+                            chapter.CreationTime,
+                            chapter.Name
+                        }).ToList()
                     });
                 }
             }
 
             return BadRequest(ModelState);
         }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult GetCatalog([FromBody]GetCatalogVM model)
-        {
-            if (ModelState.IsValid)
-                return Ok(new GetCatalogRVM()
-                {
-                    Length = _db.Books.Count()
-                    , Books = _db.Books.Skip(model.Page * model.PageSize).Take(model.PageSize).Select(b => new Book()
-                    {
-                        Id = b.Id,
-                        Title = b.Title
-                    }).ToList()
-                });
-
-            return BadRequest(ModelState);
-        }
-
     }
 }

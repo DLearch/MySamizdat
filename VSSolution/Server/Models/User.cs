@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Server.Models.Bookmarks;
 using Server.Models.Books;
 using Server.Models.Comments;
 using Server.Validators;
@@ -30,6 +29,6 @@ namespace Server.Models
 
         public List<Book> Books { get; set; }
 
-        //public List<Bookmark> Bookmarks { get; set; }
+        public List<Bookmark> Bookmarks { get; set; }
     }
 }
