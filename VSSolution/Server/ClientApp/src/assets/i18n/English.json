@@ -124,5 +124,10 @@
   },
   "site": {
     "name": "Runoo"
+  },
+  "comments-count": {
+    "none": "0 comments",
+    "singular": "1 comment",
+    "plural": "{{count}} comments"
   }
 }

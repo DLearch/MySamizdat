@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Comment } from '../comment';
 import { CommentsService } from '../comments.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-comment',
@@ -14,7 +15,8 @@ export class CommentComponent {
   @Input() comment: Comment = null;
 
   constructor(
-    private service: CommentsService
+    private service: CommentsService,
+    private auth: AuthService
   ) { }
   answer(): void {
     this.newCommentVisible = true;

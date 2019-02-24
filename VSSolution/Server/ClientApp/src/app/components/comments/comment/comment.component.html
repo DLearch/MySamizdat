@@ -18,7 +18,8 @@
 
     <!--Actions-->
     <div class="actions">
-      <button mat-button (click)="answer()">Answer</button>
+      <button *ngIf="auth.isAuth" mat-button (click)="answer()">Answer</button>
+      <a *ngIf="!auth.isAuth" mat-button routerLink="/sign-in">Answer</a>
 
       <button *ngIf="!parentId && comments && comments.length"
               mat-button
@@ -29,7 +30,7 @@
 
     </div>
 
-    <app-new-comment *ngIf="newCommentVisible" [parentId]="comment.parentId ? comment.parentId : comment.id"></app-new-comment>
+    <app-new-comment [(isVisible)]="newCommentVisible" [parentId]="comment.parentId ? comment.parentId : comment.id"></app-new-comment>
 
     <span *ngIf="answersVisible">
 

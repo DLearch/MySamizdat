@@ -15,7 +15,7 @@ export class AccountService {
   ) {
 
 
-    if (!this.userStorage.user)
+    if (this.userStorage.token && !this.userStorage.user)
       this.updateInfo().subscribe();
   }
 

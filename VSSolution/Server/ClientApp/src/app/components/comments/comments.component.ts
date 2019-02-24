@@ -18,4 +18,10 @@ export class CommentsComponent {
     return this.service.comments
       .filter(comment => !comment.parentId);
   }
+
+  pluralComments: any = {
+    '=0': 'comments-count.none',
+    '=1': 'comments-count.singular.',
+    'other': 'comments-count.plural'
+  }
 }

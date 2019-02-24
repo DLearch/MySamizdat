@@ -8,5 +8,5 @@ export class CommentsService {
   comments: Comment[];
   entityType: CommentEntityType;
   entityId: number;
-  
+
 }

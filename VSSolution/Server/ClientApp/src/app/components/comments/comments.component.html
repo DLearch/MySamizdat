@@ -1,7 +1,7 @@
 <!--Comments-->
 <div class="main-wrapper">
-  <p>{{'comments'|translate}}</p>
-  <app-new-comment></app-new-comment>
+  <div class="mat-h3">{{ (service.comments ? service.comments.length : 0) | i18nPlural: pluralComments | translate: {count: (service.comments ? service.comments.length : 0)} }}</div>
+  <app-new-comment isVisible="true"></app-new-comment>
   <app-comment *ngFor="let comment of comments"
                [comment]="comment"></app-comment>
 </div>

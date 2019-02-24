@@ -1,5 +1,5 @@
 
-<div class="main-wrapper">
+<div class="main-wrapper"  *ngIf="isVisible">
 
   <app-avatar [user]="userStorage.user"></app-avatar>
 
@@ -9,12 +9,21 @@
     <!--Content input-->
     <app-input formControlName="content" type="textarea" fieldTK="comment" [field]="mainForm.get('content')"></app-input>
 
-    <div class="actions">
+    <div class="actions" *ngIf="isActive">
+
+      <!--Cancel button-->
+      <button *ngIf="parentId" mat-button type="button" (click)="cancel()">
+        Cancel
+      </button>
 
       <!--Submit button-->
-      <button mat-raised-button color="primary" type="submit">
+      <button *ngIf="auth.isAuth" mat-raised-button color="primary" type="submit">
         {{ 'button-texts.create' | translate }}
       </button>
+
+      <a *ngIf="!auth.isAuth" mat-raised-button color="primary" routerLink="/sign-in">
+        {{ 'button-texts.create' | translate }}
+      </a>
     </div>
   </form>
 </div>
