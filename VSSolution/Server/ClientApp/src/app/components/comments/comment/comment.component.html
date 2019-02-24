@@ -1,0 +1,40 @@
+
+<div class="main-wrapper">
+
+  <!--Avatar-->
+  <app-avatar [user]="comment.author"></app-avatar>
+
+  <div class="main">
+
+    <!--Header-->
+    <div class="header">
+      <span class="mat-body-strong">{{ comment.author.userName }} </span> <span class="mat-small"> {{ comment.creationTime | date: 'short' }}</span>
+    </div>
+
+    <!--Content-->
+    <div class="content mat-body">
+      {{ comment.content }}
+    </div>
+
+    <!--Actions-->
+    <div class="actions">
+      <button mat-button (click)="answer()">Answer</button>
+
+      <button *ngIf="!parentId && comments && comments.length"
+              mat-button
+              (click)="answersVisible = !answersVisible">
+        {{ answersVisible ? 'Hide answers' : 'Show answers' }}
+        <mat-icon>{{ answersVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </button>
+
+    </div>
+
+    <app-new-comment *ngIf="newCommentVisible" [parentId]="comment.parentId ? comment.parentId : comment.id"></app-new-comment>
+
+    <span *ngIf="answersVisible">
+
+      <app-comment *ngFor="let comment of comments"
+                   [comment]="comment"></app-comment>
+    </span>
+  </div>
+</div>

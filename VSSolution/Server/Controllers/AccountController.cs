@@ -48,7 +48,10 @@ namespace Server.Controllers
                             Email = user.Email,
                             BirthDate = user.BirthDate,
                             EmailConfirmed = user.EmailConfirmed,
-                            EmailIsVisible = user.EmailIsVisible
+                            EmailIsVisible = user.EmailIsVisible,
+                            AvatarPath = user.AvatarPath,
+                            //MainLanguageId = user.MainLanguageId,
+                            //MainLanguage = user.MainLanguage
                         }
                     });
                 else

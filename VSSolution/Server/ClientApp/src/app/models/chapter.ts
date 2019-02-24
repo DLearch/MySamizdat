@@ -1,5 +1,5 @@
-import { ChapterComment } from './chapter-comment';
 import { Book } from './book';
+import { Comment } from '../components/comments/comment';
 
 export class Chapter {
   id: number;
@@ -8,7 +8,7 @@ export class Chapter {
 
   content: string;
 
-  comments: ChapterComment[];
+  comments: Comment[];
 
   bookId: number;
   book: Book;

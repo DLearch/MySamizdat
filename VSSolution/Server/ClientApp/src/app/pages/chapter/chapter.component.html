@@ -1,5 +1,4 @@
 
-<button mat-raised-button color="primary"></button>
 <div *ngIf="chapter" class="page-wrapper">
 
   <div class="main-wrapper">
@@ -7,21 +6,11 @@
     <div class="mat-h2">{{ chapter.name }}</div>
     <p>{{ chapter.content }}</p>
 
-    <div class="actions">
-      <!--Previous chapter link-->
-      <a mat-button [routerLink]="['/book', chapter.book.id, 'prev']"></a>
-      <!--Book content button-->
-      <a mat-button [routerLink]="['/book', chapter.book.id]"></a>
-      <!--Next chapter link-->
-      <a mat-raised-button color="primary" [routerLink]="['/book', chapter.book.id, 'next']"></a>
-    </div>
-
-
     <!--Divider-->
     <mat-divider></mat-divider>
   </div>
 
-  <app-comments [comments]="chapter.comments" [id]="chapter.id" type="chapter"></app-comments>
+  <app-comments></app-comments>
 </div>
 
 <app-load-overlay *ngIf="!chapter"></app-load-overlay>

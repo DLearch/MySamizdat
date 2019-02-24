@@ -25,7 +25,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CommentBook([FromBody]CommentBookVM model)
+        public async Task<IActionResult> Create([FromBody]CreateVM model)
         {
             if (ModelState.IsValid)
             {
@@ -33,67 +33,50 @@ namespace Server.Controllers
 
                 if (user != null)
                 {
-                    BookComment comment = new BookComment()
+                    Comment comment = null;
+                    switch(model.EntityType)
                     {
-                        AuthorId = user.Id
-                        , BookId = model.BookId
-                        , Content = model.Content
-                        , CreationTime = DateTime.Now
-                    };
+                        case "book":
+                            comment = new BookComment()
+                            {
+                                BookId = model.EntityId
+                            };
+                            break;
+                        case "chapter":
+                            comment = new ChapterComment()
+                            {
+                                ChapterId = model.EntityId
+                            };
+                            break;
+                        default:
+                            ModelState.AddModelError("EntityType", "not-found");
+                            break;
+                    }
 
-                    await _db.BookComments.AddAsync(comment);
-
-                    await _db.SaveChangesAsync();
-
-                    return Ok(new CommentBookRVM()
+                    if (comment != null)
                     {
-                        CommentId = comment.Id,
-                        CreationTime = comment.CreationTime,
-                        Author = new User()
+                        comment.Content = model.Content;
+                        comment.CreationTime = DateTime.Now;
+                        comment.AuthorId = user.Id;
+                        if (model.ParentId > 0)
+                            comment.ParentId = model.ParentId;
+
+                        await _db.Comments.AddAsync(comment);
+
+                        await _db.SaveChangesAsync();
+
+                        comment.Author = new User()
                         {
+                            UserName = user.UserName,
                             Id = user.Id,
-                            UserName = user.UserName
-                        }
-                    });
-                }
-                else
-                    ModelState.AddModelError("User", "not-found");
-            }
+                            AvatarPath = user.AvatarPath
+                        };
 
-            return BadRequest(ModelState);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CommentChapter([FromBody]CommentChapterVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = await _userManager.GetUserAsync(User);
-
-                if (user != null)
-                {
-                    ChapterComment comment = new ChapterComment()
-                    {
-                        AuthorId = user.Id
-                        , ChapterId = model.ChapterId
-                        , Content = model.Content
-                        , CreationTime = DateTime.Now
-                    };
-
-                    await _db.ChapterComments.AddAsync(comment);
-
-                    await _db.SaveChangesAsync();
-
-                    return Ok(new CommentBookRVM()
-                    {
-                        CommentId = comment.Id,
-                        CreationTime = comment.CreationTime,
-                        Author = new User()
+                        return Ok(new CreateRVM()
                         {
-                            Id = user.Id,
-                            UserName = user.UserName
-                        }
-                    });
+                            Comment = comment
+                        });
+                    }
                 }
                 else
                     ModelState.AddModelError("User", "not-found");

@@ -24,18 +24,21 @@ namespace Server.Controllers
         private readonly IConfiguration _configuration;
         private readonly EmailService _emailService;
         private readonly SignInManager<User> _signInManager;
+        private readonly AppDbContext _db;
 
         public AuthController(
             UserManager<User> userManager
             , IConfiguration configuration
             , EmailService emailService
             , SignInManager<User> signInManager
+            , AppDbContext db
         )
         {
             _userManager = userManager;
             _configuration = configuration;
             _emailService = emailService;
             _signInManager = signInManager;
+            _db = db;
         }
 
         [HttpPost]
@@ -78,22 +81,20 @@ namespace Server.Controllers
                     ModelState.AddModelError("Email", "not-found");
                 else
                 {
-                    if (!user.EmailConfirmed)
+                    if (false)//!user.EmailConfirmed)
                         ModelState.AddModelError("Email", "unconfirmed");
                     else
                     {
                         Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-
+                        
                         if (!result.Succeeded)
                             ModelState.AddModelError("Password", "wrong");
                         else
-                        {
                             return Ok(new GetTokenRVM()
                             {
                                 UserName = user.UserName,
                                 Token = GenerateJWTToken(user)
                             });
-                        }
                     }
                 }
             }

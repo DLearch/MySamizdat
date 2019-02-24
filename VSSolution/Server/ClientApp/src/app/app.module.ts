@@ -11,26 +11,19 @@ import { AppTranslateModule } from './app-translate.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { MainComponent } from './pages/main/main.component';
 import { AppComponent } from './app.component';
-import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
 import { InputComponent } from './components/input/input.component';
 import { LogInterceptorService } from './services/log-interceptor/log-interceptor.service';
 import { ApiService } from './services/api/api.service';
-import { BookService } from './services/book/book.service';
 import { BookComponent } from './pages/book/book.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
 import { UserPanelComponent } from './layout/user-panel/user-panel.component';
-import { CommentComponent } from './components/comment/comment.component';
 import { DialogHeaderComponent } from './components/dialog-header/dialog-header.component';
 import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
 import { CommentsComponent } from './components/comments/comments.component';
-import { CommentCreatingComponent } from './components/comment-creating/comment-creating.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
-import { ChapterCreatingComponent } from './pages/chapter-creating/chapter-creating.component';
-import { ChapterService } from './services/chapter/chapter.service';
-import { CommentService } from './services/comment/comment.service';
 import { ImageLoadComponent } from './components/image-load/image-load.component';
 import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { ThemePickerComponent } from './layout/theme-picker/theme-picker.component';
@@ -47,6 +40,17 @@ import { DialogWindowService } from './layout/dialog-window/dialog-window.servic
 import { ApiAuthService } from './auth/api-auth/api-auth.service';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ImageComponent } from './components/image/image.component';
+import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
+import { CommentComponent } from './components/comments/comment/comment.component';
+import { CommentsService } from './components/comments/comments.service';
+import { NewCommentService } from './components/comments/new-comment/new-comment.service';
+import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
+import { NewBookComponent } from './pages/new-book/new-book.component';
+import { NewChapterService } from './pages/new-chapter/new-chapter.service';
+import { NewBookService } from './pages/new-book/new-book.service';
+import { ChapterService } from './pages/chapter/chapter.service';
+import { BookService } from './pages/book/book.service';
+import { CatalogService } from './pages/catalog/catalog.service';
 
 @NgModule({
   declarations: [
@@ -58,24 +62,24 @@ import { ImageComponent } from './components/image/image.component';
     , SignInComponent
     , SignUpComponent
     , InputComponent
-    , BookCreatingComponent
     , BookComponent
     , CatalogComponent
     , DialogWindowComponent
     , UserPanelComponent
-    , CommentComponent
     , DialogHeaderComponent
     , LoadOverlayComponent
     , CommentsComponent
-    , CommentCreatingComponent
     , ChapterComponent
-    , ChapterCreatingComponent
     , ImageLoadComponent
     , BackdropComponent
     , ThemePickerComponent
     , AccountComponent
     , AvatarComponent
     , ImageComponent
+    , NewCommentComponent
+    , CommentComponent
+    , NewChapterComponent
+    , NewBookComponent
   ]
   , imports: [
     BrowserModule
@@ -98,14 +102,18 @@ import { ImageComponent } from './components/image/image.component';
     , AuthService
     , UserStorageService
     , AuthGuard
-    , BookService
     , DialogWindowService
     , ApiAuthService
-    , ChapterService
-    , CommentService
     , ThemePickerService
     , AccountService
     , ConfigurationService
+    , CommentsService
+    , NewCommentService
+    , NewChapterService
+    , NewBookService
+    , ChapterService
+    , BookService
+    , CatalogService
   ]
   , entryComponents: [
     SignInComponent

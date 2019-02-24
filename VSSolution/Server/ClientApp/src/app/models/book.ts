@@ -1,6 +1,6 @@
 import { User } from './user';
-import { BookComment } from './book-comment';
 import { Chapter } from './chapter';
+import { Comment } from '../components/comments/comment';
 
 export class Book {
   id: number;
@@ -10,7 +10,7 @@ export class Book {
   ownerId: string;
   owner: User;
 
-  comments: BookComment[];
+  comments: Comment[];
 
   mainImagePath: string;
 

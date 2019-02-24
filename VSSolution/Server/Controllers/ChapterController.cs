@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Server.Models;
+using Server.Models.Books;
+using Server.Models.Comments;
 using Server.ViewModels.Chapter;
 using System;
 using System.Collections.Generic;
@@ -40,7 +42,7 @@ namespace Server.Controllers
                 if (user != null)
                 {
                     Book book = _db.Books.Find(model.BookId);
-                    if (user.Id == book.OwnerId)
+                    if (user.Id == book.UserId)
                     {
                         Chapter chapter = new Chapter()
                         {
@@ -78,26 +80,42 @@ namespace Server.Controllers
                 Chapter chapter = await _db.Chapters
                     .Include(c => c.Book)
                     .Include(c => c.Comments)
-                        .ThenInclude(c => c.Author)
-                    .AsNoTracking()
+                     .ThenInclude(c => c.Author)
                     .FirstOrDefaultAsync(c => c.Id == model.ChapterId);
 
-                if (chapter != null)
+                if (chapter == null)
+                    ModelState.AddModelError("Chapter", "not-found");
+                else
                 {
-                    if (chapter.Book != null)
-                        chapter.Book = new Book()
+                    chapter.Book = new Book()
+                    {
+                        Id = chapter.BookId,
+                        Title = chapter.Book.Title
+                    };
+
+                    chapter.Comments = chapter.Comments.Select(
+                        c => new ChapterComment()
                         {
-                            Id = chapter.Book.Id
-                            ,
-                            Title = chapter.Book.Title
-                        };
+                            Content = c.Content,
+                            CreationTime = c.CreationTime,
+                            Id = c.Id,
+                            ChapterId = c.ChapterId,
+                            AuthorId = c.AuthorId,
+                            Author = new User()
+                            {
+                                Id = c.AuthorId,
+                                UserName = c.Author.UserName,
+                                AvatarPath = c.Author.AvatarPath
+                            },
+                            ParentId = c.ParentId
+                        }
+                        ).ToList();
 
+                    return Ok(new GetRVM()
+                    {
+                        Chapter = chapter
+                    });
                 }
-
-                return Ok(new GetRVM()
-                {
-                    Chapter = chapter
-                });
             }
 
             return BadRequest(ModelState);

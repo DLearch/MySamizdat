@@ -17,7 +17,7 @@
 
       <div class="main-info-column-2">
 
-        <div class="mat-body">Author: {{ book.owner.userName }}</div>
+        <div class="mat-body">Author: {{ book.user.userName }}</div>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
   </div>
 
   <!--Comments-->
-  <app-comments [comments]="book.comments" [id]="book.id" type="book"></app-comments>
+  <app-comments></app-comments>
 </div>
 
 <app-load-overlay *ngIf="!book"></app-load-overlay>

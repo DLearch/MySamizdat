@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/app/services/book/book.service';
-import { MatPaginator, PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material';
 import { Book } from 'src/app/models/book';
 import { ActivatedRoute } from '@angular/router';
+import { CatalogService } from './catalog.service';
 
 @Component({
   selector: 'app-catalog',
@@ -17,7 +17,7 @@ export class CatalogComponent implements OnInit {
   books: Book[];
 
   constructor(
-    private bookService: BookService
+    private service: CatalogService
     , private route: ActivatedRoute
   ) { }
 
@@ -33,13 +33,12 @@ export class CatalogComponent implements OnInit {
 
   updatePage(event: PageEvent): void {
 
-    this.bookService
-      .getCatalog(event.pageSize, event.pageIndex)
+    this.service
+      .get(event.pageSize, event.pageIndex)
       .subscribe(
         response => {
           this.length = response.length;
           this.books = response.books;
-          
         }
       );
   }

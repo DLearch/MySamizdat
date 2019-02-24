@@ -9,6 +9,6 @@ namespace Server.ViewModels.Book
     public class GetVM
     {
         [RequiredVM]
-        public int Id { get; set; }
+        public int BookId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ export class ImageComponent {
 
   get fullPath(): string {
     
-    return this.config.getString('url') + (this.path && !this.error ? this.path : this.config.getString('defaultAvatarUrn'));
+    return this.config.getString('url') + (this.path && !this.error ? this.path : this.config.getString('defaultAvatarPath'));
   }
   constructor(
     private config: ConfigurationService

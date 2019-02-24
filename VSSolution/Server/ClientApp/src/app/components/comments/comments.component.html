@@ -1,9 +1,7 @@
 <!--Comments-->
 <div class="main-wrapper">
   <p>{{'comments'|translate}}</p>
-  <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
-  <div *ngIf="!comments || !comments.length">{{'empty'|translate}}</div>
-
-  <app-comment-creating [type]="type" [id]="id" [callback]="pushCommentFunc"></app-comment-creating>
-
+  <app-new-comment></app-new-comment>
+  <app-comment *ngFor="let comment of comments"
+               [comment]="comment"></app-comment>
 </div>

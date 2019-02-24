@@ -12,7 +12,12 @@ export class AccountService {
   constructor(
     private api: ApiService
     , private userStorage: UserStorageService
-  ) { }
+  ) {
+
+
+    if (!this.userStorage.user)
+      this.updateInfo().subscribe();
+  }
 
   updateInfo(): Observable<void> {
 

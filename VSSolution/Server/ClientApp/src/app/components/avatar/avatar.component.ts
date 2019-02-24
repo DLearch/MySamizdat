@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConfigurationService } from 'src/app/services/configuration/configuration.service';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
 
@@ -9,31 +9,29 @@ import { UserStorageService } from 'src/app/auth/user-storage.service';
 })
 export class AvatarComponent {
 
-  readonly defaultAvatarUri: string = 'images/avatars/default.png';
+  @Input() user: { userName: string, avatarPath: string } = null;
 
-  @Input() imageType: string = null;
-  @Input() userName: string | 'default' = null;
+  constructor(
+    private config: ConfigurationService,
+    private userStorage: UserStorageService
+  ) { }
 
-  get avatarUri(): string {
+  get avatarPath(): string {
+    
+    if (this.user && this.user.avatarPath)
+      return this.user.avatarPath;
 
-    if (this.userName && this.imageType)
-      return '/images/avatars/' + this.userName + this.imageType;
-
-    return this.defaultAvatarUri;
+    return this.config.getString('defaultAvatarPath');
   }
 
   getLink(): string[] | string {
 
-    if (!this.userName)
+    if (!this.user || !this.user.userName)
       return '/users';
-
-    if ('default' === this.userName || this.userStorage.userName === this.userName)
+    
+    if (this.userStorage.userName && this.userStorage.userName === this.user.userName)
       return '/account';
 
-    return ['/users', this.userName];
+    return ['/users', this.user.userName];
   }
-
-  constructor(
-    private userStorage: UserStorageService
-  ) { }
 }

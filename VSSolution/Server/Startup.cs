@@ -45,7 +45,6 @@ namespace Server
             services.AddConfiguredSpaStaticFiles();
             
             services.AddScoped<EmailService>();
-            services.AddScoped<ImageStorage>();
             services.AddScoped<FilesStorage>();
 
             services.AddSignalR();

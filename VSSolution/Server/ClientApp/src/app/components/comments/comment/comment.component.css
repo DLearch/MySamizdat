@@ -1,0 +1,10 @@
+.main-wrapper {
+  display: flex;
+  margin-top: 16px;
+  flex-direction: row;
+}
+
+.main {
+  flex: 1;
+  margin-left: 10px;
+}

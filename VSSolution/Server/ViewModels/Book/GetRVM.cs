@@ -7,6 +7,6 @@ namespace Server.ViewModels.Book
 {
     public class GetRVM
     {
-        public Models.Book Book { get; set; }
+        public Models.Books.Book Book { get; set; }
     }
 }

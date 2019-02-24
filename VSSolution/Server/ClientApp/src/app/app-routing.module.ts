@@ -4,14 +4,14 @@ import { DefaultLayoutComponent } from './layout/default-layout/default-layout.c
 import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { BookComponent } from './pages/book/book.component';
-import { BookCreatingComponent } from './pages/book-creating/book-creating.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
-import { ChapterCreatingComponent } from './pages/chapter-creating/chapter-creating.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AuthGuard } from './auth/auth.guard';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { NewBookComponent } from './pages/new-book/new-book.component';
+import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
 
 const routes: Routes = [
   {
@@ -27,8 +27,8 @@ const routes: Routes = [
       , { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
       //, { path: 'users/:userName', component:  }
 
-      , { path: 'create-book', component: BookCreatingComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:book/create-chapter', component: ChapterCreatingComponent, canActivate: [AuthGuard] }
+      , { path: 'create-book', component: NewBookComponent, canActivate: [AuthGuard] }
+      , { path: 'book/:book/create-chapter', component: NewChapterComponent, canActivate: [AuthGuard] }
       , { path: 'book/:book/:chapter', component: ChapterComponent }
       , { path: 'book/:book', component: BookComponent }
 

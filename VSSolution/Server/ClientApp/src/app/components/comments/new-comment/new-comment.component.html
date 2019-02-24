@@ -1,0 +1,20 @@
+
+<div class="main-wrapper">
+
+  <app-avatar [user]="userStorage.user"></app-avatar>
+
+  <!--Comment form-->
+  <form [formGroup]="mainForm" (submit)="mainSubmit()" class="main">
+
+    <!--Content input-->
+    <app-input formControlName="content" type="textarea" fieldTK="comment" [field]="mainForm.get('content')"></app-input>
+
+    <div class="actions">
+
+      <!--Submit button-->
+      <button mat-raised-button color="primary" type="submit">
+        {{ 'button-texts.create' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

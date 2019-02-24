@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Comment } from 'src/app/models/comment';
+import { Component } from '@angular/core';
+import { CommentsService } from './comments.service';
+import { Comment } from './comment';
 
 @Component({
   selector: 'app-comments',
@@ -7,14 +8,14 @@ import { Comment } from 'src/app/models/comment';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
-  
-  @Input() comments: Comment[];
-  @Input() type: string;
-  @Input() id: number;
 
-  pushCommentFunc: Function = comment => this.pushComment(comment);
+  constructor(
+    private service: CommentsService
+  ) { }
 
-  pushComment(comment: Comment) {
-    this.comments.push(comment)
+  get comments(): Comment[] {
+
+    return this.service.comments
+      .filter(comment => !comment.parentId);
   }
 }

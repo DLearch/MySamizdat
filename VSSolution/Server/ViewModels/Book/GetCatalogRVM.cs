@@ -11,6 +11,6 @@ namespace Server.ViewModels.Book
         [RequiredVM]
         public int Length { get; set; }
 
-        public List<Models.Book> Books { get; set; }
+        public List<Models.Books.Book> Books { get; set; }
     }
 }
