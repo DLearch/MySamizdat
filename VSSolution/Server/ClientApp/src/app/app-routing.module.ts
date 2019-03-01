@@ -12,6 +12,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { NewBookComponent } from './pages/new-book/new-book.component';
 import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
+import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 
 const routes: Routes = [
   {
@@ -28,11 +29,13 @@ const routes: Routes = [
       //, { path: 'users/:userName', component:  }
 
       , { path: 'create-book', component: NewBookComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:book/create-chapter', component: NewChapterComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:book/:chapter', component: ChapterComponent }
       , { path: 'book/:book', component: BookComponent }
 
-      , { path: 'catalog/:page', component: CatalogComponent }
+      , { path: 'book/:book/create-chapter', component: NewChapterComponent, canActivate: [AuthGuard] }
+      , { path: 'book/:book/:chapter', component: ChapterComponent, runGuardsAndResolvers: 'always' }
+
+      , { path: 'bookmarks', component: BookmarksComponent, canActivate: [AuthGuard] }
+      
       , { path: 'catalog', component: CatalogComponent }
       , { path: 'book', redirectTo: 'catalog' }
 
@@ -42,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })]
   , exports: [RouterModule]
 })
 export class AppRoutingModule { }

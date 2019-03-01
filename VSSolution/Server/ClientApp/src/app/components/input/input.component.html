@@ -3,14 +3,14 @@
 <mat-form-field *ngIf="type == 'textarea'"
                 appearance="outline"
                 class="field">
-  <mat-label>{{ 'inputs.' + fieldTK + '.placeholder' | translate }}</mat-label>
+  <mat-label>{{ 'input.' + fieldTK + '.placeholder' | translate }}</mat-label>
 
   <textarea matInput
             [formControl]="field"></textarea>
 
   <mat-error *ngIf="field.invalid">
     <span *ngFor="let errorTK of errorTKs">
-      {{ 'inputs.' + fieldTK + '.errors.' + errorTK | translate }}
+      {{ 'input.' + fieldTK + '.errors.' + errorTK | translate }}
     </span>
   </mat-error>
 </mat-form-field>
@@ -18,14 +18,14 @@
 <mat-form-field *ngIf="type != 'textarea'"
                 appearance="outline"
                 class="field">
-  <mat-label>{{ 'inputs.' + fieldTK + '.placeholder' | translate }}</mat-label>
+  <mat-label>{{ 'input.' + fieldTK + '.placeholder' | translate }}</mat-label>
 
   <input matInput
          [type]="type"
          [formControl]="field" />
   <mat-error *ngIf="field.invalid">
     <span *ngFor="let errorTK of errorTKs">
-      {{ 'inputs.' + fieldTK + '.errors.' + errorTK | translate }}
+      {{ 'input.' + fieldTK + '.errors.' + errorTK | translate }}
     </span>
   </mat-error>
 </mat-form-field>

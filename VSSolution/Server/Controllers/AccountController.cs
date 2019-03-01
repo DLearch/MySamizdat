@@ -41,12 +41,8 @@ namespace Server.Controllers
                 if (user != null)
                     return Ok(new
                     {
-                        user.Id,
-                        user.UserName,
                         user.Email,
-                        user.BirthDate,
-                        user.EmailIsVisible,
-                        user.AvatarPath
+                        user.EmailIsVisible
                     });
                 else
                     ModelState.AddModelError("User", "not-found");
@@ -125,10 +121,7 @@ namespace Server.Controllers
                     IdentityResult result = await _userManager.UpdateAsync(user);
 
                     if (result.Succeeded)
-                        return Ok(new ChangeAvatarRVM()
-                        {
-                            AvatarPath = user.AvatarPath
-                        });
+                        return Ok(user.AvatarPath);
                     else
                         foreach (var error in result.Errors)
                             ModelState.AddModelError(error.Code, error.Description);

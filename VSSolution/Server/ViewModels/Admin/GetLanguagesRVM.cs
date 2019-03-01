@@ -8,6 +8,6 @@ namespace Server.ViewModels.Admin
 {
     public class GetLanguagesRVM
     {
-        public List<Language> Languages { get; set; }
+        public List<Models.Language> Languages { get; set; }
     }
 }

@@ -1,29 +1,59 @@
 {
-  "site": {
-    "name": "Runoo"
-  },
-  "pages": {
-    "sign-up": {
-      "name": "Регистрация"
+  "input": {
+    "language": {
+      "placeholder": "Язык"
     },
-    "sign-in": {
-      "name": "Вход"
+    "translate-language": {
+      "placeholder": "Язык перевода"
     },
-    "new-book": {
-      "name": "Создание книги"
+    "original-language": {
+      "placeholder": "Язык оригинала"
     },
-    "password-change": {
-      "name": "Изменение пароля"
-    }
-  },
-  "button-texts": {
-    "sign-up": "Создать аккаунт",
-    "sign-in": "Войти",
-    "sign-out": "Выйти",
-    "create-book": "Создать книгу",
-    "change-password": "Изменить пароль"
-  },
-  "inputs": {
+    "original-book-title": {
+      "placeholder": "Оригинальное название",
+      "errors": {
+        "empty": "Введите оригинальное название",
+        "short": "Оригинальное название слишком короткое"
+      }
+    },
+    "translate-book-title": {
+      "placeholder": "Переведенное название",
+      "errors": {
+        "empty": "Введите Переведенное название",
+        "short": "Переведенное название слишком короткое",
+        "already-taken": "Такой перевод или книга уже существует"
+      }
+    },
+    "comment": {
+      "placeholder": "Оставить комментарий",
+      "errors": {
+        "empty": "Введите комментарий",
+        "short": "Слишком короткий комментарий"
+      }
+    },
+    "chapter-name": {
+      "placeholder": "Название",
+      "errors": {
+        "empty": "Введите название",
+        "short": "Название слишком короткое",
+        "already-taken": "Название уже занято"
+      }
+    },
+    "chapter-content": {
+      "placeholder": "Текст",
+      "errors": {
+        "empty": "Введите текст",
+        "short": "Текст слишком короткий"
+      }
+    },
+    "book-title": {
+      "placeholder": "Название",
+      "errors": {
+        "empty": "Введите название",
+        "short": "Название слишком короткое",
+        "already-taken": "Название уже занято"
+      }
+    },
     "email": {
       "placeholder": "Email",
       "errors": {
@@ -31,7 +61,8 @@
         "wrong": "Некорректный email",
         "short": "Короткий email",
         "not-found": "Email не найден",
-        "already-taken": "Email уже занят"
+        "already-taken": "Email уже занят",
+        "unconfirmed": "Email не подтвержден"
       }
     },
     "username": {
@@ -69,5 +100,117 @@
       }
     }
   },
-  "sent": "Отправлено"
+  "site": {
+    "name": "Runoo"
+  },
+  "page": {
+    "main": {
+      "main": "Главная",
+      "link": "Главная"
+    },
+    "sign-up": {
+      "name": "Регистрация",
+      "link": "Создать аккаунт"
+    },
+    "sign-in": {
+      "name": "Вход",
+      "link": "Войти"
+    },
+    "add-book": {
+      "name": "Новая книга",
+      "link": "Добавить книгу"
+    },
+    "add-chapter": {
+      "name": "Новая глава",
+      "link": "Добавить главу"
+    },
+    "password-change": {
+      "name": "Изменение пароля",
+      "link": "Изменить пароль"
+    },
+    "catalog": {
+      "name": "Каталог",
+      "link": "Каталог"
+    },
+    "bookmarks": {
+      "name": "Закладки",
+      "link": "Закладки"
+    },
+    "chapter": {
+      "action": {
+        "contents": "Оглавление",
+        "next": "Следующая глава",
+        "previous": "Предыдущая глава"
+      }
+    }
+  },
+  "action": {
+    "create": "Создать",
+    "cancel": "Отмена",
+    "remove": "Убрать",
+    "delete": "Удалить",
+    "add": "Добавить",
+    "ok": "Ясно",
+    "continue": "Продолжить",
+    "next": "Далее",
+    "previous": "Назад",
+    "sign-out": "Выйти",
+    "read": "Читать",
+    "download": "Скачать"
+  },
+  "comment": {
+    "count": {
+      "none": "0 комментариев",
+      "one": "1 комментарий",
+      "few": "{{count}} комментария",
+      "many": "{{count}} комментариев"
+    },
+    "action": {
+      "add": "Оставить комментарий",
+      "answer": "Ответить"
+    }
+  },
+  "book": {
+    "count": {
+      "none": "0 книг",
+      "one": "1 книга",
+      "few": "{{count}} книги",
+      "many": "{{count}} книг"
+    },
+    "action": {
+      "add": "Добавить книгу",
+      "delete": "Удалить книгу"
+    }
+  },
+  "chapter": {
+    "count": {
+      "none": "0 глав",
+      "one": "1 глава",
+      "few": "{{count}} главы",
+      "many": "{{count}} глав"
+    },
+    "action": {
+      "add": "Добавить главу",
+      "delete": "Удалить главу"
+    }
+  },
+  "bookmark": {
+    "action": {
+      "remove": "Убрать из закладок",
+      "add": "Добавить в закладки"
+    }
+  },
+  "paginator": {
+    "items-per-page": "Элементов на странице",
+    "previous_page": "Предыдущая страница",
+    "next-page": "Следующая страница",
+    "first-page": "Первая страница",
+    "last-page": "Последняя страница",
+    "of": "из"
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "Английский",
+    "ua": "Украинский"
+  }
 }

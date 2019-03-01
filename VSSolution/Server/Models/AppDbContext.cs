@@ -13,7 +13,7 @@ namespace Server.Models
     public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Book> Books { get; set; }
-        //public DbSet<TranslateBook> TranslateBooks { get; set; }
+        public DbSet<TranslateBook> TranslateBooks { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
 
         //public DbSet<Team> Teams { get; set; }
@@ -21,11 +21,11 @@ namespace Server.Models
         //public DbSet<BookState> BookStates { get; set; }
         //public DbSet<TranslateBookState> TranslateBookStates { get; set; }
 
-        public DbSet<Bookmark> Bookmarks { get; set; }
+        //public DbSet<Bookmark> Bookmarks { get; set; }
 
         //public DbSet<Genre> Genres { get; set; }
         //public DbSet<Author> Authors { get; set; }
-        //public DbSet<Language> Languages { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BookComment> BookComments { get; set; }
@@ -55,6 +55,19 @@ namespace Server.Models
                 .HasForeignKey(c => c.ParentId)
                 .IsRequired(false);
             
+            modelBuilder.Entity<Bookmark>()
+                .HasKey(t => new { t.BookId, t.UserId });
+
+            modelBuilder.Entity<Bookmark>()
+                .HasOne(pt => pt.Book)
+                .WithMany(p => p.Bookmarks)
+                .HasForeignKey(pt => pt.BookId);
+
+            modelBuilder.Entity<Bookmark>()
+                .HasOne(pt => pt.User)
+                .WithMany(t => t.Bookmarks)
+                .HasForeignKey(pt => pt.UserId);
+
             //modelBuilder.Entity<BookGenre>()
             //    .HasKey(t => new { t.BookId, t.GenreId });
 
@@ -67,13 +80,13 @@ namespace Server.Models
             //    .HasOne(sc => sc.Genre)
             //    .WithMany(c => c.Books)
             //    .HasForeignKey(sc => sc.GenreId);
-            //modelBuilder.Entity<Language>().HasData(
-            //    new Language[]
-            //    {
-            //    new Language { TK = "eng"},
-            //    new Language { TK = "rus"},
-            //    new Language { TK = "ukr"}
-            //    });
+            modelBuilder.Entity<Language>().HasData(
+                new Language[]
+                {
+                new Language { Id = "en"},
+                new Language { Id = "ru"},
+                new Language { Id = "ua"}
+                });
 
             base.OnModelCreating(modelBuilder);
         }

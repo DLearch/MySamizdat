@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MyValidators } from 'src/app/MyValidators';
-import { ApiAuthService } from '../api-auth/api-auth.service';
 import { setErrors } from 'src/app/components/input/set-errors';
+import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
+import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material';
+import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
+import { AppValidators } from 'src/app/app-validators';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,19 +15,20 @@ import { setErrors } from 'src/app/components/input/set-errors';
 export class SignUpComponent {
 
   public mainForm: FormGroup;
-  public isComplete = false;
   isWaiting: boolean = false;
 
   public constructor(
     formBuilder: FormBuilder,
-    private apiAuth: ApiAuthService
+    private snackBar: MatSnackBar,
+    private authController: AuthControllerService,
+    private dialogWindow: DialogWindowService
   ) {
 
     this.mainForm = formBuilder.group({
 
       'email': ['', [Validators.required, Validators.email]]
-      , 'userName': ['', [Validators.required, MyValidators.userName]]
-      , 'password': ['', [Validators.required, MyValidators.password]]
+      , 'userName': ['', [Validators.required, AppValidators.userName]]
+      , 'password': ['', [Validators.required, AppValidators.password]]
     });
   }
 
@@ -33,12 +37,12 @@ export class SignUpComponent {
     if (this.mainForm.valid) {
       this.isWaiting = true;
 
-      this.apiAuth
-        .register(this.mainForm.value)
+      this.authController
+        .register(this.mainForm.value.userName, this.mainForm.value.email, this.mainForm.value.password)
         .subscribe(
           () => {
-            this.isComplete = true;
-            this.isWaiting = false;
+            this.dialogWindow.close();
+            this.snackBar.open('Email confirmation message sent. Check your mailbox.', 'Ok');
           }
           , response => {
             this.isWaiting = false;

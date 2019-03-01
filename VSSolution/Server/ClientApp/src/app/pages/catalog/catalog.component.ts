@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { CatalogService } from './catalog.service';
+import { CatalogControllerService } from 'src/app/api-services/catalog-controller/catalog-controller.service';
 
 @Component({
   selector: 'app-catalog',
@@ -16,28 +16,23 @@ export class CatalogComponent implements OnInit {
   books: { id: number, title: string }[];
 
   constructor(
-    private service: CatalogService
-    , private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private catalogController: CatalogControllerService
   ) { }
 
   ngOnInit() {
-
-    let page: number = +this.route.snapshot.paramMap.get('page');
-
-    if (page && page > 0)
-      this.pageIndex = page - 1;
-
-
+    
     this.updatePage({ pageSize: this.pageSize, pageIndex: this.pageIndex, length: this.length, previousPageIndex: 0 });
   }
 
   updatePage(event: PageEvent): void {
 
-    this.service
-      .get(event.pageSize, event.pageIndex)
+    this.catalogController
+      .getPage(event.pageIndex, event.pageSize)
       .subscribe(
         response => {
           this.length = response.length;
+          this.pageIndex = response.page;
           this.books = response.books;
         }
       );

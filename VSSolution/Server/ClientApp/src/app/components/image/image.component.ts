@@ -9,6 +9,7 @@ import { ConfigurationService } from 'src/app/services/configuration/configurati
 export class ImageComponent {
   
   @Input() path: string = null;
+  @Input() design: 'mini' = null;
   error: boolean = false;
 
   get fullPath(): string {

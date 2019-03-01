@@ -3,21 +3,28 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { DialogWindowService } from '../layout/dialog-window/dialog-window.service';
-import { ApiAuthService } from './api-auth/api-auth.service';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { map, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { AuthControllerService } from '../api-services/auth-controller/auth-controller.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
+  readonly authRoutes: string[] = [
+    'create-book',
+    'bookmarks',
+    'account',
+    //'book/????/create-chapter'
+  ];
+
   constructor(
     private authService: AuthService,
-    private apiAuth: ApiAuthService,
     private dialogWindow: DialogWindowService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authController: AuthControllerService
   ) { }
 
   canActivate(
@@ -27,8 +34,8 @@ export class AuthGuard implements CanActivate {
     //console.log(next);
     //console.log(state);
     //console.log(this.router);
-
-    if (next.routeConfig.path === 'sign-in') {
+    
+    if (!this.authService.isAuth && this.authRoutes.includes(next.routeConfig.path) || next.routeConfig.path === 'sign-in') {
 
       this.signOutIfAuth();
 
@@ -72,39 +79,40 @@ export class AuthGuard implements CanActivate {
   }
 
   openSignIn(): void {
-    this.dialogWindow.open(SignInComponent, { titleTK: 'pages.sign-in.name', closeButtonVisible: true });
+    this.dialogWindow.open(SignInComponent, { titleTK: 'page.sign-in.name', closeButtonVisible: true });
   }
 
   openSignUp(): void {
-    this.dialogWindow.open(SignUpComponent, { titleTK: 'pages.sign-up.name', closeButtonVisible: true });
+    this.dialogWindow.open(SignUpComponent, { titleTK: 'page.sign-up.name', closeButtonVisible: true });
   }
 
   private confirmEmail(next: ActivatedRouteSnapshot): Observable<boolean> {
 
-    return this.apiAuth.confirmEmail({
-      email: next.queryParams['email'],
-      token: next.queryParams['token']
-    }).pipe(
-      map(() => {
+    return this.authController
+      .confirmEmail(next.queryParams['email'], next.queryParams['token'])
+      .pipe(
+        map(response => {
 
-        this.snackBar.open('Email confirmed! ', 'Ok');
+        this.authService.signIn(response.userName, response.token);
 
-        if (!this.router.navigated)
-          this.router.navigate(['']);
+          this.snackBar.open('Email confirmed! ', 'Ok');
 
-        return false;
-      }),
-      catchError(() => {
+          if (!this.router.navigated)
+            this.router.navigate(['']);
 
-        if (this.router.navigated) {
+          return false;
+        }),
+        catchError(() => {
 
-          this.snackBar.open('Error! Email unconfirmed. ', 'Ok');
+          if (this.router.navigated) {
 
-          return of(false);
-        }
+            this.snackBar.open('Error! Email unconfirmed. ', 'Ok');
 
-        return of(true);
-      })
-    );
+            return of(false);
+          }
+
+          return of(true);
+        })
+      );
   }
 }

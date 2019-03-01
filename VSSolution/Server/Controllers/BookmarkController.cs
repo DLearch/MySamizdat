@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Server.Models.Books;
 
 namespace Server.Controllers
 {
@@ -25,7 +26,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddVM model)
+        public async Task<IActionResult> Add([FromBody]AddVM model)
         {
             if (ModelState.IsValid)
             {
@@ -33,15 +34,22 @@ namespace Server.Controllers
 
                 if (user != null)
                 {
-                    await _db.Bookmarks.AddAsync(new Bookmark()
-                    {
-                        BookId = model.BookId,
-                        UserId = user.Id
-                    });
-                    
-                    await _db.SaveChangesAsync();
+                    Book book = await _db.Books.Include(b => b.Bookmarks).FirstOrDefaultAsync(b => b.Id == model.BookId);
 
-                    return Ok();
+                    if (book == null)
+                        ModelState.AddModelError("Book", "not-found");
+                    else
+                    {
+                        book.Bookmarks.Add(new Bookmark()
+                        {
+                            BookId = model.BookId,
+                            UserId = user.Id
+                        });
+
+                        await _db.SaveChangesAsync();
+
+                        return Ok();
+                    }
                 }
                 else
                     ModelState.AddModelError("User", "not-found");
@@ -59,20 +67,17 @@ namespace Server.Controllers
 
                 if (user != null)
                 {
+                    List<object> books = new List<object>();
 
-                    List<object> bookmarks = new List<object>();
-
-                    foreach (var bookmark in _db.Bookmarks
-                        .Where(b => b.UserId == user.Id)
-                        .Include(b => b.Book)
-                        .ToList())
-                        bookmarks.Add(new
+                    foreach (var book in _db.Books.Where(b => b.Bookmarks.Any(bm => bm.UserId == user.Id)).ToList())
+                        books.Add(new
                         {
-                            bookId = bookmark.BookId,
-                            bookTitle = bookmark.Book.Title
+                            book.Id,
+                            book.Title,
+                            book.CoverPath
                         });
 
-                    return Ok(bookmarks);
+                    return Ok(books);
                 }
                 else
                     ModelState.AddModelError("User", "not-found");
@@ -82,7 +87,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Remove(RemoveVM model)
+        public async Task<IActionResult> Remove([FromBody]RemoveVM model)
         {
             if (ModelState.IsValid)
             {
@@ -90,17 +95,24 @@ namespace Server.Controllers
 
                 if (user != null)
                 {
-                    Bookmark bookmark = _db.Bookmarks.FirstOrDefault(b => b.UserId == user.Id && b.BookId == b.BookId);
+                    Book book = await _db.Books.Include(b => b.Bookmarks).FirstOrDefaultAsync(b => b.Id == model.BookId);
 
-                    if (bookmark == null)
-                        ModelState.AddModelError("Bookmark", "not-found");
+                    if (book == null)
+                        ModelState.AddModelError("Book", "not-found");
                     else
                     {
-                        _db.Bookmarks.Remove(bookmark);
+                        Bookmark bookmark = book.Bookmarks.FirstOrDefault(bm => bm.UserId == user.Id);
 
-                        await _db.SaveChangesAsync();
+                        if (bookmark == null)
+                            ModelState.AddModelError("Bookmark", "not-found");
+                        else
+                        {
+                            user.Bookmarks.Remove(bookmark);
 
-                        return Ok();
+                            await _db.SaveChangesAsync();
+
+                            return Ok();
+                        }
                     }
                 }
                 else

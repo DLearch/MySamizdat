@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService
+  ) {
+
+  }
 
   ngOnInit() {
   }
-
+  click(asd) {
+    console.log(asd);
+    
+  }
 }

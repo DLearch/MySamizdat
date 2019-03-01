@@ -1,26 +1,30 @@
-<!--Page name-->
-<h2>{{ 'pages.add-chapter.name' | translate }}</h2>
+<div class="page-wrapper">
+  <div class="main-wrapper">
 
-<!--Main form-->
-<form [formGroup]="mainForm">
+    <!--Page name-->
+    <h2>{{ 'page.add-chapter.name' | translate }}</h2>
 
-  <!--Name input-->
-  <app-input formControlName="name" type="text" fieldTK="chapter-name" [field]="mainForm.get('name')"></app-input>
-  <br />
+    <!--Main form-->
+    <form [formGroup]="mainForm">
 
-  <!--Content input-->
-  <app-input formControlName="content" type="textarea" fieldTK="chapter-content" [field]="mainForm.get('content')"></app-input>
-  <br />
+      <!--Name input-->
+      <app-input formControlName="name" type="text" fieldTK="chapter-name" [field]="mainForm.get('name')"></app-input>
+      <br />
 
-  <div class="flex-box">
+      <!--Content input-->
+      <app-input formControlName="content" type="textarea" fieldTK="chapter-content" [field]="mainForm.get('content')"></app-input>
+      <br />
 
-    <div class="flex-box-right-element">
+      <div class="flex-box">
 
-      <!--Submit button-->
-      <button mat-raised-button color="primary" (click)="mainSubmit()">
-        {{ 'button-texts.create' | translate }}
-      </button>
-    </div>
+        <div class="flex-box-right-element">
+
+          <!--Submit button-->
+          <button mat-raised-button color="primary" (click)="mainSubmit()">
+            {{ 'action.add' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
-
+</div>

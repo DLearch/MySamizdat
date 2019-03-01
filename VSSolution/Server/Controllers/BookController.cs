@@ -35,7 +35,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddVM model)
+        public async Task<IActionResult> Add([FromBody]AddVM model)
         {
             if (ModelState.IsValid)
             {
@@ -47,17 +47,30 @@ namespace Server.Controllers
                         ModelState.AddModelError("Title", "already-taken");
                     else
                     {
-                        Book book = new Book()
+                        if (await _db.Languages.AllAsync(l => l.Id != model.LanguageTK))
+                            ModelState.AddModelError("Language", "not-found");
+                        else
                         {
-                            Title = model.Title,
-                            UserId = user.Id
-                        };
+                            Book book = null;
 
-                        await _db.Books.AddAsync(book);
+                            if (!string.IsNullOrEmpty(model.OriginalTitle))
+                                book = new TranslateBook()
+                                {
+                                    OriginalTitle = model.OriginalTitle
+                                };
+                            else
+                                book = new Book();
 
-                        await _db.SaveChangesAsync();
+                            book.Title = model.Title;
+                            book.UserId = user.Id;
+                            book.LanguageId = model.LanguageTK;
 
-                        return Ok(book.Id);
+                            await _db.Books.AddAsync(book);
+
+                            await _db.SaveChangesAsync();
+
+                            return Ok(book.Id);
+                        }
                     }
 
                 }
@@ -77,6 +90,7 @@ namespace Server.Controllers
                 Book book = await _db.Books
                     .Include(b => b.User)
                     .Include(b => b.Chapters)
+                    .Include(b => b.Bookmarks)
                     .Include(b => b.Comments)
                         .ThenInclude(c => c.Author)
                     .FirstOrDefaultAsync(b => b.Id == model.BookId);
@@ -92,6 +106,8 @@ namespace Server.Controllers
                         book.Title,
                         book.Description,
                         book.CoverPath,
+                        OriginalTitle = book.GetType() == typeof(TranslateBook) ? (book as TranslateBook).OriginalTitle : null,
+                        LanguageTK = book.LanguageId,
                         Bookmark = user != null && book.Bookmarks.Any(b => b.UserId == user.Id),
                         User = new
                         {
@@ -110,7 +126,7 @@ namespace Server.Controllers
                                 comment.Author.AvatarPath
                             }
                         }).ToList(),
-                        Chapters = book.Chapters.Select(chapter => new
+                        Chapters = book.Chapters.OrderBy(c => c.Index).Select(chapter => new
                         {
                             chapter.Id,
                             chapter.CreationTime,

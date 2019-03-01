@@ -1,4 +1,5 @@
 export class GetBookmarksRVM {
-  bookId: number;
-  bookTitle: string;
+  id: number;
+  title: string;
+  coverPath: string;
 }

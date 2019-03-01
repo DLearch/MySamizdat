@@ -10,12 +10,9 @@ namespace Server.Models
     public class Language
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        [Required]
-        public string TK { get; set; }
-
-        public List<User> Users { get; set; }
+        //public List<User> Users { get; set; }
 
         public List<Book> Books { get; set; }
         //public List<TranslateBook> TranslateBooks { get; set; }

@@ -4,7 +4,7 @@
   <app-load-overlay *ngIf="isWaiting"></app-load-overlay>
 
   <!--Main form-->
-  <form [formGroup]="mainForm" *ngIf='!isComplete' (submit)="mainSubmit()">
+  <form [formGroup]="mainForm" (submit)="mainSubmit()">
 
     <!--Email input-->
     <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
@@ -19,12 +19,11 @@
     <div class="dialog-buttons-wrapper">
 
       <!-- Sign in link -->
-      <a routerLink="/sign-in" mat-button>{{ 'button-texts.sign-in' | translate }}</a>
+      <a routerLink="/sign-in" mat-button>{{ 'page.sign-in.link' | translate }}</a>
 
       <!--Submit button-->
-      <button mat-raised-button type="submit" color="primary"> {{ 'button-texts.sign-up' | translate }} </button>
+      <app-button type="submit" design="raised" color="primary"> {{ 'page.sign-up.link' | translate }} </app-button>
     </div>
   </form>
 
-  <p *ngIf='isComplete'>{{ 'sent' | translate }}</p>
 </div>

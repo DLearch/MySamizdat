@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
 
 @Injectable()
 export class UserStorageService {
-
-  user: User;
-
+  
   storage: Storage;
   private readonly tokenKey: string = 'jsonwebtoken';
   private readonly userNameKey: string = 'userName';
@@ -14,6 +11,9 @@ export class UserStorageService {
 
     this.storage = window.localStorage;
   }
+  
+  avatarPath: string = null;
+  birthDate: Date = null;
 
   get token(): string {
 

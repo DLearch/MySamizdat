@@ -1,0 +1,43 @@
+
+<ng-container [ngSwitch]="design">
+  <ng-container *ngSwitchCase="'raised'">
+    <button [type]="type"
+            (click)="onClick($event)"
+            mat-raised-button
+            [color]="color"
+            class="button">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'fab'">
+    <button [type]="type"
+            (click)="onClick($event)"
+            mat-fab
+            [color]="color"
+            class="button">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'icon'">
+    <button [type]="type"
+            (click)="onClick($event)"
+            mat-icon-button
+            [color]="color"
+            class="button">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+  <ng-template ngSwitchDefault>
+    <button [type]="type"
+            (click)="onClick($event)"
+            mat-button
+            [color]="color"
+            class="button">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-template>
+</ng-container>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

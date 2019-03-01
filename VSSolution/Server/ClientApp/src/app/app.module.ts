@@ -29,7 +29,6 @@ import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { ThemePickerComponent } from './layout/theme-picker/theme-picker.component';
 import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
 import { AccountComponent } from './pages/account/account.component';
-import { AccountService } from './pages/account/account.service';
 import { ConfigurationService } from './services/configuration/configuration.service';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
@@ -37,20 +36,27 @@ import { AuthService } from './auth/auth.service';
 import { UserStorageService } from './auth/user-storage.service';
 import { AuthGuard } from './auth/auth.guard';
 import { DialogWindowService } from './layout/dialog-window/dialog-window.service';
-import { ApiAuthService } from './auth/api-auth/api-auth.service';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ImageComponent } from './components/image/image.component';
 import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
 import { CommentComponent } from './components/comments/comment/comment.component';
-import { CommentsService } from './components/comments/comments.service';
-import { NewCommentService } from './components/comments/new-comment/new-comment.service';
 import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
 import { NewBookComponent } from './pages/new-book/new-book.component';
-import { NewChapterService } from './pages/new-chapter/new-chapter.service';
-import { NewBookService } from './pages/new-book/new-book.service';
-import { ChapterService } from './pages/chapter/chapter.service';
-import { BookService } from './pages/book/book.service';
-import { CatalogService } from './pages/catalog/catalog.service';
+import { AccountControllerService } from './api-services/account-controller/account-controller.service';
+import { AuthControllerService } from './api-services/auth-controller/auth-controller.service';
+import { BookControllerService } from './api-services/book-controller/book-controller.service';
+import { BookmarkControllerService } from './api-services/bookmark-controller/bookmark-controller.service';
+import { CatalogControllerService } from './api-services/catalog-controller/catalog-controller.service';
+import { ChapterControllerService } from './api-services/chapter-controller/chapter-controller.service';
+import { CommentControllerService } from './api-services/comment-controller/comment-controller.service';
+import { PluralPipe } from './pipes/plural.pipe';
+import { ButtonComponent } from './components/button/button.component';
+import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
+import { MatPaginatorIntl } from '@angular/material';
+import { PaginatorIntl } from './paginator-intl';
+import { TranslateService } from '@ngx-translate/core';
+import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.component';
+import { LanguageControllerService } from './api-services/language-controller/language-controller.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +86,9 @@ import { CatalogService } from './pages/catalog/catalog.service';
     , CommentComponent
     , NewChapterComponent
     , NewBookComponent
+    , PluralPipe
+    , ButtonComponent
+    , BookmarksComponent, PageWrapperComponent
   ]
   , imports: [
     BrowserModule
@@ -103,17 +112,25 @@ import { CatalogService } from './pages/catalog/catalog.service';
     , UserStorageService
     , AuthGuard
     , DialogWindowService
-    , ApiAuthService
     , ThemePickerService
-    , AccountService
     , ConfigurationService
-    , CommentsService
-    , NewCommentService
-    , NewChapterService
-    , NewBookService
-    , ChapterService
-    , BookService
-    , CatalogService
+    , AccountControllerService
+    , AuthControllerService
+    , BookControllerService
+    , BookmarkControllerService
+    , CatalogControllerService
+    , ChapterControllerService
+    , CommentControllerService
+    , LanguageControllerService
+    , {
+      provide: MatPaginatorIntl,
+      useFactory: (translate) => {
+        const service = new PaginatorIntl();
+        service.injectTranslateService(translate);
+        return service;
+      },
+      deps: [TranslateService]
+    }
   ]
   , entryComponents: [
     SignInComponent

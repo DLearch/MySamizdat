@@ -1,15 +1,14 @@
 <!-- If the user is logged in-->
 <span *ngIf='auth.isAuth'>
 
-  <!-- Create book button -->
-  <a routerLink="/create-book" mat-icon-button>
-    <mat-icon>library_add</mat-icon>
-  </a>
+  <!-- Bookmarks link -->
+  <a routerLink="/bookmarks" mat-button>{{'page.bookmarks.link' | translate}}</a>
+
   <!-- Profile link -->
   <a routerLink="/account" mat-button>{{ userStorage.userName }}</a>
 
   <!-- Sign out button -->
-  <button mat-button (click)="auth.signOut()">{{ 'button-texts.sign-out' | translate }}</button>
+  <button mat-button (click)="auth.signOut()">{{ 'action.sign-out' | translate }}</button>
 
 </span>
 
@@ -17,5 +16,5 @@
 <span *ngIf='!auth.isAuth'>
 
   <!-- Sign in link -->
-  <a routerLink="/sign-in" mat-button>{{ 'button-texts.sign-in' | translate }}</a>
+  <a routerLink="/sign-in" mat-button>{{ 'page.sign-in.link' | translate }}</a>
 </span>

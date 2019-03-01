@@ -1,0 +1,14 @@
+
+<div class="outer-wrapper"
+     [style.maxWidth]="maxWidth"
+     [style.margin]="alighCenter ? 'auto' : 0">
+  <div class="inner-wrapper" [style.margin]="minMargin">
+
+    <!--Page-->
+    <ng-content></ng-content>
+
+  </div>
+
+</div>
+
+<app-load-overlay *ngIf="!loaded"></app-load-overlay>

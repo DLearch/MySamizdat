@@ -33,7 +33,7 @@ export class ChapterControllerService {
     return this.api.post(model, this.controller, 'remove');
   }
 
-  getChapter(chapterId: string): Observable<GetChapterRVM> {
+  getChapter(chapterId: number): Observable<GetChapterRVM> {
 
     let model = {
       chapterId: chapterId

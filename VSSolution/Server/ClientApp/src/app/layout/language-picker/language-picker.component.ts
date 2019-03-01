@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguagePickerComponent implements OnInit {
 
-  readonly defaultLang: string = 'English';
+  defaultLang: string = 'English';
   readonly langs: string[] = [
     'English'
     , 'Русский'
@@ -20,10 +20,23 @@ export class LanguagePickerComponent implements OnInit {
 
   constructor(
     public translate: TranslateService
-  ) { }
+  ) {
+
+    switch (this.translate.getBrowserLang()) {
+      case 'ru':
+        this.defaultLang = 'Русский';
+        break;
+      case 'ua':
+        this.defaultLang = 'Русский';
+        break;
+    }
+  }
 
   ngOnInit() {
+
     this.translate.setDefaultLang(this.defaultLang);
+    this.translate.use(this.defaultLang);
+    
     this.translate.addLangs(this.langs);
   }
 

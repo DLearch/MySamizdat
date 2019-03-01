@@ -13,10 +13,12 @@ export class BookControllerService {
     private api: ApiService
   ) { }
 
-  addBook(title: string): Observable<number> {
+  addBook(title: string, languageTK: string, originalTitle: string = null): Observable<number> {
 
     let model = {
-      title: title
+      title: title,
+      languageTK: languageTK,
+      originalTitle: originalTitle
     };
 
     return this.api.post(model, this.controller, 'add');
@@ -31,7 +33,7 @@ export class BookControllerService {
     return this.api.post({ bookId: bookId }, this.controller, 'remove');
   }
 
-  getBook(bookId: string): Observable<GetBookRVM> {
+  getBook(bookId: number): Observable<GetBookRVM> {
 
     let model = {
       bookId: bookId

@@ -31,7 +31,9 @@ namespace Server.Controllers
             {
                 User user = await _userManager.GetUserAsync(User);
 
-                if (user != null)
+                if (user == null)
+                    ModelState.AddModelError("User", "not-found");
+                else
                 {
                     Comment comment = null;
                     switch(model.EntityType)
@@ -72,8 +74,6 @@ namespace Server.Controllers
                         });
                     }
                 }
-                else
-                    ModelState.AddModelError("User", "not-found");
             }
 
             return BadRequest(ModelState);

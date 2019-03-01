@@ -22,24 +22,9 @@
     <None Remove="ClientApp\src\app\api-services\chapter-controller\get-chapter-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\comment-controller\add-comment-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
-    <None Remove="ClientApp\src\app\auth\api-auth\authenticate-vm.ts" />
-    <None Remove="ClientApp\src\app\auth\api-auth\confirm-email-vm.ts" />
-    <None Remove="ClientApp\src\app\auth\api-auth\register-vm.ts" />
-    <None Remove="ClientApp\src\app\components\comments\comment.ts" />
     <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
     <None Remove="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
     <None Remove="ClientApp\src\app\layout\theme-picker\themes.ts" />
-    <None Remove="ClientApp\src\app\models\book.ts" />
-    <None Remove="ClientApp\src\app\models\chapter.ts" />
-    <None Remove="ClientApp\src\app\models\user.ts" />
-    <None Remove="ClientApp\src\app\MyValidators.ts" />
-    <None Remove="ClientApp\src\app\pages\bookmarks\bookmark.ts" />
-    <None Remove="ClientApp\src\app\pages\bookmarks\get-rvm.ts" />
-    <None Remove="ClientApp\src\app\pages\new-book\create-vm.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,23 +48,13 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\auth-controller\get-token-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\get-book-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\bookmark-controller\get-bookmarks-rvm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\chapter-controller\get-chapter-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\comment-controller\add-comment-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\auth\api-auth\authenticate-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\auth\api-auth\confirm-email-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\auth\api-auth\register-vm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\comments\comment.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\layout\theme-picker\themes.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\chapter.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\MyValidators.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\pages\bookmarks\bookmark.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\pages\bookmarks\get-rvm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\pages\new-book\create-vm.ts" />
   </ItemGroup>
 
 </Project>

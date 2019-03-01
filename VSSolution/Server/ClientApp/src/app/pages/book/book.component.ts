@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from 'src/app/models/book';
-import { BookService } from './book.service';
-import { CommentsService } from 'src/app/components/comments/comments.service';
+import { BookControllerService } from 'src/app/api-services/book-controller/book-controller.service';
+import { GetBookRVM } from 'src/app/api-services/book-controller/get-book-rvm';
+import { BookmarkControllerService } from 'src/app/api-services/bookmark-controller/bookmark-controller.service';
+import { UserStorageService } from 'src/app/auth/user-storage.service';
 
 @Component({
   selector: 'app-book',
@@ -11,25 +12,38 @@ import { CommentsService } from 'src/app/components/comments/comments.service';
 })
 export class BookComponent implements OnInit {
 
-  book: Book;
+  model: GetBookRVM = null;
+  bookId: number = 0;
 
   constructor(
-    private bookService: BookService,
     private route: ActivatedRoute,
-    private commentsService: CommentsService
+    private bookController: BookControllerService,
+    private bookmarksController: BookmarkControllerService,
+    private userStorage: UserStorageService
   ) { }
 
   ngOnInit() {
-    const bookId: number = +this.route.snapshot.paramMap.get('book');
+    this.bookId = +this.route.snapshot.paramMap.get('book');
 
-    this.bookService.get(bookId).subscribe(
-      book => {
-        this.book = book;
-        this.commentsService.comments = book.comments;
-        this.commentsService.entityId = book.id;
-        this.commentsService.entityType = 'book';
-      }
-      , error => console.log(error)
-    );
+    this.bookController
+      .getBook(this.bookId)
+      .subscribe(
+        model => {
+          this.model = model
+        }
+        , error => console.log(error)
+      );
+  }
+
+  changeBookmark(): void {
+
+    if (this.model.bookmark)
+      this.bookmarksController
+        .removeBookmark(this.bookId)
+        .subscribe(() => this.model.bookmark = false);
+    else
+      this.bookmarksController
+        .addBookmark(this.bookId)
+        .subscribe(() => this.model.bookmark = true);
   }
 }

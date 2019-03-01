@@ -1,7 +1,38 @@
-<!--Comments-->
+
 <div class="main-wrapper">
-  <div class="mat-h3">{{ (service.comments ? service.comments.length : 0) | i18nPlural: pluralComments | translate: {count: (service.comments ? service.comments.length : 0)} }}</div>
-  <app-new-comment isVisible="true"></app-new-comment>
-  <app-comment *ngFor="let comment of comments"
-               [comment]="comment"></app-comment>
+  <div class="mat-h2">
+    {{ (comments ? comments.length: 0) | plural:'comment' | translate:{count: (comments ? comments.length: 0)} }}
+  </div>
+
+  <ng-container *ngFor="let comment of filterComments()">
+    <ng-container *ngTemplateOutlet="comment"></ng-container>
+  </ng-container>
 </div>
+
+<ng-template #newComment>
+
+</ng-template>
+
+<ng-template #comment let-comment>
+
+  <div class="main-wrapper">
+
+    <!--Avatar-->
+    <app-avatar [user]="comment.author"></app-avatar>
+
+    <div class="main">
+
+      <!--Header-->
+      <div class="header">
+        <span class="mat-body-strong">{{ comment.author.userName }} </span> <span class="mat-small"> {{ comment.creationTime | date: 'short' }}</span>
+      </div>
+
+      <!--Content-->
+      <div class="content mat-body">
+        {{ comment.content }}
+      </div>
+
+    </div>
+  </div>
+
+</ng-template>

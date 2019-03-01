@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from './account.service';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
 import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
 import { ImageLoadComponent } from 'src/app/components/image-load/image-load.component';
+import { AccountControllerService } from 'src/app/api-services/account-controller/account-controller.service';
 
 @Component({
   selector: 'app-account',
@@ -16,13 +16,12 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private userStorage: UserStorageService,
-    private account: AccountService,
-    private dialog: DialogWindowService
+    private accountController: AccountControllerService
   ) { }
 
   ngOnInit() {
-    this.account
-      .updateInfo()
+    this.accountController
+      .getInfo()
       .subscribe(
         () => this.isWaiting = false,
         error => console.log(error)
@@ -31,15 +30,11 @@ export class AccountComponent implements OnInit {
 
   onEmailVisibilityChanged(): void {
     this.isEmailVisibilityChanging = true;
-    this.account
-      .changeEmailVisibility(this.userStorage.user.emailIsVisible)
+    this.accountController
+      .changeEmailVisibility(true)////// change
       .subscribe(
         () => this.isEmailVisibilityChanging = false,
         error => console.log(error)
       );
-  }
-
-  changeAvatar(): void {
-    this.dialog.open(ImageLoadComponent);
   }
 }

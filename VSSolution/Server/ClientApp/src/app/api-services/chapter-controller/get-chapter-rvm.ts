@@ -6,6 +6,10 @@ export class GetChapterRVM {
   book: {
     id: number;
     title: string;
+    chapters: {
+      id: number;
+      name: string;
+    }[];
   };
   comments: {
     id: number;

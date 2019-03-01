@@ -19,8 +19,8 @@ namespace Server.Models.Books
         //public int OriginalLanguageId { get; set; }
         //public Language OriginalLanguage { get; set; }
 
-        public int TranslateStateId { get; set; }
-        public TranslateBookState TranslateState { get; set; }
-        public string TranslateStateComment { get; set; }
+        //public int TranslateStateId { get; set; }
+        //public TranslateBookState TranslateState { get; set; }
+        //public string TranslateStateComment { get; set; }
     }
 }

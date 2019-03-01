@@ -51,9 +51,5 @@
 .header {
   display: flex;
   align-items: center;
-  margin: auto;
-}
-
-.title {
-  margin: 10px 0;
+  margin: 16px auto;
 }

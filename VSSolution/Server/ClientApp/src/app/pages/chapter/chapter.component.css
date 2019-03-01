@@ -1,7 +1,16 @@
-.main-wrapper {
-  margin: 16px;
-}
 
 .actions {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 8px;
+}
 
+.actions > a {
+
+  margin: 8px;
+}
+
+.divider {
+  margin: 16px 0;
 }

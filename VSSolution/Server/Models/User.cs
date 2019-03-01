@@ -22,13 +22,17 @@ namespace Server.Models
         public List<Comment> Comments { get; set; }
         public List<BookComment> BookComments { get; set; }
         public List<ChapterComment> ChapterComments { get; set; }
-
-        //[Required]
-        //public int LanguageId { get; set; }
+        
+        //public string LanguageId { get; set; }
         //public Language Language { get; set; }
 
         public List<Book> Books { get; set; }
 
         public List<Bookmark> Bookmarks { get; set; }
+
+        public User()
+        {
+            Bookmarks = new List<Bookmark>();
+        }
     }
 }

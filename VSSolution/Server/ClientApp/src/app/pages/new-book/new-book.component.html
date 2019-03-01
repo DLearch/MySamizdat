@@ -1,21 +1,42 @@
-<!--Page name-->
-<h2>{{ 'pages.add-book.name' | translate }}</h2>
+<div class="page-wrapper">
+  <div class="main-wrapper">
+    <!--Page name-->
+    <h2>{{ 'page.add-book.name' | translate }}</h2>
 
-<!--Main form-->
-<form [formGroup]="mainForm" (submit)="mainSubmit()">
+    <mat-slide-toggle [(ngModel)]="isTranslate">
+      Translate
+    </mat-slide-toggle>
+    <!--Main form-->
+    <form [formGroup]="mainForm">
 
-  <!--Title input-->
-  <app-input formControlName="title" type="text" fieldTK="book-title" [field]="mainForm.get('title')"></app-input>
 
-  <div class="flex-box">
+      <!--Title input-->
+      <app-input formControlName="title" type="text" [fieldTK]="isTranslate ? 'translate-book-title' : 'book-title'" [field]="mainForm.get('title')"></app-input>
 
-    <div class="flex-box-right-element">
+      <!--LanguageTK select-->
+      <mat-form-field>
+        <mat-select [placeholder]="(isTranslate ? 'input.translate-language.placeholder' : 'input.language.placeholder') | translate"
+                    formControlName="languageTK">
+          <mat-option *ngFor="let languageTK of languageTKs" [value]="languageTK">
+            {{ 'language.' + languageTK | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <!--Submit button-->
-      <button mat-raised-button color="primary" type="submit">
-        {{ 'button-texts.create-book' | translate }}
-      </button>
-    </div>
+      <!--Title input-->
+      <app-input *ngIf="isTranslate" formControlName="originalTitle" type="text" fieldTK="original-book-title" [field]="mainForm.get('originalTitle')"></app-input>
+
+      <div class="flex-box">
+
+        <div class="flex-box-right-element">
+
+          <!--Submit button-->
+          <app-button design="raised" color="primary" (simpleClick)="mainSubmit()">
+            {{ 'action.add' | translate }}
+          </app-button>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
 
+</div>

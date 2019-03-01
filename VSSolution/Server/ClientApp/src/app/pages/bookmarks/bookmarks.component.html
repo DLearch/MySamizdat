@@ -1,3 +1,32 @@
-<p>
-  bookmarks works!
-</p>
+
+<app-page-wrapper [loaded]="books">
+  
+    <!--Header-->
+    <div class="list-header">
+
+      <!--Books count-->
+      <div class="mat-h2">
+        {{ (books ? books.length: 0) | plural:'book' | translate:{count: (books ? books.length: 0)} }}
+      </div>
+
+    </div>
+
+    <!--Bookmarks-->
+    <mat-nav-list *ngIf="books">
+      <mat-list-item *ngFor="let book of books">
+
+        <!--Cover-->
+        <app-image matListAvatar design="mini" [path]="book.coverPath"></app-image>
+
+        <!--Title-->
+        <a matLine [routerLink]="['/book', book.id]">{{ book.title }}</a>
+
+        <!--Remove button-->
+        <app-button design="icon" (simpleClick)="removeBookmark(book)">
+          <mat-icon>delete</mat-icon>
+        </app-button>
+
+      </mat-list-item>
+    </mat-nav-list>
+
+</app-page-wrapper>

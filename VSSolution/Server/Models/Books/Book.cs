@@ -11,6 +11,7 @@ namespace Server.Models.Books
 {
     public class Book
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -37,15 +38,19 @@ namespace Server.Models.Books
         
         public List<Chapter> Chapters { get; set; }
         public List<BookComment> Comments { get; set; }
-
-        //[Required]
-        //public int LanguageId { get; set; }
-        //public Language Language { get; set; }
+        
+        public string LanguageId { get; set; }
+        public Language Language { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }
 
         //public int TeamId { get; set; }
         //public Team Team { get; set; }
+
+        public Book()
+        {
+            Bookmarks = new List<Bookmark>();
+        }
     }
 }

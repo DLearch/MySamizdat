@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Comment } from '../comment';
-import { CommentsService } from '../comments.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -12,19 +10,18 @@ export class CommentComponent {
 
   newCommentVisible: boolean = false;
   answersVisible: boolean = false;
-  @Input() comment: Comment = null;
+  @Input() comment: any = null;
 
   constructor(
-    private service: CommentsService,
     private auth: AuthService
   ) { }
   answer(): void {
     this.newCommentVisible = true;
   }
 
-  get comments(): Comment[] {
-
-    return this.service.comments
-      .filter(comment => comment.parentId == this.comment.id);
+  get comments(): any[] {
+    return null;
+    //return this.service.comments
+    //  .filter(comment => comment.parentId == this.comment.id);
   }
 }

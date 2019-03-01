@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
-import { MyValidators } from 'src/app/MyValidators';
 import { AuthService } from '../auth.service';
-import { ApiAuthService } from '../api-auth/api-auth.service';
 import { setErrors } from 'src/app/components/input/set-errors';
+import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
+import { AppValidators } from 'src/app/app-validators';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,14 +18,15 @@ export class SignInComponent {
 
   public constructor(
     formBuilder: FormBuilder,
-    private apiAuth: ApiAuthService
-    , private dialog: DialogWindowService
+    private dialog: DialogWindowService,
+    private authService: AuthService,
+    private authController: AuthControllerService
   ) {
 
     this.mainForm = formBuilder.group({
 
       'email': ['', [Validators.required, Validators.email]]
-      , 'password': ['', [Validators.required, MyValidators.password]]
+      , 'password': ['', [Validators.required, AppValidators.password]]
     });
   }
 
@@ -34,10 +35,13 @@ export class SignInComponent {
     if (this.mainForm.valid) {
       this.isWaiting = true;
 
-      this.apiAuth
-        .authenticate(this.mainForm.value)
+      this.authController
+        .getToken(this.mainForm.value.email, this.mainForm.value.password)
         .subscribe(
-          () => this.dialog.close(),
+        response => {
+          this.authService.signIn(response.userName, response.token);
+          this.dialog.close();
+        },
           response => {
             this.isWaiting = false;
             setErrors(response, this.mainForm);

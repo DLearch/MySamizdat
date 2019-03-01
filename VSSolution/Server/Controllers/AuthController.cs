@@ -93,7 +93,9 @@ namespace Server.Controllers
                             return Ok(new
                             {
                                 user.UserName,
-                                Token = GenerateJWTToken(user)
+                                Token = GenerateJWTToken(user),
+                                user.BirthDate,
+                                user.AvatarPath
                             });
                     }
                 }
@@ -146,7 +148,9 @@ namespace Server.Controllers
                         return Ok(new
                         {
                             user.UserName,
-                            Token = GenerateJWTToken(user)
+                            Token = GenerateJWTToken(user),
+                            user.BirthDate,
+                            user.AvatarPath
                         });
                     }
                     else

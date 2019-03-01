@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { CommentsService } from './comments.service';
-import { Comment } from './comment';
+import { Component, Input } from '@angular/core';
+import { CommentEntityType } from 'src/app/api-services/comment-controller/comment-entity-type';
+import { CommentControllerService } from 'src/app/api-services/comment-controller/comment-controller.service';
+import { UserStorageService } from 'src/app/auth/user-storage.service';
 
 @Component({
   selector: 'app-comments',
@@ -8,20 +9,22 @@ import { Comment } from './comment';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
+  
+  @Input() comments: any[];
+  @Input() entityType: CommentEntityType;
+  @Input() entityId: number;
 
   constructor(
-    private service: CommentsService
+    private commentController: CommentControllerService,
+    private userStorage: UserStorageService
   ) { }
 
-  get comments(): Comment[] {
+  filterComments(id: number = null): any[] {
 
-    return this.service.comments
-      .filter(comment => !comment.parentId);
+    if (id)
+      return this.comments.filter(comment => comment.parentId == id);
+    
+    return this.comments.filter(comment => !comment.parentId);
   }
-
-  pluralComments: any = {
-    '=0': 'comments-count.none',
-    '=1': 'comments-count.singular.',
-    'other': 'comments-count.plural'
-  }
+  
 }

@@ -11,5 +11,10 @@ namespace Server.ViewModels.Book
     {
         [RequiredVM]
         public string Title { get; set; }
+
+        [RequiredVM]
+        public string LanguageTK { get; set; }
+
+        public string OriginalTitle { get; set; }
     }   
 }

@@ -2,6 +2,8 @@ export class GetBookRVM {
   title: string;
   description: string;
   coverPath: string;
+  languageTK: string;
+  originalTitle: string;
   bookmark: boolean;
   user: {
     userName: string;

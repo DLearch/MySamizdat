@@ -1,16 +1,48 @@
 
-<div *ngIf="chapter" class="page-wrapper">
+<app-page-wrapper [loaded]="!model">
 
-  <div class="main-wrapper">
+  <!--Chapter name-->
+  <div class="mat-h2">{{ model.name }}</div>
 
-    <div class="mat-h2">{{ chapter.name }}</div>
-    <p>{{ chapter.content }}</p>
+  <!--Actions-->
+  <ng-container *ngTemplateOutlet="actions"></ng-container>
 
-    <!--Divider-->
-    <mat-divider></mat-divider>
+  <!--Content-->
+  <div>{{ model.content }}</div>
+
+  <!--Actions-->
+  <ng-container *ngTemplateOutlet="actions"></ng-container>
+
+  <!--Divider-->
+  <mat-divider class="divider"></mat-divider>
+
+</app-page-wrapper>
+
+<!--Actions template-->
+<ng-template #actions>
+
+  <div class="actions">
+
+    <!--Previous chapter link-->
+    <a mat-button
+       [disabled]="isFirstChapter"
+       [routerLink]="['/book', bookId, isFirstChapter ? '' : model.book.chapters[chapterIndex - 1].id]">
+      {{ 'page.chapter.action.previous' | translate }}
+    </a>
+
+    <!--Contents link-->
+    <a mat-raised-button
+       color="primary"
+       [routerLink]="['/book', bookId]">
+      {{ 'page.chapter.action.contents' | translate }}
+    </a>
+
+    <!--Next chapter link-->
+    <a mat-button
+      [disabled]="isLastChapter"
+      [routerLink]="['/book', bookId, isLastChapter? '' : model.book.chapters[chapterIndex + 1].id]">
+    {{ 'page.chapter.action.next' | translate }}
+    </a>
+
   </div>
-
-  <app-comments></app-comments>
-</div>
-
-<app-load-overlay *ngIf="!chapter"></app-load-overlay>
+</ng-template>

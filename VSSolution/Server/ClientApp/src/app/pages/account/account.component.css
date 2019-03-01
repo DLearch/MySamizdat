@@ -18,3 +18,8 @@
   margin: 10px 0;
   
 }
+
+.security-card {
+  max-width: 300px;
+  margin: 10px;
+}

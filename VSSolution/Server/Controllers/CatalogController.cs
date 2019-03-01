@@ -29,15 +29,30 @@ namespace Server.Controllers
         public IActionResult GetPage([FromBody]GetPageVM model)
         {
             if (ModelState.IsValid)
+            {
+                int bookCount = _db.Books.Count();
+                int page = model.Page;
+
+                if (bookCount - (model.Page * model.PageSize) < 1)
+                {
+                    page = bookCount / model.PageSize;
+
+                    if (page > 0 && bookCount % model.PageSize == 0)
+                        page--;
+                }
+
                 return Ok(new
                 {
                     Length = _db.Books.Count(),
-                    Books = _db.Books.Skip(model.Page * model.PageSize).Take(model.PageSize).Select(b => new
+                    Page = page,
+                    Books = _db.Books.Skip(page * model.PageSize).Take(model.PageSize).Select(b => new
                     {
                         b.Id,
-                        b.Title
+                        b.Title,
+                        b.CoverPath
                     }).ToList()
                 });
+            }
 
             return BadRequest(ModelState);
         }

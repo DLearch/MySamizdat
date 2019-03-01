@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NewCommentService } from './new-comment.service';
 import { setErrors } from '../../input/set-errors';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
-import { CommentsService } from '../comments.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { CommentControllerService } from 'src/app/api-services/comment-controller/comment-controller.service';
+import { CommentEntityType } from 'src/app/api-services/comment-controller/comment-entity-type';
 
 @Component({
   selector: 'app-new-comment',
@@ -15,17 +15,22 @@ export class NewCommentComponent {
 
   public mainForm: FormGroup;
 
+  @Input() comment: any = null;
+  @Output() commentChange = new EventEmitter<any>();
+
   @Input() isActive: boolean = true;
   @Input() isVisible: boolean = false;
+  @Input() comments: any[];
+  @Input() entityType: CommentEntityType;
+  @Input() entityId: number;
   @Input() parentId: number = 0;
   @Output() isVisibleChange = new EventEmitter<boolean>();
 
   constructor(
     formBuilder: FormBuilder,
-    private newCommentService: NewCommentService,
     private userStorage: UserStorageService,
-    private service: CommentsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private commentController: CommentControllerService
   ) {
 
     this.mainForm = formBuilder.group({
@@ -35,23 +40,15 @@ export class NewCommentComponent {
   }
 
   cancel(): void {
-    if (this.parentId) {
-      this.isVisible = false;
-      this.isVisibleChange.emit(false);
-    }
-    else
-      this.isActive = false;
+    
+    this.isVisible = false;
+    this.isVisibleChange.emit(false);
   }
+
   public mainSubmit(): void {
 
     if (this.mainForm.valid) {
-      console.log(this.parentId);
-      this.newCommentService
-        .create(this.mainForm.value.content, this.service.entityId, this.service.entityType, this.parentId)
-        .subscribe(
-          comment => this.service.comments.push(comment),
-          response => setErrors(response, this.mainForm)
-        );
+      
     }
   }
 }

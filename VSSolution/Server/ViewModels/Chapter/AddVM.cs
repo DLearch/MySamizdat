@@ -15,5 +15,7 @@ namespace Server.ViewModels.Chapter
 
         [RequiredVM]
         public int BookId { get; set; }
+        
+        public int? Index { get; set; }
     }
 }

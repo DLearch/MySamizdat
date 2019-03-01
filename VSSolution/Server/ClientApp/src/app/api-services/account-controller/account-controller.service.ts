@@ -31,7 +31,7 @@ export class AccountControllerService {
     return this.api.post(model, this.controller, 'changepassword');
   }
 
-  changeAvatar(avatar: File): Observable<void> {
+  changeAvatar(avatar: File): Observable<string> {
 
     let model = {
       avatar: avatar

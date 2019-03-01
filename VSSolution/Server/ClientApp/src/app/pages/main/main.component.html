@@ -1,8 +1,9 @@
 <div class="page-wrapper">
+  <div class="mat-card-subtitle">SubTitle</div>
   <p class="header">
-    main works!
+    {{ 0 | plural:'comments' | translate:{count: 3} }}
   </p>
-
+  <app-button design="raised" color="primary" (simpleClick)="click(2)">Test</app-button>
   <div class="mat-display-4">Qwerty! .mat-display-4</div>
   <div class="mat-display-3">Qwerty! .mat-display-3</div>
   <div class="mat-display-2">Qwerty! .mat-display-2</div>
