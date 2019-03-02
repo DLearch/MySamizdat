@@ -1,5 +1,7 @@
 <div class="page-wrapper">
-  <div class="mat-card-subtitle">SubTitle</div>
+
+  <app-form [template]="template" (onFormChanged)="click($event)"></app-form>
+  <!--<div class="mat-card-subtitle">SubTitle</div>
   <p class="header">
     {{ 0 | plural:'comments' | translate:{count: 3} }}
   </p>
@@ -14,6 +16,6 @@
   <div class="mat-h4">Qwerty! .mat-h4</div>
   <div class="mat-body">Qwerty! .mat-body</div>
   <div class="mat-body-strong">Qwerty! .mat-body-strong</div>
-  <div class="mat-small">Qwerty! .mat-small</div>
+  <div class="mat-small">Qwerty! .mat-small</div>-->
   <div class="">Qwerty!</div>
 </div>

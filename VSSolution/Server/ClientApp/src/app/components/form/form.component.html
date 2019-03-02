@@ -1,3 +1,42 @@
-<p>
-  form works!
-</p>
+
+
+<form [formGroup]="form">
+
+  <ng-container *ngFor="let controlTemplate of controlTemplates">
+
+    <mat-form-field>
+      <mat-label>{{ 'input.' + controlTemplate.tk + '.placeholder' | translate }}</mat-label>
+      <ng-container [ngSwitch]="controlTemplate.type">
+
+        <ng-container *ngSwitchCase="'select'">
+
+          <mat-select [placeholder]="'input.' + controlTemplate.tk +'.placeholder' | translate"
+                      [formControlName]="controlTemplate.name">
+            <mat-option *ngFor="let element of controlTemplate.selectElements" [value]="element.value">
+              {{ element.tk | translate}}
+            </mat-option>
+          </mat-select>
+
+        </ng-container>
+
+        <ng-template ngSwitchDefault>
+
+          <input matInput
+                 [type]="(controlTemplate.type ? controlTemplate.type : 'text')"
+                 [formControlName]="controlTemplate.name" />
+
+        </ng-template>
+      </ng-container>
+
+      <mat-error *ngIf="form.get(controlTemplate.name).invalid">
+        <ng-container *ngFor="let errorTK of getErrorTKs(form.get(controlTemplate.name).errors)">
+          {{ 'input.' + controlTemplate.tk + '.errors.' + errorTK | translate }}
+        </ng-container>
+      </mat-error>
+
+    </mat-form-field>
+    <br/>
+
+  </ng-container>
+
+</form>
