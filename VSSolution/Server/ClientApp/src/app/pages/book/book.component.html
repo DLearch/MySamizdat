@@ -37,23 +37,24 @@
     <!--Info column-->
     <mat-list>
 
-      <!--User-->
+      <!--Owner-->
       <mat-list-item>
         <div matLine class="mat-body">{{ model.user.userName }}</div>
-        <div matLine class="mat-card-subtitle">User</div>
+        <div matLine class="mat-card-subtitle">{{ 'book.owner' |translate}}</div>
       </mat-list-item>
 
       <!--Language-->
       <mat-list-item>
         <div matLine class="mat-body">{{ 'language.' + model.languageTK | translate }}</div>
-        <div matLine class="mat-card-subtitle">Language</div>
+        <div matLine class="mat-card-subtitle">{{ 'book.' + (model.originalTitle ? 'translate-' : '') + 'language' |translate}}</div>
       </mat-list-item>
 
       <!--Description-->
       <mat-list-item *ngIf="model.description">
         <div matLine class="mat-body">{{ model.description }}</div>
-        <div matLine class="mat-card-subtitle">Description</div>
+        <div matLine class="mat-card-subtitle">{{ 'book.description' |translate}}</div>
       </mat-list-item>
+
     </mat-list>
 
   </div>

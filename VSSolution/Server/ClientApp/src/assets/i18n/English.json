@@ -1,198 +1,199 @@
-//{
-//  "button-texts": {
-//    "send-email-confirmation-message": "Send email confirmation message",
-//    "send-email-confirmation-message-again": "Send email confirmation message again"
-//  },
-//  "email-confirmation-message-sent": "Confirmation message sent",
-//  "email-is-not-confirmed": "Email is not confirmed",
-//  "email-is-visible": "Email is visible for other users",
-//  "input": {
-//    "language": {
-//      "placeholder": "Language"
-//    },
-//    "comment": {
-//      "placeholder": "Leave comment",
-//      "errors": {
-//        "empty": "Enter comment",
-//        "wrong": "Comment is wrong",
-//        "short": "Comment is too short"
-//      }
-//    },
-//    "chapter-name": {
-//      "placeholder": "Name",
-//      "errors": {
-//        "empty": "Enter name",
-//        "wrong": "Name is wrong",
-//        "short": "Name is too short",
-//        "already-taken": "Name is already exists"
-//      }
-//    },
-//    "chapter-content": {
-//      "placeholder": "Content",
-//      "errors": {
-//        "empty": "Enter content",
-//        "wrong": "Content is wrong",
-//        "short": "Content is too short"
-//      }
-//    },
-//    "book-title": {
-//      "placeholder": "Title",
-//      "errors": {
-//        "empty": "Enter title",
-//        "wrong": "Title is wrong",
-//        "short": "Title is too short",
-//        "already-taken": "Title is already taken"
-//      }
-//    },
-//    "email": {
-//      "placeholder": "Email",
-//      "errors": {
-//        "empty": "Enter email",
-//        "wrong": "Email is wrong",
-//        "short": "Email is too short",
-//        "not-found": "Email not found",
-//        "already-taken": "Email is already taken",
-//        "unconfirmed": "Email not confirmed"
-//      }
-//    },
-//    "username": {
-//      "placeholder": "Name",
-//      "errors": {
-//        "empty": "Enter name",
-//        "wrong": "Name is wrong",
-//        "short": "Name is too short",
-//        "not-found": "User not found",
-//        "already-taken": "Name is already taken"
-//      }
-//    },
-//    "password": {
-//      "placeholder": "Password",
-//      "errors": {
-//        "empty": "Enter password",
-//        "wrong": "Password is wrong",
-//        "short": "Password is too short"
-//      }
-//    },
-//    "current-password": {
-//      "placeholder": "Current password",
-//      "errors": {
-//        "empty": "Enter current password",
-//        "wrong": "Current password is wrong",
-//        "short": "Current password is too short"
-//      }
-//    },
-//    "new-password": {
-//      "placeholder": "New password",
-//      "errors": {
-//        "empty": "Enter new password",
-//        "wrong": "New password is wrong",
-//        "short": "New password is too short"
-//      }
-//    }
-//  },
-//  "site": {
-//    "name": "Runoo"
-//  },
-//  "page": {
-//    "main": {
-//      "main": "Main",
-//      "link": "Main"
-//    },
-//    "sign-up": {
-//      "name": "Sign up",
-//      "link": "Create account"
-//    },
-//    "sign-in": {
-//      "name": "Sign in",
-//      "link": "Sign in"
-//    },
-//    "add-book": {
-//      "name": "Create book",
-//      "link": "Create book"
-//    },
-//    "add-chapter": {
-//      "name": "Create chapter",
-//      "link": "Create chapter"
-//    },
-//    "password-change": {
-//      "name": "Change password",
-//      "link": "Change password"
-//    },
-//    "catalog": {
-//      "name": "Catalog",
-//      "link": "Catalog"
-//    },
-//    "bookmarks": {
-//      "name": "Bookmarks",
-//      "link": "Bookmarks"
-//    },
-//    "chapter": {
-//      "action": {
-//        "contents": "Contents",
-//        "next": "Next chapter",
-//        "previous": "Previous chapter"
-//      }
-//    }
-//  },
-//  "action": {
-//    "create": "Create",
-//    "cancel": "Cancel",
-//    "remove": "Remove",
-//    "delete": "Delete",
-//    "add": "Add",
-//    "ok": "Ok",
-//    "continue": "Continue",
-//    "next": "Next",
-//    "previous": "Previous",
-//    "sign-out": "Sign out",
-//    "read": "Read",
-//    "download": "Download"
-//  },
-//  "comment": {
-//    "count": {
-//      "none": "0 comments",
-//      "one": "1 comment",
-//      "many": "{{count}} comments"
-//    },
-//    "action": {
-//      "add": "Leave comment",
-//      "answer": "Answer"
-//    }
-//  },
-//  "book": {
-//    "count": {
-//      "none": "0 books",
-//      "one": "1 book",
-//      "many": "{{count}} books"
-//    },
-//    "action": {
-//      "add": "Create book",
-//      "delete": "Delete book"
-//    }
-//  },
-//  "chapter": {
-//    "count": {
-//      "none": "0 chapters",
-//      "one": "1 chapter",
-//      "many": "{{count}} chapters"
-//    },
-//    "action": {
-//      "add": "Create chapter",
-//      "delete": "Delete chapter"
-//    },
-//    "bookmark": {
-//      "action": {
-//        "remove": "Remove bookmark",
-//        "add": "Add bookmark"
-//      }
-//    }
-//  },
-//  "paginator": {
-//    "items-per-page": "Items per page",
-//    "previous_page": "Previous page",
-//    "next-page": "Next page",
-//    "first-page": "First page",
-//    "last-page": "Last page",
-//    "of": "of"
-//  }
-//}
+
+{
+  "button-texts": {
+    "send-email-confirmation-message": "Send email confirmation message",
+    "send-email-confirmation-message-again": "Send email confirmation message again"
+  },
+  "email-confirmation-message-sent": "Confirmation message sent",
+  "email-is-not-confirmed": "Email is not confirmed",
+  "email-is-visible": "Email is visible for other users",
+  "input": {
+    "language": {
+      "placeholder": "Language"
+    },
+    "comment": {
+      "placeholder": "Leave comment",
+      "errors": {
+        "empty": "Enter comment",
+        "wrong": "Comment is wrong",
+        "short": "Comment is too short"
+      }
+    },
+    "chapter-name": {
+      "placeholder": "Name",
+      "errors": {
+        "empty": "Enter name",
+        "wrong": "Name is wrong",
+        "short": "Name is too short",
+        "already-taken": "Name is already exists"
+      }
+    },
+    "chapter-content": {
+      "placeholder": "Content",
+      "errors": {
+        "empty": "Enter content",
+        "wrong": "Content is wrong",
+        "short": "Content is too short"
+      }
+    },
+    "book-title": {
+      "placeholder": "Title",
+      "errors": {
+        "empty": "Enter title",
+        "wrong": "Title is wrong",
+        "short": "Title is too short",
+        "already-taken": "Title is already taken"
+      }
+    },
+    "email": {
+      "placeholder": "Email",
+      "errors": {
+        "empty": "Enter email",
+        "wrong": "Email is wrong",
+        "short": "Email is too short",
+        "not-found": "Email not found",
+        "already-taken": "Email is already taken",
+        "unconfirmed": "Email not confirmed"
+      }
+    },
+    "username": {
+      "placeholder": "Name",
+      "errors": {
+        "empty": "Enter name",
+        "wrong": "Name is wrong",
+        "short": "Name is too short",
+        "not-found": "User not found",
+        "already-taken": "Name is already taken"
+      }
+    },
+    "password": {
+      "placeholder": "Password",
+      "errors": {
+        "empty": "Enter password",
+        "wrong": "Password is wrong",
+        "short": "Password is too short"
+      }
+    },
+    "current-password": {
+      "placeholder": "Current password",
+      "errors": {
+        "empty": "Enter current password",
+        "wrong": "Current password is wrong",
+        "short": "Current password is too short"
+      }
+    },
+    "new-password": {
+      "placeholder": "New password",
+      "errors": {
+        "empty": "Enter new password",
+        "wrong": "New password is wrong",
+        "short": "New password is too short"
+      }
+    }
+  },
+  "site": {
+    "name": "Runoo"
+  },
+  "page": {
+    "main": {
+      "main": "Main",
+      "link": "Main"
+    },
+    "sign-up": {
+      "name": "Sign up",
+      "link": "Create account"
+    },
+    "sign-in": {
+      "name": "Sign in",
+      "link": "Sign in"
+    },
+    "add-book": {
+      "name": "Create book",
+      "link": "Create book"
+    },
+    "add-chapter": {
+      "name": "Create chapter",
+      "link": "Create chapter"
+    },
+    "password-change": {
+      "name": "Change password",
+      "link": "Change password"
+    },
+    "catalog": {
+      "name": "Catalog",
+      "link": "Catalog"
+    },
+    "bookmarks": {
+      "name": "Bookmarks",
+      "link": "Bookmarks"
+    },
+    "chapter": {
+      "action": {
+        "contents": "Contents",
+        "next": "Next chapter",
+        "previous": "Previous chapter"
+      }
+    }
+  },
+  "action": {
+    "create": "Create",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "delete": "Delete",
+    "add": "Add",
+    "ok": "Ok",
+    "continue": "Continue",
+    "next": "Next",
+    "previous": "Previous",
+    "sign-out": "Sign out",
+    "read": "Read",
+    "download": "Download"
+  },
+  "comment": {
+    "count": {
+      "none": "0 comments",
+      "one": "1 comment",
+      "many": "{{count}} comments"
+    },
+    "action": {
+      "add": "Leave comment",
+      "answer": "Answer"
+    }
+  },
+  "book": {
+    "count": {
+      "none": "0 books",
+      "one": "1 book",
+      "many": "{{count}} books"
+    },
+    "action": {
+      "add": "Create book",
+      "delete": "Delete book"
+    }
+  },
+  "chapter": {
+    "count": {
+      "none": "0 chapters",
+      "one": "1 chapter",
+      "many": "{{count}} chapters"
+    },
+    "action": {
+      "add": "Create chapter",
+      "delete": "Delete chapter"
+    },
+    "bookmark": {
+      "action": {
+        "remove": "Remove bookmark",
+        "add": "Add bookmark"
+      }
+    }
+  },
+  "paginator": {
+    "items-per-page": "Items per page",
+    "previous_page": "Previous page",
+    "next-page": "Next page",
+    "first-page": "First page",
+    "last-page": "Last page",
+    "of": "of"
+  }
+}

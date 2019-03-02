@@ -15,6 +15,14 @@ export class BookComponent implements OnInit {
   model: GetBookRVM = null;
   bookId: number = 0;
 
+  get isTranslate(): boolean {
+
+    if (this.model.originalTitle)
+      return true;
+
+    return false;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private bookController: BookControllerService,
@@ -31,7 +39,7 @@ export class BookComponent implements OnInit {
         model => {
           this.model = model
         }
-        , error => console.log(error)
+        , error => this.handleError(error)
       );
   }
 
@@ -45,5 +53,9 @@ export class BookComponent implements OnInit {
       this.bookmarksController
         .addBookmark(this.bookId)
         .subscribe(() => this.model.bookmark = true);
+  }
+
+  handleError(error: any): void {
+
   }
 }

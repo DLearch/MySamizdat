@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAhCyIiWLBvkaGoiV9oYp1xAAAAAACAAAAAAAQZgAAAAEAACAAAADAYkJvf124xxLasUqzBG1YGz2ZtjQKJjQW+XLJVFWiRwAAAAAOgAAAAAIAACAAAAAZm7YWBWS0GJf/muP6iwllfXFuTWSmpT3tQVDLht1xsyAAAADKDeGJpP4Ph096ZYowyUgjnLC3MhV1QzGX08DDAu+oBUAAAACncIsGAvNnISn4Q44Oe5YDM7xOuEtCinUp0JjsOYuT8Ow91B/ccVfBV+HikdX5hZYrngg9v10pCM3Tg7FZgaYv</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL6001.site4now.net%3bInitial Catalog=DB_A4610C_Learch%3bUser Id=DB_A4610C_Learch_admin%3bPassword=08abQST-4427%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Server.Models.AppDbContext">
+      <Value>Data Source=SQL6001.site4now.net%3bInitial Catalog=DB_A4610C_Learch%3bUser Id=DB_A4610C_Learch_admin%3bPassword=08abQST-4427%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

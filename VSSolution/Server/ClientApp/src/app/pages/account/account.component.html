@@ -1,11 +1,11 @@
-<app-page-wrapper [loaded]="isWaiting">
+<app-page-wrapper [loaded]="!isWaiting">
 
   <!--Basic info-->
   <mat-card class="basic-info-card">
     <mat-card-header>
       <button mat-mini-fab *ngIf="!isWaiting" class="avatar" mat-card-avatar (click)="changeAvatar()"></button>
       <mat-card-title>{{userStorage.userName}}</mat-card-title>
-      <!--<mat-card-subtitle *ngIf="!isWaiting">{{ userStorage.email }}</mat-card-subtitle>-->
+      <mat-card-subtitle>{{ userStorage.email }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content *ngIf="!isWaiting" class="basic-info-card-content">
 

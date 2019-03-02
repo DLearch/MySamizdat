@@ -57,6 +57,10 @@ import { PaginatorIntl } from './paginator-intl';
 import { TranslateService } from '@ngx-translate/core';
 import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.component';
 import { LanguageControllerService } from './api-services/language-controller/language-controller.service';
+import { NewTeamComponent } from './pages/new-team/new-team.component';
+import { TeamControllerService } from './api-services/team-controller/team-controller.service';
+import { TeamComponent } from './pages/team/team.component';
+import { FormComponent } from './components/form/form.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +92,7 @@ import { LanguageControllerService } from './api-services/language-controller/la
     , NewBookComponent
     , PluralPipe
     , ButtonComponent
-    , BookmarksComponent, PageWrapperComponent
+    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent
   ]
   , imports: [
     BrowserModule
@@ -122,6 +126,7 @@ import { LanguageControllerService } from './api-services/language-controller/la
     , ChapterControllerService
     , CommentControllerService
     , LanguageControllerService
+    , TeamControllerService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {

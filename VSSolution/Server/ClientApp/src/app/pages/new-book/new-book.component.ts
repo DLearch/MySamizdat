@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { setErrors } from 'src/app/components/input/set-errors';
 import { BookControllerService } from 'src/app/api-services/book-controller/book-controller.service';
 import { LanguageControllerService } from 'src/app/api-services/language-controller/language-controller.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-book',
@@ -13,6 +14,7 @@ import { LanguageControllerService } from 'src/app/api-services/language-control
 export class NewBookComponent implements OnInit {
 
   public mainForm: FormGroup;
+  public translateForm: FormGroup;
   languageTKs: string[];
   isTranslate: boolean = false;
 
@@ -23,11 +25,17 @@ export class NewBookComponent implements OnInit {
     , private languageController: LanguageControllerService
   ) {
 
-    this.mainForm = formBuilder.group({
+    this.translateForm = formBuilder.group({
 
       'title': ['', [Validators.required]],
       'languageTK': ['', [Validators.required]],
-      'originalTitle': ['', []]
+      'originalTitle': ['', [Validators.required]],
+      'originalLanguageTK': ['', [Validators.required]]
+    });
+    this.mainForm = formBuilder.group({
+
+      'title': ['', [Validators.required]],
+      'languageTK': ['', [Validators.required]]
     });
   }
 
@@ -40,15 +48,30 @@ export class NewBookComponent implements OnInit {
 
   public mainSubmit(): void {
 
-    if (this.mainForm.valid)
-      this.bookController.addBook(
-        this.mainForm.value.title,
-        this.mainForm.value.languageTK,
-        this.isTranslate ? this.mainForm.value.originalTitle : null
-      )
-        .subscribe(
-          bookId => this.router.navigate([`book/${bookId}`])
-          , response => setErrors(response, this.mainForm)
+    if (this.mainForm.valid) {
+
+      let observable$: Observable<number> = null;
+
+      if (this.isTranslate) {
+
+        observable$ = this.bookController.addBook(
+          this.mainForm.value.title,
+          this.mainForm.value.languageTK
         );
+      }
+      else {
+        observable$ = this.bookController.addTranslateBook(
+          this.translateForm.value.title,
+          this.translateForm.value.languageTK,
+          this.translateForm.value.originalTitle,
+          this.translateForm.value.originalLanguageTK
+        );
+      }
+      
+      observable$.subscribe(
+        bookId => this.router.navigate([`book/${bookId}`])
+        , response => setErrors(response, this.mainForm)
+      );
+    }
   }
 }

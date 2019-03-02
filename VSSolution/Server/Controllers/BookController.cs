@@ -51,19 +51,12 @@ namespace Server.Controllers
                             ModelState.AddModelError("Language", "not-found");
                         else
                         {
-                            Book book = null;
-
-                            if (!string.IsNullOrEmpty(model.OriginalTitle))
-                                book = new TranslateBook()
-                                {
-                                    OriginalTitle = model.OriginalTitle
-                                };
-                            else
-                                book = new Book();
-
-                            book.Title = model.Title;
-                            book.UserId = user.Id;
-                            book.LanguageId = model.LanguageTK;
+                            Book book = new Book()
+                            {
+                                Title = model.Title,
+                                UserId = user.Id,
+                                LanguageId = model.LanguageTK
+                            };
 
                             await _db.Books.AddAsync(book);
 
@@ -81,6 +74,45 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddTranslate([FromBody]AddTranslateVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.GetUserAsync(User);
+
+                if (user == null)
+                    ModelState.AddModelError("User", "not-found");
+                else
+                {
+                    if (await _db.Books.AnyAsync(b => b.Title == model.Title))
+                        ModelState.AddModelError("Title", "already-taken");
+                    else
+                    {
+                        if (await _db.Languages.AllAsync(l => l.Id != model.LanguageTK))
+                            ModelState.AddModelError("Language", "not-found");
+                        else
+                        {
+                            TranslateBook book = new TranslateBook()
+                            {
+                                OriginalTitle = model.OriginalTitle,
+                                Title = model.Title,
+                                UserId = user.Id,
+                                LanguageId = model.LanguageTK
+                            };
+
+                            await _db.TranslateBooks.AddAsync(book);
+
+                            await _db.SaveChangesAsync();
+
+                            return Ok(book.Id);
+                        }
+                    }
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Get([FromBody]GetVM model)

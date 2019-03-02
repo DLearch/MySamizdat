@@ -25,8 +25,7 @@ export class ChapterComponent implements OnInit {
     private chapterController: ChapterControllerService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.router.events.subscribe((e: any) => {

@@ -13,6 +13,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { NewBookComponent } from './pages/new-book/new-book.component';
 import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
 import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
+import { NewTeamComponent } from './pages/new-team/new-team.component';
+import { TeamComponent } from './pages/team/team.component';
 
 const routes: Routes = [
   {
@@ -20,13 +22,16 @@ const routes: Routes = [
     , component: DefaultLayoutComponent
     , children: [
       { path: '', component: MainComponent }
-
+        
       , { path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] }
       , { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] }
       , { path: 'confirm-email', component: ErrorComponent, canActivate: [AuthGuard]  }
 
       , { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
       //, { path: 'users/:userName', component:  }
+
+      , { path: 'create-team', component: NewTeamComponent, canActivate: [AuthGuard] }
+      , { path: 'team/:team', component: TeamComponent }
 
       , { path: 'create-book', component: NewBookComponent, canActivate: [AuthGuard] }
       , { path: 'book/:book', component: BookComponent }

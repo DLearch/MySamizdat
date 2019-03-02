@@ -1,0 +1,26 @@
+<app-page-wrapper>
+
+
+  <!--Page name-->
+  <h2>{{ 'page.add-team.name' | translate }}</h2>
+
+  <!--Main form-->
+  <form [formGroup]="mainForm">
+
+    <!--Name input-->
+    <app-input formControlName="name" type="text" fieldTK="team-name" [field]="mainForm.get('name')"></app-input>
+    <br />
+
+    <div class="flex-box">
+
+      <div class="flex-box-right-element">
+
+        <!--Submit button-->
+        <button mat-raised-button color="primary" (click)="mainSubmit()">
+          {{ 'action.add' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+</app-page-wrapper>

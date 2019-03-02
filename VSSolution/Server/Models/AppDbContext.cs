@@ -16,7 +16,7 @@ namespace Server.Models
         public DbSet<TranslateBook> TranslateBooks { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
 
-        //public DbSet<Team> Teams { get; set; }
+        public DbSet<Team> Teams { get; set; }
         
         //public DbSet<BookState> BookStates { get; set; }
         //public DbSet<TranslateBookState> TranslateBookStates { get; set; }
@@ -68,6 +68,11 @@ namespace Server.Models
                 .WithMany(t => t.Bookmarks)
                 .HasForeignKey(pt => pt.UserId);
 
+            modelBuilder.Entity<Book>()
+                .HasOne(c => c.Team)
+                .WithMany(c => c.Books)
+                .HasForeignKey(c => c.TeamId)
+                .IsRequired(false);
             //modelBuilder.Entity<BookGenre>()
             //    .HasKey(t => new { t.BookId, t.GenreId });
 

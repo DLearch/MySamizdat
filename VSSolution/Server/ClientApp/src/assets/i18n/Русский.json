@@ -180,7 +180,13 @@
     "action": {
       "add": "Добавить книгу",
       "delete": "Удалить книгу"
-    }
+    },
+    "language": "Язык",
+    "translate-language": "Язык перевода",
+    "original-language": "Язык оригинала",
+    "owner": "Владелец",
+    "author": "Автор",
+    "description": "Описание"
   },
   "chapter": {
     "count": {

@@ -13,15 +13,26 @@ export class BookControllerService {
     private api: ApiService
   ) { }
 
-  addBook(title: string, languageTK: string, originalTitle: string = null): Observable<number> {
+  addBook(title: string, languageTK: string): Observable<number> {
+
+    let model = {
+      title: title,
+      languageTK: languageTK
+    };
+
+    return this.api.post(model, this.controller, 'add');
+  }
+
+  addTranslateBook(title: string, languageTK: string, originalTitle: string, originalLanguageTK: string): Observable<number> {
 
     let model = {
       title: title,
       languageTK: languageTK,
-      originalTitle: originalTitle
+      originalTitle: originalTitle,
+      originalLanguageTK: originalLanguageTK
     };
 
-    return this.api.post(model, this.controller, 'add');
+    return this.api.post(model, this.controller, 'addtranslate');
   }
 
   removeBook(bookId: number): Observable<void> {

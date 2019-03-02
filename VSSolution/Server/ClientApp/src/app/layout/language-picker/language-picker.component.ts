@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguagePickerComponent implements OnInit {
 
+  storageKey: string = 'language';
+
   defaultLang: string = 'English';
   readonly langs: string[] = [
     'English'
@@ -35,13 +37,19 @@ export class LanguagePickerComponent implements OnInit {
   ngOnInit() {
 
     this.translate.setDefaultLang(this.defaultLang);
-    this.translate.use(this.defaultLang);
+
+    let storageLanguage: string = localStorage.getItem(this.storageKey);
+    if (storageLanguage)
+      this.translate.use(storageLanguage);
+    else
+      this.translate.use(this.defaultLang);
     
     this.translate.addLangs(this.langs);
   }
 
   switchLang(lang: string): void {
 
+    localStorage.setItem(this.storageKey, lang);
     this.translate.use(lang);
   }
 }

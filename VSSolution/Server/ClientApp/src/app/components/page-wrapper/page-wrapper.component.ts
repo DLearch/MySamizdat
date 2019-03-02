@@ -15,7 +15,7 @@ export class PageWrapperComponent {
   @Input() maxWidth: string = '1000px';
   @Input() alighCenter: boolean = true;
   @Input() minMargin: string = '16px';
-  @Input() loaded: boolean;
+  @Input() loaded: boolean = true;
 
   constructor(
     private titleService: Title
