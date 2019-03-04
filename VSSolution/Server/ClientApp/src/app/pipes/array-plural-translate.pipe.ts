@@ -2,37 +2,37 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
-  name: 'plural',
+  name: 'arrayPluralTranslate',
   pure: false
 })
-export class PluralPipe implements PipeTransform {
+export class ArrayPluralTranslatePipe implements PipeTransform {
 
   constructor(
     private translate: TranslateService
   ) { }
 
-  transform(value: number, tk?: string): any {
+  transform(array: any[], translateTK: string): string {
 
-    let result;
-    if (!value)
-      result = 'none';
-    else if (value == 1)
-      result = 'one';
+    let countTK: string;
+
+    if (!array || !array.length)
+      countTK = 'none';
+    else if (array.length == 1)
+      countTK = 'one';
     else
       switch (this.translate.currentLang) {
         case 'Русский':
-          result = this.getRussian(value);
+          countTK = this.getRu(array.length);
           break;
         default:
-          result = this.getEnglish(value);
+          countTK = this.getEn(array.length);
           break;
       }
 
-    return tk + '.count.' + result;
+    return this.translate.instant(translateTK + '.count.' + countTK, { count: (array ? array.length: 0) });
   }
+  getRu(value: number): string {
 
-  getRussian(value: number): string {
-    
     value = value % 100;
 
     if (value > 10 && value < 21)
@@ -48,8 +48,8 @@ export class PluralPipe implements PipeTransform {
     return 'many';
   }
 
-  getEnglish(value: number): string {
-    
+  getEn(value: number): string {
+
     return 'many';
   }
 }

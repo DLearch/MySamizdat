@@ -1,80 +1,25 @@
-<div class="page-wrapper">
-  <div class="main-wrapper">
-    <!--Page name-->
-    <h2>{{ 'page.add-book.name' | translate }}</h2>
 
-    <mat-slide-toggle [(ngModel)]="isTranslate">
-      Translate
-    </mat-slide-toggle>
+<app-page-wrapper [loaded]="languageTKs">
 
-    <!--Main form-->
-    <form [formGroup]="mainForm" *ngIf="!isTranslate">
+  <!--Page name-->
+  <h2>{{ 'page.add-book.name' | translate }}</h2>
 
-      <!--Title input-->
-      <app-input formControlName="title" type="text" fieldTK="book-title" [field]="mainForm.get('title')"></app-input>
+  <!--Translate toggle-->
+  <mat-slide-toggle [(ngModel)]="isTranslate">
+    Translate
+  </mat-slide-toggle>
 
-      <!--LanguageTK select-->
-      <mat-form-field>
-        <mat-select [placeholder]="'input.language.placeholder' | translate"
-                    formControlName="languageTK">
-          <mat-option *ngFor="let languageTK of languageTKs" [value]="languageTK">
-            {{ 'language.' + languageTK | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <!--Form-->
+  <app-form #form></app-form>
 
-      <div class="flex-box">
+  <div class="flex-box">
+    <!--Spacer-->
+    <span class="flex-spacer"></span>
 
-        <div class="flex-box-right-element">
-
-          <!--Submit button-->
-          <app-button design="raised" color="primary" (simpleClick)="mainSubmit()">
-            {{ 'action.add' | translate }}
-          </app-button>
-        </div>
-      </div>
-    </form>
-
-    <!--Translate form-->
-    <form [formGroup]="translateForm" *ngIf="isTranslate">
-
-      <!--Title input-->
-      <app-input formControlName="title" type="text" fieldTK="translate-book-title" [field]="mainForm.get('title')"></app-input>
-
-      <!--LanguageTK select-->
-      <mat-form-field>
-        <mat-select [placeholder]="'input.translate-language.placeholder' | translate"
-                    formControlName="languageTK">
-          <mat-option *ngFor="let languageTK of languageTKs" [value]="languageTK">
-            {{ 'language.' + languageTK | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!--Original title input-->
-      <app-input formControlName="originalTitle" type="text" fieldTK="original-book-title" [field]="mainForm.get('originalTitle')"></app-input>
-
-      <!--Original languageTK input-->
-      <mat-form-field>
-        <mat-select [placeholder]="'input.original-language.placeholder' | translate"
-                    formControlName="originalLanguageTK">
-          <mat-option *ngFor="let languageTK of languageTKs" [value]="languageTK">
-            {{ 'language.' + languageTK | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="flex-box">
-
-        <div class="flex-box-right-element">
-
-          <!--Submit button-->
-          <app-button design="raised" color="primary" (simpleClick)="mainSubmit()">
-            {{ 'action.add' | translate }}
-          </app-button>
-        </div>
-      </div>
-    </form>
+    <!--Submit button-->
+    <app-button design="raised" color="primary" (simpleClick)="submit()">
+      {{ 'action.add' | translate }}
+    </app-button>
   </div>
 
-</div>
+</app-page-wrapper>

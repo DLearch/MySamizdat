@@ -8,6 +8,6 @@ namespace Server.ViewModels.Admin
 {
     public class GetGenresRVM
     {
-        public List<Genre> Genres { get; set; }
+        //public List<Genre> Genres { get; set; }
     }
 }

@@ -1,26 +1,32 @@
 
-<div class="main-wrapper" *ngIf="isVisible">
+<div class="flex-box main-wrapper" *ngIf="isVisible">
 
-  <app-avatar [user]="userStorage.user"></app-avatar>
+  <app-avatar [user]="author"></app-avatar>
 
-  <!--Comment form-->
-  <form [formGroup]="mainForm" class="main">
+  <!--Main block-->
+  <div class="main-block">
 
-    <!--Content input-->
-    <app-input formControlName="content" type="textarea" fieldTK="comment" [field]="mainForm.get('content')"></app-input>
+    <!--Comment form-->
+    <app-form #form [template]="template"></app-form>
 
-    <div class="actions" *ngIf="isActive">
+    <div class="flex-box">
+
+      <!--Spacer-->
+      <span class="flex-spacer"></span>
 
       <!--Cancel button-->
       <app-button *ngIf="parentId" (simpleClick)="cancel()">
         {{ 'action.cancel' | translate }}
       </app-button>
 
+      <!--Spacer-->
+      <span class="spacer"></span>
+
       <!--Submit button-->
-      <app-button (authClick)="mainSubmit()" color="primary" design="raised">
+      <app-button color="primary" design="raised" (authClick)="submit()">
         {{ 'action.create' | translate }}
       </app-button>
 
     </div>
-  </form>
+  </div>
 </div>

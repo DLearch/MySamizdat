@@ -5,23 +5,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.dialog-content-wrapper {
-  width: 90%;
-  max-width: 300px;
-  min-width: 200px;
-  margin: 0 auto;
-}
-
-.dialog-buttons-wrapper {
+.flex-box {
   display: flex;
-  justify-content: space-between;
-  margin: 0.83em 0;
-}
-
-.page-wrapper {
-  max-width: 1000px;
-  width: 100%;
-  margin: auto;
 }
 
 .flex-spacer {

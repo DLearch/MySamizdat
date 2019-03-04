@@ -20,7 +20,6 @@ import { BookComponent } from './pages/book/book.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
 import { UserPanelComponent } from './layout/user-panel/user-panel.component';
-import { DialogHeaderComponent } from './components/dialog-header/dialog-header.component';
 import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
@@ -39,7 +38,6 @@ import { DialogWindowService } from './layout/dialog-window/dialog-window.servic
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ImageComponent } from './components/image/image.component';
 import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
-import { CommentComponent } from './components/comments/comment/comment.component';
 import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
 import { NewBookComponent } from './pages/new-book/new-book.component';
 import { AccountControllerService } from './api-services/account-controller/account-controller.service';
@@ -61,6 +59,7 @@ import { NewTeamComponent } from './pages/new-team/new-team.component';
 import { TeamControllerService } from './api-services/team-controller/team-controller.service';
 import { TeamComponent } from './pages/team/team.component';
 import { FormComponent } from './components/form/form.component';
+import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
 
 @NgModule({
   declarations: [
@@ -76,7 +75,6 @@ import { FormComponent } from './components/form/form.component';
     , CatalogComponent
     , DialogWindowComponent
     , UserPanelComponent
-    , DialogHeaderComponent
     , LoadOverlayComponent
     , CommentsComponent
     , ChapterComponent
@@ -87,12 +85,11 @@ import { FormComponent } from './components/form/form.component';
     , AvatarComponent
     , ImageComponent
     , NewCommentComponent
-    , CommentComponent
     , NewChapterComponent
     , NewBookComponent
     , PluralPipe
     , ButtonComponent
-    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent
+    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe
   ]
   , imports: [
     BrowserModule

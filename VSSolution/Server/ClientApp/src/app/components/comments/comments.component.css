@@ -1,6 +1,3 @@
-.main-wrapper {
-  margin: 16px;
-}
 
 .comment-wrapper {
   display: flex;
@@ -11,4 +8,8 @@
 .comment-main {
   flex: 1;
   margin-left: 10px;
+}
+
+.comment-actions {
+  display:flex;
 }

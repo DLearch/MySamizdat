@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Server.Models;
 using Server.Models.Books;
 using Server.Models.Comments;
-using Server.Models.States;
 using Server.Services;
 using Server.ViewModels.Book;
 using System;
@@ -98,7 +97,8 @@ namespace Server.Controllers
                                 OriginalTitle = model.OriginalTitle,
                                 Title = model.Title,
                                 UserId = user.Id,
-                                LanguageId = model.LanguageTK
+                                LanguageId = model.LanguageTK,
+                                OriginalLanguageId = model.OriginalLanguageTK
                             };
 
                             await _db.TranslateBooks.AddAsync(book);
@@ -139,6 +139,7 @@ namespace Server.Controllers
                         book.Description,
                         book.CoverPath,
                         OriginalTitle = book.GetType() == typeof(TranslateBook) ? (book as TranslateBook).OriginalTitle : null,
+                        OriginalLanguageTK = book.GetType() == typeof(TranslateBook) ? (book as TranslateBook).OriginalLanguageId : null,
                         LanguageTK = book.LanguageId,
                         Bookmark = user != null && book.Bookmarks.Any(b => b.UserId == user.Id),
                         User = new
@@ -152,6 +153,13 @@ namespace Server.Controllers
                             comment.Content,
                             comment.CreationTime,
                             comment.ParentId,
+                            //Parent = new
+                            //{
+                            //    Author = new
+                            //    {
+                            //        comment.Parent.Author.UserName
+                            //    }
+                            //},
                             Author = new
                             {
                                 comment.Author.UserName,

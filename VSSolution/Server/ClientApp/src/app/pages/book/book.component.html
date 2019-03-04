@@ -46,7 +46,13 @@
       <!--Language-->
       <mat-list-item>
         <div matLine class="mat-body">{{ 'language.' + model.languageTK | translate }}</div>
-        <div matLine class="mat-card-subtitle">{{ 'book.' + (model.originalTitle ? 'translate-' : '') + 'language' |translate}}</div>
+        <div matLine class="mat-card-subtitle">{{ 'book.' + (isTranslate ? 'translate-' : '') + 'language' |translate}}</div>
+      </mat-list-item>
+
+      <!--Original language-->
+      <mat-list-item *ngIf="isTranslate">
+        <div matLine class="mat-body">{{ 'language.' + model.originalLanguageTK | translate }}</div>
+        <div matLine class="mat-card-subtitle">{{ 'book.original-language' |translate}}</div>
       </mat-list-item>
 
       <!--Description-->
@@ -99,6 +105,6 @@
   <mat-divider class="divider"></mat-divider>
 
   <!--Comments-->
-  <!--<app-comments [comments]="model.comments" entityType="book" entityId="bookId"></app-comments>-->
+  <app-comments *ngIf="model" [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
 
 </app-page-wrapper>

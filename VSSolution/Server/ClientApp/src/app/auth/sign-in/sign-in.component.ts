@@ -1,50 +1,63 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
 import { AuthService } from '../auth.service';
-import { setErrors } from 'src/app/components/input/set-errors';
 import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
 import { AppValidators } from 'src/app/app-validators';
+import { FormComponent } from 'src/app/components/form/form.component';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
 
-  public mainForm: FormGroup;
+  @ViewChild('form') formComponent: FormComponent;
+  
   isWaiting: boolean = false;
+  formTemplate: any;
+  formErrors: any;
 
   public constructor(
-    formBuilder: FormBuilder,
     private dialog: DialogWindowService,
     private authService: AuthService,
     private authController: AuthControllerService
-  ) {
+  ) { }
 
-    this.mainForm = formBuilder.group({
-
-      'email': ['', [Validators.required, Validators.email]]
-      , 'password': ['', [Validators.required, AppValidators.password]]
-    });
+  ngOnInit(): void {
+    this.formTemplate = [
+      {
+        name: 'email',
+        tk: 'email',
+        type: 'email',
+        validators: [Validators.required, Validators.email]
+      },
+      {
+        name: 'password',
+        tk: 'password',
+        type: 'password',
+        validators: [Validators.required, AppValidators.password]
+      }
+    ];
   }
 
-  public mainSubmit(): void {
+  public submit(): void {
 
-    if (this.mainForm.valid) {
+    if (this.formComponent.form.valid) {
       this.isWaiting = true;
 
       this.authController
-        .getToken(this.mainForm.value.email, this.mainForm.value.password)
+        .getToken(this.formComponent.form.value.email, this.formComponent.form.value.password)
         .subscribe(
-        response => {
-          this.authService.signIn(response.userName, response.token);
-          this.dialog.close();
-        },
+          response => {
+            this.authService.signIn(response.userName, response.token);
+            this.dialog.close();
+          },
           response => {
             this.isWaiting = false;
-            setErrors(response, this.mainForm);
+
+            this.formErrors = response;
           }
         );
     }

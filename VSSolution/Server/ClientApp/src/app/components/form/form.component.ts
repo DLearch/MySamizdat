@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, ValidationErrors } from '@angular/forms';
 import { ControlTemplate } from './control-template';
+import { FormErrorDictionary } from './form-error-dictionary';
 
 @Component({
   selector: 'app-form',
@@ -12,11 +13,7 @@ export class FormComponent {
   form: FormGroup;
   controlTemplates: ControlTemplate[];
 
-
-
-  @Output() onFormChanged = new EventEmitter<FormGroup>();
-
-  @Input() set apiErrors(value: { [key: string]: string[] }) {
+  @Input() set errors(value: FormErrorDictionary) {
 
     let adaptedKey: string;
     for (let key in value) {
@@ -54,7 +51,6 @@ export class FormComponent {
 
     this.controlTemplates = value;
     this.form = this.formBuilder.group(controls);
-    this.form.valueChanges.subscribe(() => this.onFormChanged.emit(this.form))
   };
 
   constructor(

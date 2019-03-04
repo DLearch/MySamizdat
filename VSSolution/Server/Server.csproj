@@ -16,6 +16,8 @@
     <None Remove="ClientApp\src\app\api-services\account-controller\get-info-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\auth-controller\confirm-email-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\auth-controller\get-token-rvm.ts" />
+    <None Remove="ClientApp\src\app\api-services\book-controller\add-book-vm.ts" />
+    <None Remove="ClientApp\src\app\api-services\book-controller\add-translate-book-vm.ts" />
     <None Remove="ClientApp\src\app\api-services\book-controller\get-book-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\bookmark-controller\get-bookmarks-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
@@ -24,13 +26,13 @@
     <None Remove="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <None Remove="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
     <None Remove="ClientApp\src\app\components\form\control-template.ts" />
+    <None Remove="ClientApp\src\app\components\form\form-error-dictionary.ts" />
     <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
     <None Remove="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
     <None Remove="ClientApp\src\app\layout\theme-picker\themes.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Scores\" />
     <Folder Include="wwwroot\images\books\" />
   </ItemGroup>
 
@@ -48,6 +50,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\account-controller\get-info-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\auth-controller\confirm-email-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\auth-controller\get-token-rvm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\add-book-vm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\add-translate-book-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\get-book-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\bookmark-controller\get-bookmarks-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
@@ -56,6 +60,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\form\control-template.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\form\form-error-dictionary.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\layout\theme-picker\themes.ts" />

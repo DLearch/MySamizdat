@@ -2,13 +2,13 @@
 <app-page-wrapper [loaded]="model">
 
   <!--Chapter name-->
-  <div class="mat-h2">{{ model.name }}</div>
+  <div class="mat-h2">{{ model?.name }}</div>
 
   <!--Actions-->
   <ng-container *ngTemplateOutlet="actions"></ng-container>
 
   <!--Content-->
-  <div>{{ model.content }}</div>
+  <div>{{ model?.content }}</div>
 
   <!--Actions-->
   <ng-container *ngTemplateOutlet="actions"></ng-container>
@@ -21,7 +21,7 @@
 <!--Actions template-->
 <ng-template #actions>
 
-  <div class="actions">
+  <div class="actions" *ngIf="model">
 
     <!--Previous chapter link-->
     <a mat-button

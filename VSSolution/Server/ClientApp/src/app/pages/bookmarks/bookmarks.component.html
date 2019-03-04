@@ -6,7 +6,7 @@
 
       <!--Books count-->
       <div class="mat-h2">
-        {{ (books ? books.length: 0) | plural:'book' | translate:{count: (books ? books.length: 0)} }}
+        {{ books | arrayPluralTranslate:'book' }}
       </div>
 
     </div>

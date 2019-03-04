@@ -1,52 +1,73 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { setErrors } from 'src/app/components/input/set-errors';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
-import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material';
 import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.service';
 import { AppValidators } from 'src/app/app-validators';
+import { FormComponent } from 'src/app/components/form/form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
 
-  public mainForm: FormGroup;
+  @ViewChild('form') formComponent: FormComponent;
+
   isWaiting: boolean = false;
 
   public constructor(
-    formBuilder: FormBuilder,
+    private dialog: DialogWindowService,
     private snackBar: MatSnackBar,
     private authController: AuthControllerService,
-    private dialogWindow: DialogWindowService
-  ) {
+    private translate: TranslateService
+  ) { }
 
-    this.mainForm = formBuilder.group({
-
-      'email': ['', [Validators.required, Validators.email]]
-      , 'userName': ['', [Validators.required, AppValidators.userName]]
-      , 'password': ['', [Validators.required, AppValidators.password]]
-    });
+  ngOnInit(): void {
+    this.formComponent.template = [
+      {
+        name: 'email',
+        tk: 'email',
+        type: 'email',
+        validators: [Validators.required, Validators.email]
+      },
+      {
+        name: 'userName',
+        tk: 'username',
+        validators: [Validators.required, AppValidators.userName]
+      },
+      {
+        name: 'password',
+        tk: 'password',
+        type: 'password',
+        validators: [Validators.required, AppValidators.password]
+      }
+    ];
   }
 
-  public mainSubmit(): void {
+  public submit(): void {
 
-    if (this.mainForm.valid) {
+    if (this.formComponent.form.valid) {
+
       this.isWaiting = true;
 
       this.authController
-        .register(this.mainForm.value.userName, this.mainForm.value.email, this.mainForm.value.password)
+        .register(this.formComponent.form.value.userName, this.formComponent.form.value.email, this.formComponent.form.value.password)
         .subscribe(
           () => {
-            this.dialogWindow.close();
-            this.snackBar.open('Email confirmation message sent. Check your mailbox.', 'Ok');
-          }
-          , response => {
+
+            this.snackBar.open(
+              this.translate.instant('email-confirmation-message-sent'),
+              this.translate.instant('action.ok')
+            );
+            this.dialog.close();
+          },
+          response => {
             this.isWaiting = false;
-            setErrors(response, this.mainForm);
+
+            this.formComponent.errors = response;
           }
         );
     }

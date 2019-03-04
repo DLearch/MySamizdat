@@ -1,29 +1,17 @@
-<div class="dialog-content-wrapper">
+<app-page-wrapper [loaded]="!isWaiting" maxWidth="300px">
 
-  <!--Load overlay-->
-  <app-load-overlay *ngIf="isWaiting"></app-load-overlay>
+  <app-form #form></app-form>
 
-  <!--Main form-->
-  <form [formGroup]="mainForm" (submit)="mainSubmit()">
+  <div class="flex-box">
 
-    <!--Email input-->
-    <app-input formControlName="email" type="email" fieldTK="email" [field]="mainForm.get('email')"></app-input>
+    <!-- Sign in link -->
+    <a routerLink="/sign-in" mat-button>{{ 'page.sign-in.link' | translate }}</a>
 
-    <!--UserName input-->
-    <app-input formControlName="userName" type="text" fieldTK="username" [field]="mainForm.get('userName')"></app-input>
+    <!--Spacer-->
+    <span class="flex-spacer"></span>
 
-    <!--Password input-->
-    <app-input formControlName="password" type="password" fieldTK="password" [field]="mainForm.get('password')"></app-input>
+    <!--Submit button-->
+    <app-button design="raised" color="primary" (simpleClick)="submit()"> {{ 'page.sign-up.link' | translate }} </app-button>
 
-    <!--Buttons container-->
-    <div class="dialog-buttons-wrapper">
-
-      <!-- Sign in link -->
-      <a routerLink="/sign-in" mat-button>{{ 'page.sign-in.link' | translate }}</a>
-
-      <!--Submit button-->
-      <app-button type="submit" design="raised" color="primary"> {{ 'page.sign-up.link' | translate }} </app-button>
-    </div>
-  </form>
-
-</div>
+  </div>
+</app-page-wrapper>

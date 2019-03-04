@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 export class PageWrapperComponent {
   
   @Input() set title(value: string) {
-    this.titleService.setTitle(value);
+    this.titleService.setTitle(value + ' - Runoo');
   }
 
   @Input() maxWidth: string = '1000px';

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { setErrors } from 'src/app/components/input/set-errors';
 import { BookControllerService } from 'src/app/api-services/book-controller/book-controller.service';
 import { LanguageControllerService } from 'src/app/api-services/language-controller/language-controller.service';
 import { Observable } from 'rxjs';
+import { FormComponent } from 'src/app/components/form/form.component';
 
 @Component({
   selector: 'app-new-book',
@@ -13,64 +13,119 @@ import { Observable } from 'rxjs';
 })
 export class NewBookComponent implements OnInit {
 
-  public mainForm: FormGroup;
-  public translateForm: FormGroup;
+  @ViewChild('form') formComponent: FormComponent;
+  
   languageTKs: string[];
-  isTranslate: boolean = false;
+  isWaiting: boolean = false;
+  private _isTranslate: boolean = false;
+
+  set isTranslate(value: boolean) {
+
+    this._isTranslate = value;
+
+    let langSelectElements = [];
+
+    for (let languageTK of this.languageTKs)
+      langSelectElements.push({ value: languageTK, tk: 'language.' + languageTK });
+
+    if (value) {
+
+      this.formComponent.template = [
+        {
+          name: 'title',
+          tk: 'book-title',
+          validators: [Validators.required]
+        },
+        {
+          name: 'originalTitle',
+          tk: 'original-book-title',
+          validators: [Validators.required]
+        },
+        {
+          name: 'languageTK',
+          tk: 'language',
+          type: 'select',
+          validators: [Validators.required],
+          selectElements: langSelectElements
+        },
+        {
+          name: 'originalLanguageTK',
+          tk: 'original-language',
+          type: 'select',
+          validators: [Validators.required],
+          selectElements: langSelectElements
+        }
+      ];
+    }
+    else {
+
+      this.formComponent.template = [
+        {
+          name: 'title',
+          tk: 'book-title',
+          validators: [Validators.required]
+        },
+        {
+          name: 'languageTK',
+          tk: 'language',
+          type: 'select',
+          validators: [Validators.required],
+          selectElements: langSelectElements
+        }
+      ];
+    }
+  }
+  get isTranslate(): boolean {
+    return this._isTranslate;
+  }
 
   constructor(
     private bookController: BookControllerService
-    , formBuilder: FormBuilder
     , private router: Router
     , private languageController: LanguageControllerService
-  ) {
-
-    this.translateForm = formBuilder.group({
-
-      'title': ['', [Validators.required]],
-      'languageTK': ['', [Validators.required]],
-      'originalTitle': ['', [Validators.required]],
-      'originalLanguageTK': ['', [Validators.required]]
-    });
-    this.mainForm = formBuilder.group({
-
-      'title': ['', [Validators.required]],
-      'languageTK': ['', [Validators.required]]
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
 
+    this.isWaiting = true;
     this.languageController
       .getLanguages()
-      .subscribe(languageTKs => this.languageTKs = languageTKs);
+      .subscribe(languageTKs => {
+        this.languageTKs = languageTKs;
+        this.isTranslate = false;
+        this.isWaiting = false;
+      });
   }
 
-  public mainSubmit(): void {
+  public submit(): void {
 
-    if (this.mainForm.valid) {
+    if (this.formComponent.form.valid) {
 
       let observable$: Observable<number> = null;
+      this.isWaiting = true;
 
       if (this.isTranslate) {
 
-        observable$ = this.bookController.addBook(
-          this.mainForm.value.title,
-          this.mainForm.value.languageTK
+        observable$ = this.bookController.addTranslateBook(
+          this.formComponent.form.value.title,
+          this.formComponent.form.value.languageTK,
+          this.formComponent.form.value.originalTitle,
+          this.formComponent.form.value.originalLanguageTK
         );
       }
       else {
-        observable$ = this.bookController.addTranslateBook(
-          this.translateForm.value.title,
-          this.translateForm.value.languageTK,
-          this.translateForm.value.originalTitle,
-          this.translateForm.value.originalLanguageTK
+        observable$ = this.bookController.addBook(
+          this.formComponent.form.value.title,
+          this.formComponent.form.value.languageTK
         );
       }
       
       observable$.subscribe(
         bookId => this.router.navigate([`book/${bookId}`])
-        , response => setErrors(response, this.mainForm)
+        , response => {
+          this.isWaiting = false;
+          this.formComponent.errors = response;
+        }
       );
     }
   }

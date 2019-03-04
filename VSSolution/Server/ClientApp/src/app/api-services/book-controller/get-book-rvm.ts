@@ -4,6 +4,7 @@ export class GetBookRVM {
   coverPath: string;
   languageTK: string;
   originalTitle: string;
+  originalLanguageTK: string;
   bookmark: boolean;
   user: {
     userName: string;
@@ -14,6 +15,11 @@ export class GetBookRVM {
     content: string;
     creationTime: Date;
     parentId: number;
+    //parent: {
+    //  author: {
+    //    userName: string;
+    //  }
+    //};
     author: { userName: string, avatarPath: string };
   }[];
   chapters: {

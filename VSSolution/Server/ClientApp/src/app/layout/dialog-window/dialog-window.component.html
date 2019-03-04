@@ -12,19 +12,21 @@
       <!--Header-->
       <div class="header" *ngIf="service.config.titleTK || service.config.closeButtonVisible" [style.max-width]="service.config.headerMaxWidth">
 
-        <!--Title-->
-        <div *ngIf="service.config.titleTK" class="mat-h2">{{ service.config.titleTK | translate }}</div>
+        <div class="header-inner">
+          <!--Title-->
+          <div *ngIf="service.config.titleTK" class="mat-h2">{{ service.config.titleTK | translate }}</div>
 
-        <!-- Spacer -->
-        <span class="flex-spacer"></span>
+          <!-- Spacer -->
+          <span class="flex-spacer"></span>
 
-        <!--Close button-->
-        <div *ngIf="service.config.closeButtonVisible">
-          <button type='button'
-                  mat-icon-button
-                  (click)='service.close()'>
-            <mat-icon>close</mat-icon>
-          </button>
+          <!--Close button-->
+          <div *ngIf="service.config.closeButtonVisible">
+            <button type='button'
+                    mat-icon-button
+                    (click)='service.close()'>
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
 

@@ -26,5 +26,8 @@ export class CommentsComponent {
     
     return this.comments.filter(comment => !comment.parentId);
   }
-  
+
+  addComment(comment: any): void {
+    this.comments.push(comment);
+  }
 }

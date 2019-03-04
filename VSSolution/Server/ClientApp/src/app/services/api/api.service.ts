@@ -98,7 +98,7 @@ export class ApiService {
 
       if ((typeof data.error) == 'string' && (data.error as string).slice(0, 15) == '<!DOCTYPE html>')
         document.body.innerHTML = data.error;
-
+      
       switch (data.status) {
         case 400:
           return throwError(data.error);
