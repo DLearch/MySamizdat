@@ -11,7 +11,7 @@ export class PluralPipe implements PipeTransform {
     private translate: TranslateService
   ) { }
 
-  transform(value: number, tk?: string): any {
+  transform(value: number, translateTK?: string): string {
 
     let result;
     if (!value)
@@ -28,7 +28,10 @@ export class PluralPipe implements PipeTransform {
           break;
       }
 
-    return tk + '.count.' + result;
+    if (translateTK)
+      return translateTK + '.count.' + result;
+
+    return 'count.' + result;
   }
 
   getRussian(value: number): string {
@@ -40,10 +43,10 @@ export class PluralPipe implements PipeTransform {
 
     value = value % 10;
     if (value > 1 && value < 5)
-      return 'few';
+      return 'many-few';
 
     if (value == 1)
-      return 'one';
+      return 'many-one';
 
     return 'many';
   }

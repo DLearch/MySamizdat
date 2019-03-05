@@ -13,7 +13,7 @@ export class GetBookRVM {
   comments: {
     id: number;
     content: string;
-    creationTime: Date;
+    creationTime: string;
     parentId: number;
     //parent: {
     //  author: {
@@ -24,7 +24,7 @@ export class GetBookRVM {
   }[];
   chapters: {
     id: number;
-    creationTime: Date;
+    creationTime: string;
     name: string;
   }[];
 }

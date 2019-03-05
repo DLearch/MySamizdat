@@ -44,7 +44,7 @@ const routes: Routes = [
       , { path: 'catalog', component: CatalogComponent }
       , { path: 'book', redirectTo: 'catalog' }
 
-      , { path: '**', component: ErrorComponent, data: { error: 404 } }
+      , { path: '**', component: ErrorComponent, data: { code: 404, error: 'Page not found' } }
     ]
   }
 ];

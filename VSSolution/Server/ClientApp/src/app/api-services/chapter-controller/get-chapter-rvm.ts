@@ -1,7 +1,7 @@
 export class GetChapterRVM {
 
   content: string;
-  creationTime: Date;
+  creationTime: string;
   name: string;
   book: {
     id: number;

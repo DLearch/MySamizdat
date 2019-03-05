@@ -23,7 +23,7 @@ namespace Server.Models
         //public DbSet<Bookmark> Bookmarks { get; set; }
 
         //public DbSet<Genre> Genres { get; set; }
-        //public DbSet<Author> Authors { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Language> Languages { get; set; }
 
         public DbSet<Comment> Comments { get; set; }

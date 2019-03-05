@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { setErrors } from '../../input/set-errors';
+import { Validators } from '@angular/forms';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { CommentControllerService } from 'src/app/api-services/comment-controller/comment-controller.service';
 import { CommentEntityType } from 'src/app/api-services/comment-controller/comment-entity-type';
 import { FormComponent } from '../../form/form.component';

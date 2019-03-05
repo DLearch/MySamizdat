@@ -162,7 +162,8 @@
     "count": {
       "none": "0 комментариев",
       "one": "1 комментарий",
-      "few": "{{count}} комментария",
+      "many-one": "{{count}} комментарий",
+      "many-few": "{{count}} комментария",
       "many": "{{count}} комментариев"
     },
     "action": {
@@ -174,7 +175,8 @@
     "count": {
       "none": "0 книг",
       "one": "1 книга",
-      "few": "{{count}} книги",
+      "many-one": "{{count}} книга",
+      "many-few": "{{count}} книги",
       "many": "{{count}} книг"
     },
     "action": {
@@ -191,8 +193,9 @@
   "chapter": {
     "count": {
       "none": "0 глав",
-      "one": "1 глава",
-      "few": "{{count}} главы",
+      "one": "{{count}} глава",
+      "many-one": "{{count}} глава",
+      "many-few": "{{count}} главы",
       "many": "{{count}} глав"
     },
     "action": {
@@ -218,5 +221,70 @@
     "ru": "Русский",
     "en": "Английский",
     "ua": "Украинский"
+  },
+  "time": {
+    "year": {
+      "ago.count": {
+        "none": "Меньше года назад",
+        "one": "Год назад",
+        "many-one": "{{number}} год назад",
+        "many-few": "{{number}} года назад",
+        "many": "{{number}} лет назад"
+      }
+    },
+    "month": {
+      "ago.count": {
+        "none": "Меньше месяца назад",
+        "one": "Месяц назад",
+        "many-one": "{{number}} месяц назад",
+        "many-few": "{{number}} месяца назад",
+        "many": "{{number}} месяцев назад"
+      }
+    },
+    "week": {
+      "ago.count": {
+        "none": "Меньше недели назад",
+        "one": "Неделю назад",
+        "many-one": "{{number}} неделю назад",
+        "many-few": "{{number}} недели назад",
+        "many": "{{number}} недель назад"
+      }
+    },
+    "day": {
+      "ago.count": {
+        "none": "Меньше дня назад",
+        "one": "День назад",
+        "many-one": "{{number}} неделю назад",
+        "many-few": "{{number}} недели назад",
+        "many": "{{number}} дней назад"
+      }
+    },
+    "hour": {
+      "ago.count": {
+        "none": "Меньше часа назад",
+        "one": "Час назад",
+        "many-one": "{{number}} час назад",
+        "many-few": "{{number}} часа назад",
+        "many": "{{number}} часов назад"
+      }
+    },
+    "minute": {
+      "ago.count": {
+        "none": "Меньше минуты назад",
+        "one": "Минуту назад",
+        "many-one": "{{number}} минуту назад",
+        "many-few": "{{number}} минуты назад",
+        "many": "{{number}} минут назад"
+      }
+    },
+    "seconds": {
+      "ago.count": {
+        "none": "Меньше секунды назад",
+        "one": "Секунду назад",
+        "many-one": "{{number}} секунду назад",
+        "many-few": "{{number}} секунды назад",
+        "many": "{{number}} секунд назад"
+      }
+    }
   }
 }

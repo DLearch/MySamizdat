@@ -60,6 +60,7 @@ import { TeamControllerService } from './api-services/team-controller/team-contr
 import { TeamComponent } from './pages/team/team.component';
 import { FormComponent } from './components/form/form.component';
 import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
+import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,7 @@ import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
     , NewBookComponent
     , PluralPipe
     , ButtonComponent
-    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe
+    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe, TimePluralTranslatePipe
   ]
   , imports: [
     BrowserModule
@@ -124,6 +125,7 @@ import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
     , CommentControllerService
     , LanguageControllerService
     , TeamControllerService
+    , PluralPipe
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {

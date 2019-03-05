@@ -32,7 +32,7 @@
       <!--Header-->
       <div class="header">
         <span class="mat-body-strong">{{ comment.author.userName }} </span>
-        <span class="mat-card-subtitle"> {{ comment.creationTime | date: 'short' }}</span>
+        <span class="mat-card-subtitle"> {{ comment.creationTime | timePluralTranslate }}</span>
       </div>
 
       <!--Content-->

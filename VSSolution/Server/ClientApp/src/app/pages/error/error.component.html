@@ -1,3 +1,4 @@
-<p>
-  error works!
-</p>
+<app-page-wrapper [title]="code ? 'Error ' + code : 'Error'">
+  <div class="mat-h2">Error {{code}}</div>
+  <p class="mat-body">{{error}}</p>
+</app-page-wrapper>

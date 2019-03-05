@@ -20,8 +20,8 @@ namespace Server.Models.Books
 
         public string CoverPath { get; set; }
 
-        //public int AuthorId { get; set; }
-        //public Author Author { get; set; }
+        public string AuthorId { get; set; }
+        public Author Author { get; set; }
 
         //public List<BookGenre> Genres { get; set; }
 

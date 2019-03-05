@@ -11,14 +11,7 @@ import { AuthControllerService } from '../api-services/auth-controller/auth-cont
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-
-  readonly authRoutes: string[] = [
-    'create-book',
-    'bookmarks',
-    'account',
-    //'book/????/create-chapter'
-  ];
-
+  
   constructor(
     private authService: AuthService,
     private dialogWindow: DialogWindowService,
@@ -34,8 +27,8 @@ export class AuthGuard implements CanActivate {
     //console.log(next);
     //console.log(state);
     //console.log(this.router);
-    
-    if (!this.authService.isAuth && this.authRoutes.includes(next.routeConfig.path) || next.routeConfig.path === 'sign-in') {
+
+    if (next.routeConfig.path === 'sign-in') {
 
       this.signOutIfAuth();
 
@@ -69,8 +62,13 @@ export class AuthGuard implements CanActivate {
 
       return this.confirmEmail(next);
     }
+    
+    if (!this.authService.isAuth) {
+      this.router.navigate(['sign-in']);
+      return false;
+    }
 
-    return this.authService.isAuth;
+    return true;
   }
 
   signOutIfAuth(): void {
