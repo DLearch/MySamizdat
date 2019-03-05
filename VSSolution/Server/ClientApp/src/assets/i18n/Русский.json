@@ -1,4 +1,12 @@
 {
+  "component": {
+    "error": {
+      "error": "Ошибка"
+    }
+  },
+  "error": {
+    "page-not-found": "Страница не найдена"
+  },
   "input": {
     "language": {
       "placeholder": "Язык"

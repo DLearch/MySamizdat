@@ -9,8 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class ErrorComponent implements OnInit {
 
-  code: string;
-  error: string;
+  componentTK = 'component.error.';
+
+  errorTK: string;
+  descriptionTK: string;
   sub: Subscription;
 
   constructor(
@@ -21,8 +23,8 @@ export class ErrorComponent implements OnInit {
     this.sub = this.route
       .data
       .subscribe(data => {
-        this.error = data.error;
-        this.code = data.code;
+        this.errorTK = data.errorTK;
+        this.descriptionTK = data.descriptionTK;
       });
   }
 
