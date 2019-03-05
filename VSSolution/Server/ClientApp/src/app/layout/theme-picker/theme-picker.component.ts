@@ -8,6 +8,8 @@ import { ThemePickerService } from './theme-picker.service';
 })
 export class ThemePickerComponent {
 
+  componentTK = 'component.theme-picker.';
+
   get isDark(): boolean {
     return this.themePickerService.theme === 'dark';
   }

@@ -56,6 +56,6 @@ export class BookComponent implements OnInit {
   }
 
   handleError(error: any): void {
-
+    
   }
 }
