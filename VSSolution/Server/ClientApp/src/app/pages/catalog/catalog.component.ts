@@ -6,7 +6,10 @@ import { CatalogControllerService } from 'src/app/api-services/catalog-controlle
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.css']
+  styleUrls: ['./catalog.component.css'],
+  host: {
+    'class': 'page'
+  }
 })
 export class CatalogComponent implements OnInit {
   

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { PortalModule } from '@angular/cdk/portal';
+import { OverlayModule } from '@angular/cdk/overlay';
 import {
   MatInputModule
   , MatFormFieldModule
@@ -47,6 +48,7 @@ const modules = [
   , MatNativeDateModule
   , MatSnackBarModule
   , MatStepperModule
+  , OverlayModule
 ];
 
 @NgModule({

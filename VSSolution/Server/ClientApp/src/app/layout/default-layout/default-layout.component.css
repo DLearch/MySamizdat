@@ -10,6 +10,16 @@
   margin: auto;
 }
 
+.content-wrapper {
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+}
+
 .content {
   flex: 1;
+  display:flex;
+  margin: 16px;
 }

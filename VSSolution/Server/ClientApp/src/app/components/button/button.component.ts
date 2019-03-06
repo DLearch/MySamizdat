@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { ConfigurationService } from 'src/app/services/configuration/configuration.service';
 
 @Component({
   selector: 'app-button',
@@ -11,15 +12,25 @@ export class ButtonComponent {
   
   @Input() type: 'button' | 'submit' = 'button';
   @Input() color: 'primary' = null;
-  @Input() design: 'raised' | 'fab' | 'icon';
+  @Input() design: 'raised' | 'fab' | 'icon' | 'image';
+  @Input() imagePath: string = null;
 
   @Output() authClick = new EventEmitter<any>();
   @Output() simpleClick = new EventEmitter<any>();
-
+  
   constructor(
     private authService: AuthService,
+    private config: ConfigurationService,
     private router: Router
   ) { }
+
+  getImagePath(): string {
+
+    if (this.imagePath)
+      return this.imagePath;
+
+    return this.config.getString('defaultAvatarPath');
+  }
 
   onClick($event): void {
     

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models.Books;
 using Server.Models.Comments;
+using Server.Models.Team;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,11 @@ namespace Server.Models
         public DbSet<TranslateBook> TranslateBooks { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
 
-        public DbSet<Team> Teams { get; set; }
+        public DbSet<Team.Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
+        public DbSet<TeamMemberToTeamMemberRole> TeamMembersToTeamMemberRoles { get; set; }
         
-        //public DbSet<BookState> BookStates { get; set; }
-        //public DbSet<TranslateBookState> TranslateBookStates { get; set; }
-
-        //public DbSet<Bookmark> Bookmarks { get; set; }
-
-        //public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Language> Languages { get; set; }
 
@@ -92,6 +90,13 @@ namespace Server.Models
                 new Language { Id = "ua"}
                 });
 
+            modelBuilder.Entity<TeamMemberRole>().HasData(
+                new TeamMemberRole[]
+                {
+                new TeamMemberRole { Id = "editor"},
+                new TeamMemberRole { Id = "translator"},
+                new TeamMemberRole { Id = "writer"}
+                });
             base.OnModelCreating(modelBuilder);
         }
     }

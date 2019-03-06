@@ -61,6 +61,7 @@ import { TeamComponent } from './pages/team/team.component';
 import { FormComponent } from './components/form/form.component';
 import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
 import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
+import { PageServiceService } from './services/page-service/page-service.service';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
     , LanguageControllerService
     , TeamControllerService
     , PluralPipe
+    , PageServiceService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {

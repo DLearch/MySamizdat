@@ -22,3 +22,7 @@ body {
 .mat-h2 {
   margin: 0;
 }
+
+.page {
+  flex: 1;
+}

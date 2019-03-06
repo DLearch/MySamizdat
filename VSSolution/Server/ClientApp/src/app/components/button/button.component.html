@@ -1,5 +1,6 @@
 
 <ng-container [ngSwitch]="design">
+
   <ng-container *ngSwitchCase="'raised'">
     <button [type]="type"
             (click)="onClick($event)"
@@ -9,6 +10,18 @@
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </button>
   </ng-container>
+
+  <ng-container *ngSwitchCase="'image'">
+    <button [type]="type"
+            (click)="onClick($event)"
+            mat-mini-fab
+            [color]="color"
+            class="image"
+            [style.background-image]="'url(' + getImagePath() + ')'">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-container>
+
   <ng-container *ngSwitchCase="'fab'">
     <button [type]="type"
             (click)="onClick($event)"
@@ -18,6 +31,7 @@
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </button>
   </ng-container>
+
   <ng-container *ngSwitchCase="'icon'">
     <button [type]="type"
             (click)="onClick($event)"
@@ -27,6 +41,7 @@
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </button>
   </ng-container>
+
   <ng-template ngSwitchDefault>
     <button [type]="type"
             (click)="onClick($event)"
@@ -36,6 +51,7 @@
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </button>
   </ng-template>
+
 </ng-container>
 
 <ng-template #content>

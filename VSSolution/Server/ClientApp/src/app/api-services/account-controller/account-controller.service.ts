@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { GetInfoRVM } from './get-info-rvm';
 
 @Injectable()

@@ -1,20 +1,26 @@
 <!-- If the user is logged in-->
-<span *ngIf='auth.isAuth'>
+<ng-container *ngIf='auth.isAuth'>
 
-  <!-- Bookmarks link -->
-  <a routerLink="/bookmarks" mat-button>{{'page.bookmarks.link' | translate}}</a>
+  <app-button [matMenuTriggerFor]="langMenu" design="image"></app-button>
 
-  <!-- Profile link -->
-  <a routerLink="/account" mat-button>{{ userStorage.userName }}</a>
+  <mat-menu #langMenu="matMenu">
 
-  <!-- Sign out button -->
-  <button mat-button (click)="auth.signOut()">{{ 'action.sign-out' | translate }}</button>
+    <!-- Bookmarks link -->
+    <a routerLink="/bookmarks" mat-menu-item>{{componentTK + 'bookmarks' | translate}}</a>
 
-</span>
+    <!-- Profile link -->
+    <a routerLink="/account" mat-menu-item>{{componentTK + 'account' | translate}}</a>
+
+    <!-- Sign out button -->
+    <button mat-menu-item (click)="auth.signOut()">{{ componentTK + 'sign-out' | translate }}</button>
+
+  </mat-menu>
+
+</ng-container>
 
 <!-- If the user is not logged in-->
-<span *ngIf='!auth.isAuth'>
+<ng-container *ngIf='!auth.isAuth'>
 
   <!-- Sign in link -->
-  <a routerLink="/sign-in" mat-button>{{ 'page.sign-in.link' | translate }}</a>
-</span>
+  <a routerLink="/sign-in" mat-button>{{ componentTK + 'sign-in' | translate }}</a>
+</ng-container>

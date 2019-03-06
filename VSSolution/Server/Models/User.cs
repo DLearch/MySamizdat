@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Server.Models.Books;
 using Server.Models.Comments;
+using Server.Models.Team;
 using Server.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,8 +25,8 @@ namespace Server.Models
         public List<BookComment> BookComments { get; set; }
         public List<ChapterComment> ChapterComments { get; set; }
         
-        //public string LanguageId { get; set; }
-        //public Language Language { get; set; }
+        [InverseProperty("User")]
+        public List<TeamMember> Teams { get; set; }
 
         public List<Book> Books { get; set; }
 

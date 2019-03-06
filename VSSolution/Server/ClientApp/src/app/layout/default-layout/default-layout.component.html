@@ -21,9 +21,12 @@
   </mat-toolbar>
 
   <!-- Content -->
-  <main class="content">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="content-wrapper">
+    <main class="content">
+      <!-- [style.padding]="pageService.padding" [style.maxWidth]="pageService.maxWidth"-->
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 
   <!--Footer-->
   <mat-toolbar color="primary">

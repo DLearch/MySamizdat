@@ -9,6 +9,8 @@ import { UserStorageService } from 'src/app/auth/user-storage.service';
 })
 export class UserPanelComponent {
 
+  componentTK = 'component.user-panel.';
+
   constructor(
     private userStorage: UserStorageService,
     public auth: AuthService

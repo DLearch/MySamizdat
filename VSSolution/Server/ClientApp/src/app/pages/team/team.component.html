@@ -1,9 +1,19 @@
-<app-page-wrapper [loaded]="model">
 
-  <!--Name-->
-  <div class="mat-h2"> {{model?.name}}</div>
+<!--Name-->
+<div class="mat-h2"> {{model?.name}}</div>
 
-  <!--Name-->
-  <div class="mat-body"> {{model?.description}}</div>
+<!--Description-->
+<div class="mat-body"> {{model?.description}}</div>
 
-</app-page-wrapper>
+<!--Members-->
+<mat-nav-list *ngIf="model">
+
+  <mat-list-item *ngFor="let member of model.members">
+
+    <!--UserName-->
+    <a matLine [routerLink]="['/users', member.userName]">{{ member.userName }}</a>
+
+
+  </mat-list-item>
+
+</mat-nav-list>

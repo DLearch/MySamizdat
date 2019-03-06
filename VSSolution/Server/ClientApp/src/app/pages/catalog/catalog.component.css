@@ -1,8 +1,10 @@
-.main-wrapper {
+
+:host {
   display: flex;
   flex-direction: column;
 }
 
-.contant {
+
+.content {
   flex: 1;
 }

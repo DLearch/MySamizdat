@@ -45,7 +45,7 @@ namespace Server.Models.Books
         public User User { get; set; }
 
         public int? TeamId { get; set; }
-        public Team Team { get; set; }
+        public Team.Team Team { get; set; }
 
         public Book()
         {

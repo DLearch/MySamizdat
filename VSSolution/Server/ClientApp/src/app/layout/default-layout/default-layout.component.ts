@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ThemePickerService } from '../theme-picker/theme-picker.service';
+import { PageServiceService } from 'src/app/services/page-service/page-service.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -13,7 +14,8 @@ export class DefaultLayoutComponent {
   
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private themePickerService: ThemePickerService
+    private themePickerService: ThemePickerService,
+    private pageService: PageServiceService
   ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver

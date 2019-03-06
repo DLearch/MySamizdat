@@ -5,7 +5,7 @@
     <mat-card-header>
       <button mat-mini-fab *ngIf="!isWaiting" class="avatar" mat-card-avatar (click)="changeAvatar()"></button>
       <mat-card-title>{{userStorage.userName}}</mat-card-title>
-      <mat-card-subtitle>{{ userStorage.email }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ model?.email }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content *ngIf="!isWaiting" class="basic-info-card-content">
 
@@ -28,4 +28,15 @@
     </mat-card-header>
   </mat-card>
 
+  <!--Team-->
+  <mat-card class="team-card" *ngIf="model">
+    <mat-card-header>
+      <mat-card-title>Teams</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let team of model.teams" [routerLink]="['/team', team.id]">{{team.name}}</a>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
 </app-page-wrapper>

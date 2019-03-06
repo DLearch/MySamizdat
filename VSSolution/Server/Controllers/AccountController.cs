@@ -42,7 +42,12 @@ namespace Server.Controllers
                     return Ok(new
                     {
                         user.Email,
-                        user.EmailIsVisible
+                        user.EmailIsVisible,
+                        Teams = _db.TeamMembers.Where(tm => tm.UserId == user.Id).Select(tm => new
+                        {
+                            tm.Team.Id,
+                            tm.Team.Name
+                        }).ToList()
                     });
                 else
                     ModelState.AddModelError("User", "not-found");

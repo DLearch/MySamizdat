@@ -16,7 +16,7 @@ export class PaginatorIntl extends MatPaginatorIntl  {
   }
 
   translateLabels() {
-    this.itemsPerPageLabel = this.translate.instant('paginator.items-per-page');
+    this.itemsPerPageLabel = '';//this.translate.instant('paginator.items-per-page');
     this.nextPageLabel = this.translate.instant('paginator.next-page');
     this.previousPageLabel = this.translate.instant('paginator.previous-page');
     this.firstPageLabel = this.translate.instant('paginator.first-page');
@@ -33,7 +33,7 @@ export class PaginatorIntl extends MatPaginatorIntl  {
   
   getRangeLabel = function (page, pageSize, length) {
 
-    const ofLabel = this.translate ? this.translate.instant('paginator.of') : 'of';
+    const ofLabel = '/';//this.translate ? this.translate.instant('paginator.of') : 'of';
 
     if (length === 0 || pageSize === 0)
       return '0 ' + ofLabel + ' ' + length;

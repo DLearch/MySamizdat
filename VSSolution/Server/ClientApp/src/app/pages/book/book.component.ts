@@ -4,11 +4,17 @@ import { BookControllerService } from 'src/app/api-services/book-controller/book
 import { GetBookRVM } from 'src/app/api-services/book-controller/get-book-rvm';
 import { BookmarkControllerService } from 'src/app/api-services/bookmark-controller/bookmark-controller.service';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
+import { SignInComponent } from 'src/app/auth/sign-in/sign-in.component';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css']
+  styleUrls: ['./book.component.css'],
+  host: {
+    'class': 'page'
+  }
 })
 export class BookComponent implements OnInit {
 
@@ -40,7 +46,7 @@ export class BookComponent implements OnInit {
           this.model = model
         }
         , error => this.handleError(error)
-      );
+    );
   }
 
   changeBookmark(): void {
