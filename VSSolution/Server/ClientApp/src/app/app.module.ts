@@ -62,6 +62,8 @@ import { FormComponent } from './components/form/form.component';
 import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
 import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
 import { PageServiceService } from './services/page-service/page-service.service';
+import { NotificationsComponent } from './layout/notifications/notifications.component';
+import { TeamInviteNotificationComponent } from './components/notifications/team-invite-notification/team-invite-notification.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,7 @@ import { PageServiceService } from './services/page-service/page-service.service
     , NewBookComponent
     , PluralPipe
     , ButtonComponent
-    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe, TimePluralTranslatePipe
+    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe, TimePluralTranslatePipe, NotificationsComponent, TeamInviteNotificationComponent
   ]
   , imports: [
     BrowserModule

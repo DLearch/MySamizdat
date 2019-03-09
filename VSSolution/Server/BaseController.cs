@@ -13,6 +13,7 @@ namespace Server
     {
         protected const string ERROR_TAKEN = "already-taken";
         protected const string ERROR_NOT_FOUND = "not-found";
+        protected const string ERROR_ACCESS = "access";
 
         protected readonly UserManager<User> _userManager;
         protected readonly AppDbContext _db;
@@ -38,16 +39,16 @@ namespace Server
         }
 
         [NonAction]
-        public bool AddModelError(string key, string errorMessage, bool result)
+        public bool AddModelErrorIfFalse(string key, string errorMessage, bool result)
         {
-            if (result)
+            if (!result)
                 ModelState.AddModelError(key, errorMessage);
 
             return result;
         }
 
         [NonAction]
-        public T AddModelError<T>(string key, string errorMessage, T result)
+        public T AddModelErrorIfNull<T>(string key, string errorMessage, T result)
         {
             if (result == null)
                 ModelState.AddModelError(key, errorMessage);

@@ -31,10 +31,12 @@ namespace Server.Models
         public List<Book> Books { get; set; }
 
         public List<Bookmark> Bookmarks { get; set; }
+        public List<Notification.Notification> Notifications { get; set; }
 
         public User()
         {
             Bookmarks = new List<Bookmark>();
+            Notifications = new List<Notification.Notification>();
         }
     }
 }

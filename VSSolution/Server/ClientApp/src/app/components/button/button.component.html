@@ -36,9 +36,8 @@
     <button [type]="type"
             (click)="onClick($event)"
             mat-icon-button
-            [color]="color"
-            class="button">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
+            [color]="color">
+      <mat-icon><ng-container *ngTemplateOutlet="content"></ng-container></mat-icon>
     </button>
   </ng-container>
 

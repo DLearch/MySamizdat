@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeamControllerService } from 'src/app/api-services/team-controller/team-controller.service';
 import { GetTeamRVM } from 'src/app/api-services/team-controller/get-team-rvm';
 import { PageServiceService } from 'src/app/services/page-service/page-service.service';
+import { FormComponent } from 'src/app/components/form/form.component';
+import { Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-team',
@@ -14,14 +18,21 @@ import { PageServiceService } from 'src/app/services/page-service/page-service.s
 })
 export class TeamComponent implements OnInit {
 
+  @ViewChild('inviteForm') inviteFormComponent: FormComponent;
+  inviteFormTemplate: any;
+  inviteFormErrors: any;
+
   componentTK = 'component.team.';
   model: GetTeamRVM;
   teamId: number;
 
+
   constructor(
     private route: ActivatedRoute,
     private pageService: PageServiceService,
-    private teamController: TeamControllerService
+    private snackBar: MatSnackBar,
+    private teamController: TeamControllerService,
+    private translate: TranslateService
   ) {
     this.pageService.setDefaultTitle();
   }
@@ -36,6 +47,35 @@ export class TeamComponent implements OnInit {
 
         this.pageService.setTitle(model.name);
       });
+
+    this.inviteFormTemplate = [
+      {
+        name: 'userName',
+        tk: 'userName',
+        type: 'text',
+        validators: [Validators.required]
+      }
+    ];
   }
 
+  invite() {
+
+    if (this.inviteFormComponent.form.valid) {
+
+      this.teamController
+        .inviteMember(this.teamId, this.inviteFormComponent.form.value.userName)
+        .subscribe(
+          () => {
+
+            this.snackBar.open(
+              this.translate.instant(this.componentTK + 'invitation-sent'),
+              this.translate.instant(this.componentTK + 'invitation-sent.ok')
+            );
+          },
+          response => {
+            this.inviteFormErrors = response;
+          }
+        );
+    }
+  }
 }

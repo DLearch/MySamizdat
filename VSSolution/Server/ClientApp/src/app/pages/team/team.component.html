@@ -5,6 +5,10 @@
 <!--Description-->
 <div class="mat-body"> {{model?.description}}</div>
 
+<app-form #inviteForm [template]="inviteFormTemplate" [errors]="inviteFormErrors"></app-form>
+
+<app-button (simpleClick)="invite()">{{ componentTK + 'invite-member' |translate }}</app-button>
+
 <!--Members-->
 <mat-nav-list *ngIf="model">
 

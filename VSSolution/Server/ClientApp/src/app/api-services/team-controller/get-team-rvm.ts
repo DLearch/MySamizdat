@@ -3,5 +3,6 @@ export class GetTeamRVM {
   description: string;
   members: {
     userName: string;
+    isOwner: boolean;
   }[];
 }

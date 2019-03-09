@@ -1,4 +1,5 @@
 ﻿using Server.Models.Books;
+using Server.Models.Notification;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,5 +22,7 @@ namespace Server.Models.Team
 
         [InverseProperty("Team")]
         public List<TeamMember> Members { get; set; }
+
+        public List<TeamInviteNotification> Invites { get; set; }
     }
 }

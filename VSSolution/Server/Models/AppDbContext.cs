@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models.Books;
 using Server.Models.Comments;
+using Server.Models.Notification;
 using Server.Models.Team;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace Server.Models
         
         public DbSet<Author> Authors { get; set; }
         public DbSet<Language> Languages { get; set; }
+
+        public DbSet<Notification.Notification> Notifications { get; set; }
+        public DbSet<TeamInviteNotification> TeamInviteNotifications { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BookComment> BookComments { get; set; }

@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div>{{ componentTK + 'text' | translate: {userName: notification.inviterName, teamName: notification.teamName} }}</div>
+  <div class="actions">
+
+    <span class="flex-spacer"></span>
+
+    <app-button (simpleClick)="respond(false)">{{componentTK + 'decline' | translate}}</app-button>
+    <app-button (simpleClick)="respond(true)" design="raised">{{componentTK + 'accept' | translate}}</app-button>
+  </div>
+</div>
