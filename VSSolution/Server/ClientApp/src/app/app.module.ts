@@ -64,6 +64,7 @@ import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
 import { PageServiceService } from './services/page-service/page-service.service';
 import { NotificationsComponent } from './layout/notifications/notifications.component';
 import { TeamInviteNotificationComponent } from './components/notifications/team-invite-notification/team-invite-notification.component';
+import { BreakPointService } from './services/break-point/break-point.service';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,15 @@ import { TeamInviteNotificationComponent } from './components/notifications/team
     , NewBookComponent
     , PluralPipe
     , ButtonComponent
-    , BookmarksComponent, PageWrapperComponent, NewTeamComponent, TeamComponent, FormComponent, ArrayPluralTranslatePipe, TimePluralTranslatePipe, NotificationsComponent, TeamInviteNotificationComponent
+    , BookmarksComponent
+    , PageWrapperComponent
+    , NewTeamComponent
+    , TeamComponent
+    , FormComponent
+    , ArrayPluralTranslatePipe
+    , TimePluralTranslatePipe
+    , NotificationsComponent
+    , TeamInviteNotificationComponent
   ]
   , imports: [
     BrowserModule
@@ -130,6 +139,7 @@ import { TeamInviteNotificationComponent } from './components/notifications/team
     , TeamControllerService
     , PluralPipe
     , PageServiceService
+    , BreakPointService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {

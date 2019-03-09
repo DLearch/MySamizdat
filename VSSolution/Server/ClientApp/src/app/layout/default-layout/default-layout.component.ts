@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ThemePickerService } from '../theme-picker/theme-picker.service';
 import { PageServiceService } from 'src/app/services/page-service/page-service.service';
+import { BreakPointService } from 'src/app/services/break-point/break-point.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -13,14 +11,8 @@ import { PageServiceService } from 'src/app/services/page-service/page-service.s
 export class DefaultLayoutComponent {
   
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private themePickerService: ThemePickerService,
-    private pageService: PageServiceService
+    private pageService: PageServiceService,
+    private breakpointService: BreakPointService
   ) { }
-
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
 }
