@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable()
-export class PageServiceService {
+export class PageService {
 
   defaultTitle: string = 'Runoo';
   titleEnd: string = ' - Runoo';
   titleTK: string = null;
 
-  maxWidth: string = '1000px';
-  padding: string = '16px';
-  loaded: boolean = true;
-
+  loaded = true;
+  
   constructor(
     private titleService: Title,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd)
+        this.setDefaultTitle();
+    });
+
     this.translate.onLangChange.subscribe(() => {
       if (this.titleTK)
         this.setTitleTK(this.titleTK);
@@ -27,14 +33,15 @@ export class PageServiceService {
     this.titleTK = null;
     this.titleService.setTitle(title + this.titleEnd);
   }
+
   setTitleTK(translateKey: string) {
     this.titleTK = translateKey;
     const title = this.translate.instant(this.titleTK);
     this.titleService.setTitle(title + this.titleEnd);
   }
+
   setDefaultTitle() {
     this.titleTK = null;
     this.titleService.setTitle(this.defaultTitle);
   }
-
 }

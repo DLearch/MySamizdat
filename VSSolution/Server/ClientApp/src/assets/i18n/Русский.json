@@ -42,6 +42,13 @@
       "accept": "Принять",
       "decline": "Отклонить",
       "text": "{{userName}} приглашает вас в команду {{teamName}}"
+    },
+    "default-layout": {
+      "site-name": "Runoo",
+      "link": {
+        "catalog": "Каталог",
+        "main": "Главная"
+      }
     }
   },
   "error": {

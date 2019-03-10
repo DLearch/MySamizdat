@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { BookComponent } from './pages/book/book.component';
-import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -15,6 +13,8 @@ import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
 import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 import { NewTeamComponent } from './pages/new-team/new-team.component';
 import { TeamComponent } from './pages/team/team.component';
+import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
+import { BookPageComponent } from './pages/book-page/book-page.component';
 
 const routes: Routes = [
   {
@@ -34,14 +34,14 @@ const routes: Routes = [
       , { path: 'team/:team', component: TeamComponent }
 
       , { path: 'create-book', component: NewBookComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:book', component: BookComponent }
+      , { path: 'book/:book', component: BookPageComponent }
 
       , { path: 'book/:book/create-chapter', component: NewChapterComponent, canActivate: [AuthGuard] }
       , { path: 'book/:book/:chapter', component: ChapterComponent, runGuardsAndResolvers: 'always' }
 
       , { path: 'bookmarks', component: BookmarksComponent, canActivate: [AuthGuard] }
-      
-      , { path: 'catalog', component: CatalogComponent }
+
+      , { path: 'catalog', component: CatalogPageComponent }
       , { path: 'book', redirectTo: 'catalog' }
 
       , { path: '**', component: ErrorComponent, data: { errorTK: '404', descriptionTK: 'error.page-not-found' } }

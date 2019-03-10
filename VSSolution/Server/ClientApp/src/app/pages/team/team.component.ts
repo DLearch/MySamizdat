@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeamControllerService } from 'src/app/api-services/team-controller/team-controller.service';
 import { GetTeamRVM } from 'src/app/api-services/team-controller/get-team-rvm';
-import { PageServiceService } from 'src/app/services/page-service/page-service.service';
 import { FormComponent } from 'src/app/components/form/form.component';
 import { Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
+import { PageService } from 'src/app/services/page/page.service';
 
 @Component({
   selector: 'app-team',
@@ -29,7 +29,7 @@ export class TeamComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pageService: PageServiceService,
+    private pageService: PageService,
     private snackBar: MatSnackBar,
     private teamController: TeamControllerService,
     private translate: TranslateService

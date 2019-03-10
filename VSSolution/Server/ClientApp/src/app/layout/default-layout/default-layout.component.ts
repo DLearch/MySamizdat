@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ThemePickerService } from '../theme-picker/theme-picker.service';
-import { PageServiceService } from 'src/app/services/page-service/page-service.service';
-import { BreakPointService } from 'src/app/services/break-point/break-point.service';
+import { BreakpointService } from 'src/app/services/breakpoint/breakpoint.service';
+import { PageService } from 'src/app/services/page/page.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -9,10 +9,12 @@ import { BreakPointService } from 'src/app/services/break-point/break-point.serv
   styleUrls: ['./default-layout.component.css']
 })
 export class DefaultLayoutComponent {
-  
+
+  componentTK = 'component.default-layout.';
+
   constructor(
     private themePickerService: ThemePickerService,
-    private pageService: PageServiceService,
-    private breakpointService: BreakPointService
+    private breakpointService: BreakpointService,
+    private pageService: PageService
   ) { }
 }

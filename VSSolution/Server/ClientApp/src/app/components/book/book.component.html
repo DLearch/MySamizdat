@@ -1,0 +1,143 @@
+
+<div *ngIf="loaded | async" class="v-flex-box">
+
+  <!--Title-->
+  <div class="title">
+    <div class="mat-h2">{{ model?.title }}</div>
+    <div class="mat-h2 mat-card-subtitle">{{ model?.originalTitle }}</div>
+  </div>
+
+  <!--Content-->
+  <div class="v-flex-box" style="margin: 0 16px">
+    <ng-container [ngSwitch]="breakpoint.level">
+
+      <!--<ng-container *ngSwitchCase="2">
+        <div class="h-flex-box">
+          <div class="v-flex-box">
+            <div class="h-flex-box">
+              <div style="max-width:200px"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
+              <ng-container *ngTemplateOutlet="infoTemplate"></ng-container>
+            </div>
+            <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
+          </div>
+          <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
+        </div>
+      </ng-container>-->
+
+      <ng-container *ngSwitchCase="1">
+        <div class="h-flex-box">
+          <div style="max-width:200px"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
+          <ng-container *ngTemplateOutlet="infoTemplate"></ng-container>
+        </div>
+        <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
+        <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
+      </ng-container>
+
+      <ng-template ngSwitchDefault>
+        <div style="margin: auto;"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
+        <ng-container *ngTemplateOutlet="infoTemplate" class="cover-box"></ng-container>
+        <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
+        <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
+      </ng-template>
+
+    </ng-container>
+  </div>
+
+</div>
+
+<!--Cover and actions template-->
+<ng-template #coverAndActionsTemplate>
+
+  <div class="v-flex-box">
+
+    <!--Cover-->
+    <app-image [path]="model.coverPath"
+       style="margin: 8px 0"></app-image>
+
+    <!--Read link-->
+    <a *ngIf="model.chapters && model.chapters.length"
+       mat-raised-button
+       color="primary"
+       [routerLink]="['/book', bookId, model.chapters[0].id]"
+       style="margin: 8px 0">
+      {{ 'action.read' | translate }}
+    </a>
+
+    <!--Bookmark button-->
+    <app-button (authClick)="changeBookmark()"
+       style="margin: 8px 0">
+      {{ 'bookmark.action.' + ( model.bookmark ? 'remove' : 'add' ) | translate }}
+    </app-button>
+  </div>
+
+</ng-template>
+
+<!--Info tempalte-->
+<ng-template #infoTemplate>
+  <mat-list>
+
+    <!--Owner-->
+    <mat-list-item>
+      <div matLine class="mat-body">{{ model.user.userName }}</div>
+      <div matLine class="mat-card-subtitle">{{ 'book.owner' |translate}}</div>
+    </mat-list-item>
+
+    <!--Language-->
+    <mat-list-item>
+      <div matLine class="mat-body">{{ 'language.' + model.languageTK | translate }}</div>
+      <div matLine class="mat-card-subtitle">{{ 'book.' + (isTranslate ? 'translate-' : '') + 'language' |translate}}</div>
+    </mat-list-item>
+
+    <!--Original language-->
+    <mat-list-item *ngIf="isTranslate">
+      <div matLine class="mat-body">{{ 'language.' + model.originalLanguageTK | translate }}</div>
+      <div matLine class="mat-card-subtitle">{{ 'book.original-language' |translate}}</div>
+    </mat-list-item>
+
+    <!--Description-->
+    <mat-list-item *ngIf="model.description">
+      <div matLine class="mat-body">{{ model.description }}</div>
+      <div matLine class="mat-card-subtitle">{{ 'book.description' |translate}}</div>
+    </mat-list-item>
+
+  </mat-list>
+</ng-template>
+
+<!--Chapters template-->
+<ng-template #chaptersTemplate>
+  <div class="v-flex-box">
+    <!--Header-->
+    <div class="list-header">
+
+      <!--Chapters count-->
+      <div class="mat-h2">
+        {{ (model.chapters ? model.chapters.length: 0) | plural:'chapter' | translate:{count: (model.chapters ? model.chapters.length: 0)} }}
+      </div>
+
+      <!--Spacer-->
+      <span class="flex-spacer"></span>
+
+      <!--Create chapter link-->
+      <a mat-raised-button
+         color="primary"
+         *ngIf="model.user.userName == userStorage.userName"
+         [routerLink]="['/book', bookId, 'create-chapter']">
+        {{ 'page.add-chapter.link' | translate }}
+      </a>
+
+    </div>
+
+    <!--Chapters list-->
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let chapter of model.chapters" [routerLink]="['/book', bookId, chapter.id]">
+        {{chapter.name}}
+      </a>
+    </mat-nav-list>
+  </div>
+
+</ng-template>
+
+<!--Comments template-->
+<ng-template #commentsTemplate>
+  <app-comments [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
+</ng-template>

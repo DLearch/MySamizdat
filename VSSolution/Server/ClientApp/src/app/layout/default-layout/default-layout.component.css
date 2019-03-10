@@ -1,25 +1,26 @@
-.main-wrapper {
-  display: flex;
+.content {
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
 }
 
-.toolbar-row {
-  max-width: 1000px;
-  width: 100%;
-  margin: auto;
-}
-
-.content-wrapper {
-  margin: 0 auto;
-  flex: 1;
-  display: flex;
-  max-width: 1000px;
-  width: 100%;
-}
-
-.content {
+.main {
   flex: 1;
   display:flex;
-  margin: 16px;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.sidenav {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-main {
+  flex: 1;
+}
+
+.page-load-spinner {
+  margin: auto;
 }

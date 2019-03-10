@@ -1,50 +1,75 @@
-<div class="main-wrapper mat-app-background"
-     [ngClass]="themePickerService.class">
+<mat-sidenav-container [ngClass]="themePickerService.class" class="mat-app-background">
 
-  <!--Header-->
-  <mat-toolbar color="primary">
-    <mat-toolbar-row class="toolbar-row">
+  <!--Sidenav-->
+  <mat-sidenav #sidenav [mode]="breakpointService.medium ? 'side' : 'over'">
+    <div class="sidenav">
 
-      <!-- Main link -->
-      <a routerLink="" mat-button>{{ 'page.main.link' | translate }}</a>
+      <!--Header-->
+      <mat-toolbar color="primary">
+        <a mat-button routerLink="/"><span class="mat-h2">{{ componentTK + 'site-name' | translate }}</span></a>
+      </mat-toolbar>
 
-      <!-- Catalog link -->
-      <a routerLink="/catalog" mat-button>{{ 'page.catalog.link' | translate }}</a>
+      <!--Main-->
+      <mat-nav-list class="sidenav-main">
 
-      <!-- Spacer -->
+        <a mat-list-item routerLink="/">{{ componentTK + 'link.main' | translate }}</a>
+        <a mat-list-item routerLink="/catalog">{{ componentTK + 'link.catalog' | translate }}</a>
+
+      </mat-nav-list>
+
+      <!--Footer-->
+      <mat-toolbar color="primary">
+
+      </mat-toolbar>
+
+    </div>
+  </mat-sidenav>
+
+  <!--Content-->
+  <mat-sidenav-content class="content">
+
+    <!--Header-->
+    <mat-toolbar color="primary">
+
+      <!--Menu button-->
+      <app-button design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
+
+      <!--Spacer-->
       <span class="flex-spacer"></span>
 
       <!--User panel-->
       <app-user-panel></app-user-panel>
 
-    </mat-toolbar-row>
-  </mat-toolbar>
+    </mat-toolbar>
 
-  <!-- Content -->
-  <div class="content-wrapper">
-    <main class="content">
-      <!-- [style.padding]="pageService.padding" [style.maxWidth]="pageService.maxWidth"-->
+    <!--Main-->
+    <main class="main">
+
+      <!--Router outlet-->
       <router-outlet></router-outlet>
-    </main>
-  </div>
 
-  <!--Footer-->
-  <mat-toolbar color="primary">
-    <mat-toolbar-row class="toolbar-row">
+      <!--Spinner-->
+      <mat-spinner *ngIf="!pageService.loaded" [diameter]="70" class="page-load-spinner"></mat-spinner>
+
+    </main>
+
+    <!--Footer-->
+    <mat-toolbar color="primary">
 
       <!--Language picker-->
       <app-language-picker></app-language-picker>
 
-      <!-- Spacer -->
+      <!--Spacer-->
       <span class="flex-spacer"></span>
 
       <!--Theme picker-->
       <app-theme-picker></app-theme-picker>
 
-    </mat-toolbar-row>
-  </mat-toolbar>
+    </mat-toolbar>
 
-  <!--Dialog window-->
-  <app-dialog-window></app-dialog-window>
-</div>
+  </mat-sidenav-content>
 
+</mat-sidenav-container>
+
+<!--Dialog window-->
+<app-dialog-window [ngClass]="themePickerService.class"></app-dialog-window>

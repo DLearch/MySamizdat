@@ -10,19 +10,13 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    public class CatalogController : Controller
+    public class CatalogController : BaseController
     {
-        private readonly UserManager<User> _userManager;
-        private readonly AppDbContext _db;
-
         public CatalogController(
             UserManager<User> userManager
             , AppDbContext db
-        )
-        {
-            _userManager = userManager;
-            _db = db;
-        }
+        ) : base(userManager, db)
+        { }
 
         [HttpPost]
         [AllowAnonymous]

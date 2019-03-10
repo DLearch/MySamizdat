@@ -4,7 +4,7 @@ import { DialogWindowService } from 'src/app/layout/dialog-window/dialog-window.
 import { ImageLoadComponent } from 'src/app/components/image-load/image-load.component';
 import { AccountControllerService } from 'src/app/api-services/account-controller/account-controller.service';
 import { GetInfoRVM } from 'src/app/api-services/account-controller/get-info-rvm';
-import { PageServiceService } from 'src/app/services/page-service/page-service.service';
+import { PageService } from 'src/app/services/page/page.service';
 
 @Component({
   selector: 'app-account',
@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
   constructor(
     private userStorage: UserStorageService,
     private accountController: AccountControllerService,
-    private pageService: PageServiceService
+    private pageService: PageService
   ) {
     this.pageService.setTitleTK(this.componentTK + 'title');
   }

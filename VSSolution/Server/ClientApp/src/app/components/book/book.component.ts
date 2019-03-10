@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { GetBookRVM } from 'src/app/api-services/book-controller/get-book-rvm';
 import { ActivatedRoute } from '@angular/router';
 import { BookControllerService } from 'src/app/api-services/book-controller/book-controller.service';
-import { GetBookRVM } from 'src/app/api-services/book-controller/get-book-rvm';
 import { BookmarkControllerService } from 'src/app/api-services/bookmark-controller/bookmark-controller.service';
 import { UserStorageService } from 'src/app/auth/user-storage.service';
-import { SignInComponent } from 'src/app/auth/sign-in/sign-in.component';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Overlay } from '@angular/cdk/overlay';
+import { BreakpointService } from 'src/app/services/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-book',
@@ -17,6 +15,8 @@ import { Overlay } from '@angular/cdk/overlay';
   }
 })
 export class BookComponent implements OnInit {
+
+  @Output() loaded = new EventEmitter<boolean>();
 
   model: GetBookRVM = null;
   bookId: number = 0;
@@ -33,17 +33,22 @@ export class BookComponent implements OnInit {
     private route: ActivatedRoute,
     private bookController: BookControllerService,
     private bookmarksController: BookmarkControllerService,
-    private userStorage: UserStorageService
-  ) { }
+    private userStorage: UserStorageService,
+    private breakpoint: BreakpointService
+  ) {
+    this.loaded.emit(false);
+  }
 
   ngOnInit() {
+    this.loaded.emit(false);
     this.bookId = +this.route.snapshot.paramMap.get('book');
 
     this.bookController
       .getBook(this.bookId)
       .subscribe(
         model => {
-          this.model = model
+          this.model = model;
+          this.loaded.emit(true);
         }
         , error => this.handleError(error)
     );

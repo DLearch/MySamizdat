@@ -16,8 +16,6 @@ import { LanguagePickerComponent } from './layout/language-picker/language-picke
 import { InputComponent } from './components/input/input.component';
 import { LogInterceptorService } from './services/log-interceptor/log-interceptor.service';
 import { ApiService } from './services/api/api.service';
-import { BookComponent } from './pages/book/book.component';
-import { CatalogComponent } from './pages/catalog/catalog.component';
 import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
 import { UserPanelComponent } from './layout/user-panel/user-panel.component';
 import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
@@ -61,10 +59,15 @@ import { TeamComponent } from './pages/team/team.component';
 import { FormComponent } from './components/form/form.component';
 import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
 import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
-import { PageServiceService } from './services/page-service/page-service.service';
 import { NotificationsComponent } from './layout/notifications/notifications.component';
 import { TeamInviteNotificationComponent } from './components/notifications/team-invite-notification/team-invite-notification.component';
-import { BreakPointService } from './services/break-point/break-point.service';
+import { PageService } from './services/page/page.service';
+import { BreakpointService } from './services/breakpoint/breakpoint.service';
+import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
+import { TimeAgoPluralTranslatePipe } from './pipes/time-ago-plural-translate.pipe';
+import { BookCatalogComponent } from './components/book-catalog/book-catalog.component';
+import { BookPageComponent } from './pages/book-page/book-page.component';
+import { BookComponent } from './components/book/book.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,6 @@ import { BreakPointService } from './services/break-point/break-point.service';
     , SignUpComponent
     , InputComponent
     , BookComponent
-    , CatalogComponent
     , DialogWindowComponent
     , UserPanelComponent
     , LoadOverlayComponent
@@ -103,6 +105,10 @@ import { BreakPointService } from './services/break-point/break-point.service';
     , TimePluralTranslatePipe
     , NotificationsComponent
     , TeamInviteNotificationComponent
+    , CatalogPageComponent
+    , TimeAgoPluralTranslatePipe
+    , BookCatalogComponent
+    , BookPageComponent
   ]
   , imports: [
     BrowserModule
@@ -138,8 +144,8 @@ import { BreakPointService } from './services/break-point/break-point.service';
     , LanguageControllerService
     , TeamControllerService
     , PluralPipe
-    , PageServiceService
-    , BreakPointService
+    , PageService
+    , BreakpointService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BreakPointService } from './break-point.service';
+import { PageService } from './page.service';
 
-describe('BreakPointService', () => {
+describe('PageService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BreakPointService = TestBed.get(BreakPointService);
+    const service: PageService = TestBed.get(PageService);
     expect(service).toBeTruthy();
   });
 });
