@@ -1,58 +1,18 @@
 
-<div *ngIf="loaded | async" class="v-flex-box">
+<div *ngIf="loaded | async" class="row">
 
   <!--Title-->
-  <div class="title">
+  <div class="title col-12">
     <div class="mat-h2">{{ model?.title }}</div>
     <div class="mat-h2 mat-card-subtitle">{{ model?.originalTitle }}</div>
   </div>
 
-  <!--Content-->
-  <div class="v-flex-box" style="margin: 0 16px">
-    <ng-container [ngSwitch]="breakpoint.level">
-
-      <!--<ng-container *ngSwitchCase="2">
-        <div class="h-flex-box">
-          <div class="v-flex-box">
-            <div class="h-flex-box">
-              <div style="max-width:200px"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
-              <ng-container *ngTemplateOutlet="infoTemplate"></ng-container>
-            </div>
-            <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
-          </div>
-          <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
-        </div>
-      </ng-container>-->
-
-      <ng-container *ngSwitchCase="1">
-        <div class="h-flex-box">
-          <div style="max-width:200px"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
-          <ng-container *ngTemplateOutlet="infoTemplate"></ng-container>
-        </div>
-        <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
-      </ng-container>
-
-      <ng-template ngSwitchDefault>
-        <div style="margin: auto;"><ng-container *ngTemplateOutlet="coverAndActionsTemplate"></ng-container></div>
-        <ng-container *ngTemplateOutlet="infoTemplate" class="cover-box"></ng-container>
-        <ng-container *ngTemplateOutlet="chaptersTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="commentsTemplate"></ng-container>
-      </ng-template>
-
-    </ng-container>
-  </div>
-
-</div>
-
-<!--Cover and actions template-->
-<ng-template #coverAndActionsTemplate>
-
-  <div class="v-flex-box">
+  <!--Cover and actions-->
+  <div class="v-flex-box col-12 col-md-auto" style="margin: auto; max-width: 200px;">
 
     <!--Cover-->
     <app-image [path]="model.coverPath"
-       style="margin: 8px 0"></app-image>
+               style="margin: 8px 0"></app-image>
 
     <!--Read link-->
     <a *ngIf="model.chapters && model.chapters.length"
@@ -65,16 +25,13 @@
 
     <!--Bookmark button-->
     <app-button (authClick)="changeBookmark()"
-       style="margin: 8px 0">
+                style="margin: 8px 0">
       {{ 'bookmark.action.' + ( model.bookmark ? 'remove' : 'add' ) | translate }}
     </app-button>
   </div>
 
-</ng-template>
-
-<!--Info tempalte-->
-<ng-template #infoTemplate>
-  <mat-list>
+  <!--Info-->
+  <mat-list class="col-12 col-md">
 
     <!--Owner-->
     <mat-list-item>
@@ -101,11 +58,9 @@
     </mat-list-item>
 
   </mat-list>
-</ng-template>
 
-<!--Chapters template-->
-<ng-template #chaptersTemplate>
-  <div class="v-flex-box">
+  <!--Chapters-->
+  <div class="v-flex-box col-12">
     <!--Header-->
     <div class="list-header">
 
@@ -135,9 +90,8 @@
     </mat-nav-list>
   </div>
 
-</ng-template>
-
-<!--Comments template-->
-<ng-template #commentsTemplate>
-  <app-comments [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
-</ng-template>
+  <!--Comments-->
+  <div class="col-12">
+    <app-comments [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
+  </div>
+</div>
