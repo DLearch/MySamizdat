@@ -22,6 +22,12 @@ namespace ConsoleApp
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
         public DbSet<TeamInviteNotification> TeamInviteNotifications { get; set; }
+        public DbSet<BookState> BookStates { get; set; }
+        public DbSet<BookEvaluation> BookEvaluations { get; set; }
+        public DbSet<ChapterContent> ChapterContent { get; set; }
+        public DbSet<ChapterState> ChapterStates { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
 
         public AppDbContext()
         {
@@ -56,6 +62,11 @@ namespace ConsoleApp
                .WithMany(c => c.TeamInvites)
                .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<BookEvaluation>()
+               .HasOne(c => c.User)
+               .WithMany(c => c.BookEvaluations)
+               .OnDelete(DeleteBehavior.Restrict);
+
             // TranslateBook OriginalLanguage Required
             modelBuilder.Entity<TranslateBook>()
                         .HasOne(e => e.OriginalLanguage)
@@ -77,6 +88,29 @@ namespace ConsoleApp
                 new TeamMemberRole { TK = "head"},
                 new TeamMemberRole { TK = "deputy-head"},
                 new TeamMemberRole { TK = "member"}
+                });
+
+            modelBuilder.Entity<BookState>().HasData(
+                new BookState[]
+                {
+                new BookState { TK = "free"},
+                new BookState { TK = "work"},
+                new BookState { TK = "pause"},
+                new BookState { TK = "complete"}
+                }); 
+            modelBuilder.Entity<ChapterState>().HasData(
+                new ChapterState[]
+                {
+                    new ChapterState { TK = "work"},
+                    new ChapterState { TK = "editing"},
+                    new ChapterState { TK = "complete"}
+                });
+            modelBuilder.Entity<Genre>().HasData(
+                new Genre[]
+                {
+                    new Genre { TK = "historical"},
+                    new Genre { TK = "fantasy"},
+                    new Genre { TK = "detective"}
                 });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -105,6 +139,8 @@ namespace ConsoleApp
         public List<TeamMember> TeamMembers { get; set; }
 
         public List<TeamInviteNotification> TeamInvites { get; set; }
+
+        public List<BookEvaluation> BookEvaluations { get; set; }
     }
 
     public class Book
@@ -142,12 +178,31 @@ namespace ConsoleApp
         public string TeamName { get; set; }
         public Team Team { get; set; }
 
+        [Required]
+        public string BookStateTK { get; set; }
+        public BookState BookState { get; set; }
+        public string BookStateComment { get; set; }
+
+        public List<BookEvaluation> BookEvaluations { get; set; }
+        public List<BookGenre> BookGenre { get; set; }
+
         public string Discriminator { get; set; }
+        
+    }
+
+    public class BookState
+    {
+        [Key]
+        [Required]
+        public string TK { get; set; }
+
+        public List<Book> Books { get; set; }
     }
 
     public class Author
     {
         [Key]
+        [Required]
         public string Name { get; set; }
 
         public List<Book> Books { get; set; }
@@ -158,19 +213,55 @@ namespace ConsoleApp
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        public int Index { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
         public int BookId { get; set; }
         public Book Book { get; set; }
+        
+        public List<ChapterComment> Comments { get; set; }
+
+        [Required]
+        public string ChapterStateTK { get; set; }
+        public ChapterState ChapterState { get; set; }
+        [Required]
+        public DateTime LastStateChangeTime { get; set; }
+
+        public List<ChapterContent> ChapterContents { get; set; }
+    }
+
+    public class ChapterState
+    {
+        [Key]
+        [Required]
+        public string TK { get; set; }
+
+        public List<Chapter> Chapters { get; set; }
+    }
+    
+    public class ChapterContent
+    {
+        [Key]
+        public string Id { get; set; }
+
+        public string Content { get; set; }
 
         [Required]
         public DateTime CreationTime { get; set; }
 
-        public string Content { get; set; }
-        public List<ChapterComment> Comments { get; set; }
+        [Required]
+        public int ChapterId { get; set; }
+        public Chapter Chapter { get; set; }
     }
-
+    
     public class Language
     {
         [Key]
+        [Required]
         public string TK { get; set; }
 
         [InverseProperty("Language")]
@@ -276,6 +367,7 @@ namespace ConsoleApp
     public class TeamMemberRole
     {
         [Key]
+        [Required]
         public string TK { get; set; }
 
         public List<TeamMember> TeamMembers { get; set; }
@@ -308,5 +400,46 @@ namespace ConsoleApp
         [Required]
         public int TeamMemberId { get; set; }
         public TeamMember TeamMember { get; set; }
+    }
+
+    public class BookEvaluation
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public int Value { get; set; }
+
+        [Required]
+        public int BookId { get; set; }
+        public Book Book { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+        public User User { get; set; }
+
+        public string Discriminator { get; set; }
+    }
+
+    public class Genre
+    {
+        [Key]
+        [Required]
+        public string TK { get; set; }
+
+        public List<Book> Books { get; set; }
+    }
+    public class BookGenre
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public int BookId { get; set; }
+        public Book Book { get; set; }
+
+        [Required]
+        public string GenreTK { get; set; }
+        public Genre Genre { get; set; }
     }
 }

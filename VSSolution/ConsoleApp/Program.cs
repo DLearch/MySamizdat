@@ -64,8 +64,8 @@ namespace ConsoleApp
                 }
                 ///////////////////////////////////////////////////////////////////////////////////
 
-                Book book1 = new Book { Title = "Book1", LanguageTK = "ru", User = user1, TeamName = "Team1Name" };
-                Book book2 = new Book { Title = "Book2", LanguageTK = "en", AuthorName = "Author1", User = user2 };
+                Book book1 = new Book { Title = "Book1", LanguageTK = "ru", User = user1, TeamName = "Team1Name", BookStateTK = "work" };
+                Book book2 = new Book { Title = "Book2", LanguageTK = "en", AuthorName = "Author1", User = user2, BookStateTK = "work" };
 
                 db.Books.Add(book1);
                 db.Books.Add(book2);
@@ -102,8 +102,8 @@ namespace ConsoleApp
 
                 ///////////////////////////////////////////////////////////////////////////////////
 
-                TranslateBook tbook1 = new TranslateBook { Title = "TBook1", LanguageTK = "ru", OriginalLanguageTK = "en", OriginalTitle = "ORGTBook1", User = user1 };
-                TranslateBook tbook2 = new TranslateBook { Title = "TBook2", LanguageTK = "en", OriginalLanguageTK = "ua", AuthorName = "Author2", OriginalTitle = "ORGTBook2", User = user1 };
+                TranslateBook tbook1 = new TranslateBook { Title = "TBook1", LanguageTK = "ru", OriginalLanguageTK = "en", BookStateTK = "work", OriginalTitle = "ORGTBook1", User = user1 };
+                TranslateBook tbook2 = new TranslateBook { Title = "TBook2", LanguageTK = "en", OriginalLanguageTK = "ua", BookStateTK = "work", AuthorName = "Author2", OriginalTitle = "ORGTBook2", User = user1 };
 
                 db.TranslateBooks.Add(tbook1);
                 db.Books.Add(tbook2);
@@ -139,8 +139,8 @@ namespace ConsoleApp
 
                 ///////////////////////////////////////////////////////////////////////////////////
 
-                Chapter chapter1 = new Chapter() { Content = "Content1", BookId = book1.Id};
-                Chapter chapter2 = new Chapter() { Content = "Content2", BookId = book1.Id };
+                Chapter chapter1 = new Chapter() { BookId = book1.Id, Index = 1, ChapterStateTK = "work", Name = "CH1" };
+                Chapter chapter2 = new Chapter() { BookId = book1.Id, Index = 0, ChapterStateTK = "work", Name = "CH2" };
 
                 db.Chapters.Add(chapter1);
                 db.Chapters.Add(chapter2);
@@ -152,7 +152,7 @@ namespace ConsoleApp
                 Console.WriteLine("Список объектов:");
                 foreach (Chapter b in chapters)
                 {
-                    Console.WriteLine($"{b.Id}.{b.Content}.{b.BookId}");
+                    Console.WriteLine($"{b.Id}.{b.BookId}");
                 }
 
                 ///////////////////////////////////////////////////////////////////////////////////
@@ -189,9 +189,20 @@ namespace ConsoleApp
                 }
 
                 ///////////////////////////////////////////////////////////////////////////////////
-                
+
+                BookEvaluation bookEvaluation1 = new BookEvaluation() { BookId = book1.Id, UserId = user1.Id, Value = 0 };
+
+                db.BookEvaluations.Add(bookEvaluation1);
+                db.SaveChanges();
+                Console.WriteLine("BookEvaluations успешно сохранены");
+
+                var bookEvaluations = db.BookEvaluations.ToList();
+                Console.WriteLine("Список объектов:");
+                foreach (BookEvaluation b in bookEvaluations)
+                {
+                    Console.WriteLine($"{b.Id}.{b.Value}.{b.User.UserName}.{b.Book.Title}");
+                }
             }
-            Console.Read();
         }
     }
 }
