@@ -18,13 +18,11 @@ using System.Web;
 namespace Server.Controllers
 {
     [Authorize]
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
-        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly EmailService _emailService;
         private readonly SignInManager<User> _signInManager;
-        private readonly AppDbContext _db;
 
         public AuthController(
             UserManager<User> userManager
@@ -32,13 +30,11 @@ namespace Server.Controllers
             , EmailService emailService
             , SignInManager<User> signInManager
             , AppDbContext db
-        )
+        ) : base(userManager, db)
         {
-            _userManager = userManager;
             _configuration = configuration;
             _emailService = emailService;
             _signInManager = signInManager;
-            _db = db;
         }
 
         [HttpPost]
@@ -77,19 +73,18 @@ namespace Server.Controllers
             {
                 User user = await _userManager.FindByEmailAsync(model.Email);
 
-                if (user == null)
-                    ModelState.AddModelError("Email", "not-found");
-                else
+                AddModelErrorIfNull("Email", ERROR_NOT_FOUND, user);
+
+                if (ModelState.IsValid)
                 {
-                    if (false)//!user.EmailConfirmed)
-                        ModelState.AddModelError("Email", "unconfirmed");
-                    else
+                    AddModelErrorIfFalse("Email", ERROR_UNCONFIRMED, user.EmailConfirmed);
+
+                    if (ModelState.IsValid)
                     {
-                        Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                        bool signInSucceeded = (await _signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded;
+                        AddModelErrorIfFalse("Password", ERROR_WRONG, signInSucceeded);
                         
-                        if (!result.Succeeded)
-                            ModelState.AddModelError("Password", "wrong");
-                        else
+                        if (ModelState.IsValid)
                             return Ok(new
                             {
                                 user.UserName,
@@ -107,21 +102,18 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEmailConfirmationMessage()
         {
+            User user = await GetUserAsync();
+
             if (ModelState.IsValid)
             {
-                User user = await _userManager.GetUserAsync(User);
+                AddModelErrorIfFalse("Email", ERROR_ALREADY, !user.EmailConfirmed);
 
-                if (user != null)
-                    if (!user.EmailConfirmed)
-                    {
-                        await SendEmailConfirmationMessageAsync(user);
+                if (ModelState.IsValid)
+                {
+                    await SendEmailConfirmationMessageAsync(user);
 
-                        return Ok();
-                    }
-                    else
-                        ModelState.AddModelError("Email", "already-confirmed");
-                else
-                    ModelState.AddModelError("Email", "not-found");
+                    return Ok();
+                }
             }
 
             return BadRequest(ModelState);
@@ -134,10 +126,9 @@ namespace Server.Controllers
             if (ModelState.IsValid)
             {
                 User user = await _userManager.FindByEmailAsync(model.Email);
+                AddModelErrorIfNull("Email", ERROR_NOT_FOUND, user);
 
-                if (user == null)
-                    ModelState.AddModelError("Email", "not-found");
-                else
+                if (ModelState.IsValid)
                 {
                     IdentityResult result = await _userManager.ConfirmEmailAsync(user, model.Token);
 

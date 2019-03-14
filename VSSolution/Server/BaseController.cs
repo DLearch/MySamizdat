@@ -14,6 +14,9 @@ namespace Server
         protected const string ERROR_TAKEN = "already-taken";
         protected const string ERROR_NOT_FOUND = "not-found";
         protected const string ERROR_ACCESS = "access";
+        protected const string ERROR_UNCONFIRMED = "unconfirmed";
+        protected const string ERROR_WRONG = "wrong";
+        protected const string ERROR_ALREADY = "already";
 
         protected readonly UserManager<User> _userManager;
         protected readonly AppDbContext _db;
