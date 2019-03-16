@@ -1,0 +1,70 @@
+<mat-sidenav-container class="mat-app-background">
+
+  <!--Sidenav-->
+  <mat-sidenav #sidenav [mode]="breakpointService.level >= 3 ? 'side' : 'over'">
+    <div class="content">
+
+      <!--Header-->
+      <mat-toolbar color="primary">
+        <a mat-button routerLink="/"><span class="mat-h2">{{ componentTK + 'sidenav-header' | translate }}</span></a>
+      </mat-toolbar>
+
+      <!--Main-->
+      <mat-nav-list class="sidenav-main">
+
+        <a mat-list-item routerLink="/">{{ componentTK + 'link.main' | translate }}</a>
+
+      </mat-nav-list>
+
+      <!--Footer-->
+      <mat-toolbar color="primary">
+
+      </mat-toolbar>
+
+    </div>
+  </mat-sidenav>
+
+  <!--Content-->
+  <mat-sidenav-content class="content">
+
+    <!--Header-->
+    <mat-toolbar color="primary">
+
+      <!--Menu button-->
+      <app-button design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
+
+      <!--Spacer-->
+      <span class="flex-spacer"></span>
+
+      <app-user-panel></app-user-panel>
+
+    </mat-toolbar>
+
+    <!--Main-->
+    <main class="main">
+      <div class="main" [style.display]="pageService.loaded ? 'flex' : 'none'">
+        <!--Router outlet-->
+        <router-outlet></router-outlet>
+      </div>
+      <!--Spinner-->
+      <mat-spinner *ngIf="!pageService.loaded" [diameter]="70" class="page-load-spinner"></mat-spinner>
+
+    </main>
+
+    <!--Footer-->
+    <mat-toolbar color="primary">
+
+      <!--Language picker-->
+      <app-language-picker></app-language-picker>
+
+      <!--Spacer-->
+      <span class="flex-spacer"></span>
+
+      <!--Theme picker-->
+      <app-theme-picker></app-theme-picker>
+
+    </mat-toolbar>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

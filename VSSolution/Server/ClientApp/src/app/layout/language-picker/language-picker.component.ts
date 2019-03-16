@@ -43,7 +43,7 @@ export class LanguagePickerComponent implements OnInit {
       this.translate.use(storageLanguage);
     else
       this.translate.use(this.defaultLang);
-    
+
     this.translate.addLangs(this.langs);
   }
 

@@ -1,50 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
-import { MainComponent } from './pages/main/main.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { ChapterComponent } from './pages/chapter/chapter.component';
-import { AccountComponent } from './pages/account/account.component';
-import { AuthGuard } from './auth/auth.guard';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { NewBookComponent } from './pages/new-book/new-book.component';
-import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
-import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
-import { NewTeamComponent } from './pages/new-team/new-team.component';
-import { TeamComponent } from './pages/team/team.component';
-import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
+import { LayoutComponent } from './layout/layout.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
+import { NewBookPageComponent } from './pages/new-book-page/new-book-page.component';
 import { BookPageComponent } from './pages/book-page/book-page.component';
+import { ChapterPageComponent } from './pages/chapter-page/chapter-page.component';
 
 const routes: Routes = [
   {
     path: ''
-    , component: DefaultLayoutComponent
+    , component: LayoutComponent
     , children: [
-      { path: '', component: MainComponent }
-        
-      , { path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] }
-      , { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] }
-      , { path: 'confirm-email', component: ErrorComponent, canActivate: [AuthGuard]  }
-
-      , { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
-      //, { path: 'users/:userName', component:  }
-
-      , { path: 'create-team', component: NewTeamComponent, canActivate: [AuthGuard] }
-      , { path: 'team/:team', component: TeamComponent }
-
-      , { path: 'create-book', component: NewBookComponent, canActivate: [AuthGuard] }
+      { path: '', component: MainPageComponent }
+      , { path: 'sign-up', component: SignUpPageComponent, canActivate: [AuthGuard] }
+      , { path: 'sign-in', component: SignInPageComponent, canActivate: [AuthGuard] }
+      , { path: 'add-book', component: NewBookPageComponent, canActivate: [AuthGuard] }
+      , { path: 'book-not-found', component: ErrorPageComponent, data: { error: '404', descriptionTK: 'error.book-not-found' } }
       , { path: 'book/:book', component: BookPageComponent }
-
-      , { path: 'book/:book/create-chapter', component: NewChapterComponent, canActivate: [AuthGuard] }
-      , { path: 'book/:book/:chapter', component: ChapterComponent, runGuardsAndResolvers: 'always' }
-
-      , { path: 'bookmarks', component: BookmarksComponent, canActivate: [AuthGuard] }
-
-      , { path: 'catalog', component: CatalogPageComponent }
-      , { path: 'book', redirectTo: 'catalog' }
-
-      , { path: '**', component: ErrorComponent, data: { errorTK: '404', descriptionTK: 'error.page-not-found' } }
+      , { path: 'book/:book/:chapter', component: ChapterPageComponent }
+      , { path: '**', component: ErrorPageComponent, data: { error: '404', descriptionTK: 'error.page-not-found' } }
     ]
   }
 ];

@@ -1,5 +1,4 @@
-﻿using Server.Models.Books;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,9 +8,12 @@ namespace Server.Models
 {
     public class Bookmark
     {
+        [Key]
+        public int Id { get; set; }
+        
         public string UserId { get; set; }
         public User User { get; set; }
-            
+        
         public int BookId { get; set; }
         public Book Book { get; set; }
     }

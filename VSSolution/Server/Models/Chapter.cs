@@ -1,6 +1,4 @@
-﻿using Server.Models.Books;
-using Server.Models.Comments;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +8,7 @@ namespace Server.Models
 {
     public class Chapter
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -18,14 +17,18 @@ namespace Server.Models
         [Required]
         public string Name { get; set; }
 
-        public string Content { get; set; }
-
         [Required]
-        public DateTime CreationTime { get; set; }
-
         public int BookId { get; set; }
         public Book Book { get; set; }
 
+        [Required]
+        public string ChapterStateTK { get; set; }
+        public ChapterState ChapterState { get; set; }
+        [Required]
+        public DateTime LastStateChangeTime { get; set; }
+
         public List<ChapterComment> Comments { get; set; }
+
+        public List<ChapterContent> ChapterContents { get; set; }
     }
 }

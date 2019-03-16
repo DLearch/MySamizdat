@@ -1,5 +1,5 @@
 
-<div>
+<div class="main-wrapper">
   <div class="list-header">
 
     <div class="mat-h2">
@@ -25,14 +25,14 @@
   <div class="comment-wrapper">
 
     <!--Avatar-->
-    <app-avatar [user]="comment.author"></app-avatar>
+    <app-avatar [user]="comment.user"></app-avatar>
 
     <div class="comment-main">
 
       <!--Header-->
       <div class="header">
-        <span class="mat-body-strong">{{ comment.author.userName }} </span>
-        <span class="mat-card-subtitle"> {{ comment.creationTime | timePluralTranslate }}</span>
+        <span class="mat-body-strong">{{ comment.user.userName }} </span>
+        <span class="mat-card-subtitle"> {{ comment.creationTime | timeAgoPluralTranslate }}</span>
       </div>
 
       <!--Content-->

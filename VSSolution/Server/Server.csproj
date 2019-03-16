@@ -26,11 +26,6 @@
     <None Remove="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <None Remove="ClientApp\src\app\api-services\notification-controller\get-notifications-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
-    <None Remove="ClientApp\src\app\components\form\control-template.ts" />
-    <None Remove="ClientApp\src\app\components\form\form-error-dictionary.ts" />
-    <None Remove="ClientApp\src\app\components\input\set-errors.ts" />
-    <None Remove="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
-    <None Remove="ClientApp\src\app\layout\theme-picker\themes.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,11 +56,6 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\notification-controller\get-notifications-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\form\control-template.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\form\form-error-dictionary.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\input\set-errors.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\layout\dialog-window\dialog-window-config.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\layout\theme-picker\themes.ts" />
   </ItemGroup>
 
 </Project>

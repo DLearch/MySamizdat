@@ -1,0 +1,21 @@
+
+.content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-main {
+  flex: 1;
+}
+
+.page-load-spinner {
+  margin: auto;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}

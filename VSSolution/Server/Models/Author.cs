@@ -1,5 +1,4 @@
-﻿using Server.Models.Books;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +9,8 @@ namespace Server.Models
     public class Author
     {
         [Key]
-        public string Id { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         public List<Book> Books { get; set; }
     }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 import { ConfigurationService } from 'src/app/services/configuration/configuration.service';
-import { UserStorageService } from 'src/app/auth/user-storage.service';
 
 @Component({
   selector: 'app-avatar',
@@ -17,7 +17,7 @@ export class AvatarComponent {
   ) { }
 
   get avatarPath(): string {
-    
+
     if (this.user && this.user.avatarPath)
       return this.user.avatarPath;
 
@@ -28,7 +28,7 @@ export class AvatarComponent {
 
     if (!this.user || !this.user.userName)
       return '/users';
-    
+
     if (this.userStorage.userName && this.userStorage.userName === this.user.userName)
       return '/account';
 

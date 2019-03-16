@@ -1,8 +1,8 @@
 
 <form *ngIf="form" [formGroup]="form">
-  <ng-container *ngFor="let controlTemplate of controlTemplates">
+  <ng-container *ngFor="let inputTemplate of inputTemplates">
 
-    <ng-container [ngSwitch]="controlTemplate.type">
+    <ng-container [ngSwitch]="inputTemplate.type">
 
       <!--Select input-->
       <ng-container *ngSwitchCase="'select'">
@@ -11,20 +11,20 @@
         <mat-form-field class="field" appearance="outline">
 
           <!--Placeholder-->
-          <mat-label>{{ 'input.' + controlTemplate.tk + '.placeholder' | translate }}</mat-label>
+          <mat-label>{{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}</mat-label>
 
           <!--Select-->
-          <mat-select [placeholder]="'input.' + controlTemplate.tk +'.placeholder' | translate"
-                      [formControlName]="controlTemplate.name">
-            <mat-option *ngFor="let element of controlTemplate.selectElements" [value]="element.value">
+          <mat-select [placeholder]="'input.' + inputTemplate.tk +'.placeholder' | translate"
+                      [formControlName]="inputTemplate.name">
+            <mat-option *ngFor="let element of inputTemplate.selectElements" [value]="element.value">
               {{ element.tk | translate}}
             </mat-option>
           </mat-select>
 
           <!--Errors-->
-          <mat-error *ngIf="form.get(controlTemplate.name).invalid">
-            <ng-container *ngFor="let errorTK of getErrorTKs(form.get(controlTemplate.name).errors)">
-              {{ 'input.' + controlTemplate.tk + '.errors.' + errorTK | translate }}
+          <mat-error *ngIf="form.get(inputTemplate.name).invalid">
+            <ng-container *ngFor="let errorTK of getErrorTKs(form.get(inputTemplate.name).errors)">
+              {{ 'input.' + inputTemplate.tk + '.errors.' + errorTK | translate }}
             </ng-container>
           </mat-error>
 
@@ -39,17 +39,17 @@
         <mat-form-field class="field" appearance="outline">
 
           <!--Placeholder-->
-          <mat-label>{{ 'input.' + controlTemplate.tk + '.placeholder' | translate }}</mat-label>
+          <mat-label>{{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}</mat-label>
 
           <!--Input-->
           <input matInput
-                 [type]="(controlTemplate.type ? controlTemplate.type : 'text')"
-                 [formControlName]="controlTemplate.name" />
+                 [type]="(inputTemplate.type ? inputTemplate.type : 'text')"
+                 [formControlName]="inputTemplate.name" />
 
           <!--Errors-->
-          <mat-error *ngIf="form.get(controlTemplate.name).invalid">
-            <ng-container *ngFor="let errorTK of getErrorTKs(form.get(controlTemplate.name).errors)">
-              {{ 'input.' + controlTemplate.tk + '.errors.' + errorTK | translate }}
+          <mat-error *ngIf="form.get(inputTemplate.name).invalid">
+            <ng-container *ngFor="let errorTK of getErrorTKs(form.get(inputTemplate.name).errors)">
+              {{ 'input.' + inputTemplate.tk + '.errors.' + errorTK | translate }}
             </ng-container>
           </mat-error>
 

@@ -1,84 +1,87 @@
 {
-  "component": {
-    "error": {
-      "error": "Ошибка"
-    },
+  "layout": {
     "theme-picker": {
       "dark-theme": "Ночной режим"
     },
     "user-panel": {
-      "bookmarks": "Закладки",
-      "account": "Профиль",
-      "sign-out": "Выйти",
-      "sign-in": "Войти"
+      "sign-in": "Вход",
+      "sign-out": "Выход"
     },
-    "account": {
-      "title": "Профиль"
+    "sidenav-header": "Runoo"
+  },
+  "page": {
+    "error": {
+      "error": "Ошибка"
     },
-    "team": {
-      "invite-member": "Пригласить",
-      "invitation-sent": "Приглашение отправлено",
-      "invitation-sent.ok": "Ясно"
+    "sign-up": {
+      "title": "Регистрация"
     },
-    "book": {
-
-    },
-    "chapter": {
-
+    "sign-in": {
+      "title": "Вход"
     },
     "new-book": {
-      "title": "Новая книга"
+      "title": "Добавить книгу",
+      "step": {
+        "type": {
+          "translate": "Перевод",
+          "book": "Авторская",
+          "label": "Тип книги"
+        },
+        "language.label": "Язык",
+        "title.label": "Название"
+      },
+      "finish": "Завершить",
+      "next": "Далее",
+      "previous": "Назад"
     },
-    "new-team": {
-      "title": "Новая команда"
-    },
-    "new-chapter": {
-      "title": "Новая глава"
-    },
-    "catalog": {
-      "title": "Библиотека"
-    },
-    "team-invite-notification": {
-      "accept": "Принять",
-      "decline": "Отклонить",
-      "text": "{{userName}} приглашает вас в команду {{teamName}}"
-    },
-    "default-layout": {
-      "site-name": "Runoo",
-      "link": {
-        "catalog": "Каталог",
-        "main": "Главная"
+    "book": {
+      "tab": {
+        "main": {
+          "label": "Информация",
+          "author": "Автор",
+          "description": "Описание",
+          "user": "Куратор",
+          "language": "Язык",
+          "book-state": "Статус",
+          "team-name": "Команда",
+          "translate-language": "Язык перевода",
+          "original-language": "Язык оригинала"
+        },
+        "content": {
+          "label": "Содержание",
+          "add-chapter": "Добавить главу",
+          "new-chapter": "Новая глава"
+        },
+        "comments": {
+          "label": "Комментарии"
+        }
       }
     }
   },
+  "component": {
+    "sign-up": {
+      "sign-in": "Уже есть аккаунт",
+      "sign-up": "Отправить письмо",
+      "sent": "Письмо для подтверждения отправлено",
+      "ok": "Ясно"
+    },
+    "sign-in": {
+      "sign-in": "Войти",
+      "sign-up": "Создать аккаунт"
+    },
+    "comments": {
+    },
+    "new-comment": {
+      "add-comment": "Оставить комментарий",
+      "cancel": "Отмена"
+    }
+  },
   "error": {
-    "page-not-found": "Страница не найдена"
+    "page-not-found": "Страница не найдена",
+    "book-not-found": "Книга не найдена",
+    "chapter-not-found": "Глава не найдена"
   },
   "input": {
-    "language": {
-      "placeholder": "Язык"
-    },
-    "translate-language": {
-      "placeholder": "Язык перевода"
-    },
-    "original-language": {
-      "placeholder": "Язык оригинала"
-    },
-    "original-book-title": {
-      "placeholder": "Оригинальное название",
-      "errors": {
-        "empty": "Введите оригинальное название",
-        "short": "Оригинальное название слишком короткое"
-      }
-    },
-    "translate-book-title": {
-      "placeholder": "Переведенное название",
-      "errors": {
-        "empty": "Введите Переведенное название",
-        "short": "Переведенное название слишком короткое",
-        "already-taken": "Такой перевод или книга уже существует"
-      }
-    },
     "comment": {
       "placeholder": "Оставить комментарий",
       "errors": {
@@ -94,11 +97,37 @@
         "already-taken": "Название уже занято"
       }
     },
-    "chapter-content": {
-      "placeholder": "Текст",
+    "language": {
+      "placeholder": "Язык",
       "errors": {
-        "empty": "Введите текст",
-        "short": "Текст слишком короткий"
+        "empty": "Выберите язык"
+      }
+    },
+    "translate-language": {
+      "placeholder": "Язык перевода",
+      "errors": {
+        "empty": "Выберите язык перевода"
+      }
+    },
+    "original-language": {
+      "placeholder": "Язык оригинала",
+      "errors": {
+        "empty": "Выберите язык оригинала"
+      }
+    },
+    "original-book-title": {
+      "placeholder": "Оригинальное название",
+      "errors": {
+        "empty": "Введите оригинальное название",
+        "short": "Оригинальное название слишком короткое"
+      }
+    },
+    "translate-book-title": {
+      "placeholder": "Переведенное название",
+      "errors": {
+        "empty": "Введите переведенное название",
+        "short": "Переведенное название слишком короткое",
+        "already-taken": "Такой перевод или книга уже существует"
       }
     },
     "book-title": {
@@ -137,132 +166,100 @@
         "wrong": "Некорректный пароль",
         "short": "Слишком короткий пароль"
       }
-    },
-    "current-password": {
-      "placeholder": "Текущий пароль",
-      "errors": {
-        "empty": "Введите текущий пароль",
-        "wrong": "Неправильный пароль",
-        "short": "Слишком короткий пароль"
-      }
-    },
-    "new-password": {
-      "placeholder": "Новый пароль",
-      "errors": {
-        "empty": "Введите новый пароль",
-        "wrong": "Некорректный пароль",
-        "short": "Слишком короткий пароль"
-      }
     }
   },
-  "site": {
-    "name": "Runoo"
+  "guard.auth": {
+    "confirmed": "Почта подтверждена, вход выполнен",
+    "unconfirmed": "Ошибка, почта не подтверждена",
+    "ok": "Ясно"
   },
-  "page": {
-    "main": {
-      "main": "Главная",
-      "link": "Главная"
+  "language": {
+    "ru": "Русский",
+    "en": "Английский",
+    "ua": "Украинский"
+  },
+  "chapter.count": {
+    "none": "0 глав",
+    "one": "{{count}} глава",
+    "many-one": "{{count}} глава",
+    "many-few": "{{count}} главы",
+    "many": "{{count}} глав"
+  },
+  "comment.count": {
+    "none": "0 комментариев",
+    "one": "1 комментарий",
+    "many-one": "{{count}} комментарий",
+    "many-few": "{{count}} комментария",
+    "many": "{{count}} комментариев"
+  },
+  "book.count": {
+    "none": "0 книг",
+    "one": "1 книга",
+    "many-one": "{{count}} книга",
+    "many-few": "{{count}} книги",
+    "many": "{{count}} книг"
+  },
+  "time": {
+    "year.ago.count": {
+      "none": "Меньше года назад",
+      "one": "Год назад",
+      "many-one": "{{number}} год назад",
+      "many-few": "{{number}} года назад",
+      "many": "{{number}} лет назад"
     },
-    "sign-up": {
-      "name": "Регистрация",
-      "link": "Создать аккаунт"
+    "month.ago.count": {
+      "none": "Меньше месяца назад",
+      "one": "Месяц назад",
+      "many-one": "{{number}} месяц назад",
+      "many-few": "{{number}} месяца назад",
+      "many": "{{number}} месяцев назад"
     },
-    "sign-in": {
-      "name": "Вход",
-      "link": "Войти"
+    "week.ago.count": {
+      "none": "Меньше недели назад",
+      "one": "Неделю назад",
+      "many-one": "{{number}} неделю назад",
+      "many-few": "{{number}} недели назад",
+      "many": "{{number}} недель назад"
     },
-    "add-book": {
-      "name": "Новая книга",
-      "link": "Добавить книгу"
+    "day.ago.count": {
+      "none": "Меньше дня назад",
+      "one": "День назад",
+      "many-one": "{{number}} неделю назад",
+      "many-few": "{{number}} недели назад",
+      "many": "{{number}} дней назад"
     },
-    "add-chapter": {
-      "name": "Новая глава",
-      "link": "Добавить главу"
+    "hour.ago.count": {
+      "none": "Меньше часа назад",
+      "one": "Час назад",
+      "many-one": "{{number}} час назад",
+      "many-few": "{{number}} часа назад",
+      "many": "{{number}} часов назад"
     },
-    "password-change": {
-      "name": "Изменение пароля",
-      "link": "Изменить пароль"
+    "minute.ago.count": {
+      "none": "Меньше минуты назад",
+      "one": "Минуту назад",
+      "many-one": "{{number}} минуту назад",
+      "many-few": "{{number}} минуты назад",
+      "many": "{{number}} минут назад"
     },
-    "catalog": {
-      "name": "Каталог",
-      "link": "Каталог"
-    },
-    "bookmarks": {
-      "name": "Закладки",
-      "link": "Закладки"
-    },
-    "chapter": {
-      "action": {
-        "contents": "Оглавление",
-        "next": "Следующая глава",
-        "previous": "Предыдущая глава"
-      }
+    "second.ago.count": {
+      "none": "Меньше секунды назад",
+      "one": "Секунду назад",
+      "many-one": "{{number}} секунду назад",
+      "many-few": "{{number}} секунды назад",
+      "many": "{{number}} секунд назад"
     }
   },
-  "action": {
-    "create": "Создать",
-    "cancel": "Отмена",
-    "remove": "Убрать",
-    "delete": "Удалить",
-    "add": "Добавить",
-    "ok": "Ясно",
-    "continue": "Продолжить",
-    "next": "Далее",
-    "previous": "Назад",
-    "sign-out": "Выйти",
-    "read": "Читать",
-    "download": "Скачать"
+  "team-member-role": {
+    "head": "Глава",
+    "deputy-head": "Заместитель главы",
+    "member": "Участник"
   },
-  "comment": {
-    "count": {
-      "none": "0 комментариев",
-      "one": "1 комментарий",
-      "many-one": "{{count}} комментарий",
-      "many-few": "{{count}} комментария",
-      "many": "{{count}} комментариев"
-    },
-    "action": {
-      "add": "Оставить комментарий",
-      "answer": "Ответить"
-    }
-  },
-  "book": {
-    "count": {
-      "none": "0 книг",
-      "one": "1 книга",
-      "many-one": "{{count}} книга",
-      "many-few": "{{count}} книги",
-      "many": "{{count}} книг"
-    },
-    "action": {
-      "add": "Добавить книгу",
-      "delete": "Удалить книгу"
-    },
-    "language": "Язык",
-    "translate-language": "Язык перевода",
-    "original-language": "Язык оригинала",
-    "owner": "Владелец",
-    "author": "Автор",
-    "description": "Описание"
-  },
-  "chapter": {
-    "count": {
-      "none": "0 глав",
-      "one": "{{count}} глава",
-      "many-one": "{{count}} глава",
-      "many-few": "{{count}} главы",
-      "many": "{{count}} глав"
-    },
-    "action": {
-      "add": "Добавить главу",
-      "delete": "Удалить главу"
-    }
-  },
-  "bookmark": {
-    "action": {
-      "remove": "Убрать из закладок",
-      "add": "Добавить в закладки"
-    }
+  "book-state": {
+    "work": "В работе",
+    "pause": "Пауза",
+    "complete": "Завершен",
+    "free": "Отсутствует куратор"
   },
   "paginator": {
     "items-per-page": "Элементов на странице",
@@ -271,83 +268,5 @@
     "first-page": "Первая страница",
     "last-page": "Последняя страница",
     "of": "из"
-  },
-  "language": {
-    "ru": "Русский",
-    "en": "Английский",
-    "ua": "Украинский"
-  },
-  "time": {
-    "year": {
-      "ago.count": {
-        "none": "Меньше года назад",
-        "one": "Год назад",
-        "many-one": "{{number}} год назад",
-        "many-few": "{{number}} года назад",
-        "many": "{{number}} лет назад"
-      }
-    },
-    "month": {
-      "ago.count": {
-        "none": "Меньше месяца назад",
-        "one": "Месяц назад",
-        "many-one": "{{number}} месяц назад",
-        "many-few": "{{number}} месяца назад",
-        "many": "{{number}} месяцев назад"
-      }
-    },
-    "week": {
-      "ago.count": {
-        "none": "Меньше недели назад",
-        "one": "Неделю назад",
-        "many-one": "{{number}} неделю назад",
-        "many-few": "{{number}} недели назад",
-        "many": "{{number}} недель назад"
-      }
-    },
-    "day": {
-      "ago.count": {
-        "none": "Меньше дня назад",
-        "one": "День назад",
-        "many-one": "{{number}} неделю назад",
-        "many-few": "{{number}} недели назад",
-        "many": "{{number}} дней назад"
-      }
-    },
-    "hour": {
-      "ago.count": {
-        "none": "Меньше часа назад",
-        "one": "Час назад",
-        "many-one": "{{number}} час назад",
-        "many-few": "{{number}} часа назад",
-        "many": "{{number}} часов назад"
-      }
-    },
-    "minute": {
-      "ago.count": {
-        "none": "Меньше минуты назад",
-        "one": "Минуту назад",
-        "many-one": "{{number}} минуту назад",
-        "many-few": "{{number}} минуты назад",
-        "many": "{{number}} минут назад"
-      }
-    },
-    "seconds": {
-      "ago.count": {
-        "none": "Меньше секунды назад",
-        "one": "Секунду назад",
-        "many-one": "{{number}} секунду назад",
-        "many-few": "{{number}} секунды назад",
-        "many": "{{number}} секунд назад"
-      }
-    }
-  },
-  "team-member-role": {
-    "owner": "Владелец",
-    "head": "Глава",
-    "deputy-head": "Заместитель главы",
-    "editor": "Редактор",
-    "writer": "Писатель",
-    "translator": "Переводчик"
   }
 }

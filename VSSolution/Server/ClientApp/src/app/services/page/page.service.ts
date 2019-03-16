@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Injectable()
 export class PageService {
@@ -19,7 +19,7 @@ export class PageService {
   ) {
 
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd)
+      if (event instanceof NavigationStart)
         this.setDefaultTitle();
     });
 

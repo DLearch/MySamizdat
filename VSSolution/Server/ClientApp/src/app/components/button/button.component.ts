@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter, ViewChild, Renderer2 } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 import { ConfigurationService } from 'src/app/services/configuration/configuration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-button',
@@ -9,17 +9,18 @@ import { ConfigurationService } from 'src/app/services/configuration/configurati
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  
+
   @Input() type: 'button' | 'submit' = 'button';
   @Input() color: 'primary' = null;
   @Input() design: 'raised' | 'fab' | 'icon' | 'image';
   @Input() imagePath: string = null;
+  @Input() userName: string = null;
 
   @Output() authClick = new EventEmitter<any>();
   @Output() simpleClick = new EventEmitter<any>();
-  
+
   constructor(
-    private authService: AuthService,
+    private userStorage: UserStorageService,
     private config: ConfigurationService,
     private router: Router
   ) { }
@@ -33,12 +34,12 @@ export class ButtonComponent {
   }
 
   onClick($event): void {
-    
+
     if (this.simpleClick.observers.length)
       this.simpleClick.emit($event);
 
     if (this.authClick.observers.length)
-      if (!this.authService.isAuth)
+      if (!this.userStorage.isAuth)
         this.router.navigate(['/sign-in']);
       else
         this.authClick.emit($event);

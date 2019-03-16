@@ -8,17 +8,15 @@ import { ThemePickerService } from './theme-picker.service';
 })
 export class ThemePickerComponent {
 
-  componentTK = 'component.theme-picker.';
+  componentTK = 'layout.theme-picker.';
 
   get isDark(): boolean {
     return this.themePickerService.theme === 'dark';
   }
-
   set isDark(value: boolean) {
-    this.themePickerService.setTheme(value ? 'dark': 'light');
+    this.themePickerService.setTheme(value ? 'dark' : 'light');
   }
-
-
+  
   constructor(
     private themePickerService: ThemePickerService
   ) { }

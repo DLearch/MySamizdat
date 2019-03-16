@@ -18,7 +18,7 @@ export class BookmarkControllerService {
       bookId: bookId
     };
 
-    return this.api.post(model, this.controller, 'add');
+    return this.api.post(model, this.controller, 'addbookmark');
   }
 
   removeBookmark(bookId: number): Observable<void> {
@@ -27,7 +27,7 @@ export class BookmarkControllerService {
       bookId: bookId
     };
 
-    return this.api.post(model, this.controller, 'remove');
+    return this.api.post(model, this.controller, 'removebookmark');
   }
 
   getBookmarks(): Observable<GetBookmarksRVM[]> {

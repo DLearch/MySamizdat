@@ -13,14 +13,8 @@ export class AuthControllerService {
     private api: ApiService
   ) { }
 
-  register(userName: string, email: string, password: string): Observable<void> {
-
-    let model = {
-      userName: userName,
-      email: email,
-      password: password
-    };
-
+  register(model: { userName: string, email: string, password: string }): Observable<void> {
+    
     return this.api.post(model, this.controller, 'register');
   }
 
@@ -29,12 +23,8 @@ export class AuthControllerService {
     return this.api.post(null, this.controller, 'sendemailconfirmationmessage');
   }
 
-  getToken(email: string, password: string): Observable<GetTokenRVM> {
-
-    let model = {
-      email: email,
-      password: password
-    };
+  getToken(model: { email: string, password: string }): Observable<GetTokenRVM> {
+    
 
     return this.api.post(model, this.controller, 'gettoken');
   }

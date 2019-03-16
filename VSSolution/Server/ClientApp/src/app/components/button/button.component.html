@@ -1,56 +1,57 @@
+<ng-container *ngIf="!userName || userName == userStorage.userName">
+  <ng-container [ngSwitch]="design">
 
-<ng-container [ngSwitch]="design">
+    <ng-container *ngSwitchCase="'raised'">
+      <button [type]="type"
+              (click)="onClick($event)"
+              mat-raised-button
+              [color]="color"
+              class="button">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </button>
+    </ng-container>
 
-  <ng-container *ngSwitchCase="'raised'">
-    <button [type]="type"
-            (click)="onClick($event)"
-            mat-raised-button
-            [color]="color"
-            class="button">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </button>
+    <ng-container *ngSwitchCase="'image'">
+      <button [type]="type"
+              (click)="onClick($event)"
+              mat-mini-fab
+              [color]="color"
+              class="image"
+              [style.background-image]="'url(' + getImagePath() + ')'">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'fab'">
+      <button [type]="type"
+              (click)="onClick($event)"
+              mat-fab
+              [color]="color"
+              class="button">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'icon'">
+      <button [type]="type"
+              (click)="onClick($event)"
+              mat-icon-button
+              [color]="color">
+        <mat-icon><ng-container *ngTemplateOutlet="content"></ng-container></mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-template ngSwitchDefault>
+      <button [type]="type"
+              (click)="onClick($event)"
+              mat-button
+              [color]="color"
+              class="button">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </button>
+    </ng-template>
+
   </ng-container>
-
-  <ng-container *ngSwitchCase="'image'">
-    <button [type]="type"
-            (click)="onClick($event)"
-            mat-mini-fab
-            [color]="color"
-            class="image"
-            [style.background-image]="'url(' + getImagePath() + ')'">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </button>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="'fab'">
-    <button [type]="type"
-            (click)="onClick($event)"
-            mat-fab
-            [color]="color"
-            class="button">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </button>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="'icon'">
-    <button [type]="type"
-            (click)="onClick($event)"
-            mat-icon-button
-            [color]="color">
-      <mat-icon><ng-container *ngTemplateOutlet="content"></ng-container></mat-icon>
-    </button>
-  </ng-container>
-
-  <ng-template ngSwitchDefault>
-    <button [type]="type"
-            (click)="onClick($event)"
-            mat-button
-            [color]="color"
-            class="button">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </button>
-  </ng-template>
-
 </ng-container>
 
 <ng-template #content>

@@ -1,0 +1,15 @@
+
+<app-form #form [template]="formTemplate" [errors]="formErrors"></app-form>
+
+<div class="flex-box">
+
+  <!-- Sign up link -->
+  <a routerLink="/sign-up" mat-button>{{ componentTK + 'sign-up' | translate }}</a>
+
+  <!--Spacer-->
+  <span class="flex-spacer"></span>
+
+  <!--Submit button-->
+  <app-button design="raised" color="primary" (simpleClick)="post(form.form)"> {{ componentTK + 'sign-in' | translate }} </app-button>
+
+</div>

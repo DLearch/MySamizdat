@@ -1,0 +1,20 @@
+:host {
+  flex: 1;
+}
+
+.cover {
+  margin: 16px;
+}
+
+.menu {
+  padding: 16px;
+}
+
+.mainGrid {
+  margin: 16px;
+}
+
+.centered-box {
+  margin: auto;
+  max-width: 600px;
+}

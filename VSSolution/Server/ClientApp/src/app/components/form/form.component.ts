@@ -1,7 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, ValidationErrors } from '@angular/forms';
-import { ControlTemplate } from './control-template';
-import { FormErrorDictionary } from './form-error-dictionary';
+import { Component, Input } from '@angular/core';
+import { InputTemplate } from './input-template';
+import { FormGroup, ValidationErrors, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -11,9 +10,9 @@ import { FormErrorDictionary } from './form-error-dictionary';
 export class FormComponent {
 
   form: FormGroup;
-  controlTemplates: ControlTemplate[];
+  inputTemplates: InputTemplate[];
 
-  @Input() set errors(value: FormErrorDictionary) {
+  @Input() set errors(value: { [key: string]: string[] }) {
 
     let adaptedKey: string;
     for (let key in value) {
@@ -41,7 +40,7 @@ export class FormComponent {
     }
   }
 
-  @Input() set template(value: ControlTemplate[]) {
+  @Input() set template(value: InputTemplate[]) {
 
     let controls: { [key: string]: any } = {};
 
@@ -49,13 +48,15 @@ export class FormComponent {
       controls[controlConfig.name] = ['', controlConfig.validators]
     }
 
-    this.controlTemplates = value;
+    this.inputTemplates = value;
     this.form = this.formBuilder.group(controls);
   };
 
   constructor(
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.form = new FormGroup({});
+  }
 
   getErrorTKs(errors: ValidationErrors): string[] {
 
@@ -93,4 +94,5 @@ export class FormComponent {
 
     return errorTKs;
   }
+
 }

@@ -22,7 +22,7 @@ export class CommentControllerService {
       entityType: entityType
     };
 
-    return this.api.post(model, this.controller, 'add');
+    return this.api.post(model, this.controller, 'addcomment');
   }
 
   removeComment(commentId: number): Observable<void> {

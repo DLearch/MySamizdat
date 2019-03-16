@@ -36,7 +36,7 @@ namespace Server.Controllers
             _emailService = emailService;
             _signInManager = signInManager;
         }
-
+        
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterVM model)
@@ -65,6 +65,10 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
+        // ModelErrors:
+        // "Email" - ERROR_NOT_FOUND;
+        // "Email" - ERROR_UNCONFIRMED;
+        // "Password" - ERROR_WRONG;
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> GetToken([FromBody]GetTokenVM model)
@@ -77,7 +81,7 @@ namespace Server.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    AddModelErrorIfFalse("Email", ERROR_UNCONFIRMED, user.EmailConfirmed);
+                    //AddModelErrorIfFalse("Email", ERROR_UNCONFIRMED, user.EmailConfirmed);
 
                     if (ModelState.IsValid)
                     {
@@ -99,6 +103,9 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
+        // ModelErrors:
+        // "Email" - ALREADY;
+        // "User" -  ERROR_NOT_FOUND;
         [HttpPost]
         public async Task<IActionResult> SendEmailConfirmationMessage()
         {
@@ -119,6 +126,8 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
+        // ModelErrors:
+        // "Email" - ERROR_NOT_FOUND;
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail([FromBody]ConfirmEmailVM model)

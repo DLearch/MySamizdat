@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommentEntityType } from 'src/app/api-services/comment-controller/comment-entity-type';
 import { CommentControllerService } from 'src/app/api-services/comment-controller/comment-controller.service';
-import { UserStorageService } from 'src/app/auth/user-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 
 @Component({
   selector: 'app-comments',
@@ -9,7 +9,7 @@ import { UserStorageService } from 'src/app/auth/user-storage.service';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
-  
+
   @Input() comments: any[];
   @Input() entityType: CommentEntityType;
   @Input() entityId: number;
@@ -23,7 +23,7 @@ export class CommentsComponent {
 
     if (id)
       return this.comments.filter(comment => comment.parentId == id);
-    
+
     return this.comments.filter(comment => !comment.parentId);
   }
 

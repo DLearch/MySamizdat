@@ -4,46 +4,33 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 @Injectable()
 export class BreakpointService {
 
+  readonly breakpoints: string[] = [
+    '(max-width: 399.99px)',
+    '(min-width: 400px) and (max-width: 599.99px)',
+    '(min-width: 600px) and (max-width: 799.99px)',
+    '(min-width: 800px) and (max-width: 999.99px)',
+    '(min-width: 1000px) and (max-width: 1199.99px)',
+    '(min-width: 1200px) and (max-width: 1399.99px)',
+    '(min-width: 1400px) and (max-width: 1599.99px)',
+    '(min-width: 1600px)'
+  ];
+
   level: number = 0;
-
-  xSmall: boolean = true;
-  small: boolean = false;
-  medium: boolean = false;
-  large: boolean = false;
-  xLarge: boolean = false;
-
+  
   constructor(
     private breakpointObserver: BreakpointObserver
   ) {
 
     this.breakpointObserver
-      .observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large,
-        Breakpoints.XLarge
-      ])
+      .observe(this.breakpoints)
       .subscribe((state: BreakpointState) => {
-
-        if (state.breakpoints[Breakpoints.XSmall])
-          this.level = 0;
-        else if (state.breakpoints[Breakpoints.Small])
-          this.level = 1;
-        else if (state.breakpoints[Breakpoints.Medium])
-          this.level = 2;
-        else if (state.breakpoints[Breakpoints.Large])
-          this.level = 3;
-        else if (state.breakpoints[Breakpoints.XLarge])
-          this.level = 4;
-
-        //this.xSmall = this.level >= 0;
-        this.small = this.level >= 1;
-        this.medium = this.level >= 2;
-        this.large = this.level >= 3;
-        this.xLarge = this.level >= 4;
-
-        console.log(this.level);
+        
+        for (let breakpoint of this.breakpoints) {
+          if (state.breakpoints[breakpoint]) {
+            this.level = this.breakpoints.indexOf(breakpoint);
+            return;
+          }
+        }
       });
   }
 }

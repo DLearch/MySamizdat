@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { themes } from './themes';
-import { window } from 'rxjs/operators';
 
 @Injectable()
 export class ThemePickerService {
 
   storageKey: string = 'theme';
-
+  
   readonly defaultTheme: string = 'dark';
 
   theme: string = this.defaultTheme;
@@ -18,8 +17,14 @@ export class ThemePickerService {
 
   setTheme(theme: string) {
 
+    if (this.class)
+      document.body.classList.remove(this.class);
+
     this.theme = theme;
     this.class = themes[theme];
-    localStorage.setItem(this.storageKey, theme)
+    localStorage.setItem(this.storageKey, theme);
+
+    if (this.class)
+      document.body.classList.add(this.class);
   }
 }

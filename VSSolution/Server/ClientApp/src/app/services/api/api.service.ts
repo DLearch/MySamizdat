@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ConfigurationService } from '../configuration/configuration.service';
-import { UserStorageService } from 'src/app/auth/user-storage.service';
+import { UserStorageService } from '../user-storage/user-storage.service';
 
 @Injectable()
 export class ApiService {
@@ -28,28 +28,29 @@ export class ApiService {
       );
   }
 
-  public postForm(data: any, controller?: string, action?: string): Observable<any> {
+  //public postForm(data: any, controller?: string, action?: string): Observable<any> {
 
-    let httpHeaders = new HttpHeaders();
+  //  let httpHeaders = new HttpHeaders();
 
-    if (this.userStorageService.token)
-      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
+  //  if (this.userStorageService.token)
+  //    httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
 
-    var formData = new FormData();
-    for (let key in data)
-      formData.append(key, data[key]);
+  //  var formData = new FormData();
+  //  for (let key in data)
+  //    formData.append(key, data[key]);
 
-    return this.http
-      .post(
-        this.getUri(controller, action)
-      , formData
-      , { headers: httpHeaders }
-      )
-      .pipe(
-        tap(response => this.handleResponse(response)),
-        catchError(response => this.handleError(response))
-      );
-  }
+  //  return this.http
+  //    .post(
+  //      this.getUri(controller, action)
+  //    , formData
+  //    , { headers: httpHeaders }
+  //    )
+  //    .pipe(
+  //      tap(response => this.handleResponse(response)),
+  //      catchError(response => this.handleError(response))
+  //    );
+  //}
+
   public getUri(controller?: string, action?: string): string {
 
     let uri: string = this.config.getString('apiUrl');

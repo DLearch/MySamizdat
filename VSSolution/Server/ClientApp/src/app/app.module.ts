@@ -8,36 +8,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material.module';
 import { AppTranslateModule } from './app-translate.module';
-import { ErrorComponent } from './pages/error/error.component';
-import { MainComponent } from './pages/main/main.component';
 import { AppComponent } from './app.component';
-import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
-import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
-import { InputComponent } from './components/input/input.component';
 import { LogInterceptorService } from './services/log-interceptor/log-interceptor.service';
 import { ApiService } from './services/api/api.service';
-import { DialogWindowComponent } from './layout/dialog-window/dialog-window.component';
-import { UserPanelComponent } from './layout/user-panel/user-panel.component';
-import { LoadOverlayComponent } from './components/load-overlay/load-overlay.component';
-import { CommentsComponent } from './components/comments/comments.component';
-import { ChapterComponent } from './pages/chapter/chapter.component';
-import { ImageLoadComponent } from './components/image-load/image-load.component';
-import { BackdropComponent } from './components/backdrop/backdrop.component';
-import { ThemePickerComponent } from './layout/theme-picker/theme-picker.component';
-import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
-import { AccountComponent } from './pages/account/account.component';
 import { ConfigurationService } from './services/configuration/configuration.service';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { AuthService } from './auth/auth.service';
-import { UserStorageService } from './auth/user-storage.service';
-import { AuthGuard } from './auth/auth.guard';
-import { DialogWindowService } from './layout/dialog-window/dialog-window.service';
-import { AvatarComponent } from './components/avatar/avatar.component';
-import { ImageComponent } from './components/image/image.component';
-import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
-import { NewChapterComponent } from './pages/new-chapter/new-chapter.component';
-import { NewBookComponent } from './pages/new-book/new-book.component';
 import { AccountControllerService } from './api-services/account-controller/account-controller.service';
 import { AuthControllerService } from './api-services/auth-controller/auth-controller.service';
 import { BookControllerService } from './api-services/book-controller/book-controller.service';
@@ -46,69 +20,47 @@ import { CatalogControllerService } from './api-services/catalog-controller/cata
 import { ChapterControllerService } from './api-services/chapter-controller/chapter-controller.service';
 import { CommentControllerService } from './api-services/comment-controller/comment-controller.service';
 import { PluralPipe } from './pipes/plural.pipe';
-import { ButtonComponent } from './components/button/button.component';
-import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { PaginatorIntl } from './paginator-intl';
 import { TranslateService } from '@ngx-translate/core';
-import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.component';
 import { LanguageControllerService } from './api-services/language-controller/language-controller.service';
-import { NewTeamComponent } from './pages/new-team/new-team.component';
 import { TeamControllerService } from './api-services/team-controller/team-controller.service';
-import { TeamComponent } from './pages/team/team.component';
-import { FormComponent } from './components/form/form.component';
 import { ArrayPluralTranslatePipe } from './pipes/array-plural-translate.pipe';
-import { TimePluralTranslatePipe } from './pipes/time-plural-translate.pipe';
-import { NotificationsComponent } from './layout/notifications/notifications.component';
-import { TeamInviteNotificationComponent } from './components/notifications/team-invite-notification/team-invite-notification.component';
 import { PageService } from './services/page/page.service';
 import { BreakpointService } from './services/breakpoint/breakpoint.service';
-import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
 import { TimeAgoPluralTranslatePipe } from './pipes/time-ago-plural-translate.pipe';
-import { BookCatalogComponent } from './components/book-catalog/book-catalog.component';
+import { LayoutComponent } from './layout/layout.component';
+import { LanguagePickerComponent } from './layout/language-picker/language-picker.component';
+import { ThemePickerComponent } from './layout/theme-picker/theme-picker.component';
+import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
+import { UserStorageService } from './services/user-storage/user-storage.service';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { ButtonComponent } from './components/button/button.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { FormComponent } from './components/form/form.component';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
+import { UserPanelComponent } from './layout/user-panel/user-panel.component';
+import { NewBookPageComponent } from './pages/new-book-page/new-book-page.component';
 import { BookPageComponent } from './pages/book-page/book-page.component';
-import { BookComponent } from './components/book/book.component';
+import { CoverComponent } from './components/cover/cover.component';
+import { ChapterPageComponent } from './pages/chapter-page/chapter-page.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
   declarations: [
     AppComponent
-    , DefaultLayoutComponent
-    , MainComponent
-    , ErrorComponent
-    , LanguagePickerComponent
-    , SignInComponent
-    , SignUpComponent
-    , InputComponent
-    , BookComponent
-    , DialogWindowComponent
-    , UserPanelComponent
-    , LoadOverlayComponent
-    , CommentsComponent
-    , ChapterComponent
-    , ImageLoadComponent
-    , BackdropComponent
-    , ThemePickerComponent
-    , AccountComponent
-    , AvatarComponent
-    , ImageComponent
-    , NewCommentComponent
-    , NewChapterComponent
-    , NewBookComponent
     , PluralPipe
-    , ButtonComponent
-    , BookmarksComponent
-    , PageWrapperComponent
-    , NewTeamComponent
-    , TeamComponent
-    , FormComponent
     , ArrayPluralTranslatePipe
-    , TimePluralTranslatePipe
-    , NotificationsComponent
-    , TeamInviteNotificationComponent
-    , CatalogPageComponent
     , TimeAgoPluralTranslatePipe
-    , BookCatalogComponent
-    , BookPageComponent
+    , LayoutComponent
+    , LanguagePickerComponent
+    , ThemePickerComponent, MainPageComponent, ErrorPageComponent, ButtonComponent, SignInComponent, SignUpComponent, FormComponent, SignUpPageComponent, SignInPageComponent, UserPanelComponent, NewBookPageComponent, BookPageComponent, CoverComponent, ChapterPageComponent, CommentsComponent, NewCommentComponent, AvatarComponent
   ]
   , imports: [
     BrowserModule
@@ -128,11 +80,7 @@ import { BookComponent } from './components/book/book.component';
       multi: true
     }
     , ApiService
-    , AuthService
     , UserStorageService
-    , AuthGuard
-    , DialogWindowService
-    , ThemePickerService
     , ConfigurationService
     , AccountControllerService
     , AuthControllerService
@@ -146,6 +94,8 @@ import { BookComponent } from './components/book/book.component';
     , PluralPipe
     , PageService
     , BreakpointService
+    , ThemePickerService
+    , AuthGuard
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {
@@ -157,9 +107,6 @@ import { BookComponent } from './components/book/book.component';
     }
   ]
   , entryComponents: [
-    SignInComponent
-    , SignUpComponent
-    , ImageLoadComponent
   ]
   , bootstrap: [AppComponent]
 })

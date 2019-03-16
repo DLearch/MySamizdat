@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Server.Models.Books;
-using Server.Models.Comments;
-using Server.Models.Notification;
-using Server.Models.Team;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,25 +9,26 @@ namespace Server.Models
 {
     public class AppDbContext : IdentityDbContext<User>
     {
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<TranslateBook> TranslateBooks { get; set; }
-        public DbSet<Chapter> Chapters { get; set; }
-
-        public DbSet<Team.Team> Teams { get; set; }
-        public DbSet<TeamMember> TeamMembers { get; set; }
-        public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
-        public DbSet<TeamMemberToTeamMemberRole> TeamMembersToTeamMemberRoles { get; set; }
-        
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<Language> Languages { get; set; }
-
-        public DbSet<Notification.Notification> Notifications { get; set; }
-        public DbSet<TeamInviteNotification> TeamInviteNotifications { get; set; }
-
+        public DbSet<BookState> BookStates { get; set; }
+        public DbSet<ChapterState> ChapterStates { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BookComment> BookComments { get; set; }
         public DbSet<ChapterComment> ChapterComments { get; set; }
-        
+        public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<ChapterContent> ChapterContent { get; set; }
+        public DbSet<BookEvaluation> BookEvaluations { get; set; }
+        public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<TeamInviteNotification> TeamInviteNotifications { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -40,67 +37,74 @@ namespace Server.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TeamInviteNotification>()
+               .HasOne(c => c.Team)
+               .WithMany(c => c.Invites)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeamInviteNotification>()
+               .HasOne(c => c.TeamMember)
+               .WithMany(c => c.Invites)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<ChapterComment>()
                .HasOne(c => c.Chapter)
                .WithMany(c => c.Comments)
                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Comment>()
-               .HasOne(c => c.Parent)
-               .WithMany(c => c.Children)
+               .HasOne(c => c.User)
+               .WithMany(c => c.Comments)
                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Parent)
-                .WithMany(c => c.Children)
-                .HasForeignKey(c => c.ParentId)
-                .IsRequired(false);
-            
-            modelBuilder.Entity<Bookmark>()
-                .HasKey(t => new { t.BookId, t.UserId });
+            modelBuilder.Entity<BookEvaluation>()
+               .HasOne(c => c.User)
+               .WithMany(c => c.BookEvaluations)
+               .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Bookmark>()
-                .HasOne(pt => pt.Book)
-                .WithMany(p => p.Bookmarks)
-                .HasForeignKey(pt => pt.BookId);
+            modelBuilder.Entity<TranslateBook>()
+                        .HasOne(e => e.OriginalLanguage)
+                        .WithMany(e => e.TranslateBooks)
+                        .HasForeignKey(e => e.OriginalLanguageTK)
+                        .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Bookmark>()
-                .HasOne(pt => pt.User)
-                .WithMany(t => t.Bookmarks)
-                .HasForeignKey(pt => pt.UserId);
-
-            modelBuilder.Entity<Book>()
-                .HasOne(c => c.Team)
-                .WithMany(c => c.Books)
-                .HasForeignKey(c => c.TeamId)
-                .IsRequired(false);
-            //modelBuilder.Entity<BookGenre>()
-            //    .HasKey(t => new { t.BookId, t.GenreId });
-
-            //modelBuilder.Entity<BookGenre>()
-            //    .HasOne(sc => sc.Book)
-            //    .WithMany(s => s.Genres)
-            //    .HasForeignKey(sc => sc.BookId);
-
-            //modelBuilder.Entity<BookGenre>()
-            //    .HasOne(sc => sc.Genre)
-            //    .WithMany(c => c.Books)
-            //    .HasForeignKey(sc => sc.GenreId);
+            modelBuilder.Entity<ChapterState>().HasData(
+                new ChapterState[]
+                {
+                    new ChapterState { TK = "work"},
+                    new ChapterState { TK = "editing"},
+                    new ChapterState { TK = "complete"}
+                });
+            modelBuilder.Entity<Genre>().HasData(
+                new Genre[]
+                {
+                    new Genre { TK = "historical"},
+                    new Genre { TK = "fantasy"},
+                    new Genre { TK = "detective"}
+                });
             modelBuilder.Entity<Language>().HasData(
                 new Language[]
                 {
-                new Language { Id = "en"},
-                new Language { Id = "ru"},
-                new Language { Id = "ua"}
+                new Language { TK = "en"},
+                new Language { TK = "ru"},
+                new Language { TK = "ua"}
                 });
-
+            modelBuilder.Entity<BookState>().HasData(
+                new BookState[]
+                {
+                new BookState { TK = "free"},
+                new BookState { TK = "work"},
+                new BookState { TK = "pause"},
+                new BookState { TK = "complete"}
+                });
             modelBuilder.Entity<TeamMemberRole>().HasData(
                 new TeamMemberRole[]
                 {
-                new TeamMemberRole { Id = "editor"},
-                new TeamMemberRole { Id = "translator"},
-                new TeamMemberRole { Id = "writer"}
+                new TeamMemberRole { TK = "head"},
+                new TeamMemberRole { TK = "deputy-head"},
+                new TeamMemberRole { TK = "member"}
                 });
+
             base.OnModelCreating(modelBuilder);
         }
     }

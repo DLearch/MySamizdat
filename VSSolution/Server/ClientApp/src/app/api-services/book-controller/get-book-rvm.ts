@@ -1,15 +1,26 @@
 export class GetBookRVM {
   title: string;
+  authorName: string;
+  bookStateTK: string;
   description: string;
-  coverPath: string;
+  descriminator: string;
+  teamName: string;
   languageTK: string;
-  originalTitle: string;
   originalLanguageTK: string;
+  originalTitle: string;
+  coverPath: string;
+  creationTime: string;
   bookmark: boolean;
   user: {
     userName: string;
     avatarPath: string;
   };
+  chapters: {
+    id: number;
+    lastStateChangeTime: string;
+    chapterStateTK: string;
+    name: string;
+  }[];
   comments: {
     id: number;
     content: string;
@@ -20,11 +31,6 @@ export class GetBookRVM {
     //    userName: string;
     //  }
     //};
-    author: { userName: string, avatarPath: string };
-  }[];
-  chapters: {
-    id: number;
-    creationTime: string;
-    name: string;
+    user: { userName: string, avatarPath: string };
   }[];
 }

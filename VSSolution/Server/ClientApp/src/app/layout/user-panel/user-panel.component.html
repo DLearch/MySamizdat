@@ -1,8 +1,5 @@
 <!-- If the user is logged in-->
-<ng-container *ngIf='auth.isAuth'>
-
-  <!--Notifications menu button-->
-  <app-button [matMenuTriggerFor]="notificationsMenu" design="icon">notifications</app-button>
+<ng-container *ngIf='userStorage.isAuth'>
 
   <!--User menu button-->
   <app-button [matMenuTriggerFor]="userMenu" design="image"></app-button>
@@ -10,29 +7,18 @@
 </ng-container>
 
 <!-- If the user is not logged in-->
-<ng-container *ngIf='!auth.isAuth'>
+<ng-container *ngIf='!userStorage.isAuth'>
 
   <!-- Sign in link -->
   <a routerLink="/sign-in" mat-button>{{ componentTK + 'sign-in' | translate }}</a>
+
 </ng-container>
 
-
-
-<!--Notifications menu-->
-<mat-menu #notificationsMenu="matMenu">
-  <app-notifications></app-notifications>
-</mat-menu>
 
 <!--User menu-->
 <mat-menu #userMenu="matMenu">
 
-  <!-- Bookmarks link -->
-  <a routerLink="/bookmarks" mat-menu-item>{{componentTK + 'bookmarks' | translate}}</a>
-
-  <!-- Profile link -->
-  <a routerLink="/account" mat-menu-item>{{componentTK + 'account' | translate}}</a>
-
   <!-- Sign out button -->
-  <button mat-menu-item (click)="auth.signOut()">{{ componentTK + 'sign-out' | translate }}</button>
+  <button mat-menu-item (click)="userStorage.signOut()">{{ componentTK + 'sign-out' | translate }}</button>
 
 </mat-menu>

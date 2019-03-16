@@ -23,6 +23,7 @@ import {
   , MatNativeDateModule
   , MatSnackBarModule
   , MatStepperModule
+  , MatTabsModule
 } from '@angular/material';
 
 const modules = [
@@ -49,6 +50,7 @@ const modules = [
   , MatSnackBarModule
   , MatStepperModule
   , OverlayModule
+  , MatTabsModule
 ];
 
 @NgModule({

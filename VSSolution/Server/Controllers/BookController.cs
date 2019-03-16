@@ -1,177 +1,161 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Server.Models;
-using Server.Models.Books;
-using Server.Models.Comments;
-using Server.Services;
-using Server.ViewModels.Book;
+using Server.ViewModels.BookController;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
     [Authorize]
-    public class BookController : Controller
+    public class BookController : BaseController
     {
-        private readonly UserManager<User> _userManager;
-        private readonly AppDbContext _db;
-
         public BookController(
             UserManager<User> userManager
             , AppDbContext db
-        )
-        {
-            _userManager = userManager;
-            _db = db;
-        }
+        ) : base(userManager, db)
+        { }
 
+        // ModelErrors:
+        // "User" -  ERROR_NOT_FOUND;
+        // "Title" -  ERROR_TAKEN;
+        // "LanguageTK" -  ERROR_NOT_FOUND;
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody]AddVM model)
+        public async Task<IActionResult> AddBook([FromBody]AddBookVM model)
         {
+            User user = await GetUserAsync();
+
             if (ModelState.IsValid)
             {
-                User user = await _userManager.GetUserAsync(User);
+                AddModelErrorIfFalse("Title", ERROR_TAKEN, _db.Books.All(b => b.Title != model.Title));
 
-                if(user != null)
+                AddModelErrorIfNull("LanguageTK", ERROR_NOT_FOUND, await _db.Languages.FindAsync(model.LanguageTK));
+
+                if (ModelState.IsValid)
                 {
-                    if (await _db.Books.AnyAsync(b => b.Title == model.Title))
-                        ModelState.AddModelError("Title", "already-taken");
-                    else
+                    Book book = new Book()
                     {
-                        if (await _db.Languages.AllAsync(l => l.Id != model.LanguageTK))
-                            ModelState.AddModelError("Language", "not-found");
-                        else
-                        {
-                            Book book = new Book()
-                            {
-                                Title = model.Title,
-                                UserId = user.Id,
-                                LanguageId = model.LanguageTK
-                            };
+                        Title = model.Title,
+                        LanguageTK = model.LanguageTK,
+                        BookStateTK = "work",
+                        CreationTime = DateTime.Now,
+                        UserId = user.Id
+                    };
 
-                            await _db.Books.AddAsync(book);
+                    await _db.Books.AddAsync(book);
+                    await _db.SaveChangesAsync();
 
-                            await _db.SaveChangesAsync();
-
-                            return Ok(book.Id);
-                        }
-                    }
-
-                }
-                else
-                    ModelState.AddModelError("User", "not-found");
-            }
-
-            return BadRequest(ModelState);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddTranslate([FromBody]AddTranslateVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = await _userManager.GetUserAsync(User);
-
-                if (user == null)
-                    ModelState.AddModelError("User", "not-found");
-                else
-                {
-                    if (await _db.Books.AnyAsync(b => b.Title == model.Title))
-                        ModelState.AddModelError("Title", "already-taken");
-                    else
-                    {
-                        if (await _db.Languages.AllAsync(l => l.Id != model.LanguageTK))
-                            ModelState.AddModelError("Language", "not-found");
-                        else
-                        {
-                            TranslateBook book = new TranslateBook()
-                            {
-                                OriginalTitle = model.OriginalTitle,
-                                Title = model.Title,
-                                UserId = user.Id,
-                                LanguageId = model.LanguageTK,
-                                OriginalLanguageId = model.OriginalLanguageTK
-                            };
-
-                            await _db.TranslateBooks.AddAsync(book);
-
-                            await _db.SaveChangesAsync();
-
-                            return Ok(book.Id);
-                        }
-                    }
+                    return Ok(book.Id);
                 }
             }
 
             return BadRequest(ModelState);
         }
+
+        // ModelErrors:
+        // "User" -  ERROR_NOT_FOUND;
+        // "Title" -  ERROR_TAKEN;
+        // "LanguageTK" -  ERROR_NOT_FOUND;
+        // "OriginalLanguageTK" -  ERROR_NOT_FOUND;
+        [HttpPost]
+        public async Task<IActionResult> AddTranslateBook([FromBody]AddTranslateBookVM model)
+        {
+            User user = await GetUserAsync();
+            
+            if (ModelState.IsValid)
+            {
+                AddModelErrorIfFalse("Title", ERROR_TAKEN, _db.Books.All(b => b.Title != model.Title));
+
+                AddModelErrorIfNull("LanguageTK", ERROR_NOT_FOUND, await _db.Languages.FindAsync(model.LanguageTK));
+                AddModelErrorIfNull("OriginalLanguageTK", ERROR_NOT_FOUND, await _db.Languages.FindAsync(model.OriginalLanguageTK));
+
+                if (ModelState.IsValid)
+                {
+                    TranslateBook book = new TranslateBook()
+                    {
+                        Title = model.Title,
+                        LanguageTK = model.LanguageTK,
+                        BookStateTK = "work",
+                        CreationTime = DateTime.Now,
+                        UserId = user.Id,
+                        OriginalLanguageTK = model.OriginalLanguageTK,
+                        OriginalTitle = model.OriginalTitle
+                    };
+
+                    await _db.TranslateBooks.AddAsync(book);
+                    await _db.SaveChangesAsync();
+
+                    return Ok(book.Id);
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        // "BookId" - ERROR_NOT_FOUND;
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Get([FromBody]GetVM model)
+        public async Task<IActionResult> GetBook([FromBody]GetBookVM model)
         {
             if (ModelState.IsValid)
             {
                 Book book = await _db.Books
+                    .Include(b => b.Bookmarks)
                     .Include(b => b.User)
                     .Include(b => b.Chapters)
-                    .Include(b => b.Bookmarks)
                     .Include(b => b.Comments)
-                        .ThenInclude(c => c.Author)
+                        .ThenInclude(c => c.User)
                     .FirstOrDefaultAsync(b => b.Id == model.BookId);
-                
-                if(book == null)
-                    ModelState.AddModelError("Book", "not-found");
-                else
+
+                AddModelErrorIfNull("BookId", ERROR_NOT_FOUND, book);
+
+                if (ModelState.IsValid)
                 {
                     User user = await _userManager.GetUserAsync(User);
-                    
+                    TranslateBook translateBook = book.GetType() == typeof(TranslateBook) ? book as TranslateBook : new TranslateBook();
+
                     return Ok(new
                     {
                         book.Title,
+                        book.AuthorName,
+                        book.BookStateTK,
                         book.Description,
+                        book.Discriminator,
+                        book.TeamName,
+                        book.LanguageTK,
+                        translateBook.OriginalLanguageTK,
+                        translateBook.OriginalTitle,
                         book.CoverPath,
-                        OriginalTitle = book.GetType() == typeof(TranslateBook) ? (book as TranslateBook).OriginalTitle : null,
-                        OriginalLanguageTK = book.GetType() == typeof(TranslateBook) ? (book as TranslateBook).OriginalLanguageId : null,
-                        LanguageTK = book.LanguageId,
-                        Bookmark = user != null && book.Bookmarks.Any(b => b.UserId == user.Id),
+                        book.CreationTime,
+                        Bookmark = user != null ? book.Bookmarks.Any(bm => bm.UserId == user.Id) : false,
                         User = new
                         {
                             book.User.UserName,
                             book.User.AvatarPath
                         },
-                        Comments = book.Comments.Select(comment => new
+                        Chapters = book.Chapters.OrderBy(c => c.Index).Select(c => new
                         {
-                            comment.Id,
-                            comment.Content,
-                            comment.CreationTime,
-                            comment.ParentId,
-                            //Parent = new
-                            //{
-                            //    Author = new
-                            //    {
-                            //        comment.Parent.Author.UserName
-                            //    }
-                            //},
-                            Author = new
+                            c.LastStateChangeTime,
+                            c.ChapterStateTK,
+                            c.Name,
+                            c.Id
+                        }),
+                        Comments = book.Comments.Select(c => new
+                        {
+                            c.Id,
+                            c.ParentId,
+                            c.Content,
+                            c.CreationTime,
+                            User = new
                             {
-                                comment.Author.UserName,
-                                comment.Author.AvatarPath
+                                c.User.UserName,
+                                c.User.AvatarPath
                             }
-                        }).ToList(),
-                        Chapters = book.Chapters.OrderBy(c => c.Index).Select(chapter => new
-                        {
-                            chapter.Id,
-                            chapter.CreationTime,
-                            chapter.Name
-                        }).ToList()
+                        })
                     });
                 }
             }

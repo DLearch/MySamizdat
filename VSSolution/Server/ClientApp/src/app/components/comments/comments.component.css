@@ -5,11 +5,19 @@
   flex-direction: row;
 }
 
+.main-wrapper {
+  margin: 16px;
+}
+
 .comment-main {
   flex: 1;
   margin-left: 10px;
 }
 
 .comment-actions {
-  display:flex;
+  display: flex;
+}
+
+.list-header {
+  margin: 0 0 16px 0;
 }

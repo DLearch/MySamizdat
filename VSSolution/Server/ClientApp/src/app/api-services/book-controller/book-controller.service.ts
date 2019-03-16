@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { GetBookRVM } from './get-book-rvm';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class BookControllerService {
       languageTK: languageTK
     };
 
-    return this.api.post(model, this.controller, 'add');
+    return this.api.post(model, this.controller, 'addbook');
   }
 
   addTranslateBook(title: string, languageTK: string, originalTitle: string, originalLanguageTK: string): Observable<number> {
@@ -32,7 +31,7 @@ export class BookControllerService {
       originalLanguageTK: originalLanguageTK
     };
 
-    return this.api.post(model, this.controller, 'addtranslate');
+    return this.api.post(model, this.controller, 'addtranslatebook');
   }
 
   removeBook(bookId: number): Observable<void> {
@@ -46,10 +45,13 @@ export class BookControllerService {
 
   getBook(bookId: number): Observable<GetBookRVM> {
 
+    if (!bookId) 
+      return throwError({BookId: "empty"});
+
     let model = {
       bookId: bookId
     };
 
-    return this.api.post(model, this.controller, 'get');
+    return this.api.post(model, this.controller, 'getbook');
   }
 }

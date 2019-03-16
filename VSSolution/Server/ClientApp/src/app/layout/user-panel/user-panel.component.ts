@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
-import { UserStorageService } from 'src/app/auth/user-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -9,11 +8,10 @@ import { UserStorageService } from 'src/app/auth/user-storage.service';
 })
 export class UserPanelComponent {
 
-  componentTK = 'component.user-panel.';
+  componentTK = 'layout.user-panel.';
 
   constructor(
-    private userStorage: UserStorageService,
-    public auth: AuthService
+    private userStorage: UserStorageService
   ) { }
-  
+
 }

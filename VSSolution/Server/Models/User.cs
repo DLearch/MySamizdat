@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Server.Models.Books;
-using Server.Models.Comments;
-using Server.Models.Team;
 using Server.Validators;
 using System;
 using System.Collections.Generic;
@@ -20,23 +17,17 @@ namespace Server.Models
         public DateTime BirthDate { get; set; }
         
         public string AvatarPath { get; set; }
-
-        public List<Comment> Comments { get; set; }
-        public List<BookComment> BookComments { get; set; }
-        public List<ChapterComment> ChapterComments { get; set; }
         
-        [InverseProperty("User")]
-        public List<TeamMember> Teams { get; set; }
-
         public List<Book> Books { get; set; }
 
-        public List<Bookmark> Bookmarks { get; set; }
-        public List<Notification.Notification> Notifications { get; set; }
+        public List<Comment> Comments { get; set; }
 
-        public User()
-        {
-            Bookmarks = new List<Bookmark>();
-            Notifications = new List<Notification.Notification>();
-        }
+        public List<Bookmark> Bookmarks { get; set; }
+
+        public List<BookEvaluation> BookEvaluations { get; set; }
+
+        public List<TeamMember> TeamMembers { get; set; }
+
+        public List<Notification> Notifications { get; set; }
     }
 }
