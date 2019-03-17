@@ -1,10 +1,10 @@
 export class GetChapterRVM {
 
   content: string;
-  creationTime: string;
+  lastStateChangeTime: string;
   name: string;
+  chapterStateTK: string;
   book: {
-    id: number;
     title: string;
     chapters: {
       id: number;
@@ -13,7 +13,12 @@ export class GetChapterRVM {
   };
   comments: {
     id: number;
-    userName: string;
-    avatarPath: string;
+    parentId: number;
+    content: string;
+    creationTime: string;
+    user: {
+      userName: string;
+      avatarPath: string;
+    }
   }[];
 }

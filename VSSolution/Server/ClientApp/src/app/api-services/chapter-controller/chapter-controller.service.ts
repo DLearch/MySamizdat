@@ -37,6 +37,6 @@ export class ChapterControllerService {
       chapterId: chapterId
     };
 
-    return this.api.post(model, this.controller, 'get');
+    return this.api.post(model, this.controller, 'getchapter');
   }
 }

@@ -60,5 +60,59 @@ namespace Server.Controllers
 
             return BadRequest(ModelState);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> GetChapter([FromBody]GetChapterVM model)
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                Chapter chapter = await _db.Chapters
+                    .Include(c => c.ChapterContents)
+                    .Include(c => c.Book)
+                        .ThenInclude(b => b.Chapters)
+                    .Include(c => c.Comments)
+                        .ThenInclude(c => c.User)
+                    .FirstOrDefaultAsync(c => c.Id == model.ChapterId);
+
+                AddModelErrorIfNull("ChapterId", ERROR_NOT_FOUND, chapter);
+
+                if (ModelState.IsValid)
+                {
+
+                    return Ok(new
+                    {
+                        chapter.LastStateChangeTime,
+                        chapter.Name,
+                        chapter.ChapterStateTK,
+                        chapter.ChapterContents.LastOrDefault()?.Content,
+                        Book = new
+                        {
+                            chapter.Book.Title,
+                            Chapters = chapter.Book.Chapters.OrderBy(c => c.Index).Select(c => new
+                            {
+                                c.Id,
+                                c.Name
+                            }).ToList()
+                        },
+                        Comments = chapter.Comments.Select(c => new
+                        {
+                            c.Id,
+                            c.ParentId,
+                            c.Content,
+                            c.CreationTime,
+                            User = new
+                            {
+                                c.User.UserName,
+                                c.User.AvatarPath
+                            }
+                        })
+                    });
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
     }
 }
