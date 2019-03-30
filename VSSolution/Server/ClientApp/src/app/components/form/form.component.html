@@ -8,7 +8,7 @@
       <ng-container *ngSwitchCase="'select'">
 
         <!--Field-->
-        <mat-form-field class="field" appearance="outline">
+        <mat-form-field class="field">
 
           <!--Placeholder-->
           <mat-label>{{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}</mat-label>
@@ -32,17 +32,33 @@
 
       </ng-container>
 
+      <!--Checkbox input-->
+      <ng-container *ngSwitchCase="'checkbox'">
+
+        <mat-checkbox [formControlName]="inputTemplate.name">
+          {{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}
+        </mat-checkbox>
+
+        <!--Errors-->
+        <mat-error *ngIf="form.get(inputTemplate.name).invalid">
+          <ng-container *ngFor="let errorTK of getErrorTKs(form.get(inputTemplate.name).errors)">
+            {{ 'input.' + inputTemplate.tk + '.errors.' + errorTK | translate }}
+          </ng-container>
+        </mat-error>
+
+      </ng-container>
       <!--Default input-->
       <ng-template ngSwitchDefault>
 
         <!--Field-->
-        <mat-form-field class="field" appearance="outline">
+        <mat-form-field class="field">
 
           <!--Placeholder-->
           <mat-label>{{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}</mat-label>
 
           <!--Input-->
           <input matInput
+                 [value]="inputTemplate.value ? inputTemplate.value : null"
                  [type]="(inputTemplate.type ? inputTemplate.type : 'text')"
                  [formControlName]="inputTemplate.name" />
 

@@ -60,7 +60,7 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
       }, response => {
         this.pageService.loaded = true;
         this.sub.unsubscribe();
-        this.router.navigate(['/chapter-not-found']);
+        this.pageService.error = { error: '404', descriptionTK: 'error.chapter-not-found' };
       });
   }
 

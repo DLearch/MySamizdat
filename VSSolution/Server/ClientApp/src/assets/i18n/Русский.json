@@ -5,9 +5,22 @@
     },
     "user-panel": {
       "sign-in": "Вход",
-      "sign-out": "Выход"
+      "sign-out": "Выход",
+      "bookmarks": "Закладки",
+      "account": "Аккаунт"
     },
-    "sidenav-header": "Runoo"
+    "sidenav-header": "Runoo",
+    "link": {
+      "main": "Главная",
+      "catalog": "Книги"
+    },
+    "notifications": {
+      "team-invite-notification": {
+        "text": "{{userName}} приглашает вас в команду {{teamName}}",
+        "accept": "Принять",
+        "decline": "Отклонить"
+      }
+    }
   },
   "page": {
     "error": {
@@ -59,6 +72,15 @@
     },
     "chapter": {
       "empty": "Пусто"
+    },
+    "book-catalog": {
+    },
+    "user": {
+      "title": "Аккаунт",
+      "emailvisible": "Показывать email другим пользователям?"
+    },
+    "new-team": {
+      "title": "Новая команда"
     }
   },
   "component": {
@@ -77,17 +99,33 @@
     "new-comment": {
       "add-comment": "Оставить комментарий",
       "cancel": "Отмена"
+    },
+    "filters": {
+      "label": "Фильтры",
+      "apply": "Применить",
+      "reset": "Сбросить"
+    },
+    "new-team": {
+      "create": "Добавить"
+    },
+    "invite-team-member": {
+      "invite": "Пригласить"
     }
   },
   "error": {
     "page-not-found": "Страница не найдена",
     "book-not-found": "Книга не найдена",
+    "user-not-found": "Пользователь не найден",
     "chapter-not-found": "Глава не найдена"
   },
   "input": {
     "chapter": {
       "placeholder": "Глава"
     },
+    "translate-filter": {
+      "placeholder": "Только переводы"
+    },
+    "search.placeholder": "Поиск",
     "comment": {
       "placeholder": "Оставить комментарий",
       "errors": {
@@ -140,6 +178,14 @@
       "placeholder": "Название",
       "errors": {
         "empty": "Введите название",
+        "short": "Название слишком короткое",
+        "already-taken": "Название уже занято"
+      }
+    },
+    "team-name": {
+      "placeholder": "Название",
+      "errors": {
+        "empty": "Введите название команды",
         "short": "Название слишком короткое",
         "already-taken": "Название уже занято"
       }
@@ -204,6 +250,20 @@
     "many-one": "{{count}} книга",
     "many-few": "{{count}} книги",
     "many": "{{count}} книг"
+  },
+  "user-team.count": {
+    "none": "Не состоит в командах",
+    "one": "Состоит в 1 команде",
+    "many-one": "Состоит в {{count}} команде",
+    "many-few": "Состоит в {{count}} командах",
+    "many": "Состоит в {{count}} командах"
+  },
+  "team-member.count": {
+    "none": "Нет участников",
+    "one": "1 участник",
+    "many-one": "{{count}} участник",
+    "many-few": "{{count}} участника",
+    "many": "{{count}} участников"
   },
   "time": {
     "year.ago.count": {

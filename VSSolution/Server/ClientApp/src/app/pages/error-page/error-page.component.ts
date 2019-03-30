@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ErrorPageData } from './error-page-data';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ export class ErrorPageComponent implements OnInit {
 
   componentTK = 'page.error.';
 
-  errorData: ErrorPageData;
+  @Input() errorData: ErrorPageData;
 
   sub: Subscription;
 
@@ -23,6 +23,18 @@ export class ErrorPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    if (!this.errorData)
+      this.subscribeRouteErrorData();
+  }
+
+  ngOnDestroy() {
+    if (this.sub)
+      this.sub.unsubscribe();
+  }
+
+  subscribeRouteErrorData() {
+
     this.sub = this.route
       .data
       .subscribe((data: ErrorPageData) => {
@@ -36,9 +48,5 @@ export class ErrorPageComponent implements OnInit {
         else
           this.pageService.setTitleTK(this.componentTK + 'error');
       });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 }

@@ -6,17 +6,18 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CatalogControllerService {
 
-  readonly controller: string = 'catalog';
+  readonly controller: string = 'bookcatalog';
 
   constructor(
     private api: ApiService
   ) { }
 
-  getPage(page: number, pageSize: number): Observable<GetPageRVM> {
+  getPage(page: number, pageSize: number, filters: { type: string, value?: any }[]): Observable<GetPageRVM> {
 
     let model = {
       page: page,
-      pageSize: pageSize
+      pageSize: pageSize,
+      filters: filters
     };
 
     return this.api.post(model, this.controller, 'getpage');

@@ -1,0 +1,52 @@
+
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #filtersDrawer mode="side" position="end">
+    <app-filters [formTemplate]="filtersFormTemplate" (onApply)="applyFilters($event)"></app-filters>
+  </mat-drawer>
+  <mat-drawer-content class="drawer-content">
+    <div class="book-list" *ngIf="booksLoaded">
+      <div class="list-header ">
+
+        <div class="mat-h2">
+          {{ books | arrayPluralTranslate:'book' }}
+        </div>
+        <a routerLink="/books/add" mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </a>
+
+        <span class="flex-spacer"></span>
+
+        <app-search [(value)]="searchValue"></app-search>
+
+        <app-button design="icon" (simpleClick)='filtersDrawer.toggle()'>
+          filter_list
+        </app-button>
+      </div>
+
+      <mat-nav-list *ngIf="books" class="content">
+        <mat-list-item *ngFor="let book of books">
+          <app-cover matListAvatar design="mini" [path]="book.coverPath" routerLink="/book/{{ book.id }}"></app-cover>
+
+          <div matLine routerLink="/book/{{ book.id }}"> {{ book.title }} </div>
+
+          <app-button design="icon" (simpleClick)="removeBookmark(book)">
+            <mat-icon>delete</mat-icon>
+          </app-button>
+        </mat-list-item>
+      </mat-nav-list>
+
+
+      <mat-paginator (page)="updatePage($event)"
+                     [length]="length"
+                     [pageSize]="pageSize"
+                     [pageIndex]="pageIndex"
+                     showFirstLastButtons="true"
+                     [pageSizeOptions]="[2, 5, 10, 25, 100]">
+      </mat-paginator>
+    </div>
+    <div class="spinner-wrapper" *ngIf="!booksLoaded">
+      <mat-spinner [diameter]="70" class="load-spinner"></mat-spinner>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

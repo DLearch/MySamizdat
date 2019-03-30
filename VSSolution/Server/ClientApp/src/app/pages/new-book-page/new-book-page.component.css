@@ -5,8 +5,5 @@
 .stepper {
   max-width: 500px;
   margin: 0 auto;
-}
-
-app-button {
-  margin: 8px;
+  background: none;
 }

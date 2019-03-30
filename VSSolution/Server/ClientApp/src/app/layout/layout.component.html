@@ -1,7 +1,7 @@
 <mat-sidenav-container class="mat-app-background">
 
   <!--Sidenav-->
-  <mat-sidenav #sidenav [mode]="breakpointService.level >= 3 ? 'side' : 'over'">
+  <mat-sidenav #sidenav [mode]="breakpointService.level >= 3 ? 'side' : 'over'" class="mat-app-background">
     <div class="content">
 
       <!--Header-->
@@ -13,6 +13,7 @@
       <mat-nav-list class="sidenav-main">
 
         <a mat-list-item routerLink="/">{{ componentTK + 'link.main' | translate }}</a>
+        <a mat-list-item routerLink="/books">{{ componentTK + 'link.catalog' | translate }}</a>
 
       </mat-nav-list>
 
@@ -42,13 +43,13 @@
 
     <!--Main-->
     <main class="main">
-      <div class="main" [style.display]="pageService.loaded ? 'flex' : 'none'">
+      <div class="main" [style.display]="pageService.loaded && !pageService.error ? 'flex' : 'none'">
         <!--Router outlet-->
         <router-outlet></router-outlet>
       </div>
+      <app-error-page [errorData]="pageService.error" *ngIf="pageService.loaded && pageService.error"></app-error-page>
       <!--Spinner-->
       <mat-spinner *ngIf="!pageService.loaded" [diameter]="70" class="page-load-spinner"></mat-spinner>
-
     </main>
 
     <!--Footer-->

@@ -12,29 +12,29 @@ export class TeamControllerService {
     private api: ApiService
   ) { }
 
-  addTeam(name: string): Observable<number> {
+  addTeam(name: string): Observable<string> {
 
     let model = {
-      name: name
+      teamName: name
     };
 
-    return this.api.post(model, this.controller, 'add');
+    return this.api.post(model, this.controller, 'addteam');
   }
 
-  getTeam(teamId: number): Observable<GetTeamRVM> {
+  getTeam(teamName: string): Observable<GetTeamRVM> {
 
     let model = {
-      teamId: teamId
+      teamName: teamName
     };
 
-    return this.api.post(model, this.controller, 'get');
+    return this.api.post(model, this.controller, 'getteam');
   }
 
-  inviteMember(teamId: number, userName: string): Observable<void> {
+  inviteMember(teamName: string, userName: string): Observable<void> {
 
     let model = {
       userName: userName,
-      teamId: teamId
+      teamName: teamName
     };
 
     return this.api.post(model, this.controller, 'invitemember');
@@ -50,11 +50,11 @@ export class TeamControllerService {
     return this.api.post(model, this.controller, 'respondinvitation');
   }
 
-  removeMember(teamId: number, userName: string): Observable<void> {
+  removeMember(teamName: string, userName: string): Observable<void> {
 
     let model = {
       userName: userName,
-      teamId: teamId
+      teamName: teamName
     };
 
     return this.api.post(model, this.controller, 'removemember');

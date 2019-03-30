@@ -62,6 +62,7 @@ namespace Server.Controllers
         }
         
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> GetChapter([FromBody]GetChapterVM model)
         {
             User user = await GetUserAsync();
@@ -69,6 +70,8 @@ namespace Server.Controllers
             if (ModelState.IsValid)
             {
                 Chapter chapter = await _db.Chapters
+                    .Include(b => b.Book)
+                        .ThenInclude(b => b.User)
                     .Include(c => c.ChapterContents)
                     .Include(c => c.Book)
                         .ThenInclude(b => b.Chapters)
@@ -94,7 +97,12 @@ namespace Server.Controllers
                             {
                                 c.Id,
                                 c.Name
-                            }).ToList()
+                            }).ToList(),
+                            User = new
+                            {
+                                chapter.Book.User.UserName,
+                                chapter.Book.User.AvatarPath
+                            }
                         },
                         Comments = chapter.Comments.Select(c => new
                         {

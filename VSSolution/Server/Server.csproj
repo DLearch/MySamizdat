@@ -26,6 +26,8 @@
     <None Remove="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <None Remove="ClientApp\src\app\api-services\notification-controller\get-notifications-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
+    <None Remove="ClientApp\src\app\api-services\user-controller\get-user-rvm.ts" />
+    <None Remove="ClientApp\src\app\layout\dialog\dialog-token.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +58,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\comment-controller\comment-entity-type.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\notification-controller\get-notifications-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\team-controller\get-team-rvm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api-services\user-controller\get-user-rvm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\layout\dialog\dialog-token.ts" />
   </ItemGroup>
 
 </Project>

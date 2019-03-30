@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { ErrorPageData } from 'src/app/pages/error-page/error-page-data';
 
 @Injectable()
 export class PageService {
@@ -11,6 +12,7 @@ export class PageService {
   titleTK: string = null;
 
   loaded = true;
+  error: ErrorPageData = null;
   
   constructor(
     private titleService: Title,
@@ -19,8 +21,10 @@ export class PageService {
   ) {
 
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart)
+      if (event instanceof NavigationStart) {
+        this.error = null;
         this.setDefaultTitle();
+      }
     });
 
     this.translate.onLangChange.subscribe(() => {

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogService } from 'src/app/layout/dialog/dialog.service';
+import { SignInDialogComponent } from 'src/app/dialogs/sign-in-dialog/sign-in-dialog.component';
 
 @Component({
   selector: 'app-main-page',
@@ -7,5 +9,9 @@ import { Component } from '@angular/core';
 })
 export class MainPageComponent {
 
-  constructor() { }
+  constructor(private dialogService: DialogService) { }
+
+  open() {
+    this.dialogService.open(SignInDialogComponent);
+  }
 }

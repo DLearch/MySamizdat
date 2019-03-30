@@ -4,7 +4,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 .flex-box {
   display: flex;
 }
@@ -35,4 +34,8 @@ body {
 
 .row {
   margin: 0;
+}
+
+.bg-none {
+  background: none;
 }

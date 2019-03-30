@@ -5,7 +5,7 @@
     <app-button design="raised" color="primary" (simpleClick)="selectBook()">{{componentTK + 'step.type.book' | translate}}</app-button>
 
     <app-button (simpleClick)="selectTranslate()">{{componentTK + 'step.type.translate' | translate}}</app-button>
-
+      
   </mat-step>
 
   <mat-step [label]="componentTK + 'step.language.label' | translate" [stepControl]="languageForm.form">

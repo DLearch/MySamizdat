@@ -6,6 +6,7 @@
               (click)="onClick($event)"
               mat-raised-button
               [color]="color"
+              [disabled]="disabled"
               class="button">
         <ng-container *ngTemplateOutlet="content"></ng-container>
       </button>
@@ -16,6 +17,7 @@
               (click)="onClick($event)"
               mat-mini-fab
               [color]="color"
+              [disabled]="disabled"
               class="image"
               [style.background-image]="'url(' + getImagePath() + ')'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -26,6 +28,7 @@
       <button [type]="type"
               (click)="onClick($event)"
               mat-fab
+              [disabled]="disabled"
               [color]="color"
               class="button">
         <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -36,6 +39,7 @@
       <button [type]="type"
               (click)="onClick($event)"
               mat-icon-button
+              [disabled]="disabled"
               [color]="color">
         <mat-icon><ng-container *ngTemplateOutlet="content"></ng-container></mat-icon>
       </button>
@@ -45,6 +49,7 @@
       <button [type]="type"
               (click)="onClick($event)"
               mat-button
+              [disabled]="disabled"
               [color]="color"
               class="button">
         <ng-container *ngTemplateOutlet="content"></ng-container>

@@ -24,6 +24,7 @@ import {
   , MatSnackBarModule
   , MatStepperModule
   , MatTabsModule
+  , MatCheckboxModule
 } from '@angular/material';
 
 const modules = [
@@ -51,6 +52,7 @@ const modules = [
   , MatStepperModule
   , OverlayModule
   , MatTabsModule
+  , MatCheckboxModule
 ];
 
 @NgModule({

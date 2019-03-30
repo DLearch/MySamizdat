@@ -1,6 +1,9 @@
-<div class="main-wrapper" *ngIf="model">
-
+<div class="list-header">
   <div class="mat-h2">{{ model?.name }}</div>
+  <app-button *ngIf="model" design="icon" [userName]="model.book.user.userName">edit</app-button>
+</div>
+
+<div class="main-wrapper" *ngIf="model">
 
   <ng-container *ngTemplateOutlet="selectChapterTemplate"></ng-container>
 

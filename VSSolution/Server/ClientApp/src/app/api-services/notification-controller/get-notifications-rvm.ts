@@ -3,7 +3,6 @@ export class GetNotificationsRVM {
   creationTime: string;
   isChecked: boolean;
   discriminator: string;
-  teamId?: number;
   teamName?: string;
   inviterName?: string;
 }

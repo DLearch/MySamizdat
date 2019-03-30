@@ -28,7 +28,17 @@ export class BookPageComponent implements OnInit {
   newChapterFormErrors: any;
 
   get mainGridCols(): number {
-    return this.breakpointService.level + 1;
+
+    if (this.breakpointService.level == 0)
+      return 1;
+
+    if (this.breakpointService.level == 1)
+      return 2;
+
+    if (this.breakpointService.level == 2)
+      return 3;
+
+    return 4;
   }
 
   get isTranslate(): boolean {
@@ -102,7 +112,7 @@ export class BookPageComponent implements OnInit {
       },
       response => {
         this.pageService.loaded = true;
-        this.router.navigate(['/book-not-found']);
+        this.pageService.error = { error: '404', descriptionTK: 'error.book-not-found' };
       });
   }
 

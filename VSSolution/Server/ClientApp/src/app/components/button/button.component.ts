@@ -15,6 +15,7 @@ export class ButtonComponent {
   @Input() design: 'raised' | 'fab' | 'icon' | 'image';
   @Input() imagePath: string = null;
   @Input() userName: string = null;
+  @Input() disabled: boolean = false;
 
   @Output() authClick = new EventEmitter<any>();
   @Output() simpleClick = new EventEmitter<any>();

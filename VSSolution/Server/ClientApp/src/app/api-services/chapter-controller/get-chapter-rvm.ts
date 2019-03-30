@@ -10,6 +10,10 @@ export class GetChapterRVM {
       id: number;
       name: string;
     }[];
+    user: {
+      userName: string;
+      avatarPath: string;
+    };
   };
   comments: {
     id: number;

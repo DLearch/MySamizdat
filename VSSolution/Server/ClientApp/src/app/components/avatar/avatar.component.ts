@@ -27,11 +27,11 @@ export class AvatarComponent {
   getLink(): string[] | string {
 
     if (!this.user || !this.user.userName)
-      return '/users';
+      return '/user';
 
     if (this.userStorage.userName && this.userStorage.userName === this.user.userName)
       return '/account';
 
-    return ['/users', this.user.userName];
+    return ['/user', this.user.userName];
   }
 }

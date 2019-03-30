@@ -51,6 +51,28 @@ import { ChapterPageComponent } from './pages/chapter-page/chapter-page.componen
 import { CommentsComponent } from './components/comments/comments.component';
 import { NewCommentComponent } from './components/comments/new-comment/new-comment.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { NewChapterComponent } from './components/new-chapter/new-chapter.component';
+import { DialogComponent } from './layout/dialog/dialog.component';
+import { DialogService } from './layout/dialog/dialog.service';
+import { SignInDialogComponent } from './dialogs/sign-in-dialog/sign-in-dialog.component';
+import { DialogGuard } from './guards/dialog/dialog.guard';
+import { SignUpDialogComponent } from './dialogs/sign-up-dialog/sign-up-dialog.component';
+import { NewChapterDialogComponent } from './dialogs/new-chapter-dialog/new-chapter-dialog.component';
+import { BookCatalogPageComponent } from './pages/book-catalog-page/book-catalog-page.component';
+import { FiltersComponent } from './components/filters/filters.component';
+import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
+import { SearchComponent } from './components/search/search.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { UserControllerService } from './api-services/user-controller/user-controller.service';
+import { NewTeamDialogComponent } from './dialogs/new-team-dialog/new-team-dialog.component';
+import { NewTeamComponent } from './components/new-team/new-team.component';
+import { NewTeamPageComponent } from './pages/new-team-page/new-team-page.component';
+import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { InviteTeamMemberComponent } from './components/invite-team-member/invite-team-member.component';
+import { InviteTeamMemberDialogComponent } from './dialogs/invite-team-member-dialog/invite-team-member-dialog.component';
+import { InviteTeamMemberPageComponent } from './pages/invite-team-member-page/invite-team-member-page.component';
+import { NotificationsComponent } from './layout/notifications/notifications.component';
+import { TeamInviteNotificationComponent } from './layout/notifications/team-invite-notification/team-invite-notification.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +82,39 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     , TimeAgoPluralTranslatePipe
     , LayoutComponent
     , LanguagePickerComponent
-    , ThemePickerComponent, MainPageComponent, ErrorPageComponent, ButtonComponent, SignInComponent, SignUpComponent, FormComponent, SignUpPageComponent, SignInPageComponent, UserPanelComponent, NewBookPageComponent, BookPageComponent, CoverComponent, ChapterPageComponent, CommentsComponent, NewCommentComponent, AvatarComponent
+    , ThemePickerComponent
+    , MainPageComponent
+    , ErrorPageComponent
+    , ButtonComponent
+    , SignInComponent
+    , SignUpComponent
+    , FormComponent
+    , SignUpPageComponent
+    , SignInPageComponent
+    , UserPanelComponent
+    , NewBookPageComponent
+    , BookPageComponent
+    , CoverComponent
+    , ChapterPageComponent
+    , CommentsComponent
+    , NewCommentComponent
+    , AvatarComponent
+    , NewChapterComponent
+    , DialogComponent
+    , SignInDialogComponent
+    , SignUpDialogComponent
+    , NewChapterDialogComponent
+    , BookCatalogPageComponent
+    , FiltersComponent
+    , BookmarksPageComponent
+    , SearchComponent
+    , UserPageComponent
+    , NewTeamDialogComponent
+    , NewTeamComponent
+    , NewTeamPageComponent
+    , TeamPageComponent
+    , InviteTeamMemberComponent
+    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent
   ]
   , imports: [
     BrowserModule
@@ -91,11 +145,14 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     , CommentControllerService
     , LanguageControllerService
     , TeamControllerService
+    , UserControllerService
     , PluralPipe
     , PageService
     , BreakpointService
     , ThemePickerService
     , AuthGuard
+    , DialogService
+    , DialogGuard
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {
@@ -107,6 +164,11 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     }
   ]
   , entryComponents: [
+    DialogComponent,
+    SignInDialogComponent,
+    SignUpDialogComponent,
+    NewTeamDialogComponent
+    , InviteTeamMemberDialogComponent
   ]
   , bootstrap: [AppComponent]
 })

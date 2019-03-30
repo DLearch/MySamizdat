@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
-import { FormComponent } from '../form/form.component';
-import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthControllerService } from 'src/app/api-services/auth-controller/auth-controller.service';
 import { InputTemplate } from '../form/input-template';
 import { Validators, FormGroup } from '@angular/forms';
