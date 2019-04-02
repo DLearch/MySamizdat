@@ -56,6 +56,7 @@ namespace Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.AddEfDiagrams<AppDbContext>();
             }
 
             app.UseHttpsRedirection();

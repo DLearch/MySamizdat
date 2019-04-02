@@ -18,6 +18,7 @@
     </mat-grid-tile>
 
     <ng-container *ngFor="let prop of mainProps">
+
       <mat-grid-tile *ngIf="prop && (prop.value || prop.valueTK)">
 
         <ng-container *ngIf="!prop.link; else linkMainPropTemplate">

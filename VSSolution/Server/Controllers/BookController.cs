@@ -7,6 +7,7 @@ using Server.ViewModels.BookController;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
@@ -157,6 +158,27 @@ namespace Server.Controllers
                             }
                         })
                     });
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBook([FromBody]EditBookVM model)
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                Book book = await _db.Books.FirstOrDefaultAsync(b => b.Id == model.BookId);
+
+                if (book == null)
+                    ModelState.AddModelError("BookId", ERROR_NOT_FOUND);
+
+                if (ModelState.IsValid)
+                {
+                    
                 }
             }
 

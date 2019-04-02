@@ -25,7 +25,7 @@ export class InviteTeamMemberComponent implements OnInit {
   public constructor(
     private route: ActivatedRoute,
     private teamController: TeamControllerService
-  ) { console.log(route); }
+  ) { }
 
   ngOnInit() {
 
