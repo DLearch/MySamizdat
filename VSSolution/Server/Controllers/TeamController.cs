@@ -175,5 +175,83 @@ namespace Server.Controllers
 
             return BadRequest(ModelState);
         }
+
+        // ModelErrors:
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUserTeams([FromBody]GetPageVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _db.Users
+                    .Include(u => u.TeamMembers)
+                        .ThenInclude(m => m.Team)
+                    .FirstOrDefaultAsync(u => u.UserName == model.UserName);
+
+                if (user == null)
+                    ModelState.AddModelError("userName", ERROR_NOT_FOUND);
+
+                if (ModelState.IsValid)
+                {
+                    List<TeamMember> userTeams = user.TeamMembers
+                        .Where(m => FilterTeam(model.Filters, m))
+                        .ToList();
+
+                    int count = userTeams.Count();
+                    int page = model.Page;
+
+                    if (count - (model.Page * model.PageSize) < 1)
+                    {
+                        page = count / model.PageSize;
+
+                        if (page > 0 && count % model.PageSize == 0)
+                            page--;
+                    }
+
+                    return Ok(new
+                    {
+                        Length = count,
+                        Page = page,
+                        Teams = userTeams
+                            .Skip(page * model.PageSize)
+                            .Take(model.PageSize)
+                            .Select(m => new
+                            {
+                                m.TeamName
+                            }).ToList()
+                    });
+                }
+                    
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [NonAction]
+        bool FilterTeam(List<CatalogFilter> filters, TeamMember teamMember)
+        {
+            if (filters != null && teamMember != null)
+                foreach (CatalogFilter filter in filters)
+                {
+                    switch (filter.Type)
+                    {
+                        case "head":
+                            
+                            if (teamMember.TeamMemberRoleTK == "head")
+                                break;
+                            else
+                                return false;
+                        case "search":
+
+                            string value = filter.Value as string;
+
+                            if (!string.IsNullOrEmpty(teamMember?.Team?.Name) && teamMember.Team.Name.Contains(value))
+                                break;
+                            else
+                                return false;
+                    }
+                }
+            return true;
+        }
     }
 }

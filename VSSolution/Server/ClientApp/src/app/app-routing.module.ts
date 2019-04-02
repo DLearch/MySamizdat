@@ -16,6 +16,7 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { NewTeamPageComponent } from './pages/new-team-page/new-team-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { InviteTeamMemberPageComponent } from './pages/invite-team-member-page/invite-team-member-page.component';
+import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       , { path: 'new-team', component: NewTeamPageComponent, canActivate: [AuthGuard, DialogGuard] }
       , { path: 'books/add', component: NewBookPageComponent, canActivate: [AuthGuard] }
       , { path: 'team/:team/invite', component: InviteTeamMemberPageComponent, canActivate: [AuthGuard, DialogGuard] }
+      , { path: 'user/:user/teams', component: UserTeamsPageComponent }
       , { path: 'books', component: BookCatalogPageComponent }
       , { path: 'team/:team', component: TeamPageComponent }
       , { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthGuard] }

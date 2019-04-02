@@ -75,6 +75,7 @@ import { NotificationsComponent } from './layout/notifications/notifications.com
 import { TeamInviteNotificationComponent } from './layout/notifications/team-invite-notification/team-invite-notification.component';
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     , NewTeamPageComponent
     , TeamPageComponent
     , InviteTeamMemberComponent
-    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent, EditDialogComponent, CatalogComponent
+    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent, EditDialogComponent, CatalogComponent, UserTeamsPageComponent
   ]
   , imports: [
     BrowserModule

@@ -1,0 +1,10 @@
+
+<app-catalog [headerLabel]="teams | arrayPluralTranslate:'user-team'" [event]="event" (onUpdate)="update($event)" [filtersTemplate]="filtersTemplate">
+
+  <mat-nav-list *ngIf="teams">
+    <a mat-list-item *ngFor="let team of teams" routerLink="/team/{{ team.teamName }}">
+      <div matLine> {{ team.teamName }} </div>
+    </a>
+  </mat-nav-list>
+
+</app-catalog>

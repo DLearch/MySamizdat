@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Observable } from 'rxjs';
 import { GetTeamRVM } from './get-team-rvm';
+import { CatalogPageUpdateEvent } from 'src/app/components/catalog/catalog-page-update-event';
+import { GetUserTeamsRVM } from './get-user-teams-rvm';
 
 @Injectable()
 export class TeamControllerService {
@@ -58,5 +60,17 @@ export class TeamControllerService {
     };
 
     return this.api.post(model, this.controller, 'removemember');
+  }
+
+  getUserTeams(userName: string, event: CatalogPageUpdateEvent): Observable<GetUserTeamsRVM> {
+
+    let model = {
+      userName: userName,
+      pageSize: event.pageSize,
+      page: event.pageIndex,
+      filters: event.filters
+    };
+
+    return this.api.post(model, this.controller, 'getuserteams');
   }
 }

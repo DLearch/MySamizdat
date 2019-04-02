@@ -1,3 +1,47 @@
-<p>
-  catalog works!
-</p>
+
+<mat-drawer-container class="main-drawer-container">
+
+  <!--Filters drawer-->
+  <mat-drawer #filtersDrawer mode="side" position="end">
+    <!--Filters component-->
+    <app-filters *ngIf="filtersTemplate" [formTemplate]="filtersTemplate" (onApply)="applyFilters($event)"></app-filters>
+  </mat-drawer>
+
+  <mat-drawer-content class="main-drawer-content">
+
+    <!--Header-->
+    <div class="list-header">
+
+      <div class="mat-h2">
+        {{ headerLabel }}
+      </div>
+      <a *ngIf="addLink" [routerLink]="addLink" mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </a>
+
+      <span class="flex-spacer"></span>
+
+      <app-search (onSearch)="search($event)"></app-search>
+      <app-button *ngIf="filtersTemplate" design="icon" (simpleClick)='filtersDrawer.toggle()'>
+        filter_list
+      </app-button>
+    </div>
+
+    <!--List-->
+    <div class="list">
+
+      <ng-content></ng-content>
+
+    </div>
+
+    <mat-paginator *ngIf="event"
+                   (page)="update($event)"
+                   [length]="event.length"
+                   [pageSize]="event.pageSize"
+                   [pageIndex]="event.pageIndex"
+                   showFirstLastButtons="true"
+                   [pageSizeOptions]="[2, 5, 10, 25, 100]">
+    </mat-paginator>
+  </mat-drawer-content>
+
+</mat-drawer-container>

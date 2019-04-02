@@ -8,26 +8,13 @@ import { FormComponent } from '../form/form.component';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-
-  @ViewChild('form') form: FormComponent;
-
+  
   formTemplate: InputTemplate[];
   formErrors: any = null;
 
-  @Input() set value(value: string) {
-
-    this.formTemplate = [
-      {
-        name: 'search',
-        tk: 'search',
-        value: value
-      }
-    ];
-  }
-  get value(): string {
-    return this.form.form.value.search;
-  }
-  @Output() valueChange = new EventEmitter<string>();
+  @Input() value: string;
+  @Output() valueChanged = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter<string>();
 
   constructor() {
 
@@ -39,9 +26,7 @@ export class SearchComponent {
     ];
   }
   
-  onSearch(model: string) {
-
-    this.value = model;
-    this.valueChange.emit(model);
+  search(value: string) {
+    this.onSearch.emit(value);
   }
 }
