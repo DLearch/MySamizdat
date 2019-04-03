@@ -165,24 +165,50 @@ namespace Server.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> EditBook([FromBody]EditBookVM model)
         {
-            User user = await GetUserAsync();
+            //User user = await GetUserAsync();
 
             if (ModelState.IsValid)
             {
-                Book book = await _db.Books.FirstOrDefaultAsync(b => b.Id == model.BookId);
+                Dictionary<string, string> props = new Dictionary<string, string>
+                {
+                    { "Description", "dfdf" }
+                };
+                Book book = await _db.Books.FirstOrDefaultAsync(b => b.Id == 1);//model.BookId);
 
                 if (book == null)
                     ModelState.AddModelError("BookId", ERROR_NOT_FOUND);
 
                 if (ModelState.IsValid)
                 {
-                    
+
+                    string tableName = "Books";
+                    string idName = "Id";
+                    string paramsValues = PropsDictionaryToString(props);
+                    return Ok(await _db.Database.ExecuteSqlCommandAsync($"UPDATE {tableName} SET {paramsValues} WHERE {idName}=1", tableName, paramsValues, idName));
                 }
             }
 
             return BadRequest(ModelState);
+        }
+
+        string PropsDictionaryToString(Dictionary<string, string> props)
+        {
+            StringBuilder paramsValues = new StringBuilder();
+
+            foreach (var prop in props)
+            {
+                paramsValues.Append(prop.Key);
+                paramsValues.Append("='");
+                paramsValues.Append(prop.Value);
+                paramsValues.Append("'");
+                if (props.Last().Key != prop.Key)
+                    paramsValues.Append(',');
+            }
+
+            return paramsValues.ToString();
         }
     }
 }

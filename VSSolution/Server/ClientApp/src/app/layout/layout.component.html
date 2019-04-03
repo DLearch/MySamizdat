@@ -12,9 +12,13 @@
       <!--Main-->
       <mat-nav-list class="sidenav-main">
 
-        <a mat-list-item routerLink="/">{{ componentTK + 'link.main' | translate }}</a>
-        <a mat-list-item routerLink="/books">{{ componentTK + 'link.catalog' | translate }}</a>
+        <a mat-list-item routerLink="/" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.main' | translate }}</a>
+        <a mat-list-item routerLink="/books" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.catalog' | translate }}</a>
 
+        <app-flex-spacer></app-flex-spacer>
+
+        <a mat-list-item routerLink="/new-team" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.new-team' | translate }}</a>
+        <a mat-list-item routerLink="/books/add" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.new-book' | translate }}</a>
       </mat-nav-list>
 
       <!--Footer-->
@@ -34,8 +38,7 @@
       <!--Menu button-->
       <app-button design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
 
-      <!--Spacer-->
-      <span class="flex-spacer"></span>
+      <app-flex-spacer></app-flex-spacer>
 
       <app-user-panel></app-user-panel>
 
@@ -58,8 +61,7 @@
       <!--Language picker-->
       <app-language-picker></app-language-picker>
 
-      <!--Spacer-->
-      <span class="flex-spacer"></span>
+      <app-flex-spacer></app-flex-spacer>
 
       <!--Theme picker-->
       <app-theme-picker></app-theme-picker>

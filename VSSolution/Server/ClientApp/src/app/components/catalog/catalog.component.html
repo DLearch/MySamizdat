@@ -27,11 +27,12 @@
       </app-button>
     </div>
 
-    <!--List-->
-    <div class="list">
-
+    <div class="list" *ngIf="updated">
       <ng-content></ng-content>
+    </div>
 
+    <div class="spinner-wrapper" *ngIf="!updated">
+      <mat-spinner [diameter]="70"></mat-spinner>
     </div>
 
     <mat-paginator *ngIf="event"

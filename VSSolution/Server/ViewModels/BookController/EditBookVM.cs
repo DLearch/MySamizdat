@@ -8,12 +8,14 @@ namespace Server.ViewModels.BookController
 {
     public class EditBookVM
     {
-        [RequiredVM]
-        public int BookId { get; set; }
+        //[RequiredVM]
+        //public int BookId { get; set; }
 
-        [RequiredVM]
-        public string Title { get; set; }
+        //[RequiredVM]
+        //public string Title { get; set; }
 
-        public string Description { get; set; }
+        //public string Description { get; set; }
+
+        //public Dictionary<string, string> Properties { get; set; }
     }
 }

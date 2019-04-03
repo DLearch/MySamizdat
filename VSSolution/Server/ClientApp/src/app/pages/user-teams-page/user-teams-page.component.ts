@@ -54,6 +54,9 @@ export class UserTeamsPageComponent implements OnInit {
         filters: event.filters
       };
 
+    }, response => {
+
+      this.pageService.error = { descriptionTK: 'error.unknown' };
     })
   }
 }

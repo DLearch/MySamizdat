@@ -12,11 +12,20 @@ import { InputTemplate } from '../form/input-template';
 export class CatalogComponent implements OnInit {
 
   componentTK = 'component.catalog.';
-  
+
+  updated: boolean = false;
   searchValue: string = null;
   filters: Filter[] = [];
 
-  @Input() event: CatalogPageUpdateEvent = null;
+  private _event: CatalogPageUpdateEvent = null;
+  @Input() set event(value: CatalogPageUpdateEvent) {
+    this._event = value;
+    this.updated = value != null;
+  }
+  get event(): CatalogPageUpdateEvent {
+    return this._event;
+  }
+
   @Input() addLink: string | string[] = null;
   @Input() headerLabel: string = null;
   @Input() filtersTemplate: InputTemplate[];
@@ -30,7 +39,8 @@ export class CatalogComponent implements OnInit {
   }
   
   update(event: PageEvent = { pageSize: this.event.pageSize, pageIndex: this.event.pageIndex, length: this.event.length }) {
-    
+
+    this.updated = false;
     this.onUpdate.emit({
       pageIndex: event.pageIndex,
       pageSize: event.pageSize,

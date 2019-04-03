@@ -14,23 +14,10 @@
         </div>
       </div>
 
+      <a mat-button [routerLink]="['/user', userName, 'teams']">
+        {{ componentTK + 'teams' | translate }}
+      </a>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="card">
-    <div class="list-header">
-      <div class="mat-h2">
-        {{ model.teams | arrayPluralTranslate:'user-team' }}
-      </div>
-
-      <a mat-icon-button routerLink="/new-team"><mat-icon>add</mat-icon></a>
-    </div>
-    <mat-nav-list *ngIf="model.teams">
-
-      <a mat-list-item *ngFor="let team of model.teams" [routerLink]="['/team', team.name]">
-        {{team.name}}
-      </a>
-
-    </mat-nav-list>
-  </mat-card>
 </div>

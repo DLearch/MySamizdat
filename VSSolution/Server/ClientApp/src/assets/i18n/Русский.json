@@ -12,7 +12,9 @@
     "sidenav-header": "Runoo",
     "link": {
       "main": "Главная",
-      "catalog": "Книги"
+      "catalog": "Книги",
+      "new-team": "Создать команду",
+      "new-book": "Добавить книгу"
     },
     "notifications": {
       "team-invite-notification": {
@@ -77,7 +79,8 @@
     },
     "user": {
       "title": "Аккаунт",
-      "emailvisible": "Показывать email другим пользователям?"
+      "emailvisible": "Показывать email другим пользователям?",
+      "teams": "Команды"
     },
     "new-team": {
       "title": "Новая команда"
