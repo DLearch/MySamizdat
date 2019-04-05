@@ -77,6 +77,7 @@ import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.component';
 import { FlexSpacerComponent } from './components/flex-spacer/flex-spacer.component';
+import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,7 @@ import { FlexSpacerComponent } from './components/flex-spacer/flex-spacer.compon
     , NewTeamPageComponent
     , TeamPageComponent
     , InviteTeamMemberComponent
-    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent, EditDialogComponent, CatalogComponent, UserTeamsPageComponent, FlexSpacerComponent
+    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent, EditDialogComponent, CatalogComponent, UserTeamsPageComponent, FlexSpacerComponent, FiltersDialogComponent
   ]
   , imports: [
     BrowserModule

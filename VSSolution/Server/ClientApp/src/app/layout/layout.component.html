@@ -1,73 +1,74 @@
-<mat-sidenav-container class="mat-app-background">
 
-  <!--Sidenav-->
-  <mat-sidenav #sidenav [mode]="breakpointService.level >= 3 ? 'side' : 'over'" class="mat-app-background">
-    <div class="content">
+<mat-toolbar class="header mat-elevation-z2">
+  <mat-toolbar-row class="toolbar-line">
+    <app-button *ngIf="!isDesktop" design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
+    <a mat-button routerLink="/"><span class="mat-h2">{{ componentTK + 'sidenav-header' | translate }}</span></a>
 
-      <!--Header-->
-      <mat-toolbar color="primary">
-        <a mat-button routerLink="/"><span class="mat-h2">{{ componentTK + 'sidenav-header' | translate }}</span></a>
-      </mat-toolbar>
+    <app-flex-spacer></app-flex-spacer>
 
-      <!--Main-->
-      <mat-nav-list class="sidenav-main">
+    <ng-container *ngIf='userStorage.isAuth'>
 
-        <a mat-list-item routerLink="/" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.main' | translate }}</a>
-        <a mat-list-item routerLink="/books" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.catalog' | translate }}</a>
+      <app-notifications></app-notifications>
+      <div class="mat-h2 userName" *ngIf="isDesktop;else mobileUserTemplate">{{userStorage.userName}}</div>
 
-        <app-flex-spacer></app-flex-spacer>
 
-        <a mat-list-item routerLink="/new-team" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.new-team' | translate }}</a>
-        <a mat-list-item routerLink="/books/add" (click)="sidenavClick(sidenav)">{{ componentTK + 'link.new-book' | translate }}</a>
+      <ng-template #mobileUserTemplate>
+        <app-button class="userName" [matMenuTriggerFor]="userMenu" design="image" *ngIf="!isDesktop"></app-button>
+
+        <mat-menu #userMenu="matMenu">
+          <a mat-menu-item routerLink="/bookmarks">{{ componentTK + 'link.' + 'bookmarks' | translate }}</a>
+          <a mat-menu-item [routerLink]="['/user', userStorage.userName]">{{ componentTK + 'link.' + 'account' | translate }}</a>
+          <button mat-menu-item (click)="userStorage.signOut()">{{ componentTK + 'sign-out' | translate }}</button>
+        </mat-menu>
+      </ng-template>
+
+
+    </ng-container>
+    <ng-container *ngIf='!userStorage.isAuth'>
+
+      <a routerLink="/sign-in" mat-button><span class="mat-h2">{{ componentTK + 'sign-in' | translate }}</span></a>
+
+    </ng-container>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="main-wrapper" [class.desktop-main-wrapper]="isDesktop">
+
+  <mat-card class="nav-mat-card" *ngIf="isDesktop">
+    <a mat-button *ngFor="let link of links" [routerLink]="link.path">{{ componentTK + 'link.' + link.tKey | translate }}</a>
+
+    <app-flex-spacer></app-flex-spacer>
+
+    <ng-container *ngIf="userStorage.isAuth">
+
+      <a mat-button *ngFor="let link of authLinks" [routerLink]="link.path">{{ componentTK + 'link.' + link.tKey | translate }}</a>
+      <app-button (click)="userStorage.signOut()">{{ componentTK + 'sign-out' | translate }}</app-button>
+
+    </ng-container>
+  </mat-card>
+
+  <mat-sidenav-container class="mobile-sidenav-container">
+    <mat-sidenav #sidenav mode="over">
+
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let link of links" [routerLink]="link.path">{{ componentTK + 'link.' + link.tKey | translate }}</a>
       </mat-nav-list>
 
-      <!--Footer-->
-      <mat-toolbar color="primary">
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
 
-      </mat-toolbar>
+      <router-outlet></router-outlet>
 
-    </div>
-  </mat-sidenav>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-  <!--Content-->
-  <mat-sidenav-content class="content">
+</div>
 
-    <!--Header-->
-    <mat-toolbar color="primary">
-
-      <!--Menu button-->
-      <app-button design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
-
-      <app-flex-spacer></app-flex-spacer>
-
-      <app-user-panel></app-user-panel>
-
-    </mat-toolbar>
-
-    <!--Main-->
-    <main class="main">
-      <div class="main" [style.display]="pageService.loaded && !pageService.error ? 'flex' : 'none'">
-        <!--Router outlet-->
-        <router-outlet></router-outlet>
-      </div>
-      <app-error-page [errorData]="pageService.error" *ngIf="pageService.loaded && pageService.error"></app-error-page>
-      <!--Spinner-->
-      <mat-spinner *ngIf="!pageService.loaded" [diameter]="70" class="page-load-spinner"></mat-spinner>
-    </main>
-
-    <!--Footer-->
-    <mat-toolbar color="primary">
-
-      <!--Language picker-->
-      <app-language-picker></app-language-picker>
-
-      <app-flex-spacer></app-flex-spacer>
-
-      <!--Theme picker-->
-      <app-theme-picker></app-theme-picker>
-
-    </mat-toolbar>
-
-  </mat-sidenav-content>
-
-</mat-sidenav-container>
+<mat-toolbar class="footer mat-elevation-z24">
+  <mat-toolbar-row class="toolbar-line">
+    <app-language-picker></app-language-picker>
+    <app-flex-spacer></app-flex-spacer>
+    <app-theme-picker></app-theme-picker>
+  </mat-toolbar-row>
+</mat-toolbar>

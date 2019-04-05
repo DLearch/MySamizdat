@@ -17,6 +17,8 @@ export class CatalogComponent implements OnInit {
   searchValue: string = null;
   filters: Filter[] = [];
 
+  filtersOpened: boolean = false;
+
   private _event: CatalogPageUpdateEvent = null;
   @Input() set event(value: CatalogPageUpdateEvent) {
     this._event = value;

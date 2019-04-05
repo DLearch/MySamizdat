@@ -10,18 +10,23 @@
       "account": "Аккаунт"
     },
     "sidenav-header": "Runoo",
+    "sign-in": "Вход",
+    "sign-out": "Выход",
     "link": {
       "main": "Главная",
       "catalog": "Книги",
       "new-team": "Создать команду",
-      "new-book": "Добавить книгу"
+      "new-book": "Добавить книгу",
+      "bookmarks": "Закладки",
+      "account": "Профиль"
     },
     "notifications": {
       "team-invite-notification": {
         "text": "{{userName}} приглашает вас в команду {{teamName}}",
         "accept": "Принять",
         "decline": "Отклонить"
-      }
+      },
+      "empty": "Нет уведомлений"
     }
   },
   "page": {
