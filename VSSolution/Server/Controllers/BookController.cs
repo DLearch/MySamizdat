@@ -98,8 +98,7 @@ namespace Server.Controllers
         }
 
         // "BookId" - ERROR_NOT_FOUND;
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> GetBook([FromBody]GetBookVM model)
         {
             if (ModelState.IsValid)
@@ -165,7 +164,6 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> EditBook([FromBody]EditBookVM model)
         {
             //User user = await GetUserAsync();
@@ -194,6 +192,49 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeTeam([FromBody]ChangeTeamVM model)
+        {
+            User user = await GetUserAsync();
+            
+            if (ModelState.IsValid)
+            {
+                Team team = await _db.Teams
+                    .Include(t => t.TeamMembers)
+                        .ThenInclude(t => t.User)
+                    .FirstOrDefaultAsync(t => t.Name.Normalize() == model.TeamName.Normalize());
+
+                if (team == null)
+                    ModelState.AddModelError("TeamName", ERROR_NOT_FOUND);
+
+                Book book = await _db.Books
+                    .FirstOrDefaultAsync(b => b.Id == model.BookId);
+
+                if (book == null)
+                    ModelState.AddModelError("BookId", ERROR_NOT_FOUND);
+
+                if (ModelState.IsValid)
+                {
+                    if (team.TeamMembers.All(p => p.UserId != user.Id))
+                        ModelState.AddModelError("TeamName", ERROR_ACCESS);
+
+                    if (book.UserId != user.Id)
+                        ModelState.AddModelError("BookId", ERROR_ACCESS);
+
+                    if (ModelState.IsValid)
+                    {
+                        book.TeamName = team.Name;
+
+                        await _db.SaveChangesAsync();
+
+                        return Ok();
+                    }
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+        [NonAction]
         string PropsDictionaryToString(Dictionary<string, string> props)
         {
             StringBuilder paramsValues = new StringBuilder();
@@ -209,6 +250,104 @@ namespace Server.Controllers
             }
 
             return paramsValues.ToString();
+        }
+
+        [HttpPost, AllowAnonymous]
+        public async Task<IActionResult> GetUserBooks([FromBody]GetUserBooksVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _db.Users
+                    .Include(u => u.Books)
+                    .FirstOrDefaultAsync(u => u.NormalizedUserName == model.UserName.Normalize());
+
+                if (user == null)
+                    ModelState.AddModelError("UserName", ERROR_NOT_FOUND);
+
+                if (ModelState.IsValid)
+                {
+                    List<Book> userBooks = user.Books
+                        .ToList();
+
+                    int count = userBooks.Count();
+                    int page = model.Page;
+
+                    if (count - (model.Page * model.PageSize) < 1)
+                    {
+                        page = count / model.PageSize;
+
+                        if (page > 0 && count % model.PageSize == 0)
+                            page--;
+                    }
+
+                    return Ok(new
+                    {
+                        Length = count,
+                        Page = page,
+                        Books = userBooks
+                            .Skip(page * model.PageSize)
+                            .Take(model.PageSize)
+                            .Select(m => new
+                            {
+                                m.Title,
+                                m.Id,
+                                m.CoverPath
+                            }).ToList()
+                    });
+                }
+
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost, AllowAnonymous]
+        public async Task<IActionResult> GetTeamBooks([FromBody]GetTeamBooksVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                Team team = await _db.Teams
+                    .Include(u => u.Books)
+                    .FirstOrDefaultAsync(u => u.Name.Normalize() == model.TeamName.Normalize());
+
+                if (team == null)
+                    ModelState.AddModelError("TeamName", ERROR_NOT_FOUND);
+
+                if (ModelState.IsValid)
+                {
+                    List<Book> teamBooks = team.Books
+                        .ToList();
+
+                    int count = teamBooks.Count();
+                    int page = model.Page;
+
+                    if (count - (model.Page * model.PageSize) < 1)
+                    {
+                        page = count / model.PageSize;
+
+                        if (page > 0 && count % model.PageSize == 0)
+                            page--;
+                    }
+
+                    return Ok(new
+                    {
+                        Length = count,
+                        Page = page,
+                        Books = teamBooks
+                            .Skip(page * model.PageSize)
+                            .Take(model.PageSize)
+                            .Select(m => new
+                            {
+                                m.Title,
+                                m.Id,
+                                m.CoverPath
+                            }).ToList()
+                    });
+                }
+
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }

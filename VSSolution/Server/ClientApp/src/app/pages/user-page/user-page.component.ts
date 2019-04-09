@@ -22,6 +22,10 @@ export class UserPageComponent implements OnInit {
   userName: string;
   model: GetUserRVM;
 
+  get isCurrentUser(): boolean {
+    return this.userName == this.userStorage.userName;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
@@ -35,8 +39,11 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe(params =>
-      this.loadUser(params['user'])
-        .subscribe(() => this.finishPageLoad())
+      this.loadUser(params['user']).subscribe(() => this.finishPageLoad())
+    );
+
+    this.userStorage.authChanged.subscribe(() =>
+      this.loadUser(this.userName).subscribe(() => this.finishPageLoad())
     );
   }
 
@@ -95,5 +102,30 @@ export class UserPageComponent implements OnInit {
       .changeEmailVisibility(value)
       .subscribe();
   }
+
+  changeEmailVisibility() {
+
+    const newVisibility: boolean = !this.model.emailIsVisible;
+
+    this.userController
+      .changeEmailVisibility(newVisibility)
+      .subscribe(() => this.model.emailIsVisible = newVisibility);
+  }
   
+  changeAvatar(files: File[]) {
+
+    if (!files || files.length == 0)
+      return;
+
+    let avatar = files[0];
+
+    this.userController.changeAvatar(avatar).subscribe(
+      newAvatarPath => {
+        this.model.avatarPath = newAvatarPath;
+
+        if (this.isCurrentUser)
+          this.userStorage.avatarPath = newAvatarPath;
+      }
+    );
+  }
 }

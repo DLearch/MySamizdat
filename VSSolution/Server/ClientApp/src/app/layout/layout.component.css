@@ -57,3 +57,7 @@
 .userName {
   margin: 0 8px;
 }
+
+.avatar {
+  object-fit: cover;
+}

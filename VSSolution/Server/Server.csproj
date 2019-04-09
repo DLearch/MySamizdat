@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <UserSecretsId>111b2108-6330-4123-a92a-6b9d2190b85c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     <None Remove="ClientApp\src\app\api-services\book-controller\add-book-vm.ts" />
     <None Remove="ClientApp\src\app\api-services\book-controller\add-translate-book-vm.ts" />
     <None Remove="ClientApp\src\app\api-services\book-controller\get-book-rvm.ts" />
+    <None Remove="ClientApp\src\app\api-services\book-controller\get-user-books-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\bookmark-controller\get-bookmarks-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
     <None Remove="ClientApp\src\app\api-services\chapter-controller\get-chapter-rvm.ts" />
@@ -54,6 +56,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\add-book-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\add-translate-book-vm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\get-book-rvm.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api-services\book-controller\get-user-books-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\bookmark-controller\get-bookmarks-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\catalog-controller\get-page-rvm.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\api-services\chapter-controller\get-chapter-rvm.ts" />

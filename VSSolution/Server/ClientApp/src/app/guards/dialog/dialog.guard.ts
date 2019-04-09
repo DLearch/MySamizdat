@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
 import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 import { NewTeamDialogComponent } from 'src/app/dialogs/new-team-dialog/new-team-dialog.component';
 import { InviteTeamMemberDialogComponent } from 'src/app/dialogs/invite-team-member-dialog/invite-team-member-dialog.component';
+import { ChangeBookTeamDialogComponent } from 'src/app/dialogs/change-book-team-dialog/change-book-team-dialog.component';
 
 @Injectable()
 export class DialogGuard implements CanActivate {
@@ -31,6 +32,7 @@ export class DialogGuard implements CanActivate {
       this.openIf('sign-in', next, SignInDialogComponent);
       this.openIf('sign-up', next, SignUpDialogComponent);
       this.openIf('new-team', next, NewTeamDialogComponent);
+      this.openIf('book/:book/change-team', next, ChangeBookTeamDialogComponent);
       this.openIf('team/:team/invite', next, InviteTeamMemberDialogComponent);
 
       if (this.dialog.opened) 

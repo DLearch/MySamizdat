@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{79B35E40-4C30-4EC2-9ACF-BF7AEC5F6CA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunooServerApp", "RunooServerApp\RunooServerApp.csproj", "{F9A167CD-3C0E-4C87-8A40-6D77364AA076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunooServerApp", "RunooServerApp\RunooServerApp.csproj", "{F9A167CD-3C0E-4C87-8A40-6D77364AA076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

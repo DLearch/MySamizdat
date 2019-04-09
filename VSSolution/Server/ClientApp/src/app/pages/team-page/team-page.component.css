@@ -19,3 +19,8 @@
 .mat-card-subtitle, .mat-card-subtitle:not(:first-child) {
   margin: 0;
 }
+
+.links-card {
+  padding: 0;
+  margin: 8px;
+}

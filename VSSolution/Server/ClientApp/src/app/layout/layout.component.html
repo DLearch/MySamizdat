@@ -1,7 +1,9 @@
 
 <mat-toolbar class="header mat-elevation-z2">
   <mat-toolbar-row class="toolbar-line">
-    <app-button *ngIf="!isDesktop" design="icon" (simpleClick)='sidenav.toggle()'>menu</app-button>
+    <app-button *ngIf="!isDesktop" design="icon"
+                [matTooltip]="componentTK + 'menu' | translate"
+                (simpleClick)='sidenav.toggle()'>menu</app-button>
     <a mat-button routerLink="/"><span class="mat-h2">{{ componentTK + 'sidenav-header' | translate }}</span></a>
 
     <app-flex-spacer></app-flex-spacer>
@@ -13,7 +15,7 @@
 
 
       <ng-template #mobileUserTemplate>
-        <app-button class="userName" [matMenuTriggerFor]="userMenu" design="image" *ngIf="!isDesktop"></app-button>
+        <app-button class="userName" [matMenuTriggerFor]="userMenu" [imagePath]="userStorage.avatarPath" design="avatar" *ngIf="!isDesktop"></app-button>
 
         <mat-menu #userMenu="matMenu">
           <a mat-menu-item routerLink="/bookmarks">{{ componentTK + 'link.' + 'bookmarks' | translate }}</a>
@@ -21,7 +23,6 @@
           <button mat-menu-item (click)="userStorage.signOut()">{{ componentTK + 'sign-out' | translate }}</button>
         </mat-menu>
       </ng-template>
-
 
     </ng-container>
     <ng-container *ngIf='!userStorage.isAuth'>

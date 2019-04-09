@@ -6,6 +6,6 @@
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
     <ShowAllFiles>false</ShowAllFiles>
-    <NameOfLastUsedPublishProfile>CustomProfile1</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Server20190407030830 - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

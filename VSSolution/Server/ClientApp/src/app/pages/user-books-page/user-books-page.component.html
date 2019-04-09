@@ -1,0 +1,14 @@
+
+<app-catalog [headerLabel]="books | arrayPluralTranslate:'book'"
+             [event]="event"
+             addLink="/new-book"
+             (onUpdate)="update($event)"
+             [filtersTemplate]="filtersTemplate">
+
+  <mat-nav-list *ngIf="books">
+    <a mat-list-item *ngFor="let book of books" [routerLink]="['/book', book.id]">
+      <div matLine> {{ book.title }} </div>
+    </a>
+  </mat-nav-list>
+
+</app-catalog>

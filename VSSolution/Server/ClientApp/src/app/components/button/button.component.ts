@@ -12,8 +12,18 @@ export class ButtonComponent {
 
   @Input() type: 'button' | 'submit' = 'button';
   @Input() color: 'primary' = null;
-  @Input() design: 'raised' | 'fab' | 'icon' | 'image';
-  @Input() imagePath: string = null;
+  @Input() design: 'raised' | 'fab' | 'icon' | 'avatar';
+  private _image = null;
+  @Input() set imagePath(value: string) {
+    let result = value;
+    if (result)
+      while (result.indexOf('\\') != -1)
+        result = result.replace('\\', '/');
+    this._image = result;
+  }
+  get imagePath(): string {
+    return this._image;
+  }
   @Input() userName: string = null;
   @Input() disabled: boolean = false;
 

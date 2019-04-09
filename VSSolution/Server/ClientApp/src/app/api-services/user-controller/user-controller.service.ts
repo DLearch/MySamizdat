@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Observable } from 'rxjs';
 import { GetUserRVM } from './get-user-rvm';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserControllerService {
@@ -38,5 +39,14 @@ export class UserControllerService {
     };
 
     return this.api.post(model, this.controller, 'changepassword');
+  }
+
+  changeAvatar(avatar: File): Observable<string> {
+
+    let model = {
+      avatar: avatar
+    };
+
+    return this.api.postForm(model, this.controller, 'changeavatar').pipe(map(response => response.avatarPath));
   }
 }

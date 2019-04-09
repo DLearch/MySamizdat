@@ -6,6 +6,7 @@ import { PageService } from 'src/app/services/page/page.service';
 import { Observable, of } from 'rxjs';
 import { TeamControllerService } from 'src/app/api-services/team-controller/team-controller.service';
 import { map, catchError } from 'rxjs/operators';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 
 @Component({
   selector: 'app-team-page',
@@ -17,12 +18,17 @@ export class TeamPageComponent implements OnInit {
   readonly componentTK = 'page.team.';
   readonly notFoundError: ErrorPageData = { error: '404', descriptionTK: 'error.team-not-found' };
 
+  get currentMember() {
+    return this.model.members.find(m => m.userName == this.userStorage.userName);
+  }
+
   teamName: string;
   model: GetTeamRVM;
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
-    private teamController: TeamControllerService
+    private teamController: TeamControllerService,
+    private userStorage: UserStorageService
   ) {
     this.startPageLoad();
   }
@@ -77,5 +83,18 @@ export class TeamPageComponent implements OnInit {
       this.pageService.setTitle(this.teamName);
     else
       this.pageService.setDefaultTitle();
+  }
+
+  removeMember(member) {
+
+    this.teamController
+      .removeMember(this.teamName, member.userName)
+      .subscribe(
+      () => {
+
+        const index = this.model.members.indexOf(member);
+        this.model.members.splice(index, 1)
+      }
+      );
   }
 }

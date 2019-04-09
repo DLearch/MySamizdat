@@ -15,11 +15,28 @@
     </div>
     <mat-nav-list *ngIf="model.members">
 
-      <a mat-list-item *ngFor="let member of model.members" [routerLink]="['/user', member.userName]">
-        {{member.userName}} <div class="mat-card-subtitle role" *ngIf="member.roleTK != 'member'">&nbsp;&nbsp;{{ 'team-member-role.' + member.roleTK | translate}}</div>
-      </a>
+      <mat-list-item *ngFor="let member of model.members">
+        <app-avatar matListAvatar [user]="member"></app-avatar>
+
+        <div matLine [routerLink]="['/user', member.userName]">
+          {{ member.userName }}
+          <div class="mat-card-subtitle role" *ngIf="member.roleTK != 'member'">
+            {{ 'team-member-role.' + member.roleTK | translate}}
+          </div>
+        </div>
+
+        <app-button *ngIf="currentMember != null && currentMember.roleTK == 'head' && currentMember.userName != member.userName" design="icon" (authClick)="removeMember(member)">
+          <mat-icon>delete</mat-icon>
+        </app-button>
+      </mat-list-item>
 
     </mat-nav-list>
   </mat-card>
 
+  <mat-card class="links-card">
+
+    <a mat-button [routerLink]="['/team', teamName, 'books']">
+      {{ componentTK + 'books' | translate }}
+    </a>
+  </mat-card>
 </div>

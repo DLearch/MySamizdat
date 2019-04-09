@@ -25,8 +25,10 @@ namespace Server.Services
         {
             if (file == null)
                 throw new ArgumentNullException("file");
+
+            string fileName = file.FileName.Replace(' ', '_');
             
-            string filePath = Path.Combine(FilesFolder, Path.GetRandomFileName() + '.' + file.FileName);
+            string filePath = Path.Combine(FilesFolder, Path.GetRandomFileName() + '.' + fileName);
             
             using (var fileStream = new FileStream(Path.Combine(_appEnvironment.WebRootPath, filePath), FileMode.Create))
             {

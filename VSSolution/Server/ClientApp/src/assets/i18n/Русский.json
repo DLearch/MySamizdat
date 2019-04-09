@@ -12,6 +12,7 @@
     "sidenav-header": "Runoo",
     "sign-in": "Вход",
     "sign-out": "Выход",
+    "menu": "Меню",
     "link": {
       "main": "Главная",
       "catalog": "Книги",
@@ -63,7 +64,7 @@
           "user": "Куратор",
           "language": "Язык",
           "book-state": "Статус",
-          "team-name": "Команда",
+          "team": "Команда",
           "translate-language": "Язык перевода",
           "original-language": "Язык оригинала"
         },
@@ -84,8 +85,12 @@
     },
     "user": {
       "title": "Аккаунт",
-      "emailvisible": "Показывать email другим пользователям?",
-      "teams": "Команды"
+      "email-visible": {
+        "yes": "Показывать email другим пользователям? Да",
+        "no": "Показывать email другим пользователям? Нет"
+      },
+      "teams": "Команды",
+      "books": "Книги"
     },
     "new-team": {
       "title": "Новая команда"
@@ -118,6 +123,9 @@
     },
     "invite-team-member": {
       "invite": "Пригласить"
+    },
+    "change-book-team": {
+      "give": "Дать доступ"
     }
   },
   "error": {
@@ -195,7 +203,8 @@
       "errors": {
         "empty": "Введите название команды",
         "short": "Название слишком короткое",
-        "already-taken": "Название уже занято"
+        "already-taken": "Название уже занято",
+        "not-found": "Команда не найдена"
       }
     },
     "email": {
@@ -265,6 +274,13 @@
     "many-one": "Состоит в {{count}} команде",
     "many-few": "Состоит в {{count}} командах",
     "many": "Состоит в {{count}} командах"
+  },
+  "team.count": {
+    "none": "0 команд",
+    "one": "1 команда",
+    "many-one": "{{count}} команда",
+    "many-few": "{{count}} команды",
+    "many": "{{count}} команд"
   },
   "team-member.count": {
     "none": "Нет участников",

@@ -17,6 +17,9 @@ import { NewTeamPageComponent } from './pages/new-team-page/new-team-page.compon
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { InviteTeamMemberPageComponent } from './pages/invite-team-member-page/invite-team-member-page.component';
 import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.component';
+import { ChangeBookTeamPageComponent } from './pages/change-book-team-page/change-book-team-page.component';
+import { UserBooksPageComponent } from './pages/user-books-page/user-books-page.component';
+import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.component';
 
 const routes: Routes = [
   {
@@ -30,11 +33,14 @@ const routes: Routes = [
       , { path: 'books/add', component: NewBookPageComponent, canActivate: [AuthGuard] }
       , { path: 'team/:team/invite', component: InviteTeamMemberPageComponent, canActivate: [AuthGuard, DialogGuard] }
       , { path: 'user/:user/teams', component: UserTeamsPageComponent }
+      , { path: 'user/:user/books', component: UserBooksPageComponent }
       , { path: 'books', component: BookCatalogPageComponent }
+      , { path: 'team/:team/books', component: TeamBooksPageComponent }
       , { path: 'team/:team', component: TeamPageComponent }
       , { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthGuard] }
       , { path: 'user/:user', component: UserPageComponent }
       , { path: 'book/:book', component: BookPageComponent }
+      , { path: 'book/:book/change-team', component: ChangeBookTeamPageComponent, canActivate: [AuthGuard, DialogGuard] }
       , { path: 'book/:book/:chapter', component: ChapterPageComponent }
       , { path: '**', component: ErrorPageComponent, data: { error: '404', descriptionTK: 'error.page-not-found' } }
     ]

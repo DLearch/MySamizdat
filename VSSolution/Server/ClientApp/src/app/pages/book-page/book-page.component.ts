@@ -144,4 +144,8 @@ export class BookPageComponent implements OnInit {
     else for (let control in form.controls)
       form.controls[control].markAsTouched();
   }
+
+  changeTeam() {
+
+  }
 }

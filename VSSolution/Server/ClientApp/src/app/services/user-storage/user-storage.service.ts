@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class UserStorageService {
 
-  get isAuth(): boolean {
+  get isAuth(): boolean { 
     return this.token != null;
   }
+
+  private authSubject;
+  authChanged;
 
   signIn(model: { token: string, userName: string, avatarPath: string, birthDate: string }) {
     this.token = model.token;
@@ -23,7 +27,8 @@ export class UserStorageService {
   private readonly userNameKey: string = 'userName';
 
   constructor() {
-
+    this.authSubject = new Subject<boolean>();
+    this.authChanged = this.authSubject.asObservable();
     this.storage = window.localStorage;
     window.addEventListener("storage", () => this.updateAuth());
   }
@@ -40,15 +45,17 @@ export class UserStorageService {
   }
 
   set token(value: string) {
-
+    
     if (value) {
 
       this.storage.setItem(this.tokenKey, value);
+      this.authSubject.next(true);
     }
     else {
 
       this.storage.removeItem(this.tokenKey);
       this.userName = null;
+      this.authSubject.next(false);
     }
   }
 

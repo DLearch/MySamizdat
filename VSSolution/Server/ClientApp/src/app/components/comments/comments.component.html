@@ -1,5 +1,6 @@
 
-<div class="main-wrapper">
+<mat-card>
+
   <div class="list-header">
 
     <div class="mat-h2">
@@ -17,7 +18,7 @@
     <ng-container *ngTemplateOutlet="commentTemplate; context: {comment: comment}"></ng-container>
 
   </ng-container>
-</div>
+</mat-card>
 
 <ng-template #commentTemplate let-comment="comment">
 

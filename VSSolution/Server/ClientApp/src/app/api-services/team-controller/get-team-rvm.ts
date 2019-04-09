@@ -3,6 +3,7 @@ export class GetTeamRVM {
   description: string;
   members: {
     userName: string;
-    isOwner: boolean;
+    avatarPath: string;
+    roleTK: string;
   }[];
 }

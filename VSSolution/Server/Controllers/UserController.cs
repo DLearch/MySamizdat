@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
+using Server.Services;
 using Server.ViewModels.UserController;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,18 @@ namespace Server.Controllers
     [Authorize]
     public class UserController : BaseController
     {
+        private FilesStorage _filesStorage;
+
         public UserController(
             UserManager<User> userManager
             , AppDbContext db
+            , FilesStorage filesStorage
         ) : base(userManager, db)
-        { }
+        {
+            _filesStorage = filesStorage;
+        }
 
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> GetUser([FromBody]GetUserVM model)
         {
             if (ModelState.IsValid)
@@ -41,6 +46,7 @@ namespace Server.Controllers
                     {
                         Email = accesed || user.EmailIsVisible ? user.Email : null,
                         user.EmailIsVisible,
+                        user.AvatarPath,
                         Teams = _db.TeamMembers.Where(m => m.UserId == user.Id).Select(m => new
                         {
                             Name = m.TeamName,
@@ -88,6 +94,60 @@ namespace Server.Controllers
                 else
                     foreach (var error in result.Errors)
                         ModelState.AddModelError(error.Code, error.Description);
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> ChangeAvatar([FromForm]ChangeAvatarVM model)
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                string currentAvatar = user.AvatarPath;
+
+                try
+                {
+                    if (model.Avatar != null)
+                        user.AvatarPath = await _filesStorage.SaveAsync(model.Avatar);
+                    else
+                        user.AvatarPath = null;
+
+
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+
+                    if (!result.Succeeded)
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError(error.Code, error.Description);
+                }
+                catch (Exception e)
+                {
+                    user.AvatarPath = currentAvatar;
+
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                        return BadRequest(e.Message);
+                    else
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        if (currentAvatar != null)
+                            _filesStorage.Delete(currentAvatar);
+                    }
+                    catch(Exception)
+                    {
+                        return Ok(new { user.AvatarPath });
+                    }
+                    return Ok(new { user.AvatarPath });
+                }
             }
 
             return BadRequest(ModelState);

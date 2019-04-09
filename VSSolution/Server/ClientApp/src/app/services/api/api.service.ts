@@ -19,7 +19,7 @@ export class ApiService {
     return this.http
       .post(
         this.getUri(controller, action)
-        , this.getBody(data)
+        , this.getJsonBody(data)
         , { headers: this.getHttpHeaders() }
       )
       .pipe(
@@ -27,29 +27,25 @@ export class ApiService {
         catchError(response => this.handleError(response))
       );
   }
+  
+  public postForm(data: any, controller?: string, action?: string): Observable<any> {
 
-  //public postForm(data: any, controller?: string, action?: string): Observable<any> {
+    let httpHeaders = new HttpHeaders();
 
-  //  let httpHeaders = new HttpHeaders();
-
-  //  if (this.userStorageService.token)
-  //    httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
-
-  //  var formData = new FormData();
-  //  for (let key in data)
-  //    formData.append(key, data[key]);
-
-  //  return this.http
-  //    .post(
-  //      this.getUri(controller, action)
-  //    , formData
-  //    , { headers: httpHeaders }
-  //    )
-  //    .pipe(
-  //      tap(response => this.handleResponse(response)),
-  //      catchError(response => this.handleError(response))
-  //    );
-  //}
+    if (this.userStorageService.token)
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + this.userStorageService.token);
+    
+    return this.http
+      .post(
+        this.getUri(controller, action)
+      , this.getFormBody(data)
+      , { headers: httpHeaders }
+      )
+      .pipe(
+        tap(response => this.handleResponse(response)),
+        catchError(response => this.handleError(response))
+      );
+  }
 
   public getUri(controller?: string, action?: string): string {
 
@@ -64,11 +60,20 @@ export class ApiService {
     return uri;
   }
 
-  private getBody(data: any): string {
+  private getJsonBody(data: any): string {
 
     return JSON.stringify(data);
   }
 
+  private getFormBody(data: any): FormData {
+
+    var formData = new FormData();
+
+    for (let key in data)
+      formData.append(key, data[key]);
+
+    return formData;
+  }
   private getHttpHeaders(): HttpHeaders {
 
     let httpHeaders = new HttpHeaders({

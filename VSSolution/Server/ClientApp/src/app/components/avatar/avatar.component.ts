@@ -8,30 +8,31 @@ import { ConfigurationService } from 'src/app/services/configuration/configurati
   styleUrls: ['./avatar.component.css']
 })
 export class AvatarComponent {
+  
+  @Input() set user(value: { userName: string, avatarPath: string }) {
 
-  @Input() user: { userName: string, avatarPath: string } = null;
+    if (value && value.avatarPath) {
+
+      this.avatarPath = value.avatarPath;
+
+      if (this.avatarPath)
+        while (this.avatarPath.indexOf('\\') != -1)
+          this.avatarPath = this.avatarPath.replace('\\', '/');
+    }
+    else
+      this.avatarPath = this.config.getString('defaultAvatarPath');
+
+    if (!value || !value.userName)
+      this.link = '/user';
+    else
+      this.link = ['/user', value.userName];
+  }
+
+  avatarPath: string = null;
+  link: string | string[] = null;
 
   constructor(
     private config: ConfigurationService,
     private userStorage: UserStorageService
   ) { }
-
-  get avatarPath(): string {
-
-    if (this.user && this.user.avatarPath)
-      return this.user.avatarPath;
-
-    return this.config.getString('defaultAvatarPath');
-  }
-
-  getLink(): string[] | string {
-
-    if (!this.user || !this.user.userName)
-      return '/user';
-
-    if (this.userStorage.userName && this.userStorage.userName === this.user.userName)
-      return '/account';
-
-    return ['/user', this.user.userName];
-  }
 }

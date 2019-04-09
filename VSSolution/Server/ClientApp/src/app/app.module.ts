@@ -78,6 +78,13 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.component';
 import { FlexSpacerComponent } from './components/flex-spacer/flex-spacer.component';
 import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.component';
+import { ChangeBookTeamDialogComponent } from './dialogs/change-book-team-dialog/change-book-team-dialog.component';
+import { ChangeBookTeamPageComponent } from './pages/change-book-team-page/change-book-team-page.component';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './dialogs/confirm-dialog/confirm-dialog.service';
+import { ChangeBookTeamComponent } from './components/change-book-team/change-book-team.component';
+import { UserBooksPageComponent } from './pages/user-books-page/user-books-page.component';
+import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +126,18 @@ import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.
     , NewTeamPageComponent
     , TeamPageComponent
     , InviteTeamMemberComponent
-    , InviteTeamMemberDialogComponent, InviteTeamMemberPageComponent, NotificationsComponent, TeamInviteNotificationComponent, EditDialogComponent, CatalogComponent, UserTeamsPageComponent, FlexSpacerComponent, FiltersDialogComponent
+    , InviteTeamMemberDialogComponent
+    , InviteTeamMemberPageComponent
+    , NotificationsComponent
+    , TeamInviteNotificationComponent
+    , EditDialogComponent
+    , CatalogComponent
+    , UserTeamsPageComponent
+    , FlexSpacerComponent
+    , FiltersDialogComponent
+    , ChangeBookTeamDialogComponent
+    , ChangeBookTeamPageComponent
+    , ConfirmDialogComponent, ChangeBookTeamComponent, UserBooksPageComponent, TeamBooksPageComponent
   ]
   , imports: [
     BrowserModule
@@ -158,6 +176,7 @@ import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.
     , AuthGuard
     , DialogService
     , DialogGuard
+    , ConfirmDialogService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {
@@ -174,6 +193,7 @@ import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.
     SignUpDialogComponent,
     NewTeamDialogComponent
     , InviteTeamMemberDialogComponent
+    , ChangeBookTeamDialogComponent
   ]
   , bootstrap: [AppComponent]
 })

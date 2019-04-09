@@ -63,8 +63,7 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> GetTeam([FromBody]GetTeamVM model)
         {
             if (ModelState.IsValid)
@@ -176,9 +175,57 @@ namespace Server.Controllers
             return BadRequest(ModelState);
         }
 
-        // ModelErrors:
         [HttpPost]
-        [AllowAnonymous]
+        public async Task<IActionResult> RemoveMember([FromBody]RemoveMemberVM model)
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                Team team = await _db.Teams
+                    .Include(t => t.TeamMembers)
+                        .ThenInclude(t => t.User)
+                    .FirstOrDefaultAsync(t => t.Name.Normalize() == model.TeamName.Normalize());
+
+                if (team == null)
+                    ModelState.AddModelError("Team", ERROR_NOT_FOUND);
+                
+                if (ModelState.IsValid)
+                {
+                    TeamMember teamMember = team.TeamMembers.FirstOrDefault(tm => tm.UserId == user.Id);
+                    
+                    if (AddModelErrorIfNull("User", ERROR_ACCESS, teamMember) != null)
+                        AddModelErrorIfFalse("User", ERROR_ACCESS, teamMember.TeamMemberRoleTK == "head");
+
+                    if (ModelState.IsValid)
+                    {
+                        TeamMember tmToRemove = team.TeamMembers.FirstOrDefault(tm => tm.User.UserName.Normalize() == model.UserName.Normalize());
+
+                        if (tmToRemove == null)
+                            ModelState.AddModelError("UserName", ERROR_NOT_FOUND);
+
+                        if (ModelState.IsValid)
+                        {
+                            if (tmToRemove.Id == teamMember.Id)
+                                ModelState.AddModelError("", ERROR_ACCESS);
+
+                            if (ModelState.IsValid)
+                            {
+                                _db.TeamMembers.Remove(tmToRemove);
+
+                                await _db.SaveChangesAsync();
+
+                                return Ok();
+                            }
+                        }
+                    }
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+        // ModelErrors:
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> GetUserTeams([FromBody]GetPageVM model)
         {
             if (ModelState.IsValid)
@@ -252,6 +299,46 @@ namespace Server.Controllers
                     }
                 }
             return true;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GiveBook([FromBody]GiveBookVM model)
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                AddModelErrorIfFalse("Name", ERROR_TAKEN, _db.Users.All(u => u.UserName != model.TeamName) && _db.Teams.All(t => t.Name != model.TeamName));
+
+                if (ModelState.IsValid)
+                {
+                    Team team = new Team()
+                    {
+                        Name = model.TeamName,
+                        CreationTime = DateTime.Now
+                    };
+
+                    await _db.AddAsync(team);
+
+                    await _db.SaveChangesAsync();
+
+                    TeamMember teamMember = new TeamMember()
+                    {
+                        TeamName = model.TeamName,
+                        CreationTime = DateTime.Now,
+                        UserId = user.Id,
+                        TeamMemberRoleTK = "head"
+                    };
+
+                    await _db.AddAsync(teamMember);
+
+                    await _db.SaveChangesAsync();
+
+                    return Ok(team.CreationTime);
+                }
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }

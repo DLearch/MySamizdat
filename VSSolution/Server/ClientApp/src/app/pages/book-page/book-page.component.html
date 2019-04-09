@@ -1,62 +1,64 @@
 <div *ngIf="model" class="main-wrapper">
 
-  <div class="list-header">
+  <mat-card class="header-card">
+    <mat-card-header>
 
-    <div>
-      <div class="mat-h2">{{ model?.title }}</div>
-      <div class="mat-h2 mat-card-subtitle">{{ model?.originalTitle }}</div>
-    </div>
+      <mat-card-title>{{ model?.title }}</mat-card-title>
+      <mat-card-subtitle>{{ model?.originalTitle }}</mat-card-subtitle>
 
-    <span class="flex-spacer"></span>
+    </mat-card-header>
 
+    <app-flex-spacer></app-flex-spacer>
+
+    <a mat-button [routerLink]="['/book', bookId, 'change-team']">change team</a>
     <app-button design="icon" (authClick)="changeBookmark()">{{( model.bookmark ? 'star' : 'star_border' ) | translate}}</app-button>
-  </div>
+  </mat-card>
 
-  <mat-grid-list [cols]="mainGridCols" rowHeight="72px" class="side-margin">
-    <mat-grid-tile rowspan="4">
-      <app-cover [path]="model.coverPath"></app-cover>
-    </mat-grid-tile>
+  <mat-card class="info-card">
 
-    <ng-container *ngFor="let prop of mainProps">
-
-      <mat-grid-tile *ngIf="prop && (prop.value || prop.valueTK)">
-
-        <ng-container *ngIf="!prop.link; else linkMainPropTemplate">
-
-          <mat-list style="width: 100%;">
-            <mat-list-item>
-              <div matLine class="mat-body" *ngIf="prop.value">{{ prop.value }}</div>
-              <div matLine class="mat-body" *ngIf="prop.valueTK">{{ prop.valueTK | translate}}</div>
-              <div matLine class="mat-card-subtitle">{{ mainTabTK + prop.labelTK | translate}}</div>
-            </mat-list-item>
-          </mat-list>
-
-        </ng-container>
-
-        <ng-template #linkMainPropTemplate>
-
-          <mat-nav-list style="width: 100%;">
-            <a mat-list-item [routerLink]="prop.link">
-              <div matLine class="mat-body" *ngIf="prop.value">{{ prop.value }}</div>
-              <div matLine class="mat-body" *ngIf="prop.valueTK">{{ prop.valueTK | translate}}</div>
-              <div matLine class="mat-card-subtitle">{{ mainTabTK + prop.labelTK | translate}}</div>
-            </a>
-          </mat-nav-list>
-        </ng-template>
+    <mat-grid-list [cols]="mainGridCols" rowHeight="72px">
+      <mat-grid-tile rowspan="4">
+        <app-cover [path]="model.coverPath"></app-cover>
       </mat-grid-tile>
-    </ng-container>
 
-  </mat-grid-list>
-  <div class="list-header">
+      <ng-container *ngFor="let prop of mainProps">
+
+        <mat-grid-tile *ngIf="prop && (prop.value || prop.valueTK)">
+
+          <ng-container *ngIf="!prop.link; else linkMainPropTemplate">
+
+            <mat-list style="width: 100%;">
+              <mat-list-item>
+                <div matLine class="mat-body" *ngIf="prop.value">{{ prop.value }}</div>
+                <div matLine class="mat-body" *ngIf="prop.valueTK">{{ prop.valueTK | translate}}</div>
+                <div matLine class="mat-card-subtitle">{{ mainTabTK + prop.labelTK | translate}}</div>
+              </mat-list-item>
+            </mat-list>
+
+          </ng-container>
+
+          <ng-template #linkMainPropTemplate>
+
+            <mat-nav-list style="width: 100%;">
+              <a mat-list-item [routerLink]="prop.link">
+                <div matLine class="mat-body" *ngIf="prop.value">{{ prop.value }}</div>
+                <div matLine class="mat-body" *ngIf="prop.valueTK">{{ prop.valueTK | translate}}</div>
+                <div matLine class="mat-card-subtitle">{{ mainTabTK + prop.labelTK | translate}}</div>
+              </a>
+            </mat-nav-list>
+          </ng-template>
+        </mat-grid-tile>
+      </ng-container>
+
+    </mat-grid-list>
+  </mat-card>
+
+  <mat-card class="chapters-header-card">
 
     <div class="mat-h2">
       {{ model.chapters | arrayPluralTranslate:'chapter' }}
     </div>
     <app-button [matMenuTriggerFor]="newChapterMenu" [userName]="model.user.userName" design="icon">add</app-button>
-
-    <span class="flex-spacer"></span>
-
-
 
     <mat-menu #newChapterMenu="matMenu">
 
@@ -70,16 +72,18 @@
       </div>
 
     </mat-menu>
+  </mat-card>
 
-  </div>
+  <mat-card class="chapters-card" *ngIf="model.chapters && model.chapters.length > 0">
 
-  <mat-nav-list *ngIf="model.chapters" class="side-margin">
+    <mat-nav-list class="side-margin">
 
-    <a mat-list-item *ngFor="let chapter of model.chapters" [routerLink]="['/book', bookId, chapter.id]">
-      {{chapter.name}}
-    </a>
+      <a mat-list-item *ngFor="let chapter of model.chapters" [routerLink]="['/book', bookId, chapter.id]">
+        {{chapter.name}}
+      </a>
 
-  </mat-nav-list>
+    </mat-nav-list>
+  </mat-card>
 
-  <app-comments [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
+  <app-comments class="comments-card" [comments]="model.comments" entityType="book" [entityId]="bookId"></app-comments>
 </div>

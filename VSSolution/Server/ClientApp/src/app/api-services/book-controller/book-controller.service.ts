@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Observable, throwError } from 'rxjs';
 import { GetBookRVM } from './get-book-rvm';
+import { CatalogPageUpdateEvent } from 'src/app/components/catalog/catalog-page-update-event';
+import { GetUserBooksRVM } from './get-user-books-rvm';
 
 @Injectable()
 export class BookControllerService {
@@ -53,5 +55,37 @@ export class BookControllerService {
     };
 
     return this.api.post(model, this.controller, 'getbook');
+  }
+
+  changeTeam(bookId: number, teamName: string): Observable<void> {
+    
+    let model = {
+      bookId: bookId,
+      teamName: teamName
+    };
+
+    return this.api.post(model, this.controller, 'changeteam');
+  }
+  getUserBooks(userName: string, event: CatalogPageUpdateEvent): Observable<GetUserBooksRVM> {
+
+    let model = {
+      userName: userName,
+      pageSize: event.pageSize,
+      page: event.pageIndex,
+      filters: event.filters
+    };
+
+    return this.api.post(model, this.controller, 'getuserbooks');
+  }
+  getTeamBooks(teamName: string, event: CatalogPageUpdateEvent): Observable<GetUserBooksRVM> {
+
+    let model = {
+      teamName: teamName,
+      pageSize: event.pageSize,
+      page: event.pageIndex,
+      filters: event.filters
+    };
+
+    return this.api.post(model, this.controller, 'getteambooks');
   }
 }

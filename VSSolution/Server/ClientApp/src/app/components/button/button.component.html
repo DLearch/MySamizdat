@@ -12,13 +12,13 @@
       </button>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'image'">
+    <ng-container *ngSwitchCase="'avatar'">
       <button [type]="type"
               (click)="onClick($event)"
               mat-mini-fab
               [color]="color"
               [disabled]="disabled"
-              class="image"
+              class="avatar"
               [style.background-image]="'url(' + getImagePath() + ')'">
         <ng-container *ngTemplateOutlet="content"></ng-container>
       </button>

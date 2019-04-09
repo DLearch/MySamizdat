@@ -14,8 +14,7 @@ namespace Server.ViewModels.TeamController
         [RequiredVM]
         public int PageSize { get; set; }
 
-        [RequiredVM]
-        [UserNameVM]
+        [RequiredVM, UserNameVM]
         public string UserName { get; set; }
 
         public List<CatalogFilter> Filters { get; set; }
