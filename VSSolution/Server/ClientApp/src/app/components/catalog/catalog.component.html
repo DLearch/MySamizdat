@@ -11,7 +11,7 @@
     <app-flex-spacer></app-flex-spacer>
 
     <app-search (onSearch)="search($event)"></app-search>
-    <app-button *ngIf="filtersTemplate" design="icon" (simpleClick)='filtersOpened = !filtersOpened'>
+    <app-button *ngIf="filtersTemplate" design="icon" (simpleClick)='filtersClick()'>
       filter_list
     </app-button>
 
@@ -39,6 +39,6 @@
   </mat-paginator>
 </div>
 
-<mat-card class="filters-card" *ngIf="filtersTemplate" [style.display]="filtersOpened? 'flex' : 'none' ">
+<mat-card class="filters-card" *ngIf="filtersTemplate" [style.display]="filtersOpened && breakpoint.level >= 3  ? 'flex' : 'none' ">
   <app-filters [formTemplate]="filtersTemplate" (onApply)="applyFilters($event)"></app-filters>
 </mat-card>

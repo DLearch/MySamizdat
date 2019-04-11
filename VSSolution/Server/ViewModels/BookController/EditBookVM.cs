@@ -1,4 +1,5 @@
-﻿using Server.Validators.ViewModel;
+﻿using Server.Models;
+using Server.Validators.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,10 @@ namespace Server.ViewModels.BookController
 {
     public class EditBookVM
     {
-        //[RequiredVM]
-        //public int BookId { get; set; }
-
-        //[RequiredVM]
-        //public string Title { get; set; }
-
-        //public string Description { get; set; }
-
-        //public Dictionary<string, string> Properties { get; set; }
+        [RequiredVM]
+        public int BookId { get; set; }
+        
+        [RequiredVM]
+        public Book Book { get; set; }
     }
 }

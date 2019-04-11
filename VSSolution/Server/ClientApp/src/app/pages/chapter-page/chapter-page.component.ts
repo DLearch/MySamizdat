@@ -3,7 +3,8 @@ import { GetChapterRVM } from 'src/app/api-services/chapter-controller/get-chapt
 import { ChapterControllerService } from 'src/app/api-services/chapter-controller/chapter-controller.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PageService } from 'src/app/services/page/page.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chapter-page',
@@ -34,41 +35,46 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private pageService: PageService
   ) {
-    this.pageService.loaded = false;
+    this.startPageLoad();
   }
 
-  ngOnInit() {
-    this.sub = this.router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.updateModel();
-      }
-    });
-    this.updateModel();
+  ngOnInit()
+  {
+    this.sub = this.route.params.subscribe(params =>
+      this.loadChapter(params['book'], params['chapter']).subscribe(() => this.finishPageLoad())
+    );
+    
+    this.loadChapter(
+      +this.route.snapshot.paramMap.get('book'),
+      +this.route.snapshot.paramMap.get('chapter')
+    );
   }
 
-  updateModel() {
-    this.bookId = +this.route.snapshot.paramMap.get('book');
-    this.chapterId = +this.route.snapshot.paramMap.get('chapter');
+  loadChapter(bookId: number, chapterId: number): Observable<void> {
+    
+    this.bookId = bookId;
+    this.chapterId = chapterId;
 
-    this.chapterController
+    return this.chapterController
       .getChapter(this.chapterId)
-      .subscribe(model => {
-        this.model = model;
-        this.chapterIndex = model.book.chapters.findIndex(c => c.id == this.chapterId);
-        this.pageService.setTitle(this.model.name);
-        this.pageService.loaded = true;
-      }, response => {
-        this.pageService.loaded = true;
-        this.sub.unsubscribe();
-        this.pageService.error = { error: '404', descriptionTK: 'error.chapter-not-found' };
-      });
-  }
-
-  selectChapter(id: number) {
-
+      .pipe(
+        map(response => {
+          this.model = response;
+          this.chapterIndex = response.book.chapters.findIndex(c => c.id == this.chapterId);
+          this.pageService.setTitle(this.model.name);
+        })
+      );
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  startPageLoad() {
+    this.pageService.loaded = false;
+  }
+
+  finishPageLoad() {
+    this.pageService.loaded = true;
   }
 }

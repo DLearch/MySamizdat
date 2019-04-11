@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { dialogDataToken } from 'src/app/layout/dialog/dialog-data-token';
+import { ConfirmDialogConfig } from './confirm-dialog-config';
+import { DialogService } from 'src/app/layout/dialog/dialog.service';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmDialogComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    @Inject(dialogDataToken) public config: ConfirmDialogConfig,
+    private dialog: DialogService
+  ) { console.log(config); }
 
   ngOnInit() {
   }
 
+  ok() {
+    this.dialog.close(true);
+  }
+
+  cancel() {
+    this.dialog.close(false);
+  }
 }

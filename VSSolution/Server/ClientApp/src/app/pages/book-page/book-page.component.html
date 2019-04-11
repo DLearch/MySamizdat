@@ -10,7 +10,8 @@
 
     <app-flex-spacer></app-flex-spacer>
 
-    <a mat-button [routerLink]="['/book', bookId, 'change-team']">change team</a>
+    <!--<a mat-button [routerLink]="['/book', bookId, 'change-team']">change team</a>-->
+    <a mat-icon-button [routerLink]="['/book', bookId, 'edit']"><mat-icon>edit</mat-icon></a>
     <app-button design="icon" (authClick)="changeBookmark()">{{( model.bookmark ? 'star' : 'star_border' ) | translate}}</app-button>
   </mat-card>
 

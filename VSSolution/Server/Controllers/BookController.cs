@@ -123,6 +123,7 @@ namespace Server.Controllers
                         book.Title,
                         book.AuthorName,
                         book.BookStateTK,
+                        book.BookStateComment,
                         book.Description,
                         book.Discriminator,
                         book.TeamName,
@@ -348,6 +349,146 @@ namespace Server.Controllers
             }
 
             return BadRequest(ModelState);
+        }
+
+        [HttpGet, AllowAnonymous]
+        public async Task<ActionResult<Book>> Get(int id)
+        {
+            Book book = await _db.Books.FindAsync(id);
+
+            if (book == null)
+                return NotFound();
+
+            return book;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, [FromBody]UpdateVM model)
+        {
+            // Check if model is valid
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Get book and check if it exists
+            Book bookToUpdate = await _db.Books.FindAsync(id);
+            if (bookToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Get suppliant and check if he has access rights
+            User suppliant = await _userManager.GetUserAsync(User);
+            if (suppliant == null || suppliant.Id != bookToUpdate.UserId)
+            {
+                return Unauthorized();
+            }
+
+            //Check if title is unique
+            if (bookToUpdate.Title != model.Title && await _db.Books.AnyAsync(p => p.Title == model.Title))
+            {
+                ModelState.AddModelError("Title", ERROR_TAKEN);
+            }
+
+            // Check if language exists
+            if (await _db.Languages.FindAsync(model.LanguageTK) == null)
+            {
+                ModelState.AddModelError("LanguageTK", ERROR_NOT_FOUND);
+            }
+
+            // Check if state exists
+            if (await _db.BookStates.FindAsync(model.StateTK) == null)
+            {
+                ModelState.AddModelError("StateTK", ERROR_NOT_FOUND);
+            }
+
+            // Get user and check if it exists
+            User user = await _db.Users.FirstOrDefaultAsync(p => p.UserName == model.UserName);
+            if (user == null)
+            {
+                ModelState.AddModelError("UserName", ERROR_NOT_FOUND);
+            }
+
+            // Сheck if team exists and suppliant has access rights
+            if (!string.IsNullOrEmpty(model.TeamName))
+            {
+                Team team = await _db.Teams.Include(p => p.TeamMembers).FirstOrDefaultAsync(p => p.Name == model.TeamName);
+                if (team == null)
+                {
+                    ModelState.AddModelError("TeamName", ERROR_NOT_FOUND);
+                }
+                else
+                {
+                    if (team.TeamMembers.All(p => p.UserId != suppliant.Id))
+                    {
+                        ModelState.AddModelError("TeamName", ERROR_ACCESS);
+                    }
+                }
+            }
+            else
+            {
+                model.TeamName = null;
+            }
+            
+            // If bookToUpdate is translate validate TranslateBook fields
+            if (bookToUpdate.Discriminator == "TranslateBook")
+            {
+                // Check if OriginalTitle is not empty
+                if (string.IsNullOrEmpty(model.OriginalTitle))
+                {
+                    ModelState.AddModelError("OriginalTitle", ERROR_EMPTY);
+                }
+
+                // Check if OriginalLanguageTK is not empty and exists
+                if (string.IsNullOrEmpty(model.OriginalLanguageTK))
+                {
+                    ModelState.AddModelError("OriginalLanguageTK", ERROR_EMPTY);
+                }
+                else
+                {
+                    Language originalLanguage = await _db.Languages.FindAsync(model.OriginalLanguageTK);
+                    if (originalLanguage == null)
+                    {
+                        ModelState.AddModelError("OriginalLanguageTK", ERROR_NOT_FOUND);
+                    }
+                }
+            }
+
+            // Check if model is valid
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            // Create author if he is not exists
+            if (!string.IsNullOrEmpty(model.AuthorName) && await _db.Authors.FindAsync(model.AuthorName) == null)
+            {
+                await _db.Authors.AddAsync(entity: new Author() { Name = model.AuthorName });
+            }
+            
+            // Update fields
+            bookToUpdate.Title = model.Title;
+            bookToUpdate.Description = model.Description;
+            bookToUpdate.AuthorName = model.AuthorName;
+            bookToUpdate.LanguageTK = model.LanguageTK;
+            bookToUpdate.BookStateTK = model.StateTK;
+            bookToUpdate.BookStateComment = model.StateComment;
+            bookToUpdate.UserId = user.Id;
+            bookToUpdate.TeamName = model.TeamName;
+
+            // If book is translate then update translate fields
+            if (bookToUpdate.Discriminator == "TranslateBook")
+            {
+                TranslateBook translateBookToUpdate = bookToUpdate as TranslateBook;
+                
+                translateBookToUpdate.OriginalTitle = model.OriginalTitle;
+                translateBookToUpdate.OriginalLanguageTK = model.OriginalLanguageTK;
+            }
+
+            await _db.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

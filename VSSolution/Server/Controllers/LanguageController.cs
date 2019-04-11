@@ -21,5 +21,9 @@ namespace Server.Controllers
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Get() => Ok(_db.Languages.Select(l => l.TK).ToList());
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GetBookStateTKs() => Ok(_db.BookStates.Select(p => p.TK).ToList());
     }
 }

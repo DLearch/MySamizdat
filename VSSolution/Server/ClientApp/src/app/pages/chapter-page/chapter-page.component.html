@@ -1,6 +1,6 @@
 <div class="list-header">
   <div class="mat-h2">{{ model?.name }}</div>
-  <app-button *ngIf="model" design="icon" [userName]="model.book.user.userName">edit</app-button>
+  <a mat-icon-button [routerLink]="['/book', bookId, chapterId, 'edit']"><mat-icon>edit</mat-icon></a>
 </div>
 
 <div class="main-wrapper" *ngIf="model">
@@ -23,7 +23,7 @@
 <ng-template #selectChapterTemplate>
 
   <mat-form-field class="selectChapter">
-    <mat-select [placeholder]=" 'input.chapter.placeholder'| translate" [value]="chapterId" (value)="selectChapter($event)">
+    <mat-select *ngIf="chapterId" [placeholder]=" 'input.chapter.placeholder'| translate" [value]="chapterId">
       <mat-option *ngFor="let chapter of model.book.chapters" [value]="chapter.id" [routerLink]="['/book', bookId, chapter.id]">
         {{chapter.name}}
       </mat-option>

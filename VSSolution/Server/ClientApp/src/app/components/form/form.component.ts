@@ -42,12 +42,15 @@ export class FormComponent {
 
   @Input() set template(value: InputTemplate[]) {
 
+    if (!value)
+      value = [];
+
     let controls: { [key: string]: any } = {};
 
     for (let controlConfig of value) {
-      controls[controlConfig.name] = ['', controlConfig.validators]
+      controls[controlConfig.name] = [controlConfig.value ? controlConfig.value : '', controlConfig.validators]
     }
-
+    console.log(value)
     this.inputTemplates = value;
     this.form = this.formBuilder.group(controls);
   };

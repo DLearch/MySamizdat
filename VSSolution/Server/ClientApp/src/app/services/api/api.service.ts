@@ -14,11 +14,11 @@ export class ApiService {
     private config: ConfigurationService
   ) { }
 
-  public post(data: any, controller?: string, action?: string): Observable<any> {
+  public post(data: any, controller?: string, action?: string, id?:string): Observable<any> {
     
     return this.http
       .post(
-        this.getUri(controller, action)
+        this.getUri(controller, action, id)
         , this.getJsonBody(data)
         , { headers: this.getHttpHeaders() }
       )
@@ -47,7 +47,7 @@ export class ApiService {
       );
   }
 
-  public getUri(controller?: string, action?: string): string {
+  public getUri(controller?: string, action?: string, id?: string): string {
 
     let uri: string = this.config.getString('apiUrl');
 
@@ -56,6 +56,9 @@ export class ApiService {
 
     if (action)
       uri += '/' + action;
+
+    if (id)
+      uri += '/' + id;
 
     return uri;
   }

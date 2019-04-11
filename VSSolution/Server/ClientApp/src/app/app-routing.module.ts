@@ -20,6 +20,8 @@ import { UserTeamsPageComponent } from './pages/user-teams-page/user-teams-page.
 import { ChangeBookTeamPageComponent } from './pages/change-book-team-page/change-book-team-page.component';
 import { UserBooksPageComponent } from './pages/user-books-page/user-books-page.component';
 import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.component';
+import { EditBookPageComponent } from './pages/edit-book-page/edit-book-page.component';
+import { EditChapterComponent } from './pages/edit-chapter/edit-chapter.component';
 
 const routes: Routes = [
   {
@@ -40,8 +42,10 @@ const routes: Routes = [
       , { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthGuard] }
       , { path: 'user/:user', component: UserPageComponent }
       , { path: 'book/:book', component: BookPageComponent }
+      , { path: 'book/:book/edit', component: EditBookPageComponent, canActivate: [AuthGuard] }
       , { path: 'book/:book/change-team', component: ChangeBookTeamPageComponent, canActivate: [AuthGuard, DialogGuard] }
       , { path: 'book/:book/:chapter', component: ChapterPageComponent }
+      , { path: 'book/:book/:chapter/edit', component: EditChapterComponent, canActivate: [AuthGuard] }
       , { path: '**', component: ErrorPageComponent, data: { error: '404', descriptionTK: 'error.page-not-found' } }
     ]
   }

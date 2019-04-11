@@ -2,8 +2,9 @@ export class GetBookRVM {
   title: string;
   authorName: string;
   bookStateTK: string;
+  bookStateComment: string;
   description: string;
-  descriminator: string;
+  discriminator: string;
   teamName: string;
   languageTK: string;
   originalLanguageTK: string;

@@ -3,6 +3,8 @@ import { Filter } from '../filters/filter';
 import { PageEvent } from '@angular/material';
 import { CatalogPageUpdateEvent } from './catalog-page-update-event';
 import { InputTemplate } from '../form/input-template';
+import { BreakpointService } from 'src/app/services/breakpoint/breakpoint.service';
+import { FiltersDialogService } from 'src/app/dialogs/filters-dialog/filters-dialog.service';
 
 @Component({
   selector: 'app-catalog',
@@ -34,10 +36,26 @@ export class CatalogComponent implements OnInit {
 
   @Output() onUpdate = new EventEmitter<CatalogPageUpdateEvent>();
 
-  constructor() { }
+  constructor(
+    private breakpoint: BreakpointService,
+    private filtersDialog: FiltersDialogService
+  ) { }
 
   ngOnInit() {
     
+  }
+
+  filtersClick() {
+
+    if (this.breakpoint.level < 3) {
+      this.filtersOpened = false;
+      this.filtersDialog
+        .getFilters(this.filtersTemplate)
+        .subscribe(filters => this.applyFilters(filters));
+    }
+    else {
+      this.filtersOpened = !this.filtersOpened;
+    }
   }
   
   update(event: PageEvent = { pageSize: this.event.pageSize, pageIndex: this.event.pageIndex, length: this.event.length }) {

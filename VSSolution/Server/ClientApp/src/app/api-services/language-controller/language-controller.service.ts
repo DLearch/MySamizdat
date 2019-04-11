@@ -34,4 +34,8 @@ export class LanguageControllerService {
     return this.api.post(null, this.controller, 'get');
   }
 
+  getBookStateTKs(): Observable<string[]> {
+
+    return this.api.post(null, this.controller, 'getbookstatetks');
+  }
 }

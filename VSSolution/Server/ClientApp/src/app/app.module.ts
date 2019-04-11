@@ -85,6 +85,10 @@ import { ConfirmDialogService } from './dialogs/confirm-dialog/confirm-dialog.se
 import { ChangeBookTeamComponent } from './components/change-book-team/change-book-team.component';
 import { UserBooksPageComponent } from './pages/user-books-page/user-books-page.component';
 import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.component';
+import { EditBookPageComponent } from './pages/edit-book-page/edit-book-page.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { EditChapterComponent } from './pages/edit-chapter/edit-chapter.component';
+import { FiltersDialogService } from './dialogs/filters-dialog/filters-dialog.service';
 
 @NgModule({
   declarations: [
@@ -137,7 +141,7 @@ import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.
     , FiltersDialogComponent
     , ChangeBookTeamDialogComponent
     , ChangeBookTeamPageComponent
-    , ConfirmDialogComponent, ChangeBookTeamComponent, UserBooksPageComponent, TeamBooksPageComponent
+    , ConfirmDialogComponent, ChangeBookTeamComponent, UserBooksPageComponent, TeamBooksPageComponent, EditBookPageComponent, EditPageComponent, EditChapterComponent
   ]
   , imports: [
     BrowserModule
@@ -177,6 +181,7 @@ import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.
     , DialogService
     , DialogGuard
     , ConfirmDialogService
+    , FiltersDialogService
     , {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {
@@ -194,6 +199,8 @@ import { TeamBooksPageComponent } from './pages/team-books-page/team-books-page.
     NewTeamDialogComponent
     , InviteTeamMemberDialogComponent
     , ChangeBookTeamDialogComponent
+    , ConfirmDialogComponent
+    , FiltersDialogComponent
   ]
   , bootstrap: [AppComponent]
 })

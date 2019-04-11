@@ -17,6 +17,7 @@ namespace Server
         protected const string ERROR_UNCONFIRMED = "unconfirmed";
         protected const string ERROR_WRONG = "wrong";
         protected const string ERROR_ALREADY = "already";
+        protected const string ERROR_EMPTY = "empty";
 
         protected readonly UserManager<User> _userManager;
         protected readonly AppDbContext _db;

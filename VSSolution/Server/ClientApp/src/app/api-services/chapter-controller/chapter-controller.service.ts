@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Observable } from 'rxjs';
 import { GetChapterRVM } from './get-chapter-rvm';
+import { UpdateChapterVM } from './update-chapter-vm';
 
 @Injectable()
 export class ChapterControllerService {
@@ -38,5 +39,10 @@ export class ChapterControllerService {
     };
 
     return this.api.post(model, this.controller, 'getchapter');
+  }
+
+  update(id: number, model: UpdateChapterVM): Observable<void>  {
+
+    return this.api.post(model, this.controller, 'update', id.toString());
   }
 }

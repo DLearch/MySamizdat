@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { GetBookRVM } from './get-book-rvm';
 import { CatalogPageUpdateEvent } from 'src/app/components/catalog/catalog-page-update-event';
 import { GetUserBooksRVM } from './get-user-books-rvm';
+import { UpdateBookVM } from './update-book-vm';
 
 @Injectable()
 export class BookControllerService {
@@ -87,5 +88,10 @@ export class BookControllerService {
     };
 
     return this.api.post(model, this.controller, 'getteambooks');
+  }
+
+  update(id: number, model: UpdateBookVM): Observable<void> {
+
+    return this.api.post(model, this.controller, 'update', id.toString());
   }
 }

@@ -32,6 +32,7 @@
 
       </ng-container>
 
+
       <!--Checkbox input-->
       <ng-container *ngSwitchCase="'checkbox'">
 
@@ -47,6 +48,30 @@
         </mat-error>
 
       </ng-container>
+
+      <!--Textarea input-->
+      <ng-container *ngSwitchCase="'textarea'">
+
+        <!--Field-->
+        <mat-form-field class="field">
+
+          <!--Placeholder-->
+          <mat-label>{{ 'input.' + inputTemplate.tk + '.placeholder' | translate }}</mat-label>
+
+          <!--Input-->
+          <textarea matInput
+                 [formControlName]="inputTemplate.name"></textarea>
+
+          <!--Errors-->
+          <mat-error *ngIf="form.get(inputTemplate.name).invalid">
+            <ng-container *ngFor="let errorTK of getErrorTKs(form.get(inputTemplate.name).errors)">
+              {{ 'input.' + inputTemplate.tk + '.errors.' + errorTK | translate }}
+            </ng-container>
+          </mat-error>
+
+        </mat-form-field>
+
+      </ng-container>
       <!--Default input-->
       <ng-template ngSwitchDefault>
 
@@ -58,7 +83,6 @@
 
           <!--Input-->
           <input matInput
-                 [value]="inputTemplate.value ? inputTemplate.value : null"
                  [type]="(inputTemplate.type ? inputTemplate.type : 'text')"
                  [formControlName]="inputTemplate.name" />
 

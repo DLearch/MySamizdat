@@ -78,6 +78,14 @@ export class BookPageComponent implements OnInit {
       {
         labelTK: 'user',
         value: this.model.user.userName
+      },
+      {
+        labelTK: 'description',
+        value: this.model.description
+      },
+      {
+        labelTK: 'book-state-comment',
+        value: this.model.bookStateComment
       }
     ];
   }

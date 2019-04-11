@@ -122,5 +122,58 @@ namespace Server.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, [FromBody]UpdateVM model)
+        {
+            // Check if model is valid
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Get chapter and check if it exists
+            Chapter chapterToUpdate = await _db.Chapters
+                .Include(p => p.Book)
+                .ThenInclude(p => p.Chapters)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (chapterToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Get suppliant and check if he has access rights
+            User suppliant = await _userManager.GetUserAsync(User);
+            if (suppliant == null || suppliant.Id != chapterToUpdate.Book.UserId)
+            {
+                return Unauthorized();
+            }
+
+            //Check if name is unique
+            if (chapterToUpdate.Name != model.Name && chapterToUpdate.Book.Chapters.Any(p => p.Name == model.Name))
+            {
+                ModelState.AddModelError("Name", ERROR_TAKEN);
+            }
+
+            // Check if model is valid
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Update fields
+            chapterToUpdate.Name = model.Name;
+            
+            await _db.ChapterContent.AddAsync(new ChapterContent()
+            {
+                ChapterId = id,
+                Content = model.Content,
+                CreationTime = DateTime.Now
+            });
+
+            await _db.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

@@ -1,3 +1,10 @@
-<p>
-  confirm-dialog works!
-</p>
+
+<div class="mat-h4">
+  {{config.textTK | translate}}
+</div>
+
+<div class="actions">
+  <app-button (simpleClick)="cancel()">{{config.cancelButtonTextTK | translate}}</app-button>
+  <app-flex-spacer></app-flex-spacer>
+  <app-button design="raised" color="primary" (simpleClick)="ok()">{{config.okButtonTextTK | translate}}</app-button>
+</div>
