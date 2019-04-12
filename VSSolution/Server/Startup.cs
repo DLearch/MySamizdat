@@ -83,8 +83,8 @@ namespace Server
 
                 if (env.IsDevelopment())
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
-                else
-                    spa.UseAngularCliServer(npmScript: "start");
+                //else
+                    //spa.UseAngularCliServer(npmScript: "start");
             });
         }
     }
