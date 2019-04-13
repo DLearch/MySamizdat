@@ -1,0 +1,32 @@
+
+<div class="flex-box main-wrapper" *ngIf="isVisible">
+
+  <app-avatar [user]="user"></app-avatar>
+
+  <!--Main block-->
+  <div class="main-block">
+
+    <!--Comment form-->
+    <app-form #form [template]="template"></app-form>
+
+    <div class="flex-box">
+
+      <!--Spacer-->
+      <span class="flex-spacer"></span>
+
+      <!--Cancel button-->
+      <app-button *ngIf="parentId" (simpleClick)="cancel()">
+        {{ componentTK + 'cancel' | translate }}
+      </app-button>
+
+      <!--Spacer-->
+      <span class="spacer"></span>
+
+      <!--Submit button-->
+      <app-button color="primary" design="raised" (authClick)="post(form.form)">
+        {{ componentTK + 'add-comment' | translate }}
+      </app-button>
+
+    </div>
+  </div>
+</div>

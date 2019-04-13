@@ -11,6 +11,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <script>
+    if (localStorage.getItem('theme') == 'dark')
+      document.body.style.backgroundColor = '#303030';
+  </script>
+  <app-root></app-root>
 </body>
 </html>

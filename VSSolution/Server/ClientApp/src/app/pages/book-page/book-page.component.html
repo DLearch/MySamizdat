@@ -57,7 +57,7 @@
   <mat-card class="chapters-header-card">
 
     <div class="mat-h2">
-      {{ model.chapters | arrayPluralTranslate:'chapter' }}
+      {{ model.chapters | arrayLengthPluralTranslate:'chapter' }}
     </div>
     <app-button [matMenuTriggerFor]="newChapterMenu" [userName]="model.user.userName" design="icon">add</app-button>
 

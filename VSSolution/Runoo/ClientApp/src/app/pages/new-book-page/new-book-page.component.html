@@ -1,0 +1,33 @@
+<mat-vertical-stepper linear="true" #stepper class="stepper">
+
+  <mat-step [label]="componentTK + 'step.type.label' | translate">
+
+    <app-button design="raised" color="primary" (simpleClick)="selectBook()">{{componentTK + 'step.type.book' | translate}}</app-button>
+
+    <app-button (simpleClick)="selectTranslate()">{{componentTK + 'step.type.translate' | translate}}</app-button>
+
+  </mat-step>
+
+  <mat-step [label]="componentTK + 'step.language.label' | translate" [stepControl]="languageForm.form">
+
+    <app-form #languageForm [template]="languageFormTemplate" [errors]="languageFormErrors"></app-form>
+
+    <div>
+      <button mat-button matStepperPrevious>{{ componentTK + 'previous' | translate}}</button>
+      <button mat-button matStepperNext>{{ componentTK + 'next' | translate}}</button>
+    </div>
+
+  </mat-step>
+
+  <mat-step [label]="componentTK + 'step.title.label' | translate" [stepControl]="titleForm.form">
+
+    <app-form #titleForm [template]="titleFormTemplate" [errors]="titleFormErrors"></app-form>
+
+    <div>
+      <button mat-button matStepperPrevious>{{ componentTK + 'previous' | translate}}</button>
+      <app-button design="raised" color="primary" (simpleClick)="post(languageForm.form, titleForm.form)">{{ componentTK + 'finish' | translate}}</app-button>
+    </div>
+
+  </mat-step>
+
+</mat-vertical-stepper>

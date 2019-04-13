@@ -26,6 +26,52 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\api\auth\login-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\book\get-book-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\book\get-books-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\book\update-book-view-model.ts" />
+    <None Remove="ClientApp\src\app\api\book\update-translate-book-view-model.ts" />
+    <None Remove="ClientApp\src\app\api\chapter\get-chapter-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\chapter\update-chapter-view-model.ts" />
+    <None Remove="ClientApp\src\app\api\comment\add-comment-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\comment\comment-entity-type.ts" />
+    <None Remove="ClientApp\src\app\api\notification\get-notifications-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\team\get-team-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\team\get-teams-api-response.ts" />
+    <None Remove="ClientApp\src\app\api\user\get-user-api-response.ts" />
+    <None Remove="ClientApp\src\app\components\catalog\catalog-page-update-event.ts" />
+    <None Remove="ClientApp\src\app\dialog\dialog-data-inner-token.ts" />
+    <None Remove="ClientApp\src\app\dialog\dialog-data-token.ts" />
+    <None Remove="ClientApp\src\app\dialog\dialog-token.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\api\auth\login-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\book\update-translate-book-view-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\book\update-book-view-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\book\get-books-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\book\get-book-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\chapter\get-chapter-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\chapter\update-chapter-view-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\comment\add-comment-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\comment\comment-entity-type.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\notification\get-notifications-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\team\get-team-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\team\get-teams-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\api\user\get-user-api-response.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\catalog\catalog-page-update-event.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dialog\dialog-data-inner-token.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dialog\dialog-data-token.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dialog\dialog-token.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\src\app\api\book\update-translate-book-view-model.js">
+      <DependentUpon>update-translate-book-view-model.ts</DependentUpon>
+    </None>
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

@@ -13,6 +13,7 @@ using System.Web;
 
 namespace Runoo.Controllers
 {
+    [Authorize]
     public class AuthController : BaseController
     {
         private readonly EmailService _emailService;
@@ -65,8 +66,8 @@ namespace Runoo.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (!user.EmailConfirmed)
-                        ModelState.AddModelError("Email", ERROR_UNCONFIRMED);
+                    //if (!user.EmailConfirmed)
+                    //    ModelState.AddModelError("Email", ERROR_UNCONFIRMED);
 
                     if (ModelState.IsValid)
                     {
@@ -78,7 +79,12 @@ namespace Runoo.Controllers
                             {
                                 user.UserName,
                                 user.BirthDate,
-                                user.AvatarPath
+                                user.AvatarPath,
+                                Teams = _db.TeamMembers.Where(p => p.UserId == user.Id).Select(p => new
+                                {
+                                    p.TeamName,
+                                    p.TeamMemberRoleTK
+                                }).ToList()
                             });
                     }
                 }
@@ -86,12 +92,33 @@ namespace Runoo.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPost, AllowAnonymous]
+        [HttpPost]
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
 
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendEmailConfirmationMessage()
+        {
+            User user = await GetUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                if (user.EmailConfirmed)
+                    ModelState.AddModelError("Email", ERROR_ALREADY);
+
+                if (ModelState.IsValid)
+                {
+                    await SendEmailConfirmationMessageAsync(user);
+
+                    return Ok();
+                }
+            }
+
+            return BadRequest(ModelState);
         }
 
         [HttpPost, AllowAnonymous]
@@ -113,7 +140,12 @@ namespace Runoo.Controllers
                         {
                             user.UserName,
                             user.BirthDate,
-                            user.AvatarPath
+                            user.AvatarPath,
+                            Teams = _db.TeamMembers.Where(p => p.UserId == user.Id).Select(p => new
+                            {
+                                p.TeamName,
+                                p.TeamMemberRoleTK
+                            }).ToList()
                         });
                     }
                     else

@@ -1,0 +1,110 @@
+import { Component, OnInit } from '@angular/core';
+import { InputTemplate } from 'src/app/components/form/input-template';
+import { GetChapterApiResponse } from 'src/app/api/chapter/get-chapter-api-response';
+import { PageService } from 'src/app/services/page/page.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ChapterControllerService } from 'src/app/api/chapter/chapter-controller.service';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-update-chapter-page',
+  templateUrl: './update-chapter-page.component.html',
+  styleUrls: ['./update-chapter-page.component.css']
+})
+export class UpdateChapterPageComponent implements OnInit {
+
+  componentTK = 'page.edit-book.';
+
+  formTemplate: InputTemplate[];
+  formErrors: any;
+
+  bookId: number;
+  chapterId: number;
+
+  chapter: GetChapterApiResponse;
+  constructor(
+    private pageService: PageService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private chapterController: ChapterControllerService
+  ) {
+    this.startPageLoad();
+  }
+
+  ngOnInit() {
+
+    this.bookId = +this.route.snapshot.paramMap.get('book');
+    this.chapterId = +this.route.snapshot.paramMap.get('chapter');
+
+    this.loadChapter().subscribe(() => {
+
+      this.createForm();
+      this.finishPageLoad();
+    }, () => {
+      this.finishPageLoad();
+    });
+  }
+
+  createForm() {
+
+    this.formTemplate = [
+      {
+        name: 'name',
+        tk: 'chapter.name',
+        value: this.chapter.name
+      },
+      {
+        name: 'content',
+        tk: 'chapter.content',
+        type: 'textarea',
+        value: this.chapter.content
+      }
+    ];
+
+  }
+  loadChapter(): Observable<void> {
+
+    return this.chapterController
+      .get(this.chapterId)
+      .pipe(
+        map(response => {
+          this.chapter = response;
+        }),
+        catchError(response => {
+          this.pageService.error = { error: '404', descriptionTK: 'error.chapter-not-found' };
+
+          return throwError(response);
+        })
+      );
+  }
+
+  post(form: FormGroup) {
+
+    if (form.valid) {
+
+      this.bookId = +this.route.snapshot.paramMap.get('book');
+      this.chapterId = +this.route.snapshot.paramMap.get('chapter');
+
+      this.chapterController
+        .update(this.chapterId, form.value)
+        .subscribe(response => {
+          this.router.navigate(['/book', this.bookId, this.chapterId]);
+        },
+          response => {
+            this.formErrors = response;
+          }
+        );
+    }
+    else for (let control in form.controls)
+      form.controls[control].markAsTouched();
+  }
+  startPageLoad() {
+    this.pageService.loaded = false;
+  }
+
+  finishPageLoad() {
+    this.pageService.loaded = true;
+  }
+}

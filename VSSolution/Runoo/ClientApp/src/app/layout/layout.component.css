@@ -1,0 +1,63 @@
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.desktop-main-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.main-wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  overflow: visible;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.mobile-sidenav-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background: none;
+}
+
+.nav-mat-card {
+  border-radius: 4px;
+  margin: 8px 8px 0 8px;
+  padding: 0;
+  display: flex;
+}
+
+.header {
+}
+
+.footer {
+}
+
+.toolbar-line {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.userName {
+  margin: 0 8px;
+}
+
+.avatar {
+  object-fit: cover;
+}

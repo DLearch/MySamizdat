@@ -1,0 +1,381 @@
+{
+  "component": {
+    "sign-up": {
+      "sign-in": "Уже есть аккаунт",
+      "sign-up": "Отправить письмо",
+      "sent": "Письмо для подтверждения отправлено",
+      "ok": "Ясно"
+    },
+    "sign-in": {
+      "sign-in": "Войти",
+      "sign-up": "Создать аккаунт"
+    },
+    "comments": {
+    },
+    "new-comment": {
+      "add-comment": "Оставить комментарий",
+      "cancel": "Отмена"
+    },
+    "filters": {
+      "label": "Фильтры",
+      "apply": "Применить",
+      "reset": "Сбросить"
+    },
+    "new-team": {
+      "create": "Добавить"
+    },
+    "team-invite-member": {
+      "invite": "Пригласить"
+    },
+    "change-book-team": {
+      "give": "Дать доступ"
+    }
+  },
+  "count": {
+    "book": {
+      "none": "0 книг",
+      "one": "1 книга",
+      "many-one": "{{count}} книга",
+      "many-few": "{{count}} книги",
+      "many": "{{count}} книг"
+    },
+    "comment": {
+      "none": "0 комментариев",
+      "one": "1 комментарий",
+      "many-one": "{{count}} комментарий",
+      "many-few": "{{count}} комментария",
+      "many": "{{count}} комментариев"
+    },
+    "chapter": {
+      "none": "0 глав",
+      "one": "{{count}} глава",
+      "many-one": "{{count}} глава",
+      "many-few": "{{count}} главы",
+      "many": "{{count}} глав"
+    },
+    "team": {
+      "none": "0 команд",
+      "one": "1 команда",
+      "many-one": "{{count}} команда",
+      "many-few": "{{count}} команды",
+      "many": "{{count}} команд"
+    },
+    "team-member": {
+      "none": "Нет участников",
+      "one": "1 участник",
+      "many-one": "{{count}} участник",
+      "many-few": "{{count}} участника",
+      "many": "{{count}} участников"
+    },
+    "time": {
+      "year.ago": {
+        "none": "Меньше года назад",
+        "one": "Год назад",
+        "many-one": "{{number}} год назад",
+        "many-few": "{{number}} года назад",
+        "many": "{{number}} лет назад"
+      },
+      "month.ago": {
+        "none": "Меньше месяца назад",
+        "one": "Месяц назад",
+        "many-one": "{{number}} месяц назад",
+        "many-few": "{{number}} месяца назад",
+        "many": "{{number}} месяцев назад"
+      },
+      "week.ago": {
+        "none": "Меньше недели назад",
+        "one": "Неделю назад",
+        "many-one": "{{number}} неделю назад",
+        "many-few": "{{number}} недели назад",
+        "many": "{{number}} недель назад"
+      },
+      "day.ago": {
+        "none": "Меньше дня назад",
+        "one": "День назад",
+        "many-one": "{{number}} неделю назад",
+        "many-few": "{{number}} недели назад",
+        "many": "{{number}} дней назад"
+      },
+      "hour.ago": {
+        "none": "Меньше часа назад",
+        "one": "Час назад",
+        "many-one": "{{number}} час назад",
+        "many-few": "{{number}} часа назад",
+        "many": "{{number}} часов назад"
+      },
+      "minute.ago": {
+        "none": "Меньше минуты назад",
+        "one": "Минуту назад",
+        "many-one": "{{number}} минуту назад",
+        "many-few": "{{number}} минуты назад",
+        "many": "{{number}} минут назад"
+      },
+      "second.ago": {
+        "none": "Меньше секунды назад",
+        "one": "Секунду назад",
+        "many-one": "{{number}} секунду назад",
+        "many-few": "{{number}} секунды назад",
+        "many": "{{number}} секунд назад"
+      }
+    }
+  },
+  "error": {
+    "page-not-found": "Страница не найдена",
+    "book-not-found": "Книга не найдена",
+    "user-not-found": "Пользователь не найден",
+    "chapter-not-found": "Глава не найдена"
+  },
+  "guard.auth": {
+    "confirmed": "Почта подтверждена, вход выполнен",
+    "unconfirmed": "Ошибка, почта не подтверждена",
+    "ok": "Ясно"
+  },
+  "input": {
+    "book": {
+      "title": {
+        "placeholder": "Название",
+        "errors": {
+          "empty": "Введите название",
+          "short": "Название слишком короткое",
+          "already-taken": "Название уже занято"
+        }
+      },
+      "translate-title": {
+        "placeholder": "Переведенное название",
+        "errors": {
+          "empty": "Введите переведенное название",
+          "short": "Переведенное название слишком короткое",
+          "already-taken": "Такой перевод или книга уже существует"
+        }
+      },
+      "original-title": {
+        "placeholder": "Оригинальное название",
+        "errors": {
+          "empty": "Введите оригинальное название",
+          "short": "Оригинальное название слишком короткое"
+        }
+      },
+      "language": {
+        "placeholder": "Язык",
+        "errors": {
+          "empty": "Выберите язык"
+        }
+      },
+      "translate-language": {
+        "placeholder": "Язык перевода",
+        "errors": {
+          "empty": "Выберите язык перевода"
+        }
+      },
+      "original-language": {
+        "placeholder": "Язык оригинала",
+        "errors": {
+          "empty": "Выберите язык оригинала"
+        }
+      },
+      "description.placeholder": "Описание",
+      "author": {
+        "placeholder": "Автор",
+        "errors": {
+          "empty": "Введите имя автора"
+        }
+      },
+      "state-comment.placeholder": "Комментарий к состоянию перевода",
+      "state": {
+        "placeholder": "Состояние",
+        "errors": {
+          "empty": "Выбирите состояние"
+        }
+      },
+      "user": {
+        "placeholder": "Владелец",
+        "errors": {
+          "empty": "Введите имя владельца",
+          "short": "Имя слишком короткое",
+          "not-found": "Пользователь не найден"
+        }
+      },
+      "team": {
+        "placeholder": "Команда",
+        "errors": {
+          "empty": "Введите название команды",
+          "short": "Название слишком короткое",
+          "not-found": "Команда не найдена"
+        }
+      }
+    },
+    "chapter": {
+      "placeholder": "Глава",
+      "name": {
+        "placeholder": "Название",
+        "errors": {
+          "empty": "Введите название",
+          "short": "Название слишком короткое",
+          "already-taken": "Название уже занято"
+        }
+      },
+      "content.placeholder": "Содержание"
+    },
+    "translate-filter": {
+      "placeholder": "Только переводы"
+    },
+    "search.placeholder": "Поиск",
+    "comment": {
+      "placeholder": "Оставить комментарий",
+      "errors": {
+        "empty": "Введите комментарий",
+        "short": "Слишком короткий комментарий"
+      }
+    },
+    "chapter-name": {
+      "placeholder": "Название",
+      "errors": {
+        "empty": "Введите название",
+        "short": "Название слишком короткое",
+        "already-taken": "Название уже занято"
+      }
+    },
+    "language": {
+      "placeholder": "Язык",
+      "errors": {
+        "empty": "Выберите язык"
+      }
+    },
+    "team-name": {
+      "placeholder": "Название",
+      "errors": {
+        "empty": "Введите название команды",
+        "short": "Название слишком короткое",
+        "already-taken": "Название уже занято",
+        "not-found": "Команда не найдена"
+      }
+    },
+    "email": {
+      "placeholder": "Email",
+      "errors": {
+        "empty": "Введите email",
+        "wrong": "Некорректный email",
+        "short": "Короткий email",
+        "not-found": "Email не найден",
+        "already-taken": "Email уже занят",
+        "unconfirmed": "Email не подтвержден"
+      }
+    },
+    "username": {
+      "placeholder": "Имя",
+      "errors": {
+        "empty": "Введите имя",
+        "wrong": "Некорректное имя",
+        "short": "Слишком короткое имя",
+        "not-found": "Пользователь не найден",
+        "already-taken": "Имя уже используется"
+      }
+    },
+    "password": {
+      "placeholder": "Пароль",
+      "errors": {
+        "empty": "Введите пароль",
+        "wrong": "Некорректный пароль",
+        "short": "Слишком короткий пароль"
+      }
+    }
+  },
+  "layout": {
+    "header": "Runoo",
+    "link": {
+      "menu": "Меню",
+      "main": "Главная",
+      "bookmarks": "Закладки",
+      "catalog": "Каталог",
+      "account": "Профиль",
+      "sign-in": "Вход",
+      "sign-out": "Выход"
+    },
+    "notifications": {
+      "empty": "Нет уведомлений",
+      "team-invite-notification": {
+        "text": "{{userName}} приглашает вас в команду {{teamName}}",
+        "accept": "Принять",
+        "decline": "Отклонить"
+      }
+    },
+    "theme-picker.dark-theme": "Ночной режим"
+  },
+  "page": {
+    "error": {
+      "error": "Ошибка"
+    },
+    "sign-up": {
+      "title": "Регистрация"
+    },
+    "sign-in": {
+      "title": "Вход"
+    },
+    "new-book": {
+      "title": "Добавить книгу",
+      "step": {
+        "type": {
+          "translate": "Перевод",
+          "book": "Авторская",
+          "label": "Тип книги"
+        },
+        "language.label": "Язык",
+        "title.label": "Название"
+      },
+      "finish": "Завершить",
+      "next": "Далее",
+      "previous": "Назад"
+    },
+    "book": {
+      "author": "Автор",
+      "description": "Описание",
+      "user": "Куратор",
+      "language": "Язык",
+      "book-state": "Статус",
+      "team": "Команда",
+      "translate-language": "Язык перевода",
+      "original-language": "Язык оригинала",
+      "add-chapter": "Добавить главу",
+      "new-chapter": "Новая глава"
+    },
+    "chapter": {
+      "empty": "Пусто"
+    },
+    "book-catalog": {
+    },
+    "user": {
+      "title": "Аккаунт",
+      "email-visible": {
+        "yes": "Показывать email другим пользователям? Да",
+        "no": "Показывать email другим пользователям? Нет"
+      },
+      "teams": "Команды",
+      "books": "Книги"
+    },
+    "new-team": {
+      "title": "Новая команда"
+    },
+    "edit-book": {
+      "save": "Сохранить"
+    },
+    "team": {
+      "books": "Книги"
+    }
+  },
+  "team-member-role": {
+    "head": "Глава",
+    "deputy-head": "Заместитель главы",
+    "member": "Участник"
+  },
+  "book-state": {
+    "work": "В работе",
+    "pause": "Пауза",
+    "complete": "Завершен",
+    "free": "Отсутствует куратор"
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "Английский",
+    "ua": "Украинский"
+  }
+}

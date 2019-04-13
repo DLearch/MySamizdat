@@ -20,7 +20,7 @@ export class PluralPipe implements PipeTransform {
       result = 'one';
     else
       switch (this.translate.currentLang) {
-        case 'Русский':
+        case 'Russian':
           result = this.getRussian(value);
           break;
         default:

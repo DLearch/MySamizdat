@@ -14,7 +14,7 @@ export class CoverComponent {
 
   get fullPath(): string {
 
-    return this.config.getString('url') + (this.path && !this.error ? this.path : this.config.getString('defaultAvatarPath'));
+    return (this.path && !this.error ? this.path : this.config.getString('defaultAvatarPath'));
   }
   constructor(
     private config: ConfigurationService

@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using MimeKit.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Runoo.Services
             MimeMessage emailMessage = new MimeMessage()
             {
                 Subject = subject,
-                Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                Body = new TextPart(TextFormat.Html)
                 {
                     Text = message
                 }
@@ -35,7 +36,7 @@ namespace Runoo.Services
 
             using (SmtpClient client = new SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 25, false);
+                await client.ConnectAsync("smtp.gmail.com", 587, false);
 
                 await client.AuthenticateAsync(_configuration["Email:Address"], _configuration["Email:Password"]);
                 await client.SendAsync(emailMessage);

@@ -1,0 +1,25 @@
+{
+  "layout": {
+    "header": "Runууoo",
+    "link": {
+      "menu": "йуа",
+      "main": "упйу",
+      "bookmarks": "фівайу",
+      "catalog": "упйпйуп",
+      "account": "йуа",
+      "sign-in": "йуа",
+      "sign-out": "пйуйу"
+    },
+    "notifications": {
+      "empty": "Нет уведомлений",
+      "team-invite-notification": {
+        "text": "{{userName}} приглашает вас в команду {{teamName}}",
+        "accept": "Принять",
+        "decline": "Отклонить"
+      }
+    },
+    "theme-picker.dark-theme": "йупйуп режим"
+  },
+  "count.book.none": "0 books",
+  "asd": "йццу"
+}

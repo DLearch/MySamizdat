@@ -1,0 +1,19 @@
+
+.comment-wrapper {
+  display: flex;
+  margin-top: 16px;
+  flex-direction: row;
+}
+
+.comment-main {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.comment-actions {
+  display: flex;
+}
+
+.list-header {
+  margin: 0 0 16px 0;
+}

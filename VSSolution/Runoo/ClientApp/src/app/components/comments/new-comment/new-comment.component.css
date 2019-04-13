@@ -1,0 +1,14 @@
+.main-block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 16px
+}
+
+.main-wrapper {
+  margin-top: 16px;
+}
+
+.spacer {
+  width: 16px;
+}

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Runoo.Controllers
 {
-    [NonController]
+    //[NonController]
     public class BaseController : Controller
     {
         protected const string ERROR_TAKEN = "already-taken";

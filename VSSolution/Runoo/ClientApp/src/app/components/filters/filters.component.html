@@ -1,0 +1,19 @@
+
+<div class="list-header">
+
+  <div class="mat-h2">
+    {{ componentTK + 'label' | translate }}
+  </div>
+
+</div>
+
+<div class="filters">
+  <app-form #form [template]="formTemplate"></app-form>
+
+  <span class="flex-spacer"></span>
+  <div class="actions">
+    <app-button (simpleClick)="reset(form.form)">{{componentTK + 'reset' | translate}}</app-button>
+    <span class="flex-spacer"></span>
+    <app-button design="raised" color="primary" (simpleClick)="apply(form.form)">{{componentTK + 'apply' | translate}}</app-button>
+  </div>
+</div>

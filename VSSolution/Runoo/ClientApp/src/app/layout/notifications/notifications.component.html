@@ -1,0 +1,20 @@
+
+<button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+  <mat-icon [matBadge]="model?.length" matBadgeColor="accent" [matBadgeHidden]="!model || !model.length">notifications</mat-icon>
+</button>
+
+<mat-menu #notificationsMenu="matMenu">
+  <div class="notifications-wrapper" (click)="$event.stopPropagation()">
+
+    <ng-container *ngFor="let notification of model">
+
+      <div class="time mat-small">{{notification.creationTime | timeAgoPluralTranslate}}</div>
+
+      <app-team-invite-notification (submit)="remove(notification)" [notification]="notification"></app-team-invite-notification>
+
+      <mat-divider class="divider" *ngIf="model.indexOf(notification) != model.length - 1"></mat-divider>
+
+    </ng-container>
+    <div *ngIf="!model || !model.length" class="empty mat-body-strong">{{ componentTK + 'empty' | translate }}</div>
+  </div>
+</mat-menu>

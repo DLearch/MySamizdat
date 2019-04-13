@@ -1,0 +1,31 @@
+<div *ngIf="model" class="main-wrapper">
+  <mat-card class="card">
+    <mat-card-header>
+      <app-button design="avatar" mat-card-avatar [imagePath]="model.avatarPath" (authClick)="avatarInput.click()"></app-button>
+      <input #avatarInput type="file" (change)="changeAvatar(avatarInput.files)" />
+      <mat-card-title>{{userName}}</mat-card-title>
+      <mat-card-subtitle class="subtitle" *ngIf="model.emailIsVisible || userName == userStorage.userName">
+        {{ model?.email }}
+        <app-button design="icon"
+                    class="email-visiblility-btn"
+                    [userName]="userName"
+                    (authClick)="changeEmailVisibility()"
+                    [matTooltip]="componentTK + 'email-visible.' + (model.emailIsVisible ? 'yes' : 'no') | translate">
+          {{ model.emailIsVisible ? 'visibility' : 'visibility_off'}}
+        </app-button>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="links-card">
+
+    <a *ngIf="model.teams" mat-button routerLink="/teams" [queryParams]="{member: userName}">
+      {{ componentTK + 'teams' | translate }}
+    </a>
+    <a mat-button routerLink="/books" [queryParams]="{user: userName}">
+      {{ componentTK + 'books' | translate }}
+    </a>
+  </mat-card>
+</div>
