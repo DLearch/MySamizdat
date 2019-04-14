@@ -6,6 +6,7 @@ export class GetChapterApiResponse {
   chapterStateTK: string;
   book: {
     title: string;
+    teamName: string;
     chapters: {
       id: number;
       name: string;

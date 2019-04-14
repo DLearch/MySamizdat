@@ -5,6 +5,7 @@ import { ChapterControllerService } from 'src/app/api/chapter/chapter-controller
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from 'src/app/services/page/page.service';
 import { map } from 'rxjs/operators';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 
 @Component({
   selector: 'app-chapter-page',
@@ -22,6 +23,26 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
   chapterIndex: number;
   sub: Subscription;
 
+  get firstlevelAccess(): boolean {
+
+    if (!this.model)
+      return false;
+    if (this.userStorage.teams
+      && this.model
+      && this.model.book.teamName
+      && !!this.userStorage.teams.find(p => p.teamName.toUpperCase() == this.model.book.teamName.toUpperCase()))
+      return true;
+
+    return this.secondLevelAccess;
+  }
+
+  get secondLevelAccess(): boolean {
+
+    return this.userStorage.userName
+      && this.model.book.user.userName
+      && (this.userStorage.userName.toUpperCase() == this.model.book.user.userName.toUpperCase());
+  }
+
   get isLastChapter(): boolean {
     return this.chapterIndex == this.model.book.chapters.length - 1;
   }
@@ -33,7 +54,8 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
     private chapterController: ChapterControllerService,
     private route: ActivatedRoute,
     private router: Router,
-    private pageService: PageService
+    private pageService: PageService,
+    public userStorage: UserStorageService
   ) {
     this.startPageLoad();
   }

@@ -38,7 +38,7 @@ namespace Runoo.Controllers
                 if (suppliant == null 
                     || (book.UserId != suppliant.Id 
                     && (await _db.Teams.Include(p=>p.Books).Include(p => p.TeamMembers)
-                        .FirstOrDefaultAsync(p => p.Books.Any(p2 => p2.TeamName.ToUpperInvariant() == p.Name.ToUpperInvariant())))
+                        .FirstOrDefaultAsync(p => p.Name.ToUpperInvariant() == book.TeamName.ToUpperInvariant()))
                         ?.TeamMembers.All(p => p.UserId != suppliant.Id) == true))
                 {
                     return Unauthorized();
@@ -97,6 +97,7 @@ namespace Runoo.Controllers
                 Book = new
                 {
                     chapter.Book.Title,
+                    chapter.Book.TeamName,
                     Chapters = chapter.Book.Chapters.OrderBy(c => c.Index).Select(c => new
                     {
                         c.Id,
@@ -147,9 +148,11 @@ namespace Runoo.Controllers
             }
             
             User suppliant = await _userManager.GetUserAsync(User);
-            if (suppliant == null 
-                || suppliant.Id != chapterToUpdate.Book.UserId 
-                || chapterToUpdate.Book.Team.TeamMembers.All(p => p.UserId != suppliant.Id))
+            if (suppliant == null
+                || (chapterToUpdate.Book.UserId != suppliant.Id
+                && (await _db.Teams.Include(p => p.Books).Include(p => p.TeamMembers)
+                    .FirstOrDefaultAsync(p => p.Name.ToUpperInvariant() == chapterToUpdate.Book.TeamName.ToUpperInvariant()))
+                    ?.TeamMembers.All(p => p.UserId != suppliant.Id) == true))
             {
                 return Unauthorized();
             }

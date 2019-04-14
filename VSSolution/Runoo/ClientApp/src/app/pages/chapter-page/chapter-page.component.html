@@ -4,7 +4,7 @@
 
   <app-flex-spacer></app-flex-spacer>
 
-  <a mat-icon-button [routerLink]="['/book', bookId, chapterId, 'edit']"><mat-icon>edit</mat-icon></a>
+  <a mat-icon-button *ngIf="firstlevelAccess" [routerLink]="['/book', bookId, chapterId, 'edit']"><mat-icon>edit</mat-icon></a>
 </mat-card>
 
 <mat-card class="nav-card">

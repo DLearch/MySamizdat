@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var GetBookApiResponse = /** @class */ (function () {
-    function GetBookApiResponse() {
+var GetChapterApiResponse = /** @class */ (function () {
+    function GetChapterApiResponse() {
     }
-    return GetBookApiResponse;
+    return GetChapterApiResponse;
 }());
-exports.GetBookApiResponse = GetBookApiResponse;
-//# sourceMappingURL=get-book-api-response.js.map
+exports.GetChapterApiResponse = GetChapterApiResponse;
+//# sourceMappingURL=get-chapter-api-response.js.map

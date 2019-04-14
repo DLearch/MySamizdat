@@ -1,1 +1,1 @@
-{"version":3,"file":"get-book-api-response.js","sourceRoot":"","sources":["get-book-api-response.ts"],"names":[],"mappings":";;AAAA;IAAA;IAgCA,CAAC;IAAD,yBAAC;AAAD,CAAC,AAhCD,IAgCC;AAhCY,gDAAkB"}
+{"version":3,"file":"get-chapter-api-response.js","sourceRoot":"","sources":["get-chapter-api-response.ts"],"names":[],"mappings":";;AAAA;IAAA;IA4BA,CAAC;IAAD,4BAAC;AAAD,CAAC,AA5BD,IA4BC;AA5BY,sDAAqB"}

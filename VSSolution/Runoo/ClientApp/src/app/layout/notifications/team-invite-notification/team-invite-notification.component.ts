@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TeamControllerService } from 'src/app/api/team/team-controller.service';
+import { UserStorageService } from 'src/app/services/user-storage/user-storage.service';
 
 @Component({
   selector: 'app-team-invite-notification',
@@ -19,7 +20,8 @@ export class TeamInviteNotificationComponent implements OnInit {
   @Output() submit = new EventEmitter<boolean>();
 
   constructor(
-    private teamController: TeamControllerService
+    private teamController: TeamControllerService,
+    private userStorage: UserStorageService
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,13 @@ export class TeamInviteNotificationComponent implements OnInit {
     if (this.notification) {
       this.teamController
         .respondInvitation(this.notification.teamName, accept)
-        .subscribe(() => this.submit.emit(accept));
+        .subscribe(() => {
+
+          if (accept) {
+            this.userStorage.teams.push({ teamName: this.notification.teamName, teamMemberRoleTK: 'member' });
+          }
+          this.submit.emit(accept)
+        });
     }
   }
 }
