@@ -16,8 +16,9 @@ export class LayoutComponent {
   componentTK = 'layout.';
 
   readonly links: { path: string, tKey: string }[] = [
-    { path: "/", tKey: "main" },
-    { path: "/books", tKey: "catalog" }
+    { path: "/books", tKey: "catalog" },
+    { path: "/teams", tKey: "teams" },
+    { path: "/support", tKey: "support" }
   ];
 
   readonly authLinks: { path: string | string[], tKey: string }[] = [

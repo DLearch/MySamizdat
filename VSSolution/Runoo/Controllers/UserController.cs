@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Runoo.Attributes;
 using Runoo.Models;
 using Runoo.Services;
@@ -16,14 +17,20 @@ namespace Runoo.Controllers
     public class UserController : BaseController
     {
         private FilesStorage _filesStorage;
+        private EmailService _emailService;
+        private IConfiguration _config;
 
         public UserController(
             UserManager<User> userManager
             , AppDbContext db
-            , FilesStorage filesStorage
+            , FilesStorage filesStorage,
+            EmailService emailService,
+            IConfiguration config
         ) : base(userManager, db)
         {
             _filesStorage = filesStorage;
+            _emailService = emailService;
+            _config = config;
         }
 
         [HttpPost, AllowAnonymous]
@@ -165,6 +172,20 @@ namespace Runoo.Controllers
             catch (Exception) { }
 
             return Ok(new { suppliant.AvatarPath });
+        }
+
+        [HttpPost, AllowAnonymous]
+        public async Task<IActionResult> SendEmail([FromBody]SendEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            User suppliant = await _userManager.GetUserAsync(User);
+
+            await _emailService.SendMessageAsync(_config["Email:Address"], "Support", model.Message + "; " + model.SenderEmail + "; " + suppliant?.UserName);
+            return Ok();
         }
     }
 }

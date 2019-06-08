@@ -19,7 +19,7 @@ namespace Runoo.Controllers
         ) : base(userManager, db)
         { }
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             User suppliant = await _userManager.GetUserAsync(User);

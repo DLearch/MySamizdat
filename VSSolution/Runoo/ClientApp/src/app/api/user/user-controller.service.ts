@@ -45,4 +45,12 @@ export class UserControllerService {
 
     return this.api.postForm(model, this.controller, 'changeavatar').pipe(map(response => response.avatarPath));
   }
+  sendEmail(senderEmail: string, message: string): Observable<void> {
+
+    let model = {
+      message: message,
+      senderEmail: senderEmail
+    }
+    return this.api.post(model, this.controller, 'sendemail');
+  }
 }

@@ -1,4 +1,10 @@
 {
+  "book-state": {
+    "work": "В работе",
+    "pause": "Пауза",
+    "complete": "Завершен",
+    "free": "Отсутствует куратор"
+  },
   "component": {
     "sign-up": {
       "sign-in": "Уже есть аккаунт",
@@ -131,6 +137,12 @@
     "ok": "Ясно"
   },
   "input": {
+    "message": {
+      "placeholder": "Сообщение",
+      "errors": {
+        "empty": "Введите сообщение"
+      }
+    },
     "book": {
       "title": {
         "placeholder": "Название",
@@ -280,6 +292,11 @@
       }
     }
   },
+  "language": {
+    "ru": "Русский",
+    "en": "Английский",
+    "ua": "Украинский"
+  },
   "layout": {
     "header": "Runoo",
     "link": {
@@ -289,7 +306,9 @@
       "catalog": "Каталог",
       "account": "Профиль",
       "sign-in": "Вход",
-      "sign-out": "Выход"
+      "sign-out": "Выход",
+      "teams": "Команды",
+      "support": "Правообладателям"
     },
     "notifications": {
       "empty": "Нет уведомлений",
@@ -302,6 +321,9 @@
     "theme-picker.dark-theme": "Ночной режим"
   },
   "page": {
+    "support": {
+      "send": "Отправить"
+    },
     "error": {
       "error": "Ошибка"
     },
@@ -366,16 +388,5 @@
     "head": "Глава",
     "deputy-head": "Заместитель главы",
     "member": "Участник"
-  },
-  "book-state": {
-    "work": "В работе",
-    "pause": "Пауза",
-    "complete": "Завершен",
-    "free": "Отсутствует куратор"
-  },
-  "language": {
-    "ru": "Русский",
-    "en": "Английский",
-    "ua": "Украинский"
   }
 }

@@ -1,5 +1,5 @@
 
-<app-catalog [headerLabel]="books | arrayLengthPluralTranslate:'book'"
+<app-catalog [headerLabel]="event | arrayLengthPluralTranslate:'book'"
              [event]="event"
              addLink="/books/add"
              (onUpdate)="update($event)"

@@ -74,6 +74,7 @@ import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { TeamInviteMemberComponent } from './components/team-invite-member/team-invite-member.component';
 import { TeamInviteMemberPageComponent } from './pages/team-invite-member-page/team-invite-member-page.component';
 import { TeamInviteMemberDialogComponent } from './dialogs/team-invite-member-dialog/team-invite-member-dialog.component';
+import { SupportPageComponent } from './pages/support-page/support-page.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import { TeamInviteMemberDialogComponent } from './dialogs/team-invite-member-di
     TeamPageComponent,
     TeamInviteMemberComponent,
     TeamInviteMemberPageComponent,
-    TeamInviteMemberDialogComponent
+    TeamInviteMemberDialogComponent,
+    SupportPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

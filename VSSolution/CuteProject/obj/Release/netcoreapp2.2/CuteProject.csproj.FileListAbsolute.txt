@@ -1,0 +1,14 @@
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\bin\Release\netcoreapp2.2\CuteProject.deps.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\bin\Release\netcoreapp2.2\CuteProject.runtimeconfig.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\bin\Release\netcoreapp2.2\CuteProject.runtimeconfig.dev.json
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\bin\Release\netcoreapp2.2\CuteProject.dll
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\bin\Release\netcoreapp2.2\CuteProject.pdb
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.csprojAssemblyReference.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.RazorAssemblyInfo.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.RazorAssemblyInfo.cs
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.RazorTargetAssemblyInfo.cache
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.dll
+C:\Users\Daniel\Desktop\Runoo\VSSolution\CuteProject\obj\Release\netcoreapp2.2\CuteProject.pdb

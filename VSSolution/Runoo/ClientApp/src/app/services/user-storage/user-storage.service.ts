@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class UserStorageService {
@@ -9,7 +9,7 @@ export class UserStorageService {
   }
 
   private authSubject: Subject<boolean>;
-  authChanged;
+  authChanged: Observable<boolean>;
   storage: Storage;
 
   constructor() {
