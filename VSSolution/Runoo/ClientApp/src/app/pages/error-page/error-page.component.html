@@ -1,9 +1,0 @@
-<div>
-  <div class="mat-h2">{{ componentTK + 'error' | translate }}</div>
-  <ng-container *ngIf="errorData">
-    <div class="mat-h3" *ngIf="errorData.errorTK"> {{ errorData.errorTK | translate }}</div>
-    <div class="mat-h3" *ngIf="errorData.error"> {{ errorData.error }}</div>
-    <p class="mat-body" *ngIf="errorData.descriptionTK">{{ errorData.descriptionTK | translate}}</p>
-    <p class="mat-body" *ngIf="errorData.description">{{ errorData.description }}</p>
-  </ng-container>
-</div>
